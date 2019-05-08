@@ -14,6 +14,7 @@ public class InfoProjekt extends ApplicationAdapter {
 	public void create () {
 		batch = new SpriteBatch();
 		img = new Texture("badlogic.jpg");
+		System.out.println("Hello michi");
 	}
 
 	@Override
