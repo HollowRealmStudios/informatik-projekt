@@ -3,6 +3,9 @@ package info.projekt.jonas;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
+/**
+ * @author Jonas
+ * */
 public final class RenderUtils {
 
     public static void clearScreen() {
