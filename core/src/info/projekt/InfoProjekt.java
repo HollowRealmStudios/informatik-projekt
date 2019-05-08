@@ -18,7 +18,7 @@ public class InfoProjekt extends ApplicationAdapter {
     public void render() {
         RenderUtils.clearScreen();
         batch.begin();
-        batch.draw(img, 0, 0);
+
         batch.end();
     }
 
