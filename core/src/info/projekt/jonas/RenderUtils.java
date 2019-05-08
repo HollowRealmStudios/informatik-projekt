@@ -5,12 +5,12 @@ import com.badlogic.gdx.graphics.GL20;
 
 /**
  * @author Jonas
- * */
+ */
 public final class RenderUtils {
 
-    public static void clearScreen() {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
+	public static void clearScreen() {
+		Gdx.gl.glClearColor(0, 0, 0, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+	}
 
 }
