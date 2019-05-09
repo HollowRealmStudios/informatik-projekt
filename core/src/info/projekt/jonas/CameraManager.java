@@ -68,4 +68,9 @@ public class CameraManager {
     public OrthographicCamera getCamera() {
         return camera;
     }
+
+    @Override
+    public String toString() {
+        return camera.position.toString() + ", zoom: " + camera.zoom;
+    }
 }
