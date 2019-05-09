@@ -1,5 +1,6 @@
 package info.projekt.jonas;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector2;
@@ -12,20 +13,20 @@ public class CameraManager {
 
     private final OrthographicCamera camera;
 
-    /**
-     * @param width  the width of the camera's field of view
-     * @param height the height of the camera's field of view
-     * @param zoom   the zoom of the camera, 1 is default
-     */
-    public CameraManager(int width, int height, int zoom) {
-        camera = new OrthographicCamera(width, height);
-        camera.zoom = zoom;
+    public CameraManager() {
+        camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+    }
+
+    public void setCameraSize(int width, int height) {
+        camera.viewportWidth = width;
+        camera.viewportHeight = height;
+        update();
     }
 
     /**
      * updates the camera. Call after updating any parameters
      */
-    public void update() {
+    private void update() {
         camera.update();
     }
 
@@ -43,6 +44,7 @@ public class CameraManager {
      */
     public void setZoom(float zoom) {
         camera.zoom = zoom;
+        update();
     }
 
     /**
@@ -52,6 +54,7 @@ public class CameraManager {
      */
     public void translateRelative(Vector2 vector) {
         camera.translate(vector);
+        update();
     }
 
 
@@ -62,6 +65,7 @@ public class CameraManager {
      */
     public void translateAbsolute(Vector2 vector) {
         camera.position.set(vector, 0f);
+        update();
     }
 
     @Deprecated
