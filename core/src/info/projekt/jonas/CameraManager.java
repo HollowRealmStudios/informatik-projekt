@@ -23,7 +23,7 @@ public class CameraManager {
     }
 
     /**
-     * updates the camera. Call after updating any parameters
+     * updates the camera. Call after changing any parameters
      */
     public void update() {
         camera.update();
@@ -64,8 +64,19 @@ public class CameraManager {
         camera.position.set(vector, 0f);
     }
 
+    //FIXME this should not be used in any final releases
     @Deprecated
     public OrthographicCamera getCamera() {
         return camera;
+    }
+
+    @Override
+    public String toString() {
+        return "Orthographic camera " + camera.position.x + " | " + camera.position.y + ", zoom: " +camera.zoom;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 }
