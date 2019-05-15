@@ -15,6 +15,8 @@ public class CameraManager {
 
     public CameraManager() {
         camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        camera.position.set(new Vector2(1000, 1000), 0);
+        update();
     }
 
     public void setCameraSize(int width, int height) {
@@ -43,7 +45,7 @@ public class CameraManager {
      * @param zoom the new zoom
      */
     public void setZoom(float zoom) {
-        camera.zoom = zoom;
+        if (zoom >= 0.4f && zoom <= 1.7f) camera.zoom = zoom;
         update();
     }
 
@@ -54,6 +56,11 @@ public class CameraManager {
      */
     public void translateRelative(Vector2 vector) {
         camera.translate(vector);
+        System.out.println(camera.position.toString());
+        if (camera.position.x <= 285) camera.position.set(new Vector2(285, camera.position.y), 0);
+        else if (camera.position.x >= 1680) camera.position.set(new Vector2(1680, camera.position.y), 0);
+        else if (camera.position.y <= 400) camera.position.set(new Vector2(camera.position.x, 200), 0);
+        else if (camera.position.y >= 10500) camera.position.set(new Vector2(camera.position.x, 10500), 0);
         update();
     }
 

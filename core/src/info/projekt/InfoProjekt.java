@@ -3,6 +3,7 @@ package info.projekt;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
@@ -31,7 +32,8 @@ public class InfoProjekt extends ApplicationAdapter {
     @Override
     public void render() {
         processInput();
-        RenderUtils.clearScreen();
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(205 / 255f, 133 / 255f, 63 / 255f, 0.75f);
         batch.setProjectionMatrix(manager.getMatrix());
         batch.begin();
         for(int x = 0; x < storage.getRooms().length; x++) {
@@ -47,8 +49,8 @@ public class InfoProjekt extends ApplicationAdapter {
         else if(Gdx.input.isKeyPressed(Input.Keys.S)) manager.translateRelative(new Vector2(0, -15));
         if(Gdx.input.isKeyPressed(Input.Keys.A)) manager.translateRelative(new Vector2(-15, 0));
         else if(Gdx.input.isKeyPressed(Input.Keys.D)) manager.translateRelative(new Vector2(15, 0));
-        if(Gdx.input.isKeyPressed(Input.Keys.F1)) manager.setZoom(manager.getZoom() + 0.1f);
-        else if(Gdx.input.isKeyPressed(Input.Keys.F2)) manager.setZoom(manager.getZoom() - 0.1f);
+        if(Gdx.input.isKeyPressed(Input.Keys.F1)) manager.setZoom(manager.getZoom() + 0.05f);
+        else if(Gdx.input.isKeyPressed(Input.Keys.F2)) manager.setZoom(manager.getZoom() - 0.05f);
     }
 
     @Override
