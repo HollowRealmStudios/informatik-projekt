@@ -5,7 +5,7 @@ package info.projekt.christoph;
  */
 
 
-public class BuildMenu {
+public class TitleScreen {
 
 
 }
