@@ -7,11 +7,11 @@ import info.projekt.InfoProjekt;
 import java.awt.*;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
-		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
-		config.fullscreen = true;
-		new LwjglApplication(new InfoProjekt(), config);
-	}
+    public static void main (String[] arg) {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        config.fullscreen = true;
+        new LwjglApplication(new InfoProjekt(), config);
+    }
 }

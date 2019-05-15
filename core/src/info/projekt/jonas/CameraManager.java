@@ -68,6 +68,10 @@ public class CameraManager {
         update();
     }
 
+    public float getZoom() {
+        return camera.zoom;
+    }
+
     @Deprecated
     public OrthographicCamera getCamera() {
         return camera;
