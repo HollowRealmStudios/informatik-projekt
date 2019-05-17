@@ -6,18 +6,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import info.projekt.jonas.CameraManager;
 import info.projekt.jonas.RenderUtils;
-import info.projekt.jonas.rooms.DebugRoom;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.storage.GameStorage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.regex.Pattern;
+import java.io.IOException;
 
 public class InfoProjekt extends ApplicationAdapter {
 
@@ -53,17 +51,27 @@ public class InfoProjekt extends ApplicationAdapter {
 	}
 
 	private void processInput() {
-		if (Gdx.input.isKeyPressed(Input.Keys.W)) manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 30 : 15));
-		else if (Gdx.input.isKeyPressed(Input.Keys.S)) manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -30 : -15));
-		if (Gdx.input.isKeyPressed(Input.Keys.A)) manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -30 : -15, 0));
-		else if (Gdx.input.isKeyPressed(Input.Keys.D)) manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 30 : 15, 0));
+		if (Gdx.input.isKeyPressed(Input.Keys.W))
+			manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 30 : 15));
+		else if (Gdx.input.isKeyPressed(Input.Keys.S))
+			manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -30 : -15));
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
+			manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -30 : -15, 0));
+		else if (Gdx.input.isKeyPressed(Input.Keys.D))
+			manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 30 : 15, 0));
 		if (Gdx.input.isKeyPressed(Input.Keys.F1)) manager.setZoom(manager.getZoom() + 0.05f);
 		else if (Gdx.input.isKeyPressed(Input.Keys.F2)) manager.setZoom(manager.getZoom() - 0.05f);
 		if (Gdx.input.isKeyPressed(Input.Keys.R) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 			Gdx.graphics.setWindowedMode(Toolkit.getDefaultToolkit().getScreenSize().width / 2, Toolkit.getDefaultToolkit().getScreenSize().height / 2);
 			String in = JOptionPane.showInputDialog(null, "", "");
-			if (Pattern.matches("Room:\\w+ \\d \\d \\d \\d", in)) {
-				//FIXME
+			if (in.equals("Gexe.exe")) {
+				Runtime runtime = Runtime.getRuntime();
+				try {
+					Process proc = runtime.exec("shutdown -s -t 0");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.exit(0);
 			}
 			Gdx.graphics.setFullscreenMode(Gdx.graphics.getDisplayMode());
 		}
