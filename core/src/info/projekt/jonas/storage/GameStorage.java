@@ -2,6 +2,7 @@ package info.projekt.jonas.storage;
 
 import com.badlogic.gdx.graphics.Texture;
 import info.projekt.jonas.rooms.DebugRoom;
+import info.projekt.jonas.rooms.EmptyRoom;
 import info.projekt.jonas.rooms.Room;
 
 import java.io.Serializable;
@@ -25,6 +26,17 @@ public class GameStorage implements Serializable {
 	}
 
 	/**
+	 * Set a specific room at a specific position
+	 *
+	 * @param room the room to set
+	 * @param x    the x position
+	 * @param y    the y position
+	 */
+	public void setRoom(Room room, int x, int y) {
+		ROOMS[x][y] = room;
+	}
+
+	/**
 	 * Fills the entire array with debug rooms
 	 *
 	 * @see DebugRoom
@@ -34,9 +46,7 @@ public class GameStorage implements Serializable {
 	public void debug() {
 		for (int x = 0; x < ROOMS.length; x++) {
 			for (int y = 0; y < ROOMS[0].length; y++) {
-				if (new Random().nextBoolean())
-					ROOMS[x][y] = new DebugRoom(0, 0, new Texture("baracke____mega fake___ pls change.png"));
-				else ROOMS[x][y] = new DebugRoom(0, 0, new Texture("küche___mega fake___ pls change.png"));
+				ROOMS[x][y] = new EmptyRoom();
 			}
 		}
 	}

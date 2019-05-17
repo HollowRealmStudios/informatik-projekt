@@ -12,6 +12,7 @@ public class DesktopLauncher {
         config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
         config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
         config.fullscreen = true;
+        config.vSyncEnabled = true;
         new LwjglApplication(new InfoProjekt(), config);
     }
 }

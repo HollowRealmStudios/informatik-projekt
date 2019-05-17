@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 public class DebugRoom extends Room {
 
-    public DebugRoom(int level, int capacity, Texture texture) {
-        super(level, capacity, texture);
-    }
+	public DebugRoom() {
+		super(-1, new Texture[]{new Texture("room_debug.png")});
+	}
 }
