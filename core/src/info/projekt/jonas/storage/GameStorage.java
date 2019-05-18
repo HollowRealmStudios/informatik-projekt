@@ -2,6 +2,7 @@ package info.projekt.jonas.storage;
 
 import com.badlogic.gdx.graphics.Texture;
 import info.projekt.jonas.rooms.DebugRoom;
+import info.projekt.jonas.rooms.ElectricityRoom;
 import info.projekt.jonas.rooms.EmptyRoom;
 import info.projekt.jonas.rooms.Room;
 
@@ -46,7 +47,7 @@ public class GameStorage implements Serializable {
 	public void debug() {
 		for (int x = 0; x < ROOMS.length; x++) {
 			for (int y = 0; y < ROOMS[0].length; y++) {
-				ROOMS[x][y] = new EmptyRoom();
+				ROOMS[x][y] = new ElectricityRoom();
 			}
 		}
 	}
