@@ -2,12 +2,13 @@ package info.projekt.jonas.rooms;
 
 import com.badlogic.gdx.graphics.Texture;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 /*
  *The child class, every room inherits from
  * */
-public class Room {
+public class Room implements Serializable {
 
 	/**
 	 * The global width and height of the rooms in pixels
