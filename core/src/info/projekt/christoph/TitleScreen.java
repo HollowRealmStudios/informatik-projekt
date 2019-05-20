@@ -4,13 +4,26 @@ package info.projekt.christoph;
 //https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game
 
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import info.projekt.InfoProjekt;
 
 /**
  * @author Christoph
  */
 
 public class TitleScreen implements Screen {
+
+	public TitleScreen(final InfoProjekt game) {
+
+		OrthographicCamera camera = new OrthographicCamera();
+		camera.setToOrtho(false, 800, 480);
+
+
+
+
+	}
 
 	@Override
 	public void show() {
