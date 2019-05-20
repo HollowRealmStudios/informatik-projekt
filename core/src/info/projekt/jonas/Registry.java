@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * */
 public class Registry {
 
-	private static final ArrayList<Class<? extends Item>> ITEMS = new ArrayList<>();
-	private static final ArrayList<Class<? extends Room>> ROOMS = new ArrayList<>();
-	private static final ArrayList<Class<? extends Dweller>> DWELLERS = new ArrayList<>();
+	private static final ArrayList<Class<? extends Item>> ITEMS = new ArrayList<Class<? extends Item>>();
+	private static final ArrayList<Class<? extends Room>> ROOMS = new ArrayList<Class<? extends Room>>();
+	private static final ArrayList<Class<? extends Dweller>> DWELLERS = new ArrayList<Class<? extends Dweller>>();
 
 	/**
 	 * use this to register a new room, by passing in an object of the desired room to be registered

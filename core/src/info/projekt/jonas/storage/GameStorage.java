@@ -2,6 +2,7 @@ package info.projekt.jonas.storage;
 
 import info.projekt.jonas.rooms.DebugRoom;
 import info.projekt.jonas.rooms.ElectricityRoom;
+import info.projekt.jonas.rooms.EmptyRoom;
 import info.projekt.jonas.rooms.Room;
 
 import java.io.Serializable;
@@ -15,6 +16,14 @@ public class GameStorage implements Serializable {
      * The main 2D-Array of rooms
      */
     private final Room[][] ROOMS = new Room[5][50];
+
+    public GameStorage() {
+        for (int x = 0; x < ROOMS.length; x++) {
+            for (int y = 0; y < ROOMS[0].length; y++) {
+                ROOMS[x][y] = new EmptyRoom();
+            }
+        }
+    }
 
     /**
      * @return the 2D-Array of rooms
