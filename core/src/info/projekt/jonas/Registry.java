@@ -1,6 +1,8 @@
 package info.projekt.jonas;
 
+import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.ArrayList;
 
@@ -9,8 +11,9 @@ import java.util.ArrayList;
  * */
 public class Registry {
 
-	private static final ArrayList<Class<? extends Room>> ROOMS = new ArrayList<Class<? extends Room>>();
-	private static final ArrayList<Class<? extends Dweller>> DWELLERS = new ArrayList<Class<? extends Dweller>>();
+	private static final ArrayList<Class<? extends Item>> ITEMS = new ArrayList<>();
+	private static final ArrayList<Class<? extends Room>> ROOMS = new ArrayList<>();
+	private static final ArrayList<Class<? extends Dweller>> DWELLERS = new ArrayList<>();
 
 	/**
 	 * use this to register a new room, by passing in an object of the desired room to be registered
@@ -24,7 +27,7 @@ public class Registry {
 
 	/**
 	 * use this to register a new dweller, by passing in an object of the desired dweller to be registered
-	 * @param dweller the dweller to be reistered
+	 * @param dweller the dweller to be registered
 	 * @see Dweller
 	 *  */
 	public static void registerDweller(Dweller dweller) {
@@ -32,4 +35,13 @@ public class Registry {
 		DWELLERS.add(dweller.getClass());
 	}
 
+	/**
+	 * use this to register a new item, by passing in an object of the desired item to be registered
+	 * @param item the dweller to be registered
+	 * @see Item
+	 *  */
+	public static void registerItem(Item item) {
+		if(ITEMS.contains(item.getClass())) throw new IllegalArgumentException("Item " + item.getClass().getName() + " already registered!");
+		ITEMS.add(item.getClass());
+	}
 }
