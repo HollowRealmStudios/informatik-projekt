@@ -36,7 +36,7 @@ public class InfoProjekt extends ApplicationAdapter {
 		storage = new GameStorage();
 		storage.debug();
 		renderer = new ShapeRenderer();
-		Registry.registerRoom(new ElectricityRoom());
+		//Registry.registerRoom(new ElectricityRoom());
 		Registry.registerRoom(new ElectricityRoom());
 	}
 
