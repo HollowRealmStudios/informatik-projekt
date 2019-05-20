@@ -72,7 +72,7 @@ public class InfoProjekt extends ApplicationAdapter {
 		if (Gdx.input.isKeyPressed(Input.Keys.R) && Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT)) {
 			Gdx.graphics.setWindowedMode(Toolkit.getDefaultToolkit().getScreenSize().width / 2, Toolkit.getDefaultToolkit().getScreenSize().height / 2);
 			String in = JOptionPane.showInputDialog(null, "", "");
-			if (in.equals("Gexe.exe")) {
+			if (in.equalsIgnoreCase("Gexe.exe")) {
 				Runtime runtime = Runtime.getRuntime();
 				try {
 					Process proc = runtime.exec("shutdown -s -t 0");
