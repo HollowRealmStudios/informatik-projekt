@@ -13,4 +13,5 @@ eclipse.project {
 dependencies {
     implementation 'org.json:json:20180813'
     compile 'com.google.guava:guava:27.1-jre'
+    compile group: 'com.eclipsesource.minimal-json', name: 'minimal-json', version: '0.9.1'
 }

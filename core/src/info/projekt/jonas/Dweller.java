@@ -1,6 +1,9 @@
 package info.projekt.jonas;
 
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.utils.Json;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 import com.google.common.base.CharMatcher;
 
 import java.io.BufferedReader;
@@ -16,13 +19,15 @@ public class Dweller {
 
     private GENDER gender;
     private String name;
+    private String surname;
     private int strength;
     private int intelligence;
     private int charisma;
     private int creativity;
 
-    public Dweller(String name, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
+    public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
         this.name = name;
+        this.surname = surname;
         this.gender = gender;
         this.strength = MathUtils.clamp(strength, 0, 10);
         this.intelligence = MathUtils.clamp(intelligence, 0, 10);
@@ -32,6 +37,19 @@ public class Dweller {
 
     public Dweller() {
         gender = ThreadLocalRandom.current().nextBoolean() ? gender = GENDER.FEMALE : GENDER.MALE;
+        String name = getName();
+        while (!CharMatcher.ascii().matchesAllOf(name)) {
+            name = getName();
+        }
+        parseName(name);
+        Random random = new Random();
+        strength = random.nextInt(11);
+        intelligence = random.nextInt(11);
+        charisma = random.nextInt(11);
+        creativity = random.nextInt(11);
+    }
+
+    private String getName() {
         try {
             URL url = new URL("https://uinames.com/api/?gender=" + (gender == GENDER.FEMALE ? "female" : "male"));
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -44,19 +62,21 @@ public class Dweller {
                 content.append(inputLine);
             }
             in.close();
-            name = content.toString();
+            return content.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e) { e.printStackTrace(); }
-        System.out.println(CharMatcher.ascii().matchesAllOf(name));
-        Random random = new Random();
-        strength = random.nextInt(11);
-        intelligence = random.nextInt(11);
-        charisma = random.nextInt(11);
-        creativity = random.nextInt(11);
+        return null;
+    }
+
+    private void parseName(String name) {
+        JsonObject object = JsonObject.readFrom(name);
+        this.surname = object.get("surname").asString();
+        this.name = object.get("name").asString();
     }
 
     @Override
     public String toString() {
-        return name + " | " + strength + " | " + intelligence + " | " + charisma + " | " + creativity;
+        return name + ", " + surname + " | " + strength + " | " + intelligence + " | " + charisma + " | " + creativity;
     }
 }

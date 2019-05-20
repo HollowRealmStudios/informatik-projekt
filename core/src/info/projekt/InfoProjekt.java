@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import info.projekt.jonas.CameraManager;
+import info.projekt.jonas.Dweller;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.RenderUtils;
 import info.projekt.jonas.rooms.DebugRoom;
@@ -36,7 +37,9 @@ public class InfoProjekt extends ApplicationAdapter {
 		storage = new GameStorage();
 		storage.debug();
 		renderer = new ShapeRenderer();
-		//Registry.registerRoom(new ElectricityRoom());
+		for(int i = 0; i < 10; i++) {
+			System.out.println(new Dweller().toString());
+		}
 		Registry.registerRoom(new ElectricityRoom());
 	}
 
