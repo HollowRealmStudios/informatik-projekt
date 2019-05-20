@@ -25,11 +25,20 @@ public class Screen extends ApplicationAdapter {
 
     @Override
     public void render() {
+        processInput();
         RenderUtils.clearScreen(new Color(43, 18, 11));
         batch.begin();
         batch.draw(TitleScreenPicture,0,0,Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height);
         batch.end();
         renderer.end();
+    }
+
+
+    private void processInput(){
+
+
+
+
     }
 
     @Override

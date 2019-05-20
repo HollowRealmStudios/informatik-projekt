@@ -15,10 +15,11 @@ import info.projekt.InfoProjekt;
 
 public class TitleScreen implements Screen {
 
-	public TitleScreen(final info.projekt.christoph.Screen game) {
+	private info.projekt.christoph.Screen game;
 
-		OrthographicCamera camera = new OrthographicCamera();
-		camera.setToOrtho(false, 800, 480);
+	public TitleScreen(final info.projekt.christoph.Screen game) {
+			this.game = game;
+
 
 
 
