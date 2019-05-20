@@ -43,6 +43,7 @@ public class InfoProjekt extends ApplicationAdapter {
 		Registry.registerRoom(new ElectricityRoom());
 	}
 
+
 	@Override
 	public void render() {
 		processInput();
