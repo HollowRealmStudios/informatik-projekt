@@ -9,3 +9,8 @@ sourceSets.main.java.srcDirs = [ "src/" ]
 eclipse.project {
     name = appName + "-core"
 }
+
+dependencies {
+    implementation 'org.json:json:20180813'
+    compile 'com.google.guava:guava:27.1-jre'
+}
