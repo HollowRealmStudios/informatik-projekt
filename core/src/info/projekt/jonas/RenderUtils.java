@@ -2,6 +2,7 @@ package info.projekt.jonas;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import info.projekt.jonas.rooms.Room;
 
@@ -35,6 +36,12 @@ public final class RenderUtils {
 				batch.draw(rooms[x][y].getTexture(), x * Room.WIDTH, y * Room.HEIGHT);
 			}
 		}
+		batch.end();
+	}
+
+	public static void drawBackground(SpriteBatch batch, Texture texture) {
+		batch.begin();
+		batch.draw(texture, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 		batch.end();
 	}
 }
