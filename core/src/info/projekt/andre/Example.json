@@ -1,0 +1,5 @@
+{
+	"weapons":[{"name":"gun", "damage":120}, {"name":"gun", "damage":120}],
+	"armors":[{"name":"chestplate", "protection":29}],
+	"materials":[{"name":"plastic"}]
+}
