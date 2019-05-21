@@ -1,5 +1,6 @@
 package info.projekt.jonas;
 
+import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 

@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import info.projekt.jonas.CameraManager;
-import info.projekt.jonas.Dweller;
 import info.projekt.jonas.Registry;
-import info.projekt.jonas.RenderUtils;
+import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.gui.CameraManager;
+import info.projekt.jonas.gui.RenderUtils;
 import info.projekt.jonas.rooms.ElectricityRoom;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.storage.GameStorage;
@@ -30,7 +30,8 @@ public class InfoProjekt extends ApplicationAdapter {
     public static InputMultiplexer inputMultiplexer = new InputMultiplexer();
 
     @Override
-    public void create() {        batch = new SpriteBatch();
+    public void create() {
+        batch = new SpriteBatch();
         Texture debugRoom = new Texture("room_debug.png");
         manager = new CameraManager();
         manager.setZoom(1.8f);

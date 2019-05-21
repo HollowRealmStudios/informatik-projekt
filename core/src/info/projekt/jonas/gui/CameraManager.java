@@ -1,4 +1,4 @@
-package info.projekt.jonas;
+package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;

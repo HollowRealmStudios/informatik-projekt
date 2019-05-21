@@ -1,4 +1,4 @@
-package info.projekt.jonas;
+package info.projekt.jonas.dwellers;
 
 import com.badlogic.gdx.math.MathUtils;
 import com.eclipsesource.json.JsonObject;
