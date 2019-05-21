@@ -23,6 +23,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
     private Icon icon;
     private Label label;
     private FullscreenGui gui;
+    private OverlayGui overlayGui;
 
     public void create() {
         Gdx.input.setInputProcessor(this);
@@ -51,6 +52,15 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         gui.addComponent(label);
         gui.registerKey(Input.Keys.F1);
         System.out.println(new Dweller().toString());
+        overlayGui = new OverlayGui(this) {
+            @Override
+            public void buttonPressed(Button button) {
+                System.out.println(button.toString());
+            }
+        };
+        overlayGui.addComponent(button);
+        overlayGui.addComponent(bar);
+        overlayGui.show();
     }
 
     @Override
@@ -59,6 +69,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         RenderUtils.drawBackground(batch, new Texture("maxresdefault.jpg"));
         gui.paint(batch, renderer);
         bar.update(1);
+        overlayGui.paint(batch, renderer);
     }
 
     @Override
