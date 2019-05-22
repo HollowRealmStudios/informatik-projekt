@@ -16,12 +16,13 @@ public class DesktopLauncher {
         config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
         config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
         config.fullscreen = false;
-        config.vSyncEnabled = true;
+        config.vSyncEnabled = false;
+        config.foregroundFPS = 60;
+        config.backgroundFPS = 60;
         config.forceExit = true;
         final LwjglApplication lwjglApplication = new LwjglApplication(TitleScreen, config);
         new TitleScreen(TitleScreen);
         StorageHandler.registerArmors();
         StorageHandler.registerWeapons();
-
     }
 }
