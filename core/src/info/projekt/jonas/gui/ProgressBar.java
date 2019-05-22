@@ -18,7 +18,7 @@ public class ProgressBar extends GuiComponent {
     }
 
     public void update(int amount) {
-        this.amount = MathUtils.clamp(this.amount += amount, 0, 100);
+        this.amount = MathUtils.clamp(amount, 0, 100);
     }
 
     @Override
