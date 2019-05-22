@@ -15,7 +15,7 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
         config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
-        config.fullscreen = true;
+        config.fullscreen = false;
         config.vSyncEnabled = true;
         config.forceExit = true;
         final LwjglApplication lwjglApplication = new LwjglApplication(TitleScreen, config);
