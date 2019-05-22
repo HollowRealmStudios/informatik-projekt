@@ -2,6 +2,92 @@
   "armors": [
     {
       "texture": "armor.png",
+      "name": "Hazmat Suit",
+      "protection": 3,
+      "deviation": 0
+    },
+    {
+      "texture": "armor.png",
+      "name": "Sub to Pewdiepie-shirt",
+      "protection": 0,
+      "deviation": 1
+    },{
+      "texture": "armor.png",
+      "name": "Power Suit",
+      "protection": 5,
+      "deviation": 2
+    },{
+      "texture": "armor.png",
+      "name": "Exoskelett",
+      "protection": 6,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "Laborkittel",
+      "protection": 2,
+      "deviation": 3
+    },{
+      "texture": "armor.png",
+      "name": "Anzug",
+      "protection": 2,
+      "deviation": 1
+    },{
+      "texture": "armor.png",
+      "name": "Klettergeschirr",
+      "protection": 2,
+      "deviation": 4
+    },{
+      "texture": "armor.png",
+      "name": "Draconic Armour",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "Gexes Gesicht",
+      "protection": 15,
+      "deviation": 2
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
+      "name": "chestplate",
+      "protection": 29,
+      "deviation": 10
+    },{
+      "texture": "armor.png",
       "name": "chestplate",
       "protection": 29,
       "deviation": 10
