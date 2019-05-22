@@ -68,7 +68,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
     @Override
     public void render() {
         RenderUtils.clearScreen(new java.awt.Color(43, 18, 11));
-        RenderUtils.drawBackground(batch, new Texture("maxresdefault.jpg"));
+        RenderUtils.drawBackground(batch, new Texture("Background.png"));
         gui.paint(batch, renderer);
         bar.update(1);
         overlayGui.paint(batch, renderer);
