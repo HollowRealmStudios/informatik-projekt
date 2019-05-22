@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.gui.Button;
 import info.projekt.jonas.gui.Label;
 import info.projekt.jonas.gui.*;
@@ -53,7 +52,6 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         gui.addComponent(label);
         gui.registerKey(Input.Keys.F1);
         gui.registerKey(Input.Keys.ESCAPE);
-        System.out.println(new Dweller().toString());
     }
 
     @Override
