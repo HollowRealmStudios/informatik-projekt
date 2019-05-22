@@ -1,0 +1,4 @@
+{
+	"weapons":[{"texture": "weapon.png", "name":"machine gun", "damage":120, "deviation": 5}, {"texture": "shotgun.png", "name":"shotgun", "damage":125, "deviation": 20}],
+	
+}

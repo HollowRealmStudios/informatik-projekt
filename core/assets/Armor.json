@@ -1,0 +1,3 @@
+{
+	"armors":[{"texture": "armor.png","name":"chestplate", "protection":29, "deviation": 10}]
+}
