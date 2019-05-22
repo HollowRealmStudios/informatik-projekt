@@ -13,7 +13,7 @@ public class StorageHandler {
     /**
      * The name of the file to store into
      */
-    public static final String FILE = "Storage.dat";
+    private static final String FILE = "Storage.dat";
 
     /**
      * loads an instance of the game storage class, containing everything saved when left off
@@ -35,8 +35,8 @@ public class StorageHandler {
 
     public static void registerWeapons() throws IOException {
         JsonObject in = JsonObject.readFrom(new FileReader("Weapons.json"));
-        for (JsonValue value : in.get("weapons").asArray()) {
-            System.out.println(value.asString());
+        for(JsonValue value : in.get("weapons").asArray()) {
+            System.out.println(value.toString());
         }
     }
 
