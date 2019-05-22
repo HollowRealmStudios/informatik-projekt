@@ -7,6 +7,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.Button;
 import info.projekt.jonas.gui.Label;
 import info.projekt.jonas.gui.*;
@@ -18,7 +19,8 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
     private SpriteBatch batch;
     private ShapeRenderer renderer;
     private ProgressBar bar;
-    private Button button;
+    private Button newgamebutton;
+    private Button loadgamebutton;
     private Icon icon;
     private Label label;
     private FullscreenGui gui;
@@ -39,18 +41,24 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
 
             @Override
             public void buttonPressed(Button button) {
-                System.out.println(button.toString());
+                if (button.equals(newgamebutton)) {
+                    new InfoProjekt();
+
+                }
             }
         };
-        bar = new ProgressBar(new Color(7, 14, 255), 200, 200, 200, 20);
-        button = new Button(new Texture("Save.png"), 600, 600);
-        icon = new Icon(new Texture("room_debug.png"), 900, 900);
-        label = new Label("Hello, world!", new Font(Font.MONOSPACED, Font.BOLD, 40), 30, 30);
-        gui.addComponent(bar);
-        gui.addComponent(button);
-        gui.addComponent(icon);
-        gui.addComponent(label);
-        gui.registerKey(Input.Keys.F1);
+        // bar = new ProgressBar(new Color(7, 14, 255), 200, 200, 200, 20);
+        newgamebutton = new Button(new Texture("badlogic.jpg"), 400, 500, 400, 500);
+        loadgamebutton = new Button(0, 500, 400, 500);
+
+        //icon = new Icon(new Texture("room_debug.png"), 900, 900);
+        // label = new Label("Hello, world!", new Font(Font.MONOSPACED, Font.BOLD, 40), 30, 30);
+        // gui.addComponent(bar);
+        gui.addComponent(newgamebutton);
+        gui.addComponent(loadgamebutton);
+        // gui.addComponent(icon);
+        // gui.addComponent(label);
+        // gui.registerKey(Input.Keys.F1);
         gui.registerKey(Input.Keys.ESCAPE);
     }
 
@@ -58,7 +66,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
     public void render() {
         RenderUtils.clearScreen(new java.awt.Color(43, 18, 11));
         RenderUtils.drawBackground(batch, new Texture("Background.png"));
-        bar.update(1);
+        //bar.update(1);
         gui.paint(batch, renderer);
     }
 
@@ -67,6 +75,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         if (keycode == Input.Keys.F2) {
             gui.show();
         }
+        if (keycode == Input.Keys.ESCAPE) Gdx.app.exit();
         return false;
     }
 
