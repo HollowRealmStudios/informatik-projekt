@@ -1,5 +1,8 @@
 package info.projekt.jonas.storage;
 
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
+
 import java.io.*;
 
 /**
@@ -28,5 +31,19 @@ public class StorageHandler {
      */
     public static void saveGame(GameStorage storage) throws IOException {
         new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
+    }
+
+    public static void registerWeapons() throws IOException {
+        JsonObject in = JsonObject.readFrom(new FileReader("Weapons.json"));
+        for (JsonValue value : in.get("weapons").asArray()) {
+            System.out.println(value.asString());
+        }
+    }
+
+    public static void registerArmors() throws IOException {
+        JsonObject in = JsonObject.readFrom(new FileReader("Armors.json"));
+        for (JsonValue value : in.get("Armors").asArray()) {
+            System.out.println(value.asString());
+        }
     }
 }

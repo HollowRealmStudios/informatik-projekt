@@ -35,6 +35,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
             public void keyPressed(int key) {
                 System.out.println(key);
                 if (key == Input.Keys.F1) this.hide();
+                if(key == Input.Keys.ESCAPE) Gdx.app.exit();
             }
 
             @Override
@@ -51,6 +52,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         gui.addComponent(icon);
         gui.addComponent(label);
         gui.registerKey(Input.Keys.F1);
+        gui.registerKey(Input.Keys.ESCAPE);
         System.out.println(new Dweller().toString());
         overlayGui = new OverlayGui(this) {
             @Override
