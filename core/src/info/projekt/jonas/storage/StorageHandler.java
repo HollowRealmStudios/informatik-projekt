@@ -35,7 +35,9 @@ public class StorageHandler {
 
     public static void registerWeapons() throws IOException {
         JsonObject in = JsonObject.readFrom(new FileReader("Weapons.json"));
-        System.out.println(in.get("weapons").asArray().get(0).toString());
+        for(JsonValue value : in.get("weapons").asArray()) {
+            System.out.println(value.toString());
+        }
     }
 
     public static void registerArmors() throws IOException {
