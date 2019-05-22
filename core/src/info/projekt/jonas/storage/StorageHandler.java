@@ -41,7 +41,7 @@ public class StorageHandler {
     }
 
     public static void registerArmors() throws IOException {
-        JsonObject in = JsonObject.readFrom(new FileReader("Armors.json"));
+        JsonObject in = JsonObject.readFrom(new FileReader("Armor.json"));
         for (JsonValue value : in.get("Armors").asArray()) {
             System.out.println(value.asString());
         }

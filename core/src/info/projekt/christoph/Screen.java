@@ -7,7 +7,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.gui.Button;
 import info.projekt.jonas.gui.Label;
 import info.projekt.jonas.gui.*;
@@ -53,25 +52,14 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         gui.addComponent(label);
         gui.registerKey(Input.Keys.F1);
         gui.registerKey(Input.Keys.ESCAPE);
-        System.out.println(new Dweller().toString());
-        overlayGui = new OverlayGui(this) {
-            @Override
-            public void buttonPressed(Button button) {
-                System.out.println(button.toString());
-            }
-        };
-        overlayGui.addComponent(button);
-        overlayGui.addComponent(bar);
-        overlayGui.show();
     }
 
     @Override
     public void render() {
         RenderUtils.clearScreen(new java.awt.Color(43, 18, 11));
         RenderUtils.drawBackground(batch, new Texture("Background.png"));
-        gui.paint(batch, renderer);
         bar.update(1);
-        overlayGui.paint(batch, renderer);
+        gui.paint(batch, renderer);
     }
 
     @Override
