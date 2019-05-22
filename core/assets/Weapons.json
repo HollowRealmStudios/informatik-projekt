@@ -1,5 +1,142 @@
 {
-	"weapons":[{"texture": "weapon.png", "name":"Balistic-rifle", "damage":3, "deviation": 1}, {"texture": "shotgun.png", "name":"Balistic-shotgun", "damage":3, "deviation": 1}, {"texture": "shotgun.png", "name":"Balistic-sniper", "damage":4, "deviation": 1}, {"texture": "shotgun.png", "name":"Balistic-pistol", "damage":1, "deviation": 1}, {"texture": "shotgun.png", "name":"Laser-rifle", "damage":4, "deviation": 1}, {"texture": "shotgun.png", "name":"Laser-shotgun", "damage":4, "deviation": 2}, {"texture": "shotgun.png", "name":"Laser-sniper", "damage":5, "deviation": 0}, {"texture": "shotgun.png", "name":"Laser-pistol", "damage":2, "deviation": 0}, {"texture": "shotgun.png", "name":"Plasma-rifle", "damage":4, "deviation": 1}, {"texture": "shotgun.png", "name":"Plasma-shotgun", "damage":6, "deviation": 3}, {"texture": "shotgun.png", "name":"Plasma-sniper", "damage":7, "deviation": 0}, {"texture": "shotgun.png", "name":"Plasma-pistol", "damage":4, "deviation": 0}, {"texture": "shotgun.png", "name":"Neon-Katana", "damage":8, "deviation": 5}, {"texture": "shotgun.png", "name":"pan", "damage":4, "deviation": 2}, {"texture": "shotgun.png", "name":"1000 Voices", "damage":9, "deviation": 2}, {"texture": "shotgun.png", "name":"Turtleshell", "damage":2, "deviation": 1}, {"texture": "shotgun.png", "name":"Futur Imperfect", "damage":12, "deviation": 0}, {"texture": "shotgun.png", "name":"Granade", "damage":8, "deviation": 1}, {"texture": "shotgun.png", "name":"Victorinox", "damage":3, "deviation": 2}, {"texture": "shotgun.png", "name":"(Baseball-)Bat", "damage":3, "deviation": 0}, {"texture": "shotgun.png", "name":"AdminTool", "damage":10000, "deviation": 0}, {"texture": "shotgun.png", "name":"Ion_Sniper", "damage":15, "deviation": 5}, {"texture": "shotgun.png", "name":"Gexe's Skills", "damage":13, "deviation": 2}],
-
-
+  "weapons": [
+    {
+      "texture": "weapon.png",
+      "name": "Ballistic-rifle",
+      "damage": 3,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Ballistic-shotgun",
+      "damage": 3,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Ballistic-sniper",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Ballistic-pistol",
+      "damage": 1,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Laser-rifle",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Laser-shotgun",
+      "damage": 4,
+      "deviation": 2
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Laser-sniper",
+      "damage": 5,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Laser-pistol",
+      "damage": 2,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Plasma-rifle",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Plasma-shotgun",
+      "damage": 6,
+      "deviation": 3
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Plasma-sniper",
+      "damage": 7,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Plasma-pistol",
+      "damage": 4,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Neon-Katana",
+      "damage": 8,
+      "deviation": 5
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "pan",
+      "damage": 4,
+      "deviation": 2
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "1000 Voices",
+      "damage": 9,
+      "deviation": 2
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Turtleshell",
+      "damage": 2,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Futur Imperfect",
+      "damage": 12,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Grenade",
+      "damage": 8,
+      "deviation": 1
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Victorinox",
+      "damage": 3,
+      "deviation": 2
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "(Baseball-)Bat",
+      "damage": 3,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "AdminTool",
+      "damage": 10000,
+      "deviation": 0
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Ion_Sniper",
+      "damage": 15,
+      "deviation": 5
+    },
+    {
+      "texture": "shotgun.png",
+      "name": "Gexe's Skills",
+      "damage": 13,
+      "deviation": 2
+    }
+  ]
 }

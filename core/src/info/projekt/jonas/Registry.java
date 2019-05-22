@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Registry {
 
-    private static final ArrayList<Class<? extends Item>> ITEMS = new ArrayList<Class<? extends Item>>();
+    private static final ArrayList<Item> ITEMS = new ArrayList<Item>();
     private static final ArrayList<Class<? extends Room>> ROOMS = new ArrayList<Class<? extends Room>>();
     private static final ArrayList<Class<? extends Dweller>> DWELLERS = new ArrayList<Class<? extends Dweller>>();
 
@@ -46,8 +46,8 @@ public class Registry {
      * @see Item
      */
     public static void registerItem(Item item) {
-        if (ITEMS.contains(item.getClass()))
+        if (ITEMS.contains(item))
             throw new IllegalArgumentException("Item " + item.getClass().getName() + " already registered!");
-        ITEMS.add(item.getClass());
+        ITEMS.add(item);
     }
 }
