@@ -1,6 +1,7 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.*;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.storage.GameStorage;
@@ -9,12 +10,52 @@ import java.awt.*;
 
 import static info.projekt.InfoProjekt.batch;
 import static info.projekt.InfoProjekt.manager;
+import static info.projekt.InfoProjekt.renderer;
+
 
 public class GameScreen extends InputAdapter implements Screen {
+
+	public OverlayGui overlayGui;
+	public FullscreenGui fullscreenGui;
+	public Button buildMenuButton;
+	private static InfoProjekt source;
+
+	public GameScreen(InfoProjekt o) {
+		source = o;
+	}
+
 
 	@Override
 	public void show() {
 
+		buildMenuButton = new Button(new Texture("badlogic.jpg"),1,1,50,50);
+
+		overlayGui = new OverlayGui(source) {
+			@Override
+			public void buttonPressed(Button button) {
+
+				if(button.equals(buildMenuButton)){
+					System.out.println("ALLAH");
+					fullscreenGui.show();
+				}
+
+			}
+		};
+
+		fullscreenGui = new FullscreenGui(new Texture("finalDay.PNG"), source) {
+			@Override
+			public void keyPressed(int key) {
+
+			}
+
+			@Override
+			public void buttonPressed(Button button) {
+
+			}
+		};
+		overlayGui.show();
+		overlayGui.addComponent(buildMenuButton);
+		Gdx.input.setInputProcessor(overlayGui);
 	}
 
 	@Override
@@ -22,6 +63,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		keyDown();
 		RenderUtils.clearScreen(new Color(49, 144, 175));
 		RenderUtils.drawRooms(InfoProjekt.GAME_STORAGE.getRooms(), batch);
+		overlayGui.paint(batch,renderer);
 	}
 
 	@Override
