@@ -20,42 +20,47 @@ import java.awt.*;
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
+/**
+ * @author Christoph
+ */
+
 public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
-    /**
-     * @author Christoph
-     */
-
+    private OverlayGui overlayGui;
+    public Button newgamebutton;
+    public Button loadgamebutton;
 
 	@Override
 	public void show() {
 
 	    manager.translateAbsolute(new Vector2(HALF_WIDTH,HALF_HEIGHT));
 
-	    Button newgamebutton = new Button(new Texture("badlogic.jpg"), (int) (WIDTH*0.2552f), (int) (HEIGHT*0.4027f), (int) (WIDTH*0.4895f), (int) (HEIGHT*0.1666f));
-        Button loadgamebutton = new Button(new Texture("badlogic.jpg"),0,0,400,500);
-        OverlayGui overlayGui = new OverlayGui(this) {
+	    newgamebutton = new Button(new Texture("badlogic.jpg"), (int) (WIDTH*0.2552f), (int) (HEIGHT*0.4027f), (int) (WIDTH*0.4895f), (int) (HEIGHT*0.1666f));
+	    loadgamebutton = new Button(new Texture("badlogic.jpg"),0,0,400,500);
+        overlayGui = new OverlayGui(this) {
             @Override
             public void buttonPressed(Button button) {
-
-                if(button.equals("newgamebutton")) {
+                System.out.println("ALLAH outer");
+                if(button.equals(newgamebutton)) {
+                    System.out.println("ALLAH inner");
                     ((InfoProjekt)source).changeScreen(gameScreen);
 
                 }
-                if(button.equals("loadgamebutton")){
+                if(button.equals(loadgamebutton)){
 
 
                 }
 
             }
         };
-
+        overlayGui.addComponent(newgamebutton);
+        overlayGui.show();
 	}
 
 	@Override
 	public void render(float delta) {
 	    RenderUtils.drawBackground(batch, new Texture("Background.png"));
-
+	    overlayGui.paint(batch,renderer);
 	}
 
 	@Override
@@ -85,7 +90,8 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
     @Override
     public boolean keyDown(int keycode) {
-            if(keycode == Input.Keys.ESCAPE) Gdx.app.exit();
+	    System.out.println("ALLAH ist soooooss!");
+            if(keycode == Input.Keys.ESCAPE) System.exit(0);
 
 
 
