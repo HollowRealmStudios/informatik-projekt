@@ -22,7 +22,7 @@ public class DesktopLauncher {
         config.forceExit = true;
         final LwjglApplication lwjglApplication = new LwjglApplication(TitleScreen, config);
         new TitleScreen(TitleScreen);
-        //StorageHandler.registerArmors();
+        StorageHandler.registerArmors();
         StorageHandler.registerWeapons();
     }
 }
