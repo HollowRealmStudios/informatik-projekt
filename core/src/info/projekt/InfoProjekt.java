@@ -15,6 +15,10 @@ public class InfoProjekt extends Game {
 	private GameScreen gameScreen;
 	public static CameraManager manager;
 
+	public void changeScreen(Screen screen) {
+		setScreen(screen);
+	}
+
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
