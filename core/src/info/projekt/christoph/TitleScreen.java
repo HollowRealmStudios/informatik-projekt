@@ -32,19 +32,21 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 	public void show() {
 		manager.translateAbsolute(new Vector2(HALF_WIDTH, HALF_HEIGHT));
 
-		newgamebutton = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * 0.2552f), (int) (HEIGHT * 0.4027f), (int) (WIDTH * 0.4895f), (int) (HEIGHT * 0.1666f));
-		loadgamebutton = new Button(new Texture("badlogic.jpg"), 0, 0, 400, 500);
+		newgamebutton = new Button(new Texture("void.png"), (int) (WIDTH * 0.2552f), (int) (HEIGHT * 0.4027f), (int) (WIDTH * 0.4895f), (int) (HEIGHT * 0.1666f));
+		loadgamebutton = new Button(new Texture("void.png"), (int) (WIDTH * 0.2552f), (int) (HEIGHT * 0.1574f), (int) (WIDTH * 0.4895f), (int) (HEIGHT * 0.1666f));
 		overlayGui = new OverlayGui(source) {
 			@Override
 			public void buttonPressed(Button button) {
-				System.out.println("ALLAH outer");
+
 				if (button.equals(newgamebutton)) {
-					System.out.println("ALLAH inner");
+				    InfoProjekt.newGame();
 					TitleScreen.source.changeScreen(gameScreen);
 					Gdx.input.setInputProcessor(gameScreen);
 				}
 				if (button.equals(loadgamebutton)) {
-
+                    InfoProjekt.loadGame();
+                    TitleScreen.source.changeScreen(gameScreen);
+                    Gdx.input.setInputProcessor(gameScreen);
 
 				}
 
@@ -52,6 +54,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 		};
 		overlayGui.show();
 		overlayGui.addComponent(newgamebutton);
+		overlayGui.addComponent(loadgamebutton);
 		Gdx.input.setInputProcessor(overlayGui);
 	}
 
