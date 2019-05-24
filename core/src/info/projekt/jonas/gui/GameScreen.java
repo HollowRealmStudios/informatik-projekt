@@ -2,6 +2,7 @@ package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.math.Vector2;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.storage.GameStorage;
 
 import java.awt.*;
@@ -11,18 +12,16 @@ import static info.projekt.InfoProjekt.manager;
 
 public class GameScreen extends InputAdapter implements Screen {
 
-	private GameStorage storage = new GameStorage();
-
 	@Override
 	public void show() {
-		storage.debug();
+
 	}
 
 	@Override
 	public void render(float delta) {
 		keyDown();
 		RenderUtils.clearScreen(new Color(49, 144, 175));
-		RenderUtils.drawRooms(storage.getRooms(), batch);
+		RenderUtils.drawRooms(InfoProjekt.GAME_STORAGE.getRooms(), batch);
 	}
 
 	@Override

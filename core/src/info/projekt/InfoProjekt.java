@@ -31,6 +31,11 @@ public class InfoProjekt extends Game {
 		}
 	}
 
+	public static void newGame() {
+		GAME_STORAGE = new GameStorage();
+		GAME_STORAGE.debug();
+	}
+
 	public void changeScreen(com.badlogic.gdx.Screen screen) {
 		setScreen(screen);
 		if (screen instanceof InputProcessor) Gdx.input.setInputProcessor((InputProcessor) screen);
