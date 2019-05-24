@@ -30,6 +30,8 @@ public class InfoProjekt extends Game {
 		gameScreen = new GameScreen();
 		manager = new CameraManager();
 		setScreen(titleScreen);
+		Gdx.input.setInputProcessor((InputProcessor) titleScreen);
+
 	}
 
 	@Override
