@@ -1,13 +1,26 @@
 package info.projekt;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.christoph.Screen;
 
 public class InfoProjekt extends Game {
 
-    @Override
-    public void create() {
-		System.out.println("new Infoprojekt");
-    }
+	private SpriteBatch batch;
+	private ShapeRenderer renderer;
+	private final Screen screen = new Screen();
+
+	@Override
+	public void create() {
+		batch = new SpriteBatch();
+		renderer = new ShapeRenderer();
+		setScreen(screen);
+	}
+
+	@Override
+	public void render() {
+
+	}
 }
 

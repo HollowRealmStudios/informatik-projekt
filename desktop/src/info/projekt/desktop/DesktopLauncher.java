@@ -2,6 +2,7 @@ package info.projekt.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import info.projekt.InfoProjekt;
 import info.projekt.christoph.Screen;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.storage.StorageHandler;
@@ -20,8 +21,7 @@ public class DesktopLauncher {
         config.foregroundFPS = 60;
         config.backgroundFPS = 60;
         config.forceExit = true;
-        final LwjglApplication lwjglApplication = new LwjglApplication(TitleScreen, config);
-        new TitleScreen(TitleScreen);
+        final LwjglApplication lwjglApplication = new LwjglApplication(new InfoProjekt(), config);
         StorageHandler.registerArmors();
         StorageHandler.registerWeapons();
     }
