@@ -1,29 +1,33 @@
 package info.projekt;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.Screen;
+import info.projekt.jonas.gui.GameScreen;
 
 public class InfoProjekt extends Game {
 
-	private SpriteBatch batch;
-	private ShapeRenderer renderer;
-	private final Screen screen = new Screen();
+	public static SpriteBatch batch;
+	private static ShapeRenderer renderer;
+	private Screen screen;
+	private GameScreen gameScreen;
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
-		setScreen(screen);
+		screen = new Screen();
+		gameScreen = new GameScreen();
+		setScreen(gameScreen);
 	}
 
 	@Override
 	public void render() {
-		batch.begin();
-		batch.draw(new Texture("Background.png"), 100, 100);
-		batch.end();
+		Gdx.input.setInputProcessor((InputProcessor) getScreen());
+		getScreen().render(0);
 	}
 }
 

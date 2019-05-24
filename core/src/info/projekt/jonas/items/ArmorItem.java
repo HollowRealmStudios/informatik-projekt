@@ -6,10 +6,10 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class ArmorItem extends Item {
 
-    private int protection;
+	private int protection;
 
-    public ArmorItem(Texture texture,String name, int protection, int deviation) {
-        super(texture, name);
-        this.protection = ThreadLocalRandom.current().nextBoolean() ? protection - ThreadLocalRandom.current().nextInt(deviation) : protection + ThreadLocalRandom.current().nextInt(deviation);
-    }
+	public ArmorItem(Texture texture, String name, int protection, int deviation) {
+		super(texture, name);
+		this.protection = ThreadLocalRandom.current().nextBoolean() ? protection - ThreadLocalRandom.current().nextInt(deviation) : protection + ThreadLocalRandom.current().nextInt(deviation);
+	}
 }

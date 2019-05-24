@@ -1,15 +1,9 @@
 package info.projekt.christoph;
 
-import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.InfoProjekt;
-import info.projekt.jonas.gui.Button;
-import info.projekt.jonas.gui.Label;
-import info.projekt.jonas.gui.*;
+import info.projekt.jonas.gui.RenderUtils;
 
-import java.awt.*;
+import static info.projekt.InfoProjekt.batch;
 
 public class Screen implements com.badlogic.gdx.Screen {
 
@@ -21,7 +15,7 @@ public class Screen implements com.badlogic.gdx.Screen {
 
 	@Override
 	public void render(float delta) {
-
+		RenderUtils.drawBackground(batch, new Texture("Background.png"));
 	}
 
 	@Override
