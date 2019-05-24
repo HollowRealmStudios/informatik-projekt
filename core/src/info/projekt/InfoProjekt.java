@@ -2,21 +2,34 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.storage.GameStorage;
+import info.projekt.jonas.storage.StorageHandler;
+
+import java.io.IOException;
 
 public class InfoProjekt extends Game {
 
+	public static GameStorage GAME_STORAGE;
 	public static SpriteBatch batch;
 	public static ShapeRenderer renderer;
 	private TitleScreen titleScreen;
 	public static GameScreen gameScreen;
 	public static CameraManager manager;
+
+	public static void loadGame() {
+		try {
+			GAME_STORAGE = StorageHandler.loadGame();
+		} catch (IOException | ClassNotFoundException e) {
+			GAME_STORAGE = new GameStorage();
+			GAME_STORAGE.debug();
+		}
+	}
 
 	public void changeScreen(com.badlogic.gdx.Screen screen) {
 		setScreen(screen);
