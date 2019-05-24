@@ -13,7 +13,7 @@ public abstract class FullscreenGui extends Gui {
     private ArrayList<Integer> Keys = new ArrayList<Integer>();
     private Texture background;
 
-    public FullscreenGui(Texture background, InputProcessor source) {
+    public FullscreenGui(Texture background, Object source) {
         super(source);
         this.background = background;
     }
