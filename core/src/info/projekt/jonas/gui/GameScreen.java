@@ -1,69 +1,59 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
-import info.projekt.jonas.storage.GameStorage;
 
 import java.awt.*;
 
 import static info.projekt.InfoProjekt.batch;
 import static info.projekt.InfoProjekt.manager;
-import static info.projekt.InfoProjekt.renderer;
 
 
 public class GameScreen extends InputAdapter implements Screen {
 
-	public OverlayGui overlayGui;
-	public FullscreenGui fullscreenGui;
-	public Button buildMenuButton;
+	private ImageButton button;
+	private Stage stage;
 	private static InfoProjekt source;
 
 	public GameScreen(InfoProjekt o) {
 		source = o;
 	}
 
-
 	@Override
 	public void show() {
-
-		buildMenuButton = new Button(new Texture("badlogic.jpg"),1,1,50,50);
-
-		overlayGui = new OverlayGui(source) {
+		Gdx.input.setInputProcessor(stage);
+		stage = new Stage(new ScreenViewport());
+		button = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+		button.setBounds(0, 0, 256, 256);
+		stage.addActor(button);
+		button.addListener(new InputListener() {
 			@Override
-			public void buttonPressed(Button button) {
-
-				if(button.equals(buildMenuButton)){
-					System.out.println("ALLAH");
-					fullscreenGui.show();
-				}
-
+			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+				System.out.println(button);
+				return true;
 			}
-		};
-
-		fullscreenGui = new FullscreenGui(new Texture("finalDay.PNG"), source) {
-			@Override
-			public void keyPressed(int key) {
-
-			}
-
-			@Override
-			public void buttonPressed(Button button) {
-
-			}
-		};
-		overlayGui.show();
-		overlayGui.addComponent(buildMenuButton);
-		Gdx.input.setInputProcessor(overlayGui);
+		});
 	}
+
 
 	@Override
 	public void render(float delta) {
 		keyDown();
 		RenderUtils.clearScreen(new Color(49, 144, 175));
 		RenderUtils.drawRooms(InfoProjekt.GAME_STORAGE.getRooms(), batch);
-		overlayGui.paint(batch,renderer);
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	@Override
@@ -87,7 +77,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void resize(int width, int height) {
-
+		stage.getViewport().update(width, height, true);
 	}
 
 	@Override
@@ -107,6 +97,6 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void dispose() {
-
+		stage.dispose();
 	}
 }

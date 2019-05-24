@@ -14,8 +14,8 @@ public class DesktopLauncher {
 
 	public static void main(String[] arg) throws IOException {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = RenderUtils.WIDTH;
-		config.height = RenderUtils.HEIGHT;
+		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
+		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
 		config.fullscreen = true;
 		config.vSyncEnabled = false;
 		config.foregroundFPS = 60;

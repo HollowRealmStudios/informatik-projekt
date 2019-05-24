@@ -15,7 +15,7 @@ public class CameraManager {
 
 	public CameraManager() {
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-		camera.position.set(new Vector2(1000, 1000), 0);
+		camera.position.set(new Vector2(0, 0), 0);
 		update();
 	}
 

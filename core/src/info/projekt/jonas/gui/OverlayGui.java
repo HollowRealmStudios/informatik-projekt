@@ -1,8 +1,9 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import java.io.ObjectOutputStream;
+import static info.projekt.InfoProjekt.manager;
 
 public abstract class OverlayGui extends Gui {
 
@@ -10,5 +11,8 @@ public abstract class OverlayGui extends Gui {
 		super(source);
 	}
 
-
+	@Override
+	public void paint(SpriteBatch batch, ShapeRenderer renderer) {
+		super.paint(batch, renderer);
+	}
 }

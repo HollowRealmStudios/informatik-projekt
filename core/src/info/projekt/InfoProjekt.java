@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Vector3;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
@@ -18,7 +19,6 @@ public class InfoProjekt extends Game {
 	public static GameStorage GAME_STORAGE;
 	public static SpriteBatch batch;
 	public static ShapeRenderer renderer;
-	private TitleScreen titleScreen;
 	public static GameScreen gameScreen;
 	public static CameraManager manager;
 
@@ -26,8 +26,7 @@ public class InfoProjekt extends Game {
 		try {
 			GAME_STORAGE = StorageHandler.loadGame();
 		} catch (IOException | ClassNotFoundException e) {
-			GAME_STORAGE = new GameStorage();
-			GAME_STORAGE.debug();
+			newGame();
 		}
 	}
 
@@ -46,7 +45,7 @@ public class InfoProjekt extends Game {
 	public void create() {
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
-		titleScreen = new TitleScreen(this);
+		TitleScreen titleScreen = new TitleScreen(this);
 		gameScreen = new GameScreen(this);
 		manager = new CameraManager();
 		Gdx.input.setInputProcessor((InputProcessor) titleScreen);

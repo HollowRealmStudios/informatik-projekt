@@ -4,6 +4,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
+import info.projekt.InfoProjekt;
+
+import static info.projekt.InfoProjekt.manager;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class Button extends GuiComponent {
 
@@ -28,7 +33,7 @@ public class Button extends GuiComponent {
 	public void paint(Object o) {
 		SpriteBatch batch = (SpriteBatch) o;
 		batch.begin();
-		batch.draw(texture, box.x, box.y, box.getWidth(), box.getHeight());
+		batch.draw(texture, box.x, box.y);
 		batch.end();
 	}
 
