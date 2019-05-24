@@ -47,15 +47,15 @@ public class Screen extends Game implements InputProcessor {
 
             @Override
             public void buttonPressed(Button button) {
+            	System.out.println("Hello");
                 if (button.equals(newgamebutton)) {
                     new InfoProjekt();
-
                 }
             }
         };
-        // bar = new ProgressBar(new Color(7, 14, 255), 200, 200, 200, 20);
+        bar = new ProgressBar(new Color(7, 14, 255), 200, 200, 200, 20);
         newgamebutton = new Button(new Texture("badlogic.jpg"), 400, 500, 400, 500);
-        loadgamebutton = new Button(0, 500, 400, 500);
+        loadgamebutton = new Button(new Texture("badlogic.jpg"), 0, 500, 400, 500);
 
         //icon = new Icon(new Texture("room_debug.png"), 900, 900);
         // label = new Label("Hello, world!", new Font(Font.MONOSPACED, Font.BOLD, 40), 30, 30);

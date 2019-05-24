@@ -7,7 +7,7 @@ public class InfoProjekt extends Game {
 
     @Override
     public void create() {
-
+		System.out.println("new Infoprojekt");
     }
 }
 
