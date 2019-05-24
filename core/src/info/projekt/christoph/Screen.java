@@ -1,9 +1,6 @@
 package info.projekt.christoph;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -14,7 +11,7 @@ import info.projekt.jonas.gui.*;
 
 import java.awt.*;
 
-public class Screen extends ApplicationAdapter implements InputProcessor {
+public class Screen extends Game implements InputProcessor {
 
     private SpriteBatch batch;
     private ShapeRenderer renderer;
@@ -30,6 +27,15 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         Gdx.input.setInputProcessor(this);
         batch = new SpriteBatch();
         renderer = new ShapeRenderer();
+        overlayGui = new OverlayGui(this) {
+            @Override
+            public void buttonPressed(Button button) {
+                if (button.equals(newgamebutton)) {
+                    new InfoProjekt();
+
+                }
+            }
+        };
         gui = new FullscreenGui(new Texture("finalNight.PNG"), this) {
 
             @Override
@@ -54,7 +60,7 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         //icon = new Icon(new Texture("room_debug.png"), 900, 900);
         // label = new Label("Hello, world!", new Font(Font.MONOSPACED, Font.BOLD, 40), 30, 30);
         // gui.addComponent(bar);
-        gui.addComponent(newgamebutton);
+        overlayGui.addComponent(newgamebutton);
         gui.addComponent(loadgamebutton);
         // gui.addComponent(icon);
         // gui.addComponent(label);
@@ -68,6 +74,8 @@ public class Screen extends ApplicationAdapter implements InputProcessor {
         RenderUtils.drawBackground(batch, new Texture("Background.png"));
         //bar.update(1);
         gui.paint(batch, renderer);
+        overlayGui.paint(batch, renderer);
+        overlayGui.show();
     }
 
     @Override
