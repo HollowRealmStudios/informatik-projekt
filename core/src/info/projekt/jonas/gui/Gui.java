@@ -1,6 +1,7 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -13,7 +14,7 @@ public abstract class Gui extends InputAdapter {
 
 	public Object source;
 	protected boolean visible = false;
-	protected ArrayList<GuiComponent> COMPONENTS = new ArrayList<GuiComponent>();
+	protected ArrayList<GuiComponent> COMPONENTS = new ArrayList<>();
 
 	protected Gui(Object source) {
 		this.source = source;
@@ -24,6 +25,7 @@ public abstract class Gui extends InputAdapter {
 	}
 
 	public void show() {
+		System.out.println("Show");
 		visible = true;
 		Gdx.input.setInputProcessor(this);
 	}
@@ -36,8 +38,8 @@ public abstract class Gui extends InputAdapter {
 	public abstract void buttonPressed(Button button);
 
 	@Override
-	public boolean keyDown(int keycode) {
-		if (keycode == 57) {
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		if (button == Input.Buttons.LEFT) {
 			for (GuiComponent component : COMPONENTS) {
 				if (component instanceof Button) {
 					if (((Button) component).clicked(new Vector2(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY()))) {

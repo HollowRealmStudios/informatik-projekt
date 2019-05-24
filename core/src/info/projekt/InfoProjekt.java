@@ -20,18 +20,18 @@ public class InfoProjekt extends Game {
 	public void changeScreen(com.badlogic.gdx.Screen screen) {
 		setScreen(screen);
 		if (screen instanceof InputProcessor) Gdx.input.setInputProcessor((InputProcessor) screen);
+		render();
 	}
 
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
-		titleScreen = new TitleScreen();
+		titleScreen = new TitleScreen(this);
 		gameScreen = new GameScreen();
 		manager = new CameraManager();
-		setScreen(titleScreen);
 		Gdx.input.setInputProcessor((InputProcessor) titleScreen);
-
+		setScreen(titleScreen);
 	}
 
 	@Override

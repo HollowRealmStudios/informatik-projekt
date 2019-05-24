@@ -11,8 +11,8 @@ import java.awt.*;
 import java.io.IOException;
 
 public class DesktopLauncher {
+
 	public static void main(String[] arg) throws IOException {
-		TitleScreen TitleScreen = new TitleScreen();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.width = RenderUtils.WIDTH;
 		config.height = RenderUtils.HEIGHT;
