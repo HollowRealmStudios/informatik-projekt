@@ -1,60 +1,134 @@
 package info.projekt.christoph;
 
-//https://stackoverflow.com/questions/25837013/switching-between-screens-libgdx
-//https://github.com/libgdx/libgdx/wiki/Extending-the-simple-game
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+import info.projekt.InfoProjekt;
+import info.projekt.jonas.gui.Button;
+import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.OverlayGui;
+import info.projekt.jonas.gui.RenderUtils;
+
+import javax.sound.sampled.Line;
+import javax.tools.Tool;
+
+import java.awt.*;
+
+import static info.projekt.InfoProjekt.*;
+import static info.projekt.jonas.gui.RenderUtils.*;
+
+public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
+
+    /**
+     * @author Christoph
+     */
 
 
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.OrthographicCamera;
+	@Override
+	public void show() {
 
-/**
- * @author Christoph
- */
+	    manager.translateAbsolute(new Vector2(HALF_WIDTH,HALF_HEIGHT));
 
-public class TitleScreen implements Screen {
+	    Button newgamebutton = new Button(new Texture("badlogic.jpg"), (int) (WIDTH*0.2552f), (int) (HEIGHT*0.4027f), (int) (WIDTH*0.4895f), (int) (HEIGHT*0.1666f));
+        Button loadgamebutton = new Button(new Texture("badlogic.jpg"),0,0,400,500);
+        OverlayGui overlayGui = new OverlayGui(this) {
+            @Override
+            public void buttonPressed(Button button) {
 
-    public TitleScreen(final info.projekt.christoph.Screen game) {
+                if(button.equals("newgamebutton")) {
+                    ((InfoProjekt)source).changeScreen(gameScreen);
 
-        OrthographicCamera camera = new OrthographicCamera();
-        camera.setToOrtho(false, 800, 480);
+                }
+                if(button.equals("loadgamebutton")){
 
 
+                }
+
+            }
+        };
+
+	}
+
+	@Override
+	public void render(float delta) {
+	    RenderUtils.drawBackground(batch, new Texture("Background.png"));
+
+	}
+
+	@Override
+	public void resize(int width, int height) {
+
+	}
+
+	@Override
+	public void pause() {
+
+	}
+
+	@Override
+	public void resume() {
+
+	}
+
+	@Override
+	public void hide() {
+
+	}
+
+	@Override
+	public void dispose() {
+
+	}
+
+    @Override
+    public boolean keyDown(int keycode) {
+            if(keycode == Input.Keys.ESCAPE) Gdx.app.exit();
+
+
+
+        return false;
     }
 
     @Override
-    public void show() {
-
+    public boolean keyUp(int keycode) {
+        return false;
     }
 
     @Override
-    public void render(float delta) {
-
+    public boolean keyTyped(char character) {
+        return false;
     }
 
     @Override
-    public void resize(int width, int height) {
-
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        return false;
     }
 
     @Override
-    public void pause() {
-
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        return false;
     }
 
     @Override
-    public void resume() {
-
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        return false;
     }
 
     @Override
-    public void hide() {
-
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
     }
 
     @Override
-    public void dispose() {
-
+    public boolean scrolled(int amount) {
+        return false;
     }
 }
+
+
+
 
 
