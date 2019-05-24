@@ -15,7 +15,7 @@ public class InfoProjekt extends Game {
 	private GameScreen gameScreen;
 	public static CameraManager manager;
 
-	public void changeScreen(Screen screen) {
+	public void changeScreen(com.badlogic.gdx.Screen screen) {
 		setScreen(screen);
 	}
 
