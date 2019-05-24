@@ -41,7 +41,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 				if (button.equals(newgamebutton)) {
 					System.out.println("ALLAH inner");
 					TitleScreen.source.changeScreen(gameScreen);
-
+					Gdx.input.setInputProcessor(gameScreen);
 				}
 				if (button.equals(loadgamebutton)) {
 

@@ -1,8 +1,6 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.math.Vector2;
 import info.projekt.jonas.storage.GameStorage;
 
@@ -11,7 +9,7 @@ import java.awt.*;
 import static info.projekt.InfoProjekt.batch;
 import static info.projekt.InfoProjekt.manager;
 
-public class GameScreen implements Screen {
+public class GameScreen extends InputAdapter implements Screen {
 
 	private GameStorage storage = new GameStorage();
 
@@ -25,6 +23,12 @@ public class GameScreen implements Screen {
 		keyDown();
 		RenderUtils.clearScreen(new Color(49, 144, 175));
 		RenderUtils.drawRooms(storage.getRooms(), batch);
+	}
+
+	@Override
+	public boolean scrolled(int amount) {
+		manager.setZoom(manager.getZoom() + (amount > 0 ? 0.2f : -0.2f));
+		return false;
 	}
 
 	private void keyDown() {

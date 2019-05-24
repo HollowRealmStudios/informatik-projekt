@@ -25,7 +25,6 @@ public abstract class Gui extends InputAdapter {
 	}
 
 	public void show() {
-		System.out.println("Show");
 		visible = true;
 		Gdx.input.setInputProcessor(this);
 	}
