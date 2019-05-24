@@ -19,6 +19,7 @@ public class InfoProjekt extends Game {
 
 	public void changeScreen(com.badlogic.gdx.Screen screen) {
 		setScreen(screen);
+		if (screen instanceof InputProcessor) Gdx.input.setInputProcessor((InputProcessor) screen);
 	}
 
 	@Override
@@ -33,7 +34,6 @@ public class InfoProjekt extends Game {
 
 	@Override
 	public void render() {
-		if (getScreen() instanceof InputProcessor) Gdx.input.setInputProcessor((InputProcessor) getScreen());
 		batch.setProjectionMatrix(manager.getMatrix());
 		getScreen().render(0);
 	}
