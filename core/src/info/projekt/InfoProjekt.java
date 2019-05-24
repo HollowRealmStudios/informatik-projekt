@@ -1,6 +1,8 @@
 package info.projekt;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.Screen;
@@ -31,6 +33,7 @@ public class InfoProjekt extends Game {
 
 	@Override
 	public void render() {
+		if (getScreen() instanceof InputProcessor) Gdx.input.setInputProcessor((InputProcessor) getScreen());
 		batch.setProjectionMatrix(manager.getMatrix());
 		getScreen().render(0);
 	}
