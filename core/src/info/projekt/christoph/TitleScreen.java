@@ -5,66 +5,76 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
-import info.projekt.jonas.gui.Button;
 import info.projekt.jonas.gui.GameScreen;
-import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.RenderUtils;
 
-import static info.projekt.InfoProjekt.*;
+import static info.projekt.InfoProjekt.batch;
+import static info.projekt.InfoProjekt.manager;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
  * @author Christoph
+ * @author Jonas
  */
-
 public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
-	private static InfoProjekt source;
-	private OverlayGui overlayGui;
-	public Button newgamebutton;
-	public Button loadgamebutton;
+	private GameScreen gameScreen;
+	private InfoProjekt source;
+	private TextButton newGame;
+	private TextButton loadGame;
+	private Table table;
+	private Stage stage;
 
-	public TitleScreen(InfoProjekt o) {
-		source = o;
+	public TitleScreen(InfoProjekt source) {
+		this.source = source;
 	}
 
 	@Override
 	public void show() {
 		manager.translateAbsolute(new Vector2(HALF_WIDTH, HALF_HEIGHT));
-
-		newgamebutton = new Button(new Texture("void.png"), (int) (WIDTH * 0.2552f), (int) (HEIGHT * 0.4027f), (int) (WIDTH * 0.4895f), (int) (HEIGHT * 0.1666f));
-		loadgamebutton = new Button(new Texture("void.png"), (int) (WIDTH * 0.2552f), (int) (HEIGHT * 0.1574f), (int) (WIDTH * 0.4895f), (int) (HEIGHT * 0.1666f));
-		overlayGui = new OverlayGui(source) {
+		stage = new Stage(new ScreenViewport());
+		table = new Table();
+		newGame = new TextButton("New Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+		loadGame = new TextButton("Load Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+		newGame.getLabel().setFontScale(2, 2);
+		loadGame.getLabel().setFontScale(2, 2);
+		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		table.add(newGame).width(HALF_WIDTH).height(HEIGHT / 10);
+		table.row().padTop(50);
+		table.add(loadGame).width(HALF_WIDTH).height(HEIGHT / 10);
+		stage.addActor(table);
+		Gdx.input.setInputProcessor(stage);
+		newGame.addListener(new ClickListener() {
 			@Override
-			public void buttonPressed(Button button) {
-
-				if (button.equals(newgamebutton)) {
-					InfoProjekt.newGame();
-					TitleScreen.source.changeScreen(gameScreen);
-					System.out.println("Changing input-processor");
-					Gdx.input.setInputProcessor(GameScreen.multiplexer);
-				}
-				if (button.equals(loadgamebutton)) {
-					InfoProjekt.loadGame();
-					TitleScreen.source.changeScreen(gameScreen);
-					System.out.println("Changing input-processor");
-					Gdx.input.setInputProcessor(GameScreen.multiplexer);
-
-				}
-
+			public void clicked(InputEvent event, float x, float y) {
+				InfoProjekt.newGame();
+				source.setScreen(new GameScreen(source));
+				Gdx.input.setInputProcessor(GameScreen.multiplexer);
 			}
-		};
-		overlayGui.show();
-		overlayGui.addComponent(newgamebutton);
-		overlayGui.addComponent(loadgamebutton);
-		Gdx.input.setInputProcessor(overlayGui);
+		});
+		loadGame.addListener(new ClickListener() {
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				InfoProjekt.loadGame();
+				source.setScreen(new GameScreen(source));
+				Gdx.input.setInputProcessor(GameScreen.multiplexer);
+			}
+		});
 	}
 
 	@Override
 	public void render(float delta) {
-		RenderUtils.drawBackground(batch, new Texture("Background.png"));
-		overlayGui.paint(batch, renderer);
+		RenderUtils.drawBackground(batch, new Texture("TitleScreenBackground.png"));
+		stage.act(Gdx.graphics.getDeltaTime());
+		stage.draw();
 	}
 
 	@Override
@@ -89,7 +99,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
 	@Override
 	public void dispose() {
-
+		stage.dispose();
 	}
 
 	@Override

@@ -1,11 +1,16 @@
 package info.projekt.jonas.storage;
 
-import info.projekt.jonas.rooms.DebugRoom;
-import info.projekt.jonas.rooms.ElectricityRoom;
-import info.projekt.jonas.rooms.EmptyRoom;
+import com.badlogic.gdx.graphics.Texture;
+import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.InfoProjekt.batch;
+import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
+import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 /**
  * @author Jonas
@@ -17,12 +22,10 @@ public class GameStorage implements Serializable {
 	 */
 	private final Room[][] ROOMS = new Room[5][50];
 
+	private final ArrayList<Dweller> DWELLERS = new ArrayList<>();
+
 	public GameStorage() {
-		for (int x = 0; x < ROOMS.length; x++) {
-			for (int y = 0; y < ROOMS[0].length; y++) {
-				ROOMS[x][y] = new EmptyRoom();
-			}
-		}
+
 	}
 
 	/**
@@ -43,17 +46,10 @@ public class GameStorage implements Serializable {
 		ROOMS[x][y] = room;
 	}
 
-	/**
-	 * Fills the entire array with debug rooms
-	 *
-	 * @see DebugRoom
-	 * @deprecated
-	 */
-	@Deprecated
 	public void debug() {
-		for (int x = 0; x < ROOMS.length; x++) {
-			for (int y = 0; y < ROOMS[0].length; y++) {
-				ROOMS[x][y] = new ElectricityRoom();
+		for (int x = 0; x < GAME_STORAGE.getRooms().length; x++) {
+			for (int y = 0; y < GAME_STORAGE.getRooms()[0].length; y++) {
+				GAME_STORAGE.ROOMS[x][y] = new Room("Engine Room", "room_engine.png");
 			}
 		}
 	}

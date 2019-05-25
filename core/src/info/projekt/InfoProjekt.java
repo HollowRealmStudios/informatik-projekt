@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector3;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
@@ -26,7 +25,7 @@ public class InfoProjekt extends Game {
 		try {
 			GAME_STORAGE = StorageHandler.loadGame();
 		} catch (IOException | ClassNotFoundException e) {
-			newGame();
+			e.printStackTrace();
 		}
 	}
 
@@ -54,8 +53,18 @@ public class InfoProjekt extends Game {
 
 	@Override
 	public void render() {
+		renderer.setProjectionMatrix(manager.getMatrix());
 		batch.setProjectionMatrix(manager.getMatrix());
 		getScreen().render(0);
+	}
+
+	@Override
+	public void dispose() {
+		try {
+			StorageHandler.saveGame(GAME_STORAGE);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
 
