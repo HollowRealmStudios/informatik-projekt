@@ -1,10 +1,13 @@
 package info.projekt.jonas.gui;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.InfoProjekt;
 
+import javax.sound.sampled.Line;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -25,8 +28,9 @@ public abstract class FullscreenGui extends Gui {
     @Override
     public void paint(SpriteBatch batch, ShapeRenderer renderer) {
         if (visible) {
+	        InfoProjekt.manager.setZoom(1f);
             batch.begin();
-            batch.draw(background, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+            batch.draw(background, InfoProjekt.manager.getCamera().position.x - (int)(Gdx.graphics.getWidth() / 2), InfoProjekt.manager.getCamera().position.y - (int)(Gdx.graphics.getHeight() / 2), Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
             batch.end();
         }
         super.paint(batch, renderer);
