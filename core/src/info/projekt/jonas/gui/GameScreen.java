@@ -1,20 +1,19 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputAdapter;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static info.projekt.InfoProjekt.batch;
 import static info.projekt.InfoProjekt.manager;
@@ -22,6 +21,7 @@ import static info.projekt.InfoProjekt.manager;
 
 public class GameScreen extends InputAdapter implements Screen {
 
+	public static InputMultiplexer multiplexer;
 	private ImageButton button;
 	private Stage stage;
 	private static InfoProjekt source;
@@ -32,18 +32,15 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void show() {
-		Gdx.input.setInputProcessor(stage);
 		stage = new Stage(new ScreenViewport());
 		button = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-		button.setBounds(0, 0, 256, 256);
+		//button.setBounds(0, 0, 256, 256);
+		button.setPosition(200, 200);
 		stage.addActor(button);
-		button.addListener(new InputListener() {
-			@Override
-			public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-				System.out.println(button);
-				return true;
-			}
-		});
+		multiplexer = new InputMultiplexer();
+		multiplexer.addProcessor(this);
+		multiplexer.addProcessor(stage);
+		Gdx.input.setInputProcessor(multiplexer);
 	}
 
 

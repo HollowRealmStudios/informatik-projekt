@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.Button;
+import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.RenderUtils;
 
@@ -39,14 +40,16 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 			public void buttonPressed(Button button) {
 
 				if (button.equals(newgamebutton)) {
-				    InfoProjekt.newGame();
+					InfoProjekt.newGame();
 					TitleScreen.source.changeScreen(gameScreen);
-					Gdx.input.setInputProcessor(gameScreen);
+					System.out.println("Changing input-processor");
+					Gdx.input.setInputProcessor(GameScreen.multiplexer);
 				}
 				if (button.equals(loadgamebutton)) {
-                    InfoProjekt.loadGame();
-                    TitleScreen.source.changeScreen(gameScreen);
-                    Gdx.input.setInputProcessor(gameScreen);
+					InfoProjekt.loadGame();
+					TitleScreen.source.changeScreen(gameScreen);
+					System.out.println("Changing input-processor");
+					Gdx.input.setInputProcessor(GameScreen.multiplexer);
 
 				}
 
@@ -91,10 +94,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
 	@Override
 	public boolean keyDown(int keycode) {
-		System.out.println("ALLAH ist soooooss!");
 		if (keycode == Input.Keys.ESCAPE) System.exit(0);
-
-
 		return false;
 	}
 
