@@ -23,7 +23,6 @@ public class Room implements Serializable {
 	 * @return return the room's texture
 	 */
 	public Texture getTexture() {
-		String str;
 		if(texture == null) texture = new Texture(textureString);
 		return texture;
 	}

@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
+import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
 
@@ -78,7 +79,10 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void keyDown() {
-		//if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) GAME_STORAGE.setRoom(new DebugRoom(), (int)cellPosition.x / CELL_WIDTH, (int)cellPosition.y / CELL_HEIGHT);
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) try {
+			GAME_STORAGE.setRoom(new Room("LOL", "room_debug.png"), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
+		} catch (ArrayIndexOutOfBoundsException e) {
+		}
 		if (Gdx.input.isKeyPressed(Input.Keys.W)) {
 			manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
 		} else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
