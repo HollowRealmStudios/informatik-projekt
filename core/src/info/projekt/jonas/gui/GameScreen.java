@@ -5,9 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -25,26 +27,89 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	private Vector2 cellPosition = new Vector2();
 	public static InputMultiplexer multiplexer;
-	private ImageButton button;
+	private ImageButton buildMenu;
+	private ImageButton dwellerList;
 	private Stage stage;
-	private static InfoProjekt source;
+	private FullscreenGui buildMenuGui;
+	private FullscreenGui dwellerListGui;
+	private Button eroom;
+    private Button froom;
+    private Button wroom;
+    private Button broom;
+    private Button hroom;
 
-	public GameScreen(InfoProjekt o) {
-		source = o;
-	}
 
 	@Override
 	public void show() {
+
+	    eroom = new Button(new Texture("badlogic.jpg"),20,2,2,2);
+        hroom = new Button(new Texture("badlogic.jpg"),400,4,2,2);
+        froom = new Button(new Texture("badlogic.jpg"),800,6,2,2);
+        wroom = new Button(new Texture("badlogic.jpg"),20,500,2,2);
+        broom = new Button(new Texture("badlogic.jpg"),400,500,2,2);
+	    buildMenuGui = new FullscreenGui(new Texture("finalDay.png"),this) {
+            @Override
+            public void keyPressed(int key) {
+            if (key == Input.Keys.ESCAPE) {
+                buildMenuGui.hide();
+                Gdx.input.setInputProcessor(GameScreen.multiplexer);
+            }
+
+            }
+
+            @Override
+            public void buttonPressed(Button button) {
+
+            }
+        };
+	   dwellerListGui = new FullscreenGui(new Texture("finalNight.png"),this) {
+            @Override
+            public void keyPressed(int key) {
+                if (key == Input.Keys.ESCAPE) {
+                   dwellerListGui.hide();
+                    Gdx.input.setInputProcessor(GameScreen.multiplexer);
+                }
+            }
+
+            @Override
+            public void buttonPressed(Button button) {
+
+            }
+        };
+	    buildMenuGui.addComponent(broom);
+        buildMenuGui.addComponent(hroom);
+        buildMenuGui.addComponent(eroom);
+        buildMenuGui.addComponent(froom);
+        buildMenuGui.addComponent(wroom);
+	    buildMenuGui.registerKey(Input.Keys.ESCAPE);
+	    dwellerListGui.registerKey(Input.Keys.ESCAPE);
 		stage = new Stage(new ScreenViewport());
-		button = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-		button.setPosition(200, 200);
-		stage.addActor(button);
-		button.addListener(new ClickListener() {
+		//Images du noch richtig nutzen musst
+		dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+		buildMenu  = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+		//Size proportional noch machen du musst
+		buildMenu.setSize(100f,100f);
+        dwellerList.setSize(100f,100f);
+        //Position du noch proportinonal machen musst
+		buildMenu.setPosition(200, 200);
+		dwellerList.setPosition(200,700);
+		stage.addActor(buildMenu);
+		stage.addActor(dwellerList);
+		buildMenu.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				System.out.println(event.toString());
+				buildMenuGui.show();
+
 			}
 		});
+        dwellerList.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                dwellerListGui.show();
+            }
+        });
+
 		multiplexer = new InputMultiplexer();
 		multiplexer.addProcessor(this);
 		multiplexer.addProcessor(stage);
@@ -70,6 +135,8 @@ public class GameScreen extends InputAdapter implements Screen {
 		renderer.end();
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
+		buildMenuGui.paint(batch,renderer);
+		dwellerListGui.paint(batch, renderer);
 	}
 
 	@Override

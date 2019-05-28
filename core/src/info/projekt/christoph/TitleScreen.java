@@ -3,6 +3,7 @@ package info.projekt.christoph;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -37,6 +38,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 		this.source = source;
 	}
 
+
 	@Override
 	public void show() {
 		manager.translateAbsolute(new Vector2(HALF_WIDTH, HALF_HEIGHT));
@@ -56,7 +58,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				InfoProjekt.newGame();
-				source.setScreen(new GameScreen(source));
+				source.setScreen(new GameScreen());
 				Gdx.input.setInputProcessor(GameScreen.multiplexer);
 			}
 		});
@@ -64,7 +66,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				InfoProjekt.loadGame();
-				source.setScreen(new GameScreen(source));
+				source.setScreen(new GameScreen());
 				Gdx.input.setInputProcessor(GameScreen.multiplexer);
 			}
 		});

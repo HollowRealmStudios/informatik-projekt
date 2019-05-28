@@ -45,7 +45,7 @@ public class InfoProjekt extends Game {
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
 		TitleScreen titleScreen = new TitleScreen(this);
-		gameScreen = new GameScreen(this);
+		gameScreen = new GameScreen();
 		manager = new CameraManager();
 		Gdx.input.setInputProcessor((InputProcessor) titleScreen);
 		setScreen(titleScreen);
