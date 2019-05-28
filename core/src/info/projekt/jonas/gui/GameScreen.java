@@ -160,6 +160,12 @@ public class GameScreen extends InputAdapter implements Screen {
 		} else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
 			manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
 		}
+
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+		    System.exit(0);
+
+        }
+
 	}
 
 	@Override
@@ -186,4 +192,6 @@ public class GameScreen extends InputAdapter implements Screen {
 	public void hide() {
 
 	}
+
+
 }
