@@ -161,7 +161,7 @@ public class GameScreen extends InputAdapter implements Screen {
 			manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
 		}
 
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+		if (Gdx.input.isKeyPressed(Input.Keys.C)){
 		    System.exit(0);
 
         }
