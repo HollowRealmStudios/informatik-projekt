@@ -1,7 +1,7 @@
 {
   "armors": [
     {
-      "texture": "hazard suit.png",
+      "texture": "hazmatSuit.png",
       "name": "Hazmat Suit",
       "protection": 3,
       "deviation": 0

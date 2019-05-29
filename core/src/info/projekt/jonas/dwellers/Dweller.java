@@ -43,13 +43,13 @@ public class Dweller {
         while (!CharMatcher.ascii().matchesAllOf(Objects.requireNonNull(name))) {
             name = getName();
         }
-        if(name != null) parseName(name);
+        parseName(name);
 
         Random random = new Random();
-        strength = random.nextInt(11);
-        intelligence = random.nextInt(11);
-        charisma = random.nextInt(11);
-        creativity = random.nextInt(11);
+        strength = WeightedRandom.newInt();
+        intelligence = WeightedRandom.newInt();
+        charisma = WeightedRandom.newInt();
+        creativity = WeightedRandom.newInt();
     }
 
     private String getName() {
@@ -73,12 +73,11 @@ public class Dweller {
     }
 
     private void parseName(String name) {
-        if(name != null) {
+        if (name != null) {
             JsonObject object = JsonObject.readFrom(name);
             this.surname = object.get("surname").asString();
             this.name = object.get("name").asString();
-        }
-        else {
+        } else {
             this.surname = "Marcel";
             this.name = "Davis";
         }
