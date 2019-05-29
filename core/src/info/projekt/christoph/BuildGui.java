@@ -48,6 +48,7 @@ public class BuildGui {
         table.row().padTop((HEIGHT * 0.1f));
         table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+
         //adds table as an actor of stage
         stage.addActor(table);
     }
