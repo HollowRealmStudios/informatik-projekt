@@ -32,8 +32,6 @@ public class GameScreen extends InputAdapter implements Screen {
     private Stage stage;
 
 
-
-
     @Override
     public void show() {
 
