@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 /**
  * @author Jonas
- *The child class, every room inherits from
- * */
+ * The child class, every room inherits from
+ */
 public class Room implements Serializable {
 
     /**
@@ -45,7 +45,8 @@ public class Room implements Serializable {
 
     /**
      * The default constructor
-     * @param name the name of the Room
+     *
+     * @param name    the name of the Room
      * @param product the product the room produces
      */
     public Room(String name, String product) {

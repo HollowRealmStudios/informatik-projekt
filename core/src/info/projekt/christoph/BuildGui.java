@@ -8,8 +8,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
+import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
 
 /**
  * @author Christoph
@@ -31,6 +31,7 @@ public class BuildGui {
         stage = new Stage(new ScreenViewport());
         table = new Table();
 
+
         //giving the ImageButtons their textures
         eroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
         wroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
@@ -39,14 +40,14 @@ public class BuildGui {
         lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
         //sets the background to finalDay.png
+        table.background(new TextureRegionDrawable(new Texture("finalDay.PNG"))).setSize(WIDTH, HEIGHT);
 
         //place the buttons with an space of WIDTH (of monitor) * 1/28
-        table.background(new TextureRegionDrawable(new Texture("finalDay.PNG"))).setSize(WIDTH, HEIGHT);
-        table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+        table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f)).padLeft((WIDTH * 1f / 28f));
         table.add(wroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         table.add(froom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         table.row().padTop((HEIGHT * 0.1f));
-        table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+        table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f)).padLeft((WIDTH * 1f / 28f));
         table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
 
         //adds table as an actor of stage

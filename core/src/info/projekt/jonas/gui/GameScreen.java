@@ -36,6 +36,7 @@ public class GameScreen extends InputAdapter implements Screen {
     public void show() {
         buildGui = new BuildGui();
         stage = new Stage(new ScreenViewport());
+        buildGui.table.setVisible(false);
         //Images du noch richtig setzen musst
         dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -52,7 +53,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
-               System.out.println(event.toString());
+                System.out.println(event.toString());
 
                 buildGui.table.setVisible(true);
 
@@ -119,6 +120,15 @@ public class GameScreen extends InputAdapter implements Screen {
 
         if (Gdx.input.isKeyPressed(Input.Keys.C)) {
             System.exit(0);
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            if(buildGui.table.isVisible()){
+                buildGui.table.setVisible(false);
+            }
+            //else if()
+
+
         }
 
     }
