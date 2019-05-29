@@ -7,6 +7,9 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
+/**
+ * @author Christoph
+ * */
 public class BuildGui {
 
     private Stage stage;

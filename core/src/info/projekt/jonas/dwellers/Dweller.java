@@ -22,6 +22,7 @@ public class Dweller {
     private GENDER gender;
     private String name;
     private String surname;
+    public final String completeName;
     private int strength;
     private int intelligence;
     private int charisma;
@@ -30,6 +31,7 @@ public class Dweller {
     public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
         this.name = name;
         this.surname = surname;
+        this.completeName = surname + "," + name;
         this.gender = gender;
         this.strength = MathUtils.clamp(strength, 0, 10);
         this.intelligence = MathUtils.clamp(intelligence, 0, 10);
@@ -44,7 +46,7 @@ public class Dweller {
             name = getName();
         }
         parseName(name);
-
+        this.completeName = surname + "," + name;
         Random random = new Random();
         strength = WeightedRandom.newInt();
         intelligence = WeightedRandom.newInt();
