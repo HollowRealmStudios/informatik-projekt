@@ -8,20 +8,18 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import info.projekt.InfoProjekt;
 import info.projekt.christoph.BuildGui;
-import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
 
 import static info.projekt.InfoProjekt.*;
-import static info.projekt.jonas.gui.RenderUtils.*;
+import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
+import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 
 public class GameScreen extends InputAdapter implements Screen {
@@ -105,7 +103,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     private void keyDown() {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) try {
-            GAME_STORAGE.setRoom(new Room("LOL", "room_debug.png"), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
+            //GAME_STORAGE.setRoom(new Room("LOL", "room_debug.png"), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
         } catch (ArrayIndexOutOfBoundsException e) {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
