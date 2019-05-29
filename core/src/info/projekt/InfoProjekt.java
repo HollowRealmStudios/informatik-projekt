@@ -47,7 +47,7 @@ public class InfoProjekt extends Game {
 		TitleScreen titleScreen = new TitleScreen(this);
 		gameScreen = new GameScreen();
 		manager = new CameraManager();
-		Gdx.input.setInputProcessor((InputProcessor) titleScreen);
+		Gdx.input.setInputProcessor(titleScreen);
 		setScreen(titleScreen);
 	}
 

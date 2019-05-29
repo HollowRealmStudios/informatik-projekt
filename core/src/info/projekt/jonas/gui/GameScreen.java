@@ -48,9 +48,12 @@ public class GameScreen extends InputAdapter implements Screen {
         stage.addActor(buildMenu);
         stage.addActor(dwellerList);
         buildMenu.addListener(new ClickListener() {
+
+
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println(event.toString());
+               System.out.println(event.toString());
+
                 //buildMenuGui.show();
 
             }
@@ -63,8 +66,8 @@ public class GameScreen extends InputAdapter implements Screen {
         });
 
         multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(this);
         multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(this);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
