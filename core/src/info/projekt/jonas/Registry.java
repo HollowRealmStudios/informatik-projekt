@@ -7,7 +7,8 @@ import info.projekt.jonas.rooms.Room;
 import java.util.HashMap;
 
 /**
- * Registry used to register new things, including, but not only, rooms, dwellers and items
+ * @author Jonas
+ * Registry used to register new rooms, dwellers and items
  */
 public class Registry {
 
@@ -21,8 +22,8 @@ public class Registry {
      * @param dweller the dweller to be registered
      * @see Dweller
      */
-    public static void registerDweller(String name, Dweller dweller) {
-        DWELLERS.put(name, dweller);
+    public static void registerDweller(Dweller dweller) {
+        DWELLERS.put(dweller.completeName, dweller);
     }
 
     /**
@@ -31,11 +32,50 @@ public class Registry {
      * @param item the dweller to be registered
      * @see Item
      */
-    public static void registerItem(String name, Item item) {
-        ITEMS.put(name, item);
+    public static void registerItem(Item item) {
+        ITEMS.put(item.name, item);
     }
 
-    public static void regsterRoom(String name, Room room) {
-        ROOMS.put(name, room);
+    /**
+     * use this to register a new dweller, by passing in an object of the desired dweller to be registered
+     *
+     * @param room the Room to be registered
+     * @see Room
+     */
+    public static void registerRoom(Room room) {
+        ROOMS.put(room.name, room);
+    }
+
+    /**
+     * Return a room by its name
+     *
+     * @param name the name of the room
+     * @return the room with the name specified
+     * @see Room
+     */
+    public static Room getRoom(String name) {
+        return ROOMS.get(name);
+    }
+
+    /**
+     * Return an Item by its name
+     *
+     * @param name the name of the Item
+     * @return the Item with the name specified
+     * @see Item
+     */
+    public static Item getItem(String name) {
+        return ITEMS.get(name);
+    }
+
+    /**
+     * Return a Dweller by its name
+     *
+     * @param name the name of the Dweller
+     * @return the Dweller with the name specified
+     * @see Dweller
+     */
+    public static Dweller getDweller(String name) {
+        return DWELLERS.get(name);
     }
 }

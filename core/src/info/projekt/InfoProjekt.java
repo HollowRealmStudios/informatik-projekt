@@ -13,6 +13,10 @@ import info.projekt.jonas.storage.StorageHandler;
 
 import java.io.IOException;
 
+/**
+ * @author Jonas
+ * @author Christoph
+ * */
 public class InfoProjekt extends Game {
 
 	public static GameStorage GAME_STORAGE;
@@ -60,11 +64,8 @@ public class InfoProjekt extends Game {
 
 	@Override
 	public void dispose() {
-		try {
-			StorageHandler.saveGame(GAME_STORAGE);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		try { StorageHandler.saveGame(GAME_STORAGE); }
+		catch (IOException e) { e.printStackTrace(); }
 	}
 }
 

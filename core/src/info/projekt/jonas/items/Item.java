@@ -2,11 +2,20 @@ package info.projekt.jonas.items;
 
 import com.badlogic.gdx.graphics.Texture;
 
+/**
+ * @author Jonas
+ * */
 public class Item {
 
-    private String name;
+    /**The name of the item*/
+    public final String name;
+    /**The texture of the item*/
     private Texture texture;
 
+    /**The default constructor
+     * @param texture the item's texture
+     * @param name the item's name
+     * */
     protected Item(Texture texture, String name) {
         this.texture = texture;
         this.name = name;
