@@ -38,23 +38,18 @@ public class BuildGui {
         lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
         //set the start postion of the table to WIDTH (of monitor) * 1/28 and HEIGHT (of monitor) * 0.05
-        table.setPosition((WIDTH * 1f / 28f), (HEIGHT * 0.05f));
+        table.setPosition((WIDTH * (1f / 28f)), (HEIGHT * 0.05f));
 
         //sets the background to finalDay.png
         table.setBackground(new TextureRegionDrawable(new Texture("finalDay.png")));
 
         //place the buttons with an space of WIDTH (of monitor) * 1/28
-        table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f));
-        table.padRight((WIDTH * 1f / 28f));
-        table.add(wroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f));
-        table.padRight((WIDTH * 1f / 28f));
-        table.add(froom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f));
-        table.padRight((WIDTH * 1f / 28f));
+        table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+        table.add(wroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+        table.add(froom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         table.row().padTop((HEIGHT * 0.1f));
-        table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f));
-        table.padRight((WIDTH * 1f / 28f));
-        table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f));
-        table.padRight((WIDTH * 1f / 28f));
+        table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
+        table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
 
         //adds table as an actor of stage
         stage.addActor(table);

@@ -37,7 +37,6 @@ public class GameScreen extends InputAdapter implements Screen {
     @Override
     public void show() {
         buildGui = new BuildGui();
-        buildGui.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
         //Images du noch richtig setzen musst
         dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -69,8 +68,8 @@ public class GameScreen extends InputAdapter implements Screen {
         });
 
         multiplexer = new InputMultiplexer();
-        multiplexer.addProcessor(stage);
         multiplexer.addProcessor(this);
+        multiplexer.addProcessor(stage);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
@@ -93,6 +92,9 @@ public class GameScreen extends InputAdapter implements Screen {
         renderer.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
+        buildGui.stage.act(Gdx.graphics.getDeltaTime());
+        buildGui.stage.draw();
+
     }
 
     @Override
