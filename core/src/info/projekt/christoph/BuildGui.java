@@ -2,13 +2,13 @@ package info.projekt.christoph;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
-import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
  * @author Christoph
@@ -22,6 +22,7 @@ public class BuildGui {
     private ImageButton froom;//food
     private ImageButton hroom;//health
     private ImageButton lroom;//living
+    private Image image;
 
     public BuildGui() {
 
@@ -29,6 +30,8 @@ public class BuildGui {
         //new Stage and Table are created
         stage = new Stage(new ScreenViewport());
         table = new Table();
+        image = new Image(new Texture("finalDay.PNG"));
+        image.toBack();
 
         //giving the ImageButtons their textures
         eroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
@@ -38,10 +41,10 @@ public class BuildGui {
         lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
         //set the start postion of the table to WIDTH (of monitor) * 1/28 and HEIGHT (of monitor) * 0.05
-        table.setPosition((WIDTH * (1f / 28f)), (HEIGHT * 0.05f));
+        //table.setPosition((WIDTH * (1f / 28f)), (HEIGHT * 0.05f));
+        table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 
         //sets the background to finalDay.png
-        table.setBackground(new TextureRegionDrawable(new Texture("finalDay.png")));
 
         //place the buttons with an space of WIDTH (of monitor) * 1/28
         table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
@@ -50,11 +53,9 @@ public class BuildGui {
         table.row().padTop((HEIGHT * 0.1f));
         table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
-
+        table.add(image);
         //adds table as an actor of stage
         stage.addActor(table);
-
-
     }
 
 
