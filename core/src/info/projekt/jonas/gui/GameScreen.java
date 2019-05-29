@@ -15,6 +15,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
+import info.projekt.christoph.BuildGui;
 import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
@@ -30,11 +31,13 @@ public class GameScreen extends InputAdapter implements Screen {
     private ImageButton buildMenu;
     private ImageButton dwellerList;
     private Stage stage;
+    private BuildGui buildGui;
 
 
     @Override
     public void show() {
-
+        buildGui = new BuildGui();
+        buildGui.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
         //Images du noch richtig setzen musst
         dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -54,7 +57,7 @@ public class GameScreen extends InputAdapter implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                System.out.println(event.toString());
 
-                //buildMenuGui.show();
+                buildGui.table.setVisible(true);
 
             }
         });
