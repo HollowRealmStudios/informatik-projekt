@@ -1,6 +1,7 @@
 package info.projekt.jonas.rooms;
 
 import com.badlogic.gdx.graphics.Texture;
+import info.projekt.jonas.dwellers.Dweller;
 
 import java.io.Serializable;
 
@@ -9,45 +10,52 @@ import java.io.Serializable;
  * */
 public class Room implements Serializable {
 
-	private int level = 1;
-	private String name;
-	private transient Texture texture;
-	private String textureString;
+    public enum PRODUCT {WATER, FOOD, POWER}
 
-	public Room(String name, String texture) {
-		this.textureString = texture;
-		this.name = name;
-	}
+    private PRODUCT product;
+    private int currentLevel = 1;
+    private int production;
+    private Dweller[] dwellers = new Dweller[4];
+    private transient Texture textureLvlOne;
+    private transient Texture textureLvlTwo;
+    private transient Texture textureLvlThree;
+    private String name;
 
-	/**
-	 * @return return the room's texture
-	 */
-	public Texture getTexture() {
-		if(texture == null) texture = new Texture(textureString);
-		return texture;
-	}
 
-	/**
-	 * set the level of the room
-	 *
-	 * @param level the level to set to
-	 */
-	public void setLevel(int level) {
-		this.level = level;
-	}
+    public Room(String name, PRODUCT product) {
+        this.name = name;
+        this.product = product;
+    }
 
-	@Override
-	public String toString() {
-		return "Level: " + level + ", Capacity: " + texture.toString();
-	}
+    /**
+     * @return return the room's texture
+     */
+    public Texture getTexture() {
+        switch (currentLevel) {
+            case 1:
+                if (textureLvlOne == null) textureLvlOne = new Texture(name + "_1" + ".png");
+                return textureLvlOne;
+            case 2:
+                if (textureLvlTwo == null) textureLvlTwo = new Texture(name + "_2" + ".png");
+                return textureLvlTwo;
+            case 3:
+                if (textureLvlThree == null) textureLvlThree = new Texture(name + "_3" + ".png");
+                return textureLvlThree;
+        }
+        return null;
+    }
 
-	@Override
-	public boolean equals(Object obj) {
-		return obj instanceof Room && ((Room) obj).level == level;
-	}
+    /**
+     * set the level of the room
+     *
+     * @param level the level to set to
+     */
+    public void setLevel(int level) {
+        this.currentLevel = level;
+    }
 
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
+    @Override
+    public String toString() {
+        return "Level: " + currentLevel + ", Product: " + product;
+    }
 }

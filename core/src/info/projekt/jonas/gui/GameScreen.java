@@ -13,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import info.projekt.InfoProjekt;
 import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
@@ -22,8 +21,9 @@ import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
 
-public class GameScreen extends InputAdapter implements Screen {
+public class GameScreen extends InputAdapter, Screen {
 
+    private final Object o = this;
     private Vector2 cellPosition = new Vector2();
     public static InputMultiplexer multiplexer;
     private ImageButton buildMenu;
@@ -37,15 +37,13 @@ public class GameScreen extends InputAdapter implements Screen {
     private Button broom;
     private Button hroom;
 
-
     @Override
     public void show() {
-
-        eroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f/28f)) , (int) (HEIGHT * 0.05f), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f) );
-        hroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f/28f)) , (int) (HEIGHT * 0.05f) , (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        froom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (19f/28f)) , (int) (HEIGHT * 0.05f) , (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        wroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f/28f)) , (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        broom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f/28f)) , (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
+        eroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f / 28f)), (int) (HEIGHT * 0.05f), (int) (WIDTH * (2f / 7f)), (int) (HEIGHT * 0.4f));
+        hroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f / 28f)), (int) (HEIGHT * 0.05f), (int) (WIDTH * (2f / 7f)), (int) (HEIGHT * 0.4f));
+        froom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (19f / 28f)), (int) (HEIGHT * 0.05f), (int) (WIDTH * (2f / 7f)), (int) (HEIGHT * 0.4f));
+        wroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f / 28f)), (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f / 7f)), (int) (HEIGHT * 0.4f));
+        broom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f / 28f)), (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f / 7f)), (int) (HEIGHT * 0.4f));
         buildMenuGui = new FullscreenGui(new Texture("finalDay.png"), this) {
             @Override
             public void keyPressed(int key) {
@@ -89,7 +87,7 @@ public class GameScreen extends InputAdapter implements Screen {
         //Size proportional noch machen du musst
         buildMenu.setSize(100f, 100f);
         dwellerList.setSize(100f, 100f);
-        //Position du noch proportinonal machen musst
+        //Position du noch proportional machen musst
         buildMenu.setPosition(200, 200);
         dwellerList.setPosition(200, 700);
         stage.addActor(buildMenu);
@@ -99,6 +97,7 @@ public class GameScreen extends InputAdapter implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(event.toString());
                 buildMenuGui.show();
+                multiplexer.removeProcessor((InputProcessor) o);
 
             }
         });
