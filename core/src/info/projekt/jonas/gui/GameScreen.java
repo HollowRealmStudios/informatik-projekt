@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.christoph.BuildGui;
+import info.projekt.christoph.DwellerList;
 
 import java.awt.*;
 
@@ -27,27 +28,29 @@ public class GameScreen extends InputAdapter implements Screen {
     private Vector2 cellPosition = new Vector2();
     public static InputMultiplexer multiplexer;
     private ImageButton buildMenu;
-    private ImageButton dwellerList;
+    private ImageButton dwellerListButton;
     private Stage stage;
     private BuildGui buildGui;
-
+    private DwellerList dwellerList;
 
     @Override
     public void show() {
         buildGui = new BuildGui();
+        dwellerList = new DwellerList();
+        dwellerList.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
         buildGui.table.setVisible(false);
         //Images du noch richtig setzen musst
-        dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         //Size proportional noch machen du musst
         buildMenu.setSize(100f, 100f);
-        dwellerList.setSize(100f, 100f);
+        dwellerListButton.setSize(100f, 100f);
         //Position du noch proportinonal machen musst
         buildMenu.setPosition(200, 200);
-        dwellerList.setPosition(200, 700);
+        dwellerListButton.setPosition(200, 700);
         stage.addActor(buildMenu);
-        stage.addActor(dwellerList);
+        stage.addActor(dwellerListButton);
         buildMenu.addListener(new ClickListener() {
 
 
@@ -59,10 +62,10 @@ public class GameScreen extends InputAdapter implements Screen {
 
             }
         });
-        dwellerList.addListener(new ChangeListener() {
+        dwellerListButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                //dwellerListGui.show();
+                dwellerList.table.setVisible(true);
             }
         });
 
@@ -93,6 +96,8 @@ public class GameScreen extends InputAdapter implements Screen {
         stage.draw();
         buildGui.stage.act(Gdx.graphics.getDeltaTime());
         buildGui.stage.draw();
+        dwellerList.stage.act(Gdx.graphics.getDeltaTime());
+        dwellerList.stage.draw();
 
     }
 
@@ -126,7 +131,9 @@ public class GameScreen extends InputAdapter implements Screen {
             if(buildGui.table.isVisible()){
                 buildGui.table.setVisible(false);
             }
-            //else if()
+            else if(dwellerList.table.isVisible()){
+                dwellerList.table.setVisible(false);
+            }
 
 
         }
