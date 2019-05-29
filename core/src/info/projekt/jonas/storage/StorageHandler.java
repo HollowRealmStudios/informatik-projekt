@@ -31,7 +31,7 @@ public class StorageHandler {
             JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
             for (JsonValue object : in.asArray()) {
                 JsonObject obj = object.asObject();
-                Registry.registerItem(obj.get("name").asString(), new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
+                Registry.registerItem(new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class StorageHandler {
             JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
             for (JsonValue object : in.asArray()) {
                 JsonObject obj = object.asObject();
-                Registry.registerItem(obj.get("name").asString(), new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
+                Registry.registerItem(new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class StorageHandler {
             JsonArray in = JsonObject.readFrom(new FileReader("Rooms.json")).get("armors").asArray();
             for (JsonValue object : in.asArray()) {
                 JsonObject obj = object.asObject();
-                Registry.registerItem(obj.get("name").asString(), new Room(obj.get("name").asString(), obj.get("product").asString()));
+                Registry.registerRoom(new Room(obj.get("name").asString(), obj.get("product").asString()));
             }
         } catch (Exception e) {
             e.printStackTrace();

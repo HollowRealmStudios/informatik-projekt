@@ -1,3 +1,8 @@
 {
-  "rooms":[{"texture": "room.png", "name":"kitchen", "damage":120, "deviation": 5}, {"texture": "shotgun.png", "name":"shotgun", "damage":125, "deviation": 20}]
+  "rooms": [
+    {
+      "name": "EngineRoom",
+      "product": "Power"
+    }
+  ]
 }

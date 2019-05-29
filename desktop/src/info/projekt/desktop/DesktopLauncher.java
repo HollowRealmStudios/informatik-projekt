@@ -10,20 +10,18 @@ import java.io.IOException;
 
 public class DesktopLauncher {
 
-	public static void main(String[] arg) throws IOException {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
-		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
-		config.fullscreen = true;
-		config.vSyncEnabled = false;
-		config.foregroundFPS = 60;
-		config.backgroundFPS = 60;
-		config.forceExit = true;
-		final LwjglApplication lwjglApplication = new LwjglApplication(new InfoProjekt(), config);
-		StorageHandler.registerArmors();
-		StorageHandler.registerWeapons();
-		String x = "Hallo";
-		String y = "Hallo";
-		System.out.println(x == y);
-	}
+    public static void main(String[] arg) throws IOException {
+        LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+        config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
+        config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
+        config.fullscreen = true;
+        config.vSyncEnabled = false;
+        config.foregroundFPS = 60;
+        config.backgroundFPS = 60;
+        config.forceExit = true;
+        final LwjglApplication lwjglApplication = new LwjglApplication(new InfoProjekt(), config);
+        StorageHandler.registerArmors();
+        //StorageHandler.registerWeapons();
+        //System.out.println(Registry.allToString());
+    }
 }

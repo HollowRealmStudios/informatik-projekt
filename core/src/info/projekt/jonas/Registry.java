@@ -5,6 +5,7 @@ import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Jonas
@@ -77,5 +78,19 @@ public class Registry {
      */
     public static Dweller getDweller(String name) {
         return DWELLERS.get(name);
+    }
+
+    public static String allToString() {
+        StringBuilder b = new StringBuilder();
+        for (Map.Entry<String, Room> i : ROOMS.entrySet()) {
+            b.append(i.toString()).append("\n");
+        }
+        for (Map.Entry<String, Item> i : ITEMS.entrySet()) {
+            b.append(i.toString()).append("\n");
+        }
+        for (Map.Entry<String, Dweller> i : DWELLERS.entrySet()) {
+            b.append(i.toString()).append("\n");
+        }
+        return b.toString();
     }
 }

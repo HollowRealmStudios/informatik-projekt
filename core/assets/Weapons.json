@@ -73,7 +73,7 @@
       "deviation": 0
     },
     {
-      "texture": "kATANA.png",
+      "texture": "Katana.png",
       "name": "Neon-Katana",
       "damage": 8,
       "deviation": 5
@@ -98,7 +98,7 @@
     },
     {
       "texture": "shotgun.png",
-      "name": "Futur Imperfect",
+      "name": "Future Imperfect",
       "damage": 12,
       "deviation": 0
     },
