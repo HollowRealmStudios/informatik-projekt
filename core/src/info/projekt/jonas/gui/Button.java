@@ -33,7 +33,7 @@ public class Button extends GuiComponent {
 	public void paint(Object o) {
 		SpriteBatch batch = (SpriteBatch) o;
 		batch.begin();
-		batch.draw(texture, box.x, box.y);
+		batch.draw(texture, box.x, box.y, box.width, box.height);
 		batch.end();
 	}
 
