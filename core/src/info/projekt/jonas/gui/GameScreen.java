@@ -62,9 +62,9 @@ public class GameScreen extends InputAdapter implements Screen {
 
             }
         });
-        dwellerListButton.addListener(new ChangeListener() {
+        dwellerListButton.addListener(new ClickListener() {
             @Override
-            public void changed(ChangeEvent event, Actor actor) {
+            public void clicked(InputEvent event, float x, float y) {
                 dwellerList.table.setVisible(true);
             }
         });
@@ -72,6 +72,8 @@ public class GameScreen extends InputAdapter implements Screen {
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this);
         multiplexer.addProcessor(stage);
+        multiplexer.addProcessor(buildGui.stage);
+        multiplexer.addProcessor(dwellerList.stage);
         Gdx.input.setInputProcessor(multiplexer);
     }
 
