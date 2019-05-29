@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -29,59 +30,13 @@ public class GameScreen extends InputAdapter implements Screen {
     private ImageButton buildMenu;
     private ImageButton dwellerList;
     private Stage stage;
-    private FullscreenGui buildMenuGui;
-    private FullscreenGui dwellerListGui;
-    private Button eroom;
-    private Button froom;
-    private Button wroom;
-    private Button broom;
-    private Button hroom;
+
+
 
 
     @Override
     public void show() {
 
-        eroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f/28f)) , (int) (HEIGHT * 0.05f), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f) );
-        hroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f/28f)) , (int) (HEIGHT * 0.05f) , (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        froom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (19f/28f)) , (int) (HEIGHT * 0.05f) , (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        wroom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (1f/28f)) , (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        broom = new Button(new Texture("badlogic.jpg"), (int) (WIDTH * (10f/28f)) , (int) ((HEIGHT * 0.05f) + HALF_HEIGHT), (int) (WIDTH * (2f/7f)), (int) (HEIGHT * 0.4f));
-        buildMenuGui = new FullscreenGui(new Texture("finalDay.png"), this) {
-            @Override
-            public void keyPressed(int key) {
-                if (key == Input.Keys.ESCAPE) {
-                    buildMenuGui.hide();
-                    Gdx.input.setInputProcessor(GameScreen.multiplexer);
-                }
-
-            }
-
-            @Override
-            public void buttonPressed(Button button) {
-
-            }
-        };
-        dwellerListGui = new FullscreenGui(new Texture("finalNight.png"), this) {
-            @Override
-            public void keyPressed(int key) {
-                if (key == Input.Keys.ESCAPE) {
-                    dwellerListGui.hide();
-                    Gdx.input.setInputProcessor(GameScreen.multiplexer);
-                }
-            }
-
-            @Override
-            public void buttonPressed(Button button) {
-
-            }
-        };
-        buildMenuGui.addComponent(broom);
-        buildMenuGui.addComponent(hroom);
-        buildMenuGui.addComponent(eroom);
-        buildMenuGui.addComponent(froom);
-        buildMenuGui.addComponent(wroom);
-        buildMenuGui.registerKey(Input.Keys.ESCAPE);
-        dwellerListGui.registerKey(Input.Keys.ESCAPE);
         stage = new Stage(new ScreenViewport());
         //Images du noch richtig setzen musst
         dwellerList = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -98,14 +53,14 @@ public class GameScreen extends InputAdapter implements Screen {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(event.toString());
-                buildMenuGui.show();
+                //buildMenuGui.show();
 
             }
         });
         dwellerList.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                dwellerListGui.show();
+                //dwellerListGui.show();
             }
         });
 
@@ -134,8 +89,6 @@ public class GameScreen extends InputAdapter implements Screen {
         renderer.end();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
-        buildMenuGui.paint(batch, renderer);
-        dwellerListGui.paint(batch, renderer);
     }
 
     @Override
