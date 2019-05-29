@@ -37,7 +37,7 @@ public class BuildGui {
         hroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
         lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
-        //set the start postion of the table to WIDTH (of monitor) * 1/28 and HEIGHT (of monitor) * 0.05
+        //set the start position of the table to WIDTH (of monitor) * 1/28 and HEIGHT (of monitor) * 0.05
         table.setPosition((WIDTH * 1f / 28f), (HEIGHT * 0.05f));
 
         //sets the background to finalDay.png
