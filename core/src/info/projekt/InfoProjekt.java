@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.TitleScreen;
+import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.storage.GameStorage;
@@ -53,6 +54,17 @@ public class InfoProjekt extends Game {
 		manager = new CameraManager();
 		Gdx.input.setInputProcessor(titleScreen);
 		setScreen(titleScreen);
+		try {
+			StorageHandler.registerArmors();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			StorageHandler.registerWeapons();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(Registry.allToString());
 	}
 
 	@Override

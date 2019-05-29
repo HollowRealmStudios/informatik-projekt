@@ -10,7 +10,7 @@ public class Item {
     /**The name of the item*/
     public final String name;
     /**The texture of the item*/
-    private Texture texture;
+    protected Texture texture;
 
     /**The default constructor
      * @param texture the item's texture

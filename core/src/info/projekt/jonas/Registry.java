@@ -83,13 +83,13 @@ public class Registry {
     public static String allToString() {
         StringBuilder b = new StringBuilder();
         for (Map.Entry<String, Room> i : ROOMS.entrySet()) {
-            b.append(i.toString()).append("\n");
+            b.append(i.getValue().toString()).append("\n");
         }
         for (Map.Entry<String, Item> i : ITEMS.entrySet()) {
-            b.append(i.toString()).append("\n");
+            b.append(i.getValue().toString()).append("\n");
         }
         for (Map.Entry<String, Dweller> i : DWELLERS.entrySet()) {
-            b.append(i.toString()).append("\n");
+            b.append(i.getValue().toString()).append("\n");
         }
         return b.toString();
     }

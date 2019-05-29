@@ -3,7 +3,6 @@ package info.projekt.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import info.projekt.InfoProjekt;
-import info.projekt.jonas.storage.StorageHandler;
 
 import java.awt.*;
 import java.io.IOException;
@@ -20,8 +19,5 @@ public class DesktopLauncher {
         config.backgroundFPS = 60;
         config.forceExit = true;
         final LwjglApplication lwjglApplication = new LwjglApplication(new InfoProjekt(), config);
-        StorageHandler.registerArmors();
-        //StorageHandler.registerWeapons();
-        //System.out.println(Registry.allToString());
     }
 }

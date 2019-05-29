@@ -27,38 +27,27 @@ public class StorageHandler {
     }
 
     public static void registerWeapons() throws IOException {
-        try {
-            JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
-            for (JsonValue object : in.asArray()) {
-                JsonObject obj = object.asObject();
-                Registry.registerItem(new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+
+        JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
+        for (JsonValue object : in.asArray()) {
+            JsonObject obj = object.asObject();
+            Registry.registerItem(new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
         }
     }
 
     public static void registerArmors() throws IOException {
-        try {
-            JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
-            for (JsonValue object : in.asArray()) {
-                JsonObject obj = object.asObject();
-                Registry.registerItem(new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
+        for (JsonValue object : in.asArray()) {
+            JsonObject obj = object.asObject();
+            Registry.registerItem(new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
         }
     }
 
     public static void registerRooms() throws IOException {
-        try {
-            JsonArray in = JsonObject.readFrom(new FileReader("Rooms.json")).get("armors").asArray();
-            for (JsonValue object : in.asArray()) {
-                JsonObject obj = object.asObject();
-                Registry.registerRoom(new Room(obj.get("name").asString(), obj.get("product").asString()));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        JsonArray in = JsonObject.readFrom(new FileReader("Rooms.json")).get("rooms").asArray();
+        for (JsonValue object : in.asArray()) {
+            JsonObject obj = object.asObject();
+            Registry.registerRoom(new Room(obj.get("name").asString(), obj.get("product").asString()));
         }
     }
 }
