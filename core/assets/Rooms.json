@@ -1,8 +1,11 @@
 {
   "rooms": [
     {
-      "name": "EngineRoom",
+      "name": "",
       "product": "Power"
+    },
+    {
+      "name:"
     }
   ]
 }
