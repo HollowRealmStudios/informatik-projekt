@@ -5,11 +5,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -25,6 +23,7 @@ import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 public class GameScreen extends InputAdapter implements Screen {
 
+    public static com.badlogic.gdx.graphics.Color cursorColor;
     private Vector2 cellPosition = new Vector2();
     public static InputMultiplexer multiplexer;
     private ImageButton buildMenu;
@@ -35,6 +34,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     @Override
     public void show() {
+        cursorColor = new com.badlogic.gdx.graphics.Color(1f, 1f, 1f, 1f);
         buildGui = new BuildGui();
         dwellerList = new DwellerList();
         dwellerList.table.setVisible(false);
@@ -91,6 +91,7 @@ public class GameScreen extends InputAdapter implements Screen {
             }
         }
         batch.end();
+        renderer.setColor(cursorColor);
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.rect(cellPosition.x, cellPosition.y, CELL_WIDTH, CELL_HEIGHT);
         renderer.end();
@@ -129,11 +130,10 @@ public class GameScreen extends InputAdapter implements Screen {
             System.exit(0);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
-            if(buildGui.table.isVisible()){
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            if (buildGui.table.isVisible()) {
                 buildGui.table.setVisible(false);
-            }
-            else if(dwellerList.table.isVisible()){
+            } else if (dwellerList.table.isVisible()) {
                 dwellerList.table.setVisible(false);
             }
 
