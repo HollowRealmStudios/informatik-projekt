@@ -64,6 +64,11 @@ public class InfoProjekt extends Game {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        try {
+            StorageHandler.registerRooms();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println(Registry.allToString());
     }
 
