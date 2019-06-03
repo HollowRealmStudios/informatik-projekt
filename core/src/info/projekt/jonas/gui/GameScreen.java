@@ -10,9 +10,11 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Logger;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.DwellerList;
+import info.projekt.jonas.Registry;
 
 import java.awt.*;
 
@@ -23,6 +25,8 @@ import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 public class GameScreen extends InputAdapter implements Screen {
 
+    private static final Logger LOGGER = new Logger("Game Screen");
+    public static String selectedRoom;
     public static com.badlogic.gdx.graphics.Color cursorColor;
     private Vector2 cellPosition = new Vector2();
     public static InputMultiplexer multiplexer;
@@ -112,8 +116,9 @@ public class GameScreen extends InputAdapter implements Screen {
 
     private void keyDown() {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) try {
-            //GAME_STORAGE.setRoom(new Room("LOL", "room_debug.png"), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
-        } catch (ArrayIndexOutOfBoundsException e) {
+            GAME_STORAGE.setRoom(Registry.getRoom(selectedRoom), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
+        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
+            LOGGER.error("No room selected to place");
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
@@ -141,6 +146,7 @@ public class GameScreen extends InputAdapter implements Screen {
         }
 
     }
+
 
     @Override
     public void dispose() {
