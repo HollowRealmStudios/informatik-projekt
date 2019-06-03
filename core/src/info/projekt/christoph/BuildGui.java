@@ -8,6 +8,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.jonas.gui.GameScreen;
 
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
@@ -58,6 +59,7 @@ public class BuildGui {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
+                GameScreen.table.setVisible(true);
 
 
 
@@ -68,7 +70,7 @@ public class BuildGui {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
-
+                GameScreen.table.setVisible(true);
 
             }
         });
@@ -77,7 +79,7 @@ public class BuildGui {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
-
+                GameScreen.table.setVisible(true);
 
             }
         });
@@ -86,7 +88,7 @@ public class BuildGui {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
-
+                GameScreen.table.setVisible(true);
 
             }
         });
@@ -95,7 +97,7 @@ public class BuildGui {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
-
+                GameScreen.table.setVisible(true);
 
             }
         });

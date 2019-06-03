@@ -8,60 +8,65 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.Logger;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.DwellerList;
-import info.projekt.jonas.Registry;
 
 import java.awt.*;
 
 import static info.projekt.InfoProjekt.*;
-import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 
 public class GameScreen extends InputAdapter implements Screen {
 
-    private static final Logger LOGGER = new Logger("Game Screen");
-    public static String selectedRoom;
-    public static com.badlogic.gdx.graphics.Color cursorColor;
     private Vector2 cellPosition = new Vector2();
     public static InputMultiplexer multiplexer;
-    private ImageButton buildMenu;
+    private ImageButton buildMenuButton;
     private ImageButton dwellerListButton;
     private Stage stage;
     private BuildGui buildGui;
     private DwellerList dwellerList;
+    public static Table table;
 
     @Override
     public void show() {
-        cursorColor = new com.badlogic.gdx.graphics.Color(1f, 1f, 1f, 1f);
+        stage = new Stage(new ScreenViewport());
+        table = new Table();
+        stage.addActor(table);
+
+
         buildGui = new BuildGui();
         dwellerList = new DwellerList();
+
+
         dwellerList.table.setVisible(false);
-        stage = new Stage(new ScreenViewport());
         buildGui.table.setVisible(false);
-        //Images du noch richtig setzen musst
+
+
+
         dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        //Size proportional noch machen du musst
-        buildMenu.setSize(100f, 100f);
-        dwellerListButton.setSize(100f, 100f);
-        //Position du noch proportinonal machen musst
-        buildMenu.setPosition(200, 200);
-        dwellerListButton.setPosition(200, 700);
-        stage.addActor(buildMenu);
-        stage.addActor(dwellerListButton);
-        buildMenu.addListener(new ClickListener() {
+        buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+
+        table.align(Align.center);
+
+        table.add(buildMenuButton).width((WIDTH * 1f / 7f)).height((HEIGHT * 1f / 7f));
+        table.row().padTop((HEIGHT * 3f / 7f));
+        table.add(buildMenuButton).width((WIDTH * 1f / 7f)).height((HEIGHT * 1f / 7f));
+        table.setVisible(true);
+
+
+        buildMenuButton.addListener(new ClickListener() {
 
 
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(event.toString());
-
+                table.setVisible(false);
                 buildGui.table.setVisible(true);
 
             }
@@ -69,6 +74,7 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerListButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
+                table.setVisible(false);
                 dwellerList.table.setVisible(true);
             }
         });
@@ -95,7 +101,6 @@ public class GameScreen extends InputAdapter implements Screen {
             }
         }
         batch.end();
-        renderer.setColor(cursorColor);
         renderer.begin(ShapeRenderer.ShapeType.Line);
         renderer.rect(cellPosition.x, cellPosition.y, CELL_WIDTH, CELL_HEIGHT);
         renderer.end();
@@ -116,9 +121,8 @@ public class GameScreen extends InputAdapter implements Screen {
 
     private void keyDown() {
         if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) try {
-            GAME_STORAGE.setRoom(Registry.getRoom(selectedRoom), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
-        } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
-            LOGGER.error("No room selected to place");
+            //GAME_STORAGE.setRoom(new Room("LOL", "room_debug.png"), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
+        } catch (ArrayIndexOutOfBoundsException e) {
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
@@ -135,10 +139,11 @@ public class GameScreen extends InputAdapter implements Screen {
             System.exit(0);
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            if (buildGui.table.isVisible()) {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+            if(buildGui.table.isVisible()){
                 buildGui.table.setVisible(false);
-            } else if (dwellerList.table.isVisible()) {
+            }
+            else if(dwellerList.table.isVisible()){
                 dwellerList.table.setVisible(false);
             }
 
@@ -146,7 +151,6 @@ public class GameScreen extends InputAdapter implements Screen {
         }
 
     }
-
 
     @Override
     public void dispose() {
