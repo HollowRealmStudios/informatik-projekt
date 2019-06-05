@@ -24,7 +24,6 @@ import java.awt.*;
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-
 public class GameScreen extends InputAdapter implements Screen {
 
     public enum Mode {SELECT, UPGRADE, PLACE}
@@ -186,7 +185,7 @@ public class GameScreen extends InputAdapter implements Screen {
         selectedRoom = room;
     }
 
-    private static void setMode(Mode mode) {
+    public static void setMode(Mode mode) {
         switch (mode) {
             case PLACE:
                 renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
