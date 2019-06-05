@@ -1,11 +1,29 @@
 {
   "rooms": [
     {
-      "name": "",
+      "name": "EngineRoom",
       "product": "Power"
     },
     {
-      "name:"
+      "name": "Kitchen",
+      "product": "Food"
+    },
+    {
+      "name": "Barracks",
+      "product": "None"
+    },
+    {
+      "name": "MedRoom",
+      "product": "MedKit"
+    },
+    {
+      "name": "Sewage_treatment_plant",
+      "product": "Water"
+    },
+    {
+      "name": "Storage",
+      "product": "None"
+
     }
   ]
 }
