@@ -1,7 +1,7 @@
 {
   "weapons": [
     {
-      "texture": "weapon.png",
+      "texture": "gun.png",
       "name": "Ballistic-rifle",
       "damage": 3,
       "deviation": 1
