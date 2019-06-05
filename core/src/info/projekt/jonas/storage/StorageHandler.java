@@ -47,7 +47,7 @@ public class StorageHandler {
         JsonArray in = JsonObject.readFrom(new FileReader("Rooms.json")).get("rooms").asArray();
         for (JsonValue object : in.asArray()) {
             JsonObject obj = object.asObject();
-            Registry.registerRoom(new Room(obj.get("name").asString(), obj.get("product").asString()));
+            Registry.registerRoom(new Room(obj.get("name").asString(), obj.get("product").asString(), obj.get("cost").asInt()));
         }
     }
 }

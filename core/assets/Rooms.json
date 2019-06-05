@@ -2,28 +2,37 @@
   "rooms": [
     {
       "name": "EngineRoom",
-      "product": "Power"
+      "product": "Power",
+      "cost": 500
     },
     {
       "name": "Kitchen",
-      "product": "Food"
+      "product": "Food",
+      "cost": 500
+
     },
     {
       "name": "Barracks",
-      "product": "None"
+      "product": "None",
+      "cost": 500
+
     },
     {
       "name": "MedRoom",
-      "product": "MedKit"
+      "product": "MedKit",
+      "cost": 500
+
     },
     {
       "name": "SewageTreatmentPlant",
-      "product": "Water"
+      "product": "Water",
+      "cost": 500
+
     },
     {
       "name": "Storage",
-      "product": "None"
-
+      "product": "None",
+      "cost": 500
     }
   ]
 }

@@ -32,6 +32,9 @@ public class Room implements Serializable {
      * The dwellers currently residing in the room
      */
     private Dweller[] dwellers = new Dweller[4];
+
+    private final int cost;
+
     /**
      * The textures of the room at different levels. These cant be serialized
      */
@@ -49,7 +52,7 @@ public class Room implements Serializable {
      * @param name    the name of the Room
      * @param product the product the room produces
      */
-    public Room(String name, String product) {
+    public Room(String name, String product, int cost) {
         this.name = name;
         switch (product.toUpperCase()) {
             case "WATER":
@@ -64,6 +67,7 @@ public class Room implements Serializable {
             case "NONE":
                 this.product = PRODUCT.NONE;
         }
+        this.cost = cost;
         textureLvlOne = new Texture(name + "/" + name + "_1" + ".png");
         textureLvlTwo = new Texture(name + "/" + name + "_2" + ".png");
         textureLvlThree = new Texture(name + "/" + name + "_3" + ".png");
