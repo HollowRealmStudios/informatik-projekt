@@ -30,7 +30,7 @@ public class BuildGui {
 
         //giving the ImageButtons their textures
         //electricity
-        ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
+        ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("EngineRoom/EngineRoom_1.png")));
         //water
         ImageButton wroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
         //food

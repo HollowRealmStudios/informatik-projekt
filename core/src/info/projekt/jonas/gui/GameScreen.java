@@ -53,9 +53,9 @@ public class GameScreen extends InputAdapter implements Screen {
         ImageButton buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         currency.setPosition(50, HEIGHT - 50);
         currency.setFontScale(3);
-        table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
-        table.row().padTop(HEIGHT * 3f /7f);
-        table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
+        table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 7f);
+        table.row().padBottom(HEIGHT * 2f / 7f);
+        table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 7f);
         stage.addActor(currency);
         buildMenuButton.addListener(new ClickListener() {
             @Override
