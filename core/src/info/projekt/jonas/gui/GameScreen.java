@@ -55,9 +55,9 @@ public class GameScreen extends InputAdapter implements Screen {
         ImageButton buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         currency.setPosition(50, HEIGHT - 50);
         currency.setFontScale(3);
-        table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
-        table.row().padTop(HEIGHT * 3f /7f);
-        table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
+        buttonTable.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
+        buttonTable.row().padTop(HEIGHT * 3f /7f);
+        buttonTable.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
         stage.addActor(currency);
         buildMenuButton.addListener(new ClickListener() {
             @Override
@@ -132,7 +132,7 @@ public class GameScreen extends InputAdapter implements Screen {
         } finally {
             setMode(Mode.SELECT);
         }
-        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE && getSelectedRoom() != null) try {
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE && getSelectedRoom() == null) try {
             if (getSelectedRoom().upgradable() && GAME_STORAGE.currency >= getCost(getSelectedRoom())) {
                 GAME_STORAGE.currency -= getCost(getSelectedRoom());
                 updateCurrency();
