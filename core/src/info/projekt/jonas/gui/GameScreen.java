@@ -29,6 +29,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     public enum Mode {SELECT, UPGRADE, PLACE}
 
+    private Texture EMPTY;
     private static Mode mode = Mode.SELECT;
     private Label currency;
     private static final Logger LOGGER = new Logger("Game Screen");
@@ -41,6 +42,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     @Override
     public void show() {
+        EMPTY = new Texture("room_empty.png");
         buildGui = new BuildGui();
         dwellerList = new DwellerList();
         dwellerList.table.setVisible(false);
@@ -54,7 +56,7 @@ public class GameScreen extends InputAdapter implements Screen {
         currency.setPosition(50, HEIGHT - 50);
         currency.setFontScale(3);
         table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
-        table.row().padTop(HEIGHT * 3f /7f);
+        table.row().padTop(HEIGHT * 3f / 7f);
         table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
         stage.addActor(currency);
         buildMenuButton.addListener(new ClickListener() {
@@ -87,7 +89,7 @@ public class GameScreen extends InputAdapter implements Screen {
         batch.begin();
         for (int x = 0; x < GAME_STORAGE.getRooms().length; x++) {
             for (int y = 0; y < GAME_STORAGE.getRooms()[0].length; y++) {
-                batch.draw(GAME_STORAGE.getRooms()[x][y].getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
+                batch.draw(GAME_STORAGE.getRooms()[x][y] != null ? GAME_STORAGE.getRooms()[x][y].getTexture() : EMPTY, x * CELL_WIDTH, y * CELL_HEIGHT);
             }
         }
         batch.end();
@@ -123,24 +125,22 @@ public class GameScreen extends InputAdapter implements Screen {
     }
 
     private void handleMouseKeys() {
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE) try {
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
             if (selectedRoom != null) setRoom(Registry.getRoom(selectedRoom));
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
-        }
-        finally {
+        } finally {
             setMode(Mode.SELECT);
         }
-        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE) try {
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE && getSelectedRoom() != null) try {
             if (getSelectedRoom().upgradable() && GAME_STORAGE.currency >= getCost(getSelectedRoom())) {
-                getSelectedRoom().upgrade();
                 GAME_STORAGE.currency -= getCost(getSelectedRoom());
                 updateCurrency();
+                getSelectedRoom().upgrade();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
-        }
-        finally {
+        } finally {
             setMode(Mode.SELECT);
         }
     }
@@ -179,7 +179,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     private void setRoom(Room room) {
         Vector3 pos = manager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-        GAME_STORAGE.setRoom(room, (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
+        GAME_STORAGE.setRoom(room.copy(), (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
     }
 
     public static void setSelectedRoom(String room) {
@@ -211,7 +211,7 @@ public class GameScreen extends InputAdapter implements Screen {
     }
 
     private int getCost(Room room) {
-        return room.getLevel() * 200;
+        return room.getLevel() * room.getCost();
     }
 
     private void updateCurrency() {
