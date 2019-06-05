@@ -136,12 +136,12 @@ public class GameScreen extends InputAdapter implements Screen {
             if (getSelectedRoom().upgradable() && GAME_STORAGE.currency >= getCost(getSelectedRoom())) {
                 getSelectedRoom().upgrade();
                 GAME_STORAGE.currency -= getCost(getSelectedRoom());
-                setMode(Mode.SELECT);
                 updateCurrency();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
         }
+        setMode(Mode.SELECT);
     }
 
     private void handleMoveKeys() {
