@@ -37,7 +37,7 @@ public class GameScreen extends InputAdapter implements Screen {
     private Stage stage;
     private BuildGui buildGui;
     private DwellerList dwellerList;
-    public static Table table;
+    public static Table buttonTable;
 
     @Override
     public void show() {
@@ -46,16 +46,15 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerList.table.setVisible(false);
         buildGui.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
-        table = new Table();
-        stage.addActor(table);
+        buttonTable = new Table();
+        buttonTable.setOrigin(HALF_WIDTH,HALF_HEIGHT);
         currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
         ImageButton dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         ImageButton buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         currency.setPosition(50, HEIGHT - 50);
         currency.setFontScale(3);
-        table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 7f);
-        table.row().padBottom(HEIGHT * 2f / 7f);
-        table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 7f);
+        buttonTable.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 14f);
+        buttonTable.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).padLeft(WIDTH * 1f / 14f);
         stage.addActor(currency);
         buildMenuButton.addListener(new ClickListener() {
             @Override
@@ -70,7 +69,7 @@ public class GameScreen extends InputAdapter implements Screen {
                 dwellerList.table.setVisible(true);
             }
         });
-
+        stage.addActor(buttonTable);
         multiplexer = new InputMultiplexer();
         multiplexer.addProcessor(this);
         multiplexer.addProcessor(stage);
@@ -127,8 +126,7 @@ public class GameScreen extends InputAdapter implements Screen {
             if (selectedRoom != null) setRoom(Registry.getRoom(selectedRoom));
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
-        }
-        finally {
+        } finally {
             setMode(Mode.SELECT);
         }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE) try {
@@ -139,8 +137,7 @@ public class GameScreen extends InputAdapter implements Screen {
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
-        }
-        finally {
+        } finally {
             setMode(Mode.SELECT);
         }
     }
