@@ -131,7 +131,9 @@ public class GameScreen extends InputAdapter implements Screen {
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
         }
-
+        finally {
+            setMode(Mode.SELECT);
+        }
         if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE) try {
             if (getSelectedRoom().upgradable() && GAME_STORAGE.currency >= getCost(getSelectedRoom())) {
                 getSelectedRoom().upgrade();
@@ -141,7 +143,9 @@ public class GameScreen extends InputAdapter implements Screen {
         } catch (ArrayIndexOutOfBoundsException e) {
             LOGGER.error("Not in a valid location");
         }
-        setMode(Mode.SELECT);
+        finally {
+            setMode(Mode.SELECT);
+        }
     }
 
     private void handleMoveKeys() {

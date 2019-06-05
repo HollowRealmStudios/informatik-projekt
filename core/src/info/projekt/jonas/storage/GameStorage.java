@@ -43,7 +43,7 @@ public class GameStorage implements Serializable {
 	public void debug() {
 		for (int x = 0; x < GAME_STORAGE.getRooms().length; x++) {
 			for (int y = 0; y < GAME_STORAGE.getRooms()[0].length; y++) {
-				GAME_STORAGE.ROOMS[x][y] = new Room("EngineRoom", "Power");
+				GAME_STORAGE.ROOMS[x][y] = new Room("EngineRoom", "Power", 0);
 			}
 		}
 	}
