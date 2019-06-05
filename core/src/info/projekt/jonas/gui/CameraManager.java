@@ -94,9 +94,7 @@ public class CameraManager {
 	 * Instead, create a wrapper, so the camera isn't exposed directly!
 	 *
 	 * @return the manager's camera
-	 * @deprecated
 	 */
-	@Deprecated
 	public OrthographicCamera getCamera() {
 		return camera;
 	}
