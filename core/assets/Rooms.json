@@ -3,36 +3,36 @@
     {
       "name": "EngineRoom",
       "product": "Power",
-      "cost": 500
+      "cost": 600
     },
     {
       "name": "Kitchen",
       "product": "Food",
-      "cost": 500
+      "cost": 400
 
     },
     {
       "name": "Barracks",
       "product": "None",
-      "cost": 500
+      "cost": 800
 
     },
     {
       "name": "MedRoom",
       "product": "MedKit",
-      "cost": 500
+      "cost": 1000
 
     },
     {
       "name": "SewageTreatmentPlant",
       "product": "Water",
-      "cost": 500
+      "cost": 400
 
     },
     {
       "name": "Storage",
       "product": "None",
-      "cost": 500
+      "cost": 800
     }
   ]
 }
