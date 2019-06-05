@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Logger;
@@ -15,46 +17,46 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.DwellerList;
 import info.projekt.jonas.Registry;
+import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
 
 import static info.projekt.InfoProjekt.*;
-import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 
 public class GameScreen extends InputAdapter implements Screen {
 
+    public enum Mode {SELECT, UPGRADE, PLACE}
+
+    private static Mode mode = Mode.SELECT;
+    private Label currency;
     private static final Logger LOGGER = new Logger("Game Screen");
-    public static String selectedRoom = "Kitchen";
-    public static com.badlogic.gdx.graphics.Color cursorColor;
-    private Vector2 cellPosition = new Vector2();
+    private static String selectedRoom = "Kitchen";
     public static InputMultiplexer multiplexer;
-    private ImageButton buildMenu;
-    private ImageButton dwellerListButton;
     private Stage stage;
     private BuildGui buildGui;
     private DwellerList dwellerList;
 
     @Override
     public void show() {
-        cursorColor = new com.badlogic.gdx.graphics.Color(1f, 1f, 1f, 1f);
         buildGui = new BuildGui();
+        currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
         dwellerList = new DwellerList();
         dwellerList.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
         buildGui.table.setVisible(false);
-        //Images du noch richtig setzen musst
-        dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        //Size proportional noch machen du musst
+        ImageButton dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        ImageButton buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenu.setSize(100f, 100f);
         dwellerListButton.setSize(100f, 100f);
-        //Position du noch proportinonal machen musst
         buildMenu.setPosition(200, 200);
         dwellerListButton.setPosition(200, 700);
+        currency.setPosition(50, HEIGHT - 50);
+        currency.setFontScale(3);
         stage.addActor(buildMenu);
         stage.addActor(dwellerListButton);
+        stage.addActor(currency);
         buildMenu.addListener(new ClickListener() {
 
 
@@ -84,10 +86,8 @@ public class GameScreen extends InputAdapter implements Screen {
     @Override
     public void render(float delta) {
         keyDown();
-        Vector3 pos = manager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-        cellPosition.set((float) (Math.floor(pos.x / CELL_WIDTH) * CELL_WIDTH), (float) (Math.floor(pos.y / CELL_HEIGHT) * CELL_HEIGHT));
         Gdx.gl.glLineWidth(10);
-        RenderUtils.clearScreen(new Color(49, 144, 175));
+        RenderUtils.clearScreen(new Color(64, 29, 14));
         batch.begin();
         for (int x = 0; x < GAME_STORAGE.getRooms().length; x++) {
             for (int y = 0; y < GAME_STORAGE.getRooms()[0].length; y++) {
@@ -95,10 +95,7 @@ public class GameScreen extends InputAdapter implements Screen {
             }
         }
         batch.end();
-        renderer.setColor(cursorColor);
-        renderer.begin(ShapeRenderer.ShapeType.Line);
-        renderer.rect(cellPosition.x, cellPosition.y, CELL_WIDTH, CELL_HEIGHT);
-        renderer.end();
+        drawOutline();
         stage.act(Gdx.graphics.getDeltaTime());
         stage.draw();
         buildGui.stage.act(Gdx.graphics.getDeltaTime());
@@ -115,39 +112,111 @@ public class GameScreen extends InputAdapter implements Screen {
     }
 
     private void keyDown() {
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) try {
-            if (selectedRoom != null)
-                GAME_STORAGE.setRoom(Registry.getRoom(selectedRoom), (int) cellPosition.x / CELL_WIDTH, (int) cellPosition.y / CELL_HEIGHT);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            LOGGER.error("Not in a valid location");
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
-        } else if (Gdx.input.isKeyPressed(Input.Keys.S)) {
-            manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
-            manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
-        } else if (Gdx.input.isKeyPressed(Input.Keys.D)) {
-            manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
-        }
+        handleGuiKeys();
+        handleMiscKeys();
+        handleMouseKeys();
+        handleMoveKeys();
+        handleOutlineKeys();
+    }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.C)) {
-            System.exit(0);
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            if (buildGui.table.isVisible()) {
-                buildGui.table.setVisible(false);
-            } else if (dwellerList.table.isVisible()) {
-                dwellerList.table.setVisible(false);
-            }
-
-
-        }
+    private void handleOutlineKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.F1)) setMode(Mode.SELECT);
+        if (Gdx.input.isKeyPressed(Input.Keys.F2)) setMode(Mode.PLACE);
+        if (Gdx.input.isKeyPressed(Input.Keys.F3)) setMode(Mode.UPGRADE);
 
     }
 
+    private void handleMouseKeys() {
+        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE) try {
+            if (selectedRoom != null) setRoom(Registry.getRoom(selectedRoom));
+        } catch (ArrayIndexOutOfBoundsException e) {
+            LOGGER.error("Not in a valid location");
+        }
+
+        if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT) && mode == Mode.UPGRADE) try {
+            if (getSelectedRoom().upgradable() && GAME_STORAGE.currency >= getCost(getSelectedRoom())) {
+                getSelectedRoom().upgrade();
+                GAME_STORAGE.currency -= getCost(getSelectedRoom());
+                setMode(Mode.SELECT);
+                updateCurrency();
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            LOGGER.error("Not in a valid location");
+        }
+    }
+
+    private void handleMoveKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.W))
+            manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
+        else if (Gdx.input.isKeyPressed(Input.Keys.S))
+            manager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
+        if (Gdx.input.isKeyPressed(Input.Keys.A))
+            manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
+        else if (Gdx.input.isKeyPressed(Input.Keys.D))
+            manager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
+
+    }
+
+    private void handleMiscKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+            GAME_STORAGE.currency += 200;
+            updateCurrency();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.C)) System.exit(0);
+    }
+
+    private void handleGuiKeys() {
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            if (buildGui.table.isVisible()) buildGui.table.setVisible(false);
+            if (buildGui.table.isVisible()) dwellerList.table.setVisible(false);
+        }
+    }
+
+    private Room getSelectedRoom() {
+        Vector3 pos = manager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        return GAME_STORAGE.getRooms()[(int) Math.floor(pos.x / CELL_WIDTH)][(int) Math.floor(pos.y / CELL_HEIGHT)];
+    }
+
+    private void setRoom(Room room) {
+        Vector3 pos = manager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        GAME_STORAGE.setRoom(room, (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
+    }
+
+    public static void setSelectedRoom(String room) {
+        selectedRoom = room;
+    }
+
+    private static void setMode(Mode mode) {
+        switch (mode) {
+            case PLACE:
+                renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
+                GameScreen.mode = Mode.PLACE;
+                break;
+            case SELECT:
+                renderer.setColor(com.badlogic.gdx.graphics.Color.WHITE);
+                GameScreen.mode = Mode.SELECT;
+                break;
+            case UPGRADE:
+                renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
+                GameScreen.mode = Mode.UPGRADE;
+                break;
+        }
+    }
+
+    private void drawOutline() {
+        Vector3 pos = manager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+        renderer.begin(ShapeRenderer.ShapeType.Line);
+        renderer.rect((int) Math.floor(pos.x / CELL_WIDTH) * CELL_WIDTH, (int) Math.floor(pos.y / CELL_HEIGHT) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+        renderer.end();
+    }
+
+    private int getCost(Room room) {
+        return room.getLevel() * 200;
+    }
+
+    private void updateCurrency() {
+        currency.setText(Integer.toString(GAME_STORAGE.currency));
+    }
 
     @Override
     public void dispose() {
@@ -173,6 +242,4 @@ public class GameScreen extends InputAdapter implements Screen {
     public void hide() {
 
     }
-
-
 }

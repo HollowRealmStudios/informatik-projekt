@@ -20,9 +20,7 @@ public class GameStorage implements Serializable {
 
 	private final ArrayList<Dweller> DWELLERS = new ArrayList<>();
 
-	public GameStorage() {
-
-	}
+	public int currency;
 
 	/**
 	 * @return the 2D-Array of rooms
