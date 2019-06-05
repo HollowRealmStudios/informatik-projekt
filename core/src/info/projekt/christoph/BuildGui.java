@@ -39,6 +39,8 @@ public class BuildGui {
         ImageButton hroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
         //living
         ImageButton lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
+        //storage
+        ImageButton sroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
         //sets the background to finalDay.png
         table.background(new TextureRegionDrawable(new Texture("finalDay.PNG"))).setSize(WIDTH, HEIGHT);
@@ -50,7 +52,7 @@ public class BuildGui {
         table.row().padTop((HEIGHT * 0.1f));
         table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f)).padLeft((WIDTH * 1f / 28f));
         table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
-
+        table.add(sroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
         //adds table as an actor of stage
         stage.addActor(table);
 
@@ -60,9 +62,8 @@ public class BuildGui {
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
                 GameScreen.table.setVisible(true);
-
-
-
+                GameScreen.setSelectedRoom("EngineRoom");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
             }
         });
         wroom.addListener(new ClickListener() {
@@ -71,7 +72,8 @@ public class BuildGui {
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
                 GameScreen.table.setVisible(true);
-
+                GameScreen.setSelectedRoom("SewageTreatmentPlant");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
             }
         });
         froom.addListener(new ClickListener() {
@@ -80,6 +82,8 @@ public class BuildGui {
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
                 GameScreen.table.setVisible(true);
+                GameScreen.setSelectedRoom("Kitchen");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
 
             }
         });
@@ -89,16 +93,26 @@ public class BuildGui {
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
                 GameScreen.table.setVisible(true);
-
+                GameScreen.setSelectedRoom("MedRoom");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
             }
         });
         lroom.addListener(new ClickListener() {
-
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 table.setVisible(false);
                 GameScreen.table.setVisible(true);
-
+                GameScreen.setSelectedRoom("Barracks");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
+            }
+        });
+        sroom.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                table.setVisible(false);
+                GameScreen.table.setVisible(true);
+                GameScreen.setSelectedRoom("Storage");
+                GameScreen.setMode(GameScreen.Mode.PLACE);
             }
         });
     }
