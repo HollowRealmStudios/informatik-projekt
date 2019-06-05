@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Logger;
@@ -36,35 +37,31 @@ public class GameScreen extends InputAdapter implements Screen {
     private Stage stage;
     private BuildGui buildGui;
     private DwellerList dwellerList;
+    public static Table table;
 
     @Override
     public void show() {
         buildGui = new BuildGui();
-        currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
         dwellerList = new DwellerList();
         dwellerList.table.setVisible(false);
-        stage = new Stage(new ScreenViewport());
         buildGui.table.setVisible(false);
+        stage = new Stage(new ScreenViewport());
+        table = new Table();
+        stage.addActor(table);
+        currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
         ImageButton dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        ImageButton buildMenu = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        buildMenu.setSize(100f, 100f);
-        dwellerListButton.setSize(100f, 100f);
-        buildMenu.setPosition(200, 200);
-        dwellerListButton.setPosition(200, 700);
+        ImageButton buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         currency.setPosition(50, HEIGHT - 50);
         currency.setFontScale(3);
-        stage.addActor(buildMenu);
-        stage.addActor(dwellerListButton);
+        table.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
+        table.row().padTop(HEIGHT * 3f /7f);
+        table.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
         stage.addActor(currency);
-        buildMenu.addListener(new ClickListener() {
-
-
+        buildMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
                 System.out.println(event.toString());
-
                 buildGui.table.setVisible(true);
-
             }
         });
         dwellerListButton.addListener(new ClickListener() {
