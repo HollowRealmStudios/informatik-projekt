@@ -109,7 +109,11 @@ public class Room implements Serializable {
         return new Room(name, product.toString(), cost);
     }
 
-    @Override
+	public Dweller[] getDwellers() {
+		return dwellers;
+	}
+
+	@Override
     public String toString() {
         return "Level: " + currentLevel + ", Product: " + product;
     }
