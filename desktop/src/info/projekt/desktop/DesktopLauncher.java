@@ -20,6 +20,5 @@ public class DesktopLauncher {
 		config.backgroundFPS = 60;
 		config.forceExit = true;
 		new LwjglApplication(new InfoProjekt(), config);
-		//FIXME
 	}
 }
