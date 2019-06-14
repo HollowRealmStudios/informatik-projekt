@@ -5,10 +5,11 @@ import com.badlogic.gdx.graphics.Texture;
 /**
  * @author Jonas
  * */
-public class Item {
+public abstract class Item {
 
     /**The name of the item*/
     public final String name;
+
     /**The texture of the item*/
     protected Texture texture;
 
@@ -20,4 +21,6 @@ public class Item {
         this.texture = texture;
         this.name = name;
     }
+
+    public abstract String toString();
 }

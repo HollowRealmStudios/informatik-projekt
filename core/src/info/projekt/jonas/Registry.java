@@ -1,11 +1,19 @@
 package info.projekt.jonas;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.eclipsesource.json.JsonArray;
+import com.eclipsesource.json.JsonObject;
+import com.eclipsesource.json.JsonValue;
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.Item;
+import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.rooms.Room;
+import org.reflections.Reflections;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Jonas
@@ -17,34 +25,35 @@ public class Registry {
     private static final HashMap<String, Item> ITEMS = new HashMap<>();
     private static final HashMap<String, Dweller> DWELLERS = new HashMap<>();
 
-    /**
-     * use this to register a new dweller, by passing in an object of the desired dweller to be registered
-     *
-     * @param dweller the dweller to be registered
-     * @see Dweller
-     */
-    public static void registerDweller(Dweller dweller) {
-        DWELLERS.put(dweller.completeName, dweller);
+    public static void registerWeapons() throws IOException {
+
+        JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
+        for (JsonValue object : in.asArray()) {
+            JsonObject obj = object.asObject();
+            ITEMS.put(obj.get("name").asString(), new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
+        }
     }
 
-    /**
-     * use this to register a new item, by passing in an object of the desired item to be registered
-     *
-     * @param item the dweller to be registered
-     * @see Item
-     */
-    public static void registerItem(Item item) {
-        ITEMS.put(item.name, item);
+    public static void registerArmors() throws IOException {
+        JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
+        for (JsonValue object : in.asArray()) {
+            JsonObject obj = object.asObject();
+            ITEMS.put(obj.get("name").asString(), new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
+        }
     }
 
-    /**
-     * use this to register a new dweller, by passing in an object of the desired dweller to be registered
-     *
-     * @param room the Room to be registered
-     * @see Room
-     */
-    public static void registerRoom(Room room) {
-        ROOMS.put(room.name, room);
+    //FIXME
+    public static void registerRooms() {
+        Reflections reflections = new Reflections("info.projekt.jonas.rooms");
+        reflections.getSubTypesOf(Room.class).forEach((Class c) -> {
+            try {
+                if (((Room) c.newInstance()).getProduct() == Room.PRODUCT.OTHER && c.getMethod("produce").getDeclaringClass().equals(Room.class))
+                    System.err.println(c.getSimpleName() + " has product OTHER, however \"produce\" is not being overwritten");
+                ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
+            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     /**
@@ -55,7 +64,12 @@ public class Registry {
      * @see Room
      */
     public static Room getRoom(String name) {
-        return ROOMS.get(name);
+        try {
+            return ROOMS.get(name).getClass().newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -80,17 +94,17 @@ public class Registry {
         return DWELLERS.get(name);
     }
 
+    public static String roomsToString() {
+        StringBuilder b = new StringBuilder();
+        ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
+        return b.toString();
+    }
+
     public static String allToString() {
         StringBuilder b = new StringBuilder();
-        for (Map.Entry<String, Room> i : ROOMS.entrySet()) {
-            b.append(i.getValue().toString()).append("\n");
-        }
-        for (Map.Entry<String, Item> i : ITEMS.entrySet()) {
-            b.append(i.getValue().toString()).append("\n");
-        }
-        for (Map.Entry<String, Dweller> i : DWELLERS.entrySet()) {
-            b.append(i.getValue().toString()).append("\n");
-        }
+        ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
+        ITEMS.forEach((key, value) -> b.append(value.toString()).append("\n"));
+        DWELLERS.forEach((key, value) -> b.append(value.toString()).append("\n"));
         return b.toString();
     }
 }
