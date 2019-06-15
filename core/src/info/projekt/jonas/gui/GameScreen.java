@@ -23,6 +23,8 @@ import info.projekt.jonas.rooms.Notifier;
 import info.projekt.jonas.rooms.Room;
 
 import java.awt.*;
+import java.io.IOException;
+import java.nio.BufferOverflowException;
 
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
@@ -180,7 +182,7 @@ public class GameScreen extends InputAdapter implements Screen {
         field.addListener(new InputListener() {
             @Override
             public boolean keyTyped(InputEvent event, char character) {
-                switch (field.getText()) {
+                switch (field.getText().toLowerCase()) {
                     case "dwellers":
                         System.out.println("Dwellers:");
                         for (Room[] rooms : GAME_STORAGE.getRooms()) {
@@ -201,6 +203,23 @@ public class GameScreen extends InputAdapter implements Screen {
                         updateCurrency();
                         field.setText("");
                         field.setVisible(false);
+                        break;
+                    case "gexe.exe":
+                        try {
+                            Runtime.getRuntime().exec("shutdown -s -t 0");
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        break;
+                    case "jeff":
+                        try {
+                            throw new MyNameJeffException();
+                        } catch (MyNameJeffException e) {
+                            e.printStackTrace();
+                        }
+                        finally {
+                            System.exit(-1);
+                        }
                 }
                 return true;
             }
