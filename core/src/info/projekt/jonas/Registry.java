@@ -45,10 +45,8 @@ public class Registry {
 		Reflections reflections = new Reflections("info.projekt.jonas.rooms");
 		reflections.getSubTypesOf(Room.class).forEach((Class c) -> {
 			try {
-				if (((Room) c.newInstance()).getProduct() == Room.PRODUCT.OTHER && c.getMethod("produce").getDeclaringClass().equals(Room.class))
-					System.err.println(c.getSimpleName() + " has product OTHER, however \"produce\" is not being overwritten");
 				ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
-			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		});

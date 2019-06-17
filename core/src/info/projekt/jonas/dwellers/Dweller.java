@@ -1,5 +1,6 @@
 package info.projekt.jonas.dwellers;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
 import com.eclipsesource.json.JsonObject;
 import com.google.common.base.CharMatcher;
@@ -20,6 +21,7 @@ public class Dweller implements Serializable {
 
 	enum GENDER {MALE, FEMALE}
 
+	private transient Texture texture;
 	private GENDER gender;
 	private String name;
 	private String surname;
@@ -53,6 +55,11 @@ public class Dweller implements Serializable {
 		intelligence = WeightedRandom.newInt();
 		charisma = WeightedRandom.newInt();
 		creativity = WeightedRandom.newInt();
+	}
+
+	public Texture getTexture() {
+		if(texture == null) texture = new Texture(gender == GENDER.MALE ? "Male.png" : "Female.png");
+		return texture;
 	}
 
 	private String getName() {

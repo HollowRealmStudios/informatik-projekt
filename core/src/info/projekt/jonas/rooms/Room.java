@@ -1,23 +1,24 @@
 package info.projekt.jonas.rooms;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.gui.LimitedArrayList;
+import info.projekt.jonas.gui.RenderUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.jonas.gui.RenderUtils.*;
+import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
 
-public class Room implements Serializable {
-
-	public enum PRODUCT {WATER, FOOD, ENERGY, OTHER, NONE}
+public abstract class Room implements Serializable {
 
 	private int cost = 0;
-	private Dweller[] dwellers = new Dweller[4];
-	private PRODUCT product = PRODUCT.NONE;
+	protected LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
 	private final String name;
-	private int level;
+	private int level = 1;
 	private transient ArrayList<Texture> textures = new ArrayList<>();
 	private ArrayList<String> textureNames = new ArrayList<>();
 
@@ -33,66 +34,32 @@ public class Room implements Serializable {
 		this.cost = cost;
 	}
 
-	public void setProduct(PRODUCT product) {
-		this.product = product;
-	}
-
-	public PRODUCT getProduct() {
-		return product;
-	}
-
 	public int getCost() {
 		return cost;
 	}
 
-	public void produce() {
-		switch (product) {
-			case FOOD:
-				for (Dweller dweller : dwellers) if (dweller != null) GAME_STORAGE.food += dweller.getCreativity() * 2;
-				break;
-			case ENERGY:
-				for (Dweller dweller : dwellers) if (dweller != null) GAME_STORAGE.energy += dweller.getStrength() * 2;
-				break;
-			case WATER:
-				for (Dweller dweller : dwellers)
-					if (dweller != null) GAME_STORAGE.food += dweller.getIntelligence() * 2;
-				break;
-		}
-	}
+	public abstract void produce();
 
-	public void consume() {
-		GAME_STORAGE.energy -= GAME_STORAGE.energy >= 5 ? 5 : 0;
-		GAME_STORAGE.water -= GAME_STORAGE.water >= 5 ? 5 : 0;
-		switch (product) {
-			case FOOD:
-				for (Dweller dweller : dwellers)
-					if (dweller != null) GAME_STORAGE.food -= GAME_STORAGE.food >= 15 ? 15 : 0;
-				break;
-			case ENERGY:
-				for (Dweller dweller : dwellers)
-					if (dweller != null) GAME_STORAGE.energy -= GAME_STORAGE.energy >= 15 ? 15 : 0;
-				break;
-			case WATER:
-				for (Dweller dweller : dwellers)
-					if (dweller != null) GAME_STORAGE.water -= GAME_STORAGE.water >= 15 ? 15 : 0;
-				break;
-		}
-	}
+	public abstract void consume();
 
 	public void onTick() {
-
 	}
 
 	public void onPlace() {
-
 	}
 
 	public void onUpgrade() {
-
 	}
 
 	public void onNewDweller() {
+	}
 
+	public int getDwellerAmount() {
+		return dwellers.size();
+	}
+
+	public void addDweller(Dweller dweller) {
+		dwellers.add(dweller);
 	}
 
 	protected Room(@NotNull String name, @NotNull String texture, @NotNull String... textures) {
@@ -106,10 +73,10 @@ public class Room implements Serializable {
 	}
 
 	public Dweller[] getDwellers() {
-		return dwellers;
+		return (Dweller[]) dwellers.toArray();
 	}
 
-	public Texture getTexture() {
+	private Texture getTexture() {
 		if (textures == null) {
 			textures = new ArrayList<>();
 			for (String s : textureNames) {
@@ -127,5 +94,13 @@ public class Room implements Serializable {
 		if (level == textures.size())
 			throw new IllegalArgumentException("A level " + textures.size() + " room can't be upgraded any further");
 		level++;
+	}
+
+	public void draw(@NotNull SpriteBatch batch, int x, int y) {
+		if (!batch.isDrawing()) batch.begin();
+		batch.draw(getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
+		for (int i = 0; i < dwellers.size(); i++) {
+			if(dwellers.get(i) != null) batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100, y * CELL_HEIGHT + 20);
+		}
 	}
 }

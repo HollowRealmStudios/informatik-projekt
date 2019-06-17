@@ -19,6 +19,7 @@ import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.DwellerList;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.threads.WorkThread;
 
@@ -38,7 +39,6 @@ public class GameScreen extends InputAdapter implements Screen {
 	private Texture EMPTY;
 	private static Mode mode = Mode.SELECT;
 	private Label currency;
-	private final Logger LOGGER = new Logger("Game Screen");
 	private static String selectedRoom = "Kitchen";
 	public static InputMultiplexer multiplexer;
 	private Stage stage;
@@ -49,6 +49,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void show() {
+		if(GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
 		EMPTY = new Texture("room_empty.png");
 		field = new TextField("", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
@@ -90,7 +91,8 @@ public class GameScreen extends InputAdapter implements Screen {
 		batch.begin();
 		for (int x = 0; x < GAME_STORAGE.getRooms().length; x++) {
 			for (int y = 0; y < GAME_STORAGE.getRooms()[0].length; y++) {
-				batch.draw(GAME_STORAGE.getRooms()[x][y] != null ? GAME_STORAGE.getRooms()[x][y].getTexture() : EMPTY, x * CELL_WIDTH, y * CELL_HEIGHT);
+				if (GAME_STORAGE.getRooms()[x][y] != null) GAME_STORAGE.getRooms()[x][y].draw(batch, x, y);
+				else batch.draw(EMPTY, x * CELL_WIDTH, y * CELL_HEIGHT);
 			}
 		}
 		batch.end();
@@ -129,9 +131,9 @@ public class GameScreen extends InputAdapter implements Screen {
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
 			setRoom(Registry.getRoom(selectedRoom));
 			WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
-			LOGGER.debug("Requesting room " + selectedRoom);
+			System.out.println("Requesting room " + selectedRoom);
 		} catch (ArrayIndexOutOfBoundsException e) {
-			LOGGER.error("Not in a valid location");
+			System.out.println("Not in a valid location");
 		} finally {
 			setMode(Mode.SELECT);
 		}
@@ -143,7 +145,7 @@ public class GameScreen extends InputAdapter implements Screen {
 				WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
 			}
 		} catch (ArrayIndexOutOfBoundsException e) {
-			LOGGER.error("Not in a valid location");
+			System.out.println("Not in a valid location");
 		} finally {
 			setMode(Mode.SELECT);
 		}
@@ -182,13 +184,13 @@ public class GameScreen extends InputAdapter implements Screen {
 			@Override
 			public boolean keyTyped(InputEvent event, char character) {
 				switch (field.getText().toLowerCase()) {
-					case "dwellers":
-						LOGGER.debug("Dwellers:");
+					case "list_dweller":
+						System.out.println("Dwellers:");
 						for (Room[] rooms : GAME_STORAGE.getRooms()) {
 							for (Room room : rooms) {
 								try {
 									for (Dweller dweller : room.getDwellers()) {
-										LOGGER.debug(dweller.toString());
+										System.out.println(dweller.toString());
 									}
 								} catch (NullPointerException ignored) {
 								}
@@ -219,9 +221,9 @@ public class GameScreen extends InputAdapter implements Screen {
 						field.setText("");
 						field.setVisible(false);
 						break;
-					case "dweller":
+					case "new_dweller":
 						GAME_STORAGE.addDweller(new Dweller());
-						GAME_STORAGE.getDwellers().forEach(d -> LOGGER.debug(d.toString()));
+						GAME_STORAGE.getRooms()[0][0].addDweller(GAME_STORAGE.getDwellers().get(0));
 						field.setText("");
 						field.setVisible(false);
 						break;

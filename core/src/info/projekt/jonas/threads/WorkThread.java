@@ -82,6 +82,7 @@ public class WorkThread {
 		thread.start();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void stop() {
 		thread.stop();
 	}
