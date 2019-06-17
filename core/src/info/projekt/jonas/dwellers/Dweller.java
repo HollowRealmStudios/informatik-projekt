@@ -6,6 +6,7 @@ import com.google.common.base.CharMatcher;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Objects;
@@ -15,7 +16,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * @author Jonas
  */
-public class Dweller {
+public class Dweller implements Serializable {
 
 	enum GENDER {MALE, FEMALE}
 

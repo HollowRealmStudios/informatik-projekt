@@ -19,8 +19,8 @@ import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.DwellerList;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.threads.WorkThread;
 
 import java.awt.*;
 import java.io.IOException;
@@ -212,6 +212,19 @@ public class GameScreen extends InputAdapter implements Screen {
 						break;
 					case "jeff":
 						throw new MyNameJeffException();
+					case "resources":
+						GAME_STORAGE.water += 1000;
+						GAME_STORAGE.energy += 1000;
+						GAME_STORAGE.food += 1000;
+						field.setText("");
+						field.setVisible(false);
+						break;
+					case "dweller":
+						GAME_STORAGE.addDweller(new Dweller());
+						GAME_STORAGE.getDwellers().forEach(d -> System.out.println(d.toString()));
+						field.setText("");
+						field.setVisible(false);
+						break;
 				}
 				return true;
 			}
@@ -219,7 +232,6 @@ public class GameScreen extends InputAdapter implements Screen {
 		buildMenuButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				System.out.println(event.toString());
 				buildGui.table.setVisible(true);
 			}
 		});

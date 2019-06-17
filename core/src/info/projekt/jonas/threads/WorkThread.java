@@ -1,11 +1,11 @@
 package info.projekt.jonas.threads;
 
-import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 
-import javax.swing.*;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static info.projekt.InfoProjekt.GAME_STORAGE;
 
 public class WorkThread {
 
@@ -21,15 +21,15 @@ public class WorkThread {
 	public WorkThread(int delay) {
 		thread = new Thread(() -> {
 			while (true) {
+				System.out.println(GAME_STORAGE.energy + " | " + GAME_STORAGE.water + " | " + GAME_STORAGE.food);
 				notifyRooms();
 				generateResources();
 				consumeResources();
 				pass++;
 				if (pass > 200) if (ThreadLocalRandom.current().nextBoolean()) {
-					InfoProjekt.GAME_STORAGE.addDweller(new Dweller());
+					GAME_STORAGE.addDweller(new Dweller());
 					pass = 0;
-					InfoProjekt.GAME_STORAGE.getDwellers().forEach(d -> System.out.println(d.toString()));
-					JOptionPane.showMessageDialog(null, "New Dweller");
+					GAME_STORAGE.getDwellers().forEach(d -> System.out.println(d.toString()));
 				}
 				try {
 					Thread.sleep(delay);
@@ -41,7 +41,7 @@ public class WorkThread {
 	}
 
 	private void notifyRooms() {
-		for (Room[] rooms : InfoProjekt.GAME_STORAGE.getRooms()) {
+		for (Room[] rooms : GAME_STORAGE.getRooms()) {
 			for (Room room : rooms) {
 				if (room != null) {
 					room.onTick();
@@ -57,7 +57,7 @@ public class WorkThread {
 	}
 
 	private void generateResources() {
-		for (Room[] rooms : InfoProjekt.GAME_STORAGE.getRooms()) {
+		for (Room[] rooms : GAME_STORAGE.getRooms()) {
 			for (Room room : rooms) {
 				if (room != null) {
 					room.produce();
@@ -67,7 +67,7 @@ public class WorkThread {
 	}
 
 	private void consumeResources() {
-		for (Room[] rooms : InfoProjekt.GAME_STORAGE.getRooms()) {
+		for (Room[] rooms : GAME_STORAGE.getRooms()) {
 			for (Room room : rooms) {
 				if (room != null) {
 					room.consume();
