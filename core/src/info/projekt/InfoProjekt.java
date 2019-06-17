@@ -8,7 +8,7 @@ import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
-import info.projekt.jonas.rooms.Notifier;
+import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 
@@ -24,7 +24,7 @@ public class InfoProjekt extends Game {
 	public static SpriteBatch batch;
 	public static ShapeRenderer renderer;
 	public static CameraManager manager;
-	public static final Notifier notifier = new Notifier(1000);
+	public static final WorkThread WORK_THREAD = new WorkThread(1000);
 
 	public static void loadGame() {
 		try {

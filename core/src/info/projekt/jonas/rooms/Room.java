@@ -1,15 +1,19 @@
 package info.projekt.jonas.rooms;
 
 import com.badlogic.gdx.graphics.Texture;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import org.jetbrains.annotations.NotNull;
 
+import javax.sound.sampled.Line;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import static info.projekt.InfoProjekt.GAME_STORAGE;
+
 public class Room implements Serializable {
 
-    public enum PRODUCT {WATER, FOOD, ENERGY, OTHER, NONE}
+	public enum PRODUCT {WATER, FOOD, ENERGY, OTHER, NONE}
 
     private int cost = 0;
     private Dweller[] dwellers = new Dweller[4];
@@ -42,7 +46,33 @@ public class Room implements Serializable {
         return cost;
     }
 
-    public void produce() {}
+    public void produce() {
+    	switch (product) {
+		    case FOOD:
+		    	for(Dweller dweller : dwellers) GAME_STORAGE.food += dweller.getCreativity() * 2;
+	        break;
+		    case ENERGY:
+			    for(Dweller dweller : dwellers) GAME_STORAGE.energy += dweller.getStrength() * 2;
+		    break;
+		    case WATER:
+			    for(Dweller dweller : dwellers) GAME_STORAGE.food += dweller.getIntelligence() * 2;
+		    break;
+	    }
+    }
+
+	public void consume() {
+		switch (product) {
+			case FOOD:
+				for(Dweller dweller : dwellers) GAME_STORAGE.food -= GAME_STORAGE.food >= 15 ? 15 : 0;
+			break;
+			case ENERGY:
+				for(Dweller dweller : dwellers) GAME_STORAGE.energy -= GAME_STORAGE.energy >= 15 ? 15 : 0;
+			break;
+			case WATER:
+				for(Dweller dweller : dwellers) GAME_STORAGE.water -= GAME_STORAGE.water >= 15 ? 15 : 0;
+			break;
+		}
+	}
 
     public void onTick() {
         System.out.println("tick");

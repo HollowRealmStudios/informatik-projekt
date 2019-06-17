@@ -20,6 +20,20 @@ public class GameStorage implements Serializable {
 
 	public int currency;
 
+	public int food;
+
+	public int energy;
+
+	public int water;
+
+	public void addDweller(Dweller dweller) {
+		DWELLERS.add(dweller);
+	}
+
+	public ArrayList<Dweller> getDwellers() {
+		return DWELLERS;
+	}
+
 	/**
 	 * @return the 2D-Array of rooms
 	 */
