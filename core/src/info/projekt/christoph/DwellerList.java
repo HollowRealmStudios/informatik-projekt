@@ -18,32 +18,32 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
  */
 public class DwellerList {
 
-    public Stage stage;
-    public Table table;
+	public Stage stage;
+	public Table table;
 
 
-    public DwellerList() {
+	public DwellerList() {
 
-        stage = new Stage(new ScreenViewport());
-        table = new Table();
+		stage = new Stage(new ScreenViewport());
+		table = new Table();
 
-        table.background(new TextureRegionDrawable(new Texture("finalNight.png"))).setSize(WIDTH, HEIGHT);
-        stage.addActor(table);
+		table.background(new TextureRegionDrawable(new Texture("finalNight.png"))).setSize(WIDTH, HEIGHT);
+		stage.addActor(table);
 
-        ImageButton close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        table.add(close).width(WIDTH / 2f).height(HEIGHT / 2f);
+		ImageButton close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+		table.add(close).width(WIDTH / 2f).height(HEIGHT / 2f);
 
-        close.addListener(new ClickListener(){
+		close.addListener(new ClickListener() {
 
-            @Override
-            public void clicked(InputEvent event,float x,float y){
-                table.setVisible(false);
-                GameScreen.buttonTable.setVisible(true);
+			@Override
+			public void clicked(InputEvent event, float x, float y) {
+				table.setVisible(false);
+				GameScreen.buttonTable.setVisible(true);
 
 
-            }
+			}
 
-        });
+		});
 
-    }
+	}
 }

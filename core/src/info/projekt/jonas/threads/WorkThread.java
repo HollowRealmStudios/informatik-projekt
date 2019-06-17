@@ -1,5 +1,6 @@
 package info.projekt.jonas.threads;
 
+import com.badlogic.gdx.utils.Logger;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 
@@ -12,6 +13,7 @@ public class WorkThread {
 
 	public enum NOTIFICATION {PLACED, UPGRADED, DWELLER}
 
+	private final Logger LOGGER = new Logger("Work Thread");
 	private final Thread thread;
 	private boolean newDweller;
 	private boolean roomPlaced;
@@ -21,7 +23,7 @@ public class WorkThread {
 	public WorkThread(int delay) {
 		thread = new Thread(() -> {
 			while (true) {
-				System.out.println(GAME_STORAGE.energy + " | " + GAME_STORAGE.water + " | " + GAME_STORAGE.food);
+				LOGGER.debug(GAME_STORAGE.energy + " | " + GAME_STORAGE.water + " | " + GAME_STORAGE.food);
 				notifyRooms();
 				generateResources();
 				consumeResources();
@@ -29,7 +31,7 @@ public class WorkThread {
 				if (pass > 200) if (ThreadLocalRandom.current().nextBoolean()) {
 					GAME_STORAGE.addDweller(new Dweller());
 					pass = 0;
-					GAME_STORAGE.getDwellers().forEach(d -> System.out.println(d.toString()));
+					GAME_STORAGE.getDwellers().forEach(d -> LOGGER.debug(d.toString()));
 				}
 				try {
 					Thread.sleep(delay);

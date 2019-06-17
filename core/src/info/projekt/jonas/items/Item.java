@@ -4,23 +4,29 @@ import com.badlogic.gdx.graphics.Texture;
 
 /**
  * @author Jonas
- * */
+ */
 public abstract class Item {
 
-    /**The name of the item*/
-    public final String name;
+	/**
+	 * The name of the item
+	 */
+	public final String name;
 
-    /**The texture of the item*/
-    protected Texture texture;
+	/**
+	 * The texture of the item
+	 */
+	protected Texture texture;
 
-    /**The default constructor
-     * @param texture the item's texture
-     * @param name the item's name
-     * */
-    protected Item(Texture texture, String name) {
-        this.texture = texture;
-        this.name = name;
-    }
+	/**
+	 * The default constructor
+	 *
+	 * @param texture the item's texture
+	 * @param name    the item's name
+	 */
+	protected Item(Texture texture, String name) {
+		this.texture = texture;
+		this.name = name;
+	}
 
-    public abstract String toString();
+	public abstract String toString();
 }

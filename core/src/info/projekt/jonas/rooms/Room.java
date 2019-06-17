@@ -110,9 +110,9 @@ public class Room implements Serializable {
 	}
 
 	public Texture getTexture() {
-		if(textures == null) {
+		if (textures == null) {
 			textures = new ArrayList<>();
-			for(String s : textureNames) {
+			for (String s : textureNames) {
 				textures.add(new Texture(s));
 			}
 		}

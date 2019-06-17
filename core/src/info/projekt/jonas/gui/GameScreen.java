@@ -129,7 +129,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
 			setRoom(Registry.getRoom(selectedRoom));
 			WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
-			System.out.println("Requesting room " + selectedRoom);
+			LOGGER.debug("Requesting room " + selectedRoom);
 		} catch (ArrayIndexOutOfBoundsException e) {
 			LOGGER.error("Not in a valid location");
 		} finally {
@@ -183,12 +183,12 @@ public class GameScreen extends InputAdapter implements Screen {
 			public boolean keyTyped(InputEvent event, char character) {
 				switch (field.getText().toLowerCase()) {
 					case "dwellers":
-						System.out.println("Dwellers:");
+						LOGGER.debug("Dwellers:");
 						for (Room[] rooms : GAME_STORAGE.getRooms()) {
 							for (Room room : rooms) {
 								try {
 									for (Dweller dweller : room.getDwellers()) {
-										System.out.println(dweller.toString());
+										LOGGER.debug(dweller.toString());
 									}
 								} catch (NullPointerException ignored) {
 								}
@@ -221,7 +221,7 @@ public class GameScreen extends InputAdapter implements Screen {
 						break;
 					case "dweller":
 						GAME_STORAGE.addDweller(new Dweller());
-						GAME_STORAGE.getDwellers().forEach(d -> System.out.println(d.toString()));
+						GAME_STORAGE.getDwellers().forEach(d -> LOGGER.debug(d.toString()));
 						field.setText("");
 						field.setVisible(false);
 						break;

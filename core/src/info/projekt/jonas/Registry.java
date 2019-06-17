@@ -21,90 +21,76 @@ import java.util.HashMap;
  */
 public class Registry {
 
-    private static final HashMap<String, Room> ROOMS = new HashMap<>();
-    private static final HashMap<String, Item> ITEMS = new HashMap<>();
-    private static final HashMap<String, Dweller> DWELLERS = new HashMap<>();
+	private static final HashMap<String, Room> ROOMS = new HashMap<>();
+	private static final HashMap<String, Item> ITEMS = new HashMap<>();
 
-    public static void registerWeapons() throws IOException {
+	public static void registerWeapons() throws IOException {
 
-        JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
-        for (JsonValue object : in.asArray()) {
-            JsonObject obj = object.asObject();
-            ITEMS.put(obj.get("name").asString(), new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
-        }
-    }
+		JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
+		for (JsonValue object : in.asArray()) {
+			JsonObject obj = object.asObject();
+			ITEMS.put(obj.get("name").asString(), new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
+		}
+	}
 
-    public static void registerArmors() throws IOException {
-        JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
-        for (JsonValue object : in.asArray()) {
-            JsonObject obj = object.asObject();
-            ITEMS.put(obj.get("name").asString(), new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
-        }
-    }
+	public static void registerArmors() throws IOException {
+		JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
+		for (JsonValue object : in.asArray()) {
+			JsonObject obj = object.asObject();
+			ITEMS.put(obj.get("name").asString(), new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
+		}
+	}
 
-    //FIXME
-    public static void registerRooms() {
-        Reflections reflections = new Reflections("info.projekt.jonas.rooms");
-        reflections.getSubTypesOf(Room.class).forEach((Class c) -> {
-            try {
-                if (((Room) c.newInstance()).getProduct() == Room.PRODUCT.OTHER && c.getMethod("produce").getDeclaringClass().equals(Room.class))
-                    System.err.println(c.getSimpleName() + " has product OTHER, however \"produce\" is not being overwritten");
-                ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
-            } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
-                e.printStackTrace();
-            }
-        });
-    }
+	public static void registerRooms() {
+		Reflections reflections = new Reflections("info.projekt.jonas.rooms");
+		reflections.getSubTypesOf(Room.class).forEach((Class c) -> {
+			try {
+				if (((Room) c.newInstance()).getProduct() == Room.PRODUCT.OTHER && c.getMethod("produce").getDeclaringClass().equals(Room.class))
+					System.err.println(c.getSimpleName() + " has product OTHER, however \"produce\" is not being overwritten");
+				ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+				e.printStackTrace();
+			}
+		});
+	}
 
-    /**
-     * Return a room by its name
-     *
-     * @param name the name of the room
-     * @return the room with the name specified
-     * @see Room
-     */
-    public static Room getRoom(String name) {
-        try {
-            return ROOMS.get(name).getClass().newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+	/**
+	 * Return a room by its name
+	 *
+	 * @param name the name of the room
+	 * @return the room with the name specified
+	 * @see Room
+	 */
+	public static Room getRoom(String name) {
+		try {
+			return ROOMS.get(name).getClass().newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
-    /**
-     * Return an Item by its name
-     *
-     * @param name the name of the Item
-     * @return the Item with the name specified
-     * @see Item
-     */
-    public static Item getItem(String name) {
-        return ITEMS.get(name);
-    }
+	/**
+	 * Return an Item by its name
+	 *
+	 * @param name the name of the Item
+	 * @return the Item with the name specified
+	 * @see Item
+	 */
+	public static Item getItem(String name) {
+		return ITEMS.get(name);
+	}
 
-    /**
-     * Return a Dweller by its name
-     *
-     * @param name the name of the Dweller
-     * @return the Dweller with the name specified
-     * @see Dweller
-     */
-    public static Dweller getDweller(String name) {
-        return DWELLERS.get(name);
-    }
+	public static String roomsToString() {
+		StringBuilder b = new StringBuilder();
+		ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
+		return b.toString();
+	}
 
-    public static String roomsToString() {
-        StringBuilder b = new StringBuilder();
-        ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
-        return b.toString();
-    }
-
-    public static String allToString() {
-        StringBuilder b = new StringBuilder();
-        ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
-        ITEMS.forEach((key, value) -> b.append(value.toString()).append("\n"));
-        DWELLERS.forEach((key, value) -> b.append(value.toString()).append("\n"));
-        return b.toString();
-    }
+	public static String allToString() {
+		StringBuilder b = new StringBuilder();
+		ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
+		ITEMS.forEach((key, value) -> b.append(value.toString()).append("\n"));
+		return b.toString();
+	}
 }
