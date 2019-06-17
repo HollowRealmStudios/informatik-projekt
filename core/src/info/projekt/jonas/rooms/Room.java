@@ -116,7 +116,7 @@ public class Room implements Serializable {
 				textures.add(new Texture(s));
 			}
 		}
-		return textures.get(level);
+		return textures.get(level - 1);
 	}
 
 	public boolean upgradable() {
