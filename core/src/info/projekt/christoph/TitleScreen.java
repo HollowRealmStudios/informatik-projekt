@@ -58,7 +58,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 			public void clicked(InputEvent event, float x, float y) {
 				InfoProjekt.newGame();
 				source.setScreen(new GameScreen());
-				Gdx.input.setInputProcessor(GameScreen.multiplexer);
+				Gdx.input.setInputProcessor(GameScreen.manager);
 			}
 		});
 		loadGame.addListener(new ClickListener() {
@@ -66,7 +66,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 			public void clicked(InputEvent event, float x, float y) {
 				InfoProjekt.loadGame();
 				source.setScreen(new GameScreen());
-				Gdx.input.setInputProcessor(GameScreen.multiplexer);
+				Gdx.input.setInputProcessor(GameScreen.manager);
 			}
 		});
 	}

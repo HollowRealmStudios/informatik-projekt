@@ -72,8 +72,12 @@ public abstract class Room implements Serializable {
 		}
 	}
 
-	public Dweller[] getDwellers() {
-		return (Dweller[]) dwellers.toArray();
+	public void removeDweller(Dweller dweller) {
+		dwellers.remove(dweller);
+	}
+
+	public LimitedArrayList<Dweller> getDwellers() {
+		return dwellers;
 	}
 
 	private Texture getTexture() {
