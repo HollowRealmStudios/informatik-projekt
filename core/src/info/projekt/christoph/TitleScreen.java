@@ -11,13 +11,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.RenderUtils;
 
 import static info.projekt.InfoProjekt.batch;
-import static info.projekt.InfoProjekt.manager;
+import static info.projekt.InfoProjekt.cameraManager;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
@@ -40,14 +41,13 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
 	@Override
 	public void show() {
-		manager.translateAbsolute(new Vector2(HALF_WIDTH, HALF_HEIGHT));
 		stage = new Stage(new ScreenViewport());
 		table = new Table();
 		newGame = new TextButton("New Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
 		loadGame = new TextButton("Load Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
 		newGame.getLabel().setFontScale(2, 2);
 		loadGame.getLabel().setFontScale(2, 2);
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		table.background(new TextureRegionDrawable(new Texture("TitleScreenBackground.png"))).setSize(WIDTH, HEIGHT);
 		table.add(newGame).width(HALF_WIDTH).height(HEIGHT / 10);
 		table.row().padTop(50);
 		table.add(loadGame).width(HALF_WIDTH).height(HEIGHT / 10);
@@ -73,7 +73,6 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
 	@Override
 	public void render(float delta) {
-		RenderUtils.drawBackground(batch, new Texture("TitleScreenBackground.png"));
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
 	}

@@ -89,11 +89,11 @@ public class CameraManager {
 	}
 
 	/**
-	 * Get the camera of the manager.
+	 * Get the camera of the cameraManager.
 	 * This should not be used in any final build!
 	 * Instead, create a wrapper, so the camera isn't exposed directly!
 	 *
-	 * @return the manager's camera
+	 * @return the cameraManager's camera
 	 */
 	public OrthographicCamera getCamera() {
 		return camera;

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
@@ -47,13 +48,16 @@ public class RoomGui {
             label.getOne().addListener(new ClickListener() {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
+                	System.out.println("Click");
                     dweller = label.getTwo();
                     hide();
                     room.removeDweller(dweller);
+                    room.getDwellers().forEach(d -> System.out.println(d.toString()));
                     GameScreen.setMode(GameScreen.Mode.MOVE);
                 }
             });
         });
+
         table.setVisible(true);
     }
 
@@ -68,7 +72,7 @@ public class RoomGui {
         GameScreen.manager.removeProcessor(stage);
     }
 
-    public void click(Room room) {
+    public void click(@NotNull Room room) {
         room.addDweller(dweller);
     }
 

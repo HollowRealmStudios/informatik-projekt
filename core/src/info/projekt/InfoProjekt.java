@@ -9,6 +9,7 @@ import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.InputManager;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.threads.WorkThread;
@@ -25,7 +26,7 @@ public class InfoProjekt extends Game {
 	public static GameStorage GAME_STORAGE;
 	public static SpriteBatch batch;
 	public static ShapeRenderer renderer;
-	public static CameraManager manager;
+	public static CameraManager cameraManager;
 	public static final WorkThread WORK_THREAD = new WorkThread(1000);
 
 	public static void loadGame() {
@@ -46,7 +47,7 @@ public class InfoProjekt extends Game {
 		renderer = new ShapeRenderer();
 		TitleScreen titleScreen = new TitleScreen(this);
 		new GameScreen();
-		manager = new CameraManager();
+		cameraManager = new CameraManager();
 		Gdx.input.setInputProcessor(titleScreen);
 		setScreen(titleScreen);
 		try {
@@ -65,8 +66,8 @@ public class InfoProjekt extends Game {
 
 	@Override
 	public void render() {
-		renderer.setProjectionMatrix(manager.getMatrix());
-		batch.setProjectionMatrix(manager.getMatrix());
+		renderer.setProjectionMatrix(cameraManager.getMatrix());
+		batch.setProjectionMatrix(cameraManager.getMatrix());
 		getScreen().render(0);
 	}
 
