@@ -1,5 +1,6 @@
 package info.projekt.jonas.rooms;
 
+//FIXME
 public class MedRoom extends Room {
 
 	public MedRoom() {

@@ -1,4 +1,4 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.util;
 
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.InputProcessor;

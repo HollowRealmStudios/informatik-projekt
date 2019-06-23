@@ -1,4 +1,4 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.util;
 
 public class Tuple<V, K> {
 

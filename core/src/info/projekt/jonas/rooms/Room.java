@@ -3,8 +3,7 @@ package info.projekt.jonas.rooms;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.gui.LimitedArrayList;
-import info.projekt.jonas.gui.RenderUtils;
+import info.projekt.jonas.util.LimitedArrayList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;

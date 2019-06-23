@@ -1,5 +1,7 @@
 package info.projekt.jonas.rooms;
 
+
+//FIXME
 public class Barracks extends Room {
 
 	public Barracks() {

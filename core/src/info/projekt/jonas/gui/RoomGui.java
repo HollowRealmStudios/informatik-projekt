@@ -11,6 +11,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.util.LimitedArrayList;
+import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;

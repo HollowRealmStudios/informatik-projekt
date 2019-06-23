@@ -19,15 +19,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.christoph.BuildGui;
-import info.projekt.christoph.DwellerList;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.threads.WorkThread;
+import info.projekt.jonas.util.InputManager;
+import info.projekt.jonas.util.MyNameJeffException;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
@@ -60,7 +62,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		roomGui = new RoomGui();
 		buildGui = new BuildGui();
 		dwellerList = new DwellerList();
-		dwellerList.table.setVisible(false);
+		//dwellerList.hide();
 		buildGui.table.setVisible(false);
 		stage = new Stage(new ScreenViewport());
 		buttonTable = new Table();
@@ -104,11 +106,12 @@ public class GameScreen extends InputAdapter implements Screen {
 		stage.draw();
 		buildGui.stage.act(Gdx.graphics.getDeltaTime());
 		buildGui.stage.draw();
-		dwellerList.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.stage.draw();
 		roomGui.stage.act(Gdx.graphics.getDeltaTime());
 		roomGui.stage.draw();
-
+		dwellerList.stage.draw();
+		dwellerList.stage.act(Gdx.graphics.getDeltaTime());
+		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
+		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
 	}
 
 	@Override
@@ -181,7 +184,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	private void handleMiscKeys() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-			dwellerList.table.setVisible(false);
+			dwellerList.hide();
 			roomGui.table.setVisible(false);
 			buildGui.table.setVisible(false);
 		}
@@ -194,7 +197,7 @@ public class GameScreen extends InputAdapter implements Screen {
 	private void handleGuiKeys() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
 			if (buildGui.table.isVisible()) buildGui.table.setVisible(false);
-			if (buildGui.table.isVisible()) dwellerList.table.setVisible(false);
+			if (buildGui.table.isVisible()) dwellerList.hide();
 		}
 	}
 
@@ -203,20 +206,10 @@ public class GameScreen extends InputAdapter implements Screen {
 			@Override
 			public boolean keyTyped(InputEvent event, char character) {
 				switch (field.getText().toLowerCase()) {
-					case "list_dweller":
-						System.out.println("Dwellers:");
-						for (Room[] rooms : GAME_STORAGE.getRooms()) {
-							for (Room room : rooms) {
-								try {
-									for (Dweller dweller : room.getDwellers()) {
-										System.out.println(dweller.toString());
-									}
-								} catch (NullPointerException ignored) {
-								}
-							}
-						}
+					case "list_dwellers":
 						field.setText("");
 						field.setVisible(false);
+						dwellerList.show();
 						break;
 					case "money":
 						GAME_STORAGE.currency += 1000;
@@ -241,7 +234,7 @@ public class GameScreen extends InputAdapter implements Screen {
 						field.setVisible(false);
 						break;
 					case "new_dweller":
-						Dweller dweller = new Dweller();
+						Dweller dweller = list.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
 						GAME_STORAGE.addDweller(dweller);
 						GAME_STORAGE.getRooms()[0][0].addDweller(dweller);
 						field.setText("");
@@ -261,7 +254,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		dwellerListButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				dwellerList.table.setVisible(true);
+				dwellerList.show();
 				manager.suspendProcessor(GameScreen.this, 1);
 			}
 		});
