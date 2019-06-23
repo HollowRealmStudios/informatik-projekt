@@ -46,16 +46,6 @@ public class CameraManager {
 	}
 
 	/**
-	 * sets a new zoom for the camera
-	 *
-	 * @param zoom the new zoom
-	 */
-	public void setZoom(float zoom) {
-		if (zoom >= 0.4f && zoom <= 1.7f) camera.zoom = zoom;
-		update();
-	}
-
-	/**
 	 * translate the camera relative to its current position
 	 *
 	 * @param vector the vector to translate, given in x and y coordinates
@@ -86,6 +76,16 @@ public class CameraManager {
 	 */
 	public float getZoom() {
 		return camera.zoom;
+	}
+
+	/**
+	 * sets a new zoom for the camera
+	 *
+	 * @param zoom the new zoom
+	 */
+	public void setZoom(float zoom) {
+		if (zoom >= 0.4f && zoom <= 1.7f) camera.zoom = zoom;
+		update();
 	}
 
 	/**

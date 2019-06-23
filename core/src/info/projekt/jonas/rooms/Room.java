@@ -14,12 +14,22 @@ import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 public abstract class Room implements Serializable {
 
-	private int cost = 0;
-	protected LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
 	private final String name;
+	protected LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
+	private int cost = 0;
 	private int level = 1;
 	private transient ArrayList<Texture> textures = new ArrayList<>();
 	private ArrayList<String> textureNames = new ArrayList<>();
+
+	protected Room(@NotNull String name, @NotNull String texture, @NotNull String... textures) {
+		this.name = name;
+		this.textures.add(new Texture(texture));
+		textureNames.add(texture);
+		for (String s : textures) {
+			this.textures.add(new Texture(s));
+			textureNames.add(s);
+		}
+	}
 
 	public int getLevel() {
 		return level;
@@ -29,12 +39,12 @@ public abstract class Room implements Serializable {
 		return name;
 	}
 
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-
 	public int getCost() {
 		return cost;
+	}
+
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 
 	public abstract void produce();
@@ -59,16 +69,6 @@ public abstract class Room implements Serializable {
 
 	public void addDweller(Dweller dweller) {
 		dwellers.add(dweller);
-	}
-
-	protected Room(@NotNull String name, @NotNull String texture, @NotNull String... textures) {
-		this.name = name;
-		this.textures.add(new Texture(texture));
-		textureNames.add(texture);
-		for (String s : textures) {
-			this.textures.add(new Texture(s));
-			textureNames.add(s);
-		}
 	}
 
 	public void removeDweller(Dweller dweller) {

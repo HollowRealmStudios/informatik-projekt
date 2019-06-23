@@ -20,10 +20,10 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 //FIXME
 public class RoomGui {
 
-	private Dweller dweller;
-	private Label info;
 	public Stage stage;
 	public Table table;
+	private Dweller dweller;
+	private Label info;
 
 
 	public RoomGui() {
@@ -65,7 +65,6 @@ public class RoomGui {
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					System.out.println("click");
 					if (room.upgradable()) room.upgrade();
 				}
 			});

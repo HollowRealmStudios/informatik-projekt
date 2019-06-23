@@ -16,19 +16,16 @@ import java.util.Arrays;
  */
 public class Dweller implements Serializable {
 
-	public enum GENDER {MALE, FEMALE}
-
+	private final String completeName;
 	private Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
 	private transient Texture texture;
 	private GENDER gender;
 	private String name;
 	private String surname;
-	private final String completeName;
 	private int strength;
 	private int intelligence;
 	private int charisma;
 	private int creativity;
-
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
 		this.name = name;
 		this.surname = surname;
@@ -44,12 +41,12 @@ public class Dweller implements Serializable {
 		return items.getOne();
 	}
 
-	public WeaponItem getWeapon() {
-		return items.getTwo();
-	}
-
 	public void setArmor(ArmorItem armor) {
 		items.setOne(armor);
+	}
+
+	public WeaponItem getWeapon() {
+		return items.getTwo();
 	}
 
 	public void setWeapon(WeaponItem weapon) {
@@ -81,7 +78,6 @@ public class Dweller implements Serializable {
 		return creativity;
 	}
 
-
 	public ArrayList<String> prettyPrint() {
 		return new ArrayList<>(Arrays.asList(completeName + "   ", String.valueOf(strength) + "   ", String.valueOf(intelligence) + "   ", String.valueOf(charisma) + "   ", String.valueOf(creativity)));
 	}
@@ -90,4 +86,6 @@ public class Dweller implements Serializable {
 	public String toString() {
 		return completeName + ", " + strength + ", " + intelligence + ", " + charisma + ", " + creativity;
 	}
+
+	public enum GENDER {MALE, FEMALE}
 }

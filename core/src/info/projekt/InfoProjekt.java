@@ -22,13 +22,13 @@ import java.io.IOException;
  */
 public class InfoProjekt extends Game {
 
+	public static final WorkThread WORK_THREAD = new WorkThread(1000);
 	public static NameList list;
-	private final Logger logger = new Logger("Info Projekt");
 	public static GameStorage GAME_STORAGE;
 	public static SpriteBatch batch;
 	public static ShapeRenderer renderer;
 	public static CameraManager cameraManager;
-	public static final WorkThread WORK_THREAD = new WorkThread(1000);
+	private final Logger logger = new Logger("Info Projekt");
 
 	public static void loadGame() {
 		try {

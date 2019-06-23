@@ -12,15 +12,12 @@ import static info.projekt.InfoProjekt.GAME_STORAGE;
 public class WorkThread {
 
 
-	public enum NOTIFICATION {PLACED, UPGRADED, DWELLER}
-
 	private final Logger LOGGER = new Logger("Work Thread");
 	private final Thread thread;
 	private boolean newDweller;
 	private boolean roomPlaced;
 	private boolean roomUpgraded;
 	private int pass;
-
 	public WorkThread(int delay) {
 		thread = new Thread(() -> {
 			while (true) {
@@ -101,4 +98,6 @@ public class WorkThread {
 				break;
 		}
 	}
+
+	public enum NOTIFICATION {PLACED, UPGRADED, DWELLER}
 }

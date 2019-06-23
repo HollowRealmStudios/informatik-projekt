@@ -15,20 +15,20 @@ public class Tuple<V, K> implements Serializable {
 	public Tuple() {
 	}
 
-	public void setOne(V one) {
-		v = one;
-	}
-
-	public void setTwo(K two) {
-		k = two;
-	}
-
 	public V getOne() {
 		return v;
 	}
 
+	public void setOne(V one) {
+		v = one;
+	}
+
 	public K getTwo() {
 		return k;
+	}
+
+	public void setTwo(K two) {
+		k = two;
 	}
 
 	public Object[] asArray() {

@@ -20,8 +20,8 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 public class DwellerList {
 
 	public Stage stage;
-	private Table table;
 	public DwellerGui dwellerGui;
+	private Table table;
 
 	public DwellerList() {
 		stage = new Stage(new ScreenViewport());

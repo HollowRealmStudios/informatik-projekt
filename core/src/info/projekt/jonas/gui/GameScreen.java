@@ -36,21 +36,42 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class GameScreen extends InputAdapter implements Screen {
 
-	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
-
+	public static InputManager manager;
+	public static Table buttonTable;
+	private static Mode mode = Mode.SELECT;
+	private static String selectedRoom = "Kitchen";
 	private TextField field;
 	private ImageButton buildMenuButton;
 	private ImageButton dwellerListButton;
 	private Texture EMPTY;
-	private static Mode mode = Mode.SELECT;
 	private Label currency;
-	private static String selectedRoom = "Kitchen";
-	public static InputManager manager;
 	private Stage stage;
 	private BuildGui buildGui;
 	private DwellerList dwellerList;
 	private RoomGui roomGui;
-	public static Table buttonTable;
+
+	public static void setMode(Mode mode) {
+		switch (mode) {
+			case PLACE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
+				GameScreen.mode = Mode.PLACE;
+				break;
+			case SELECT:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
+				GameScreen.mode = Mode.SELECT;
+				break;
+			case UPGRADE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
+				GameScreen.mode = Mode.UPGRADE;
+				break;
+			case MOVE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
+				GameScreen.mode = Mode.UPGRADE;
+			case NONE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
+				GameScreen.mode = Mode.NONE;
+		}
+	}
 
 	@Override
 	public void show() {
@@ -268,36 +289,13 @@ public class GameScreen extends InputAdapter implements Screen {
 		else return null;
 	}
 
-	private void setRoom(Room room) {
-		Vector3 pos = InfoProjekt.cameraManager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
-		GAME_STORAGE.setRoom(room, (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
-	}
-
 	public static void setSelectedRoom(String room) {
 		selectedRoom = room;
 	}
 
-	public static void setMode(Mode mode) {
-		switch (mode) {
-			case PLACE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.PLACE;
-				break;
-			case SELECT:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
-				GameScreen.mode = Mode.SELECT;
-				break;
-			case UPGRADE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
-				GameScreen.mode = Mode.UPGRADE;
-				break;
-			case MOVE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
-				GameScreen.mode = Mode.UPGRADE;
-			case NONE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.NONE;
-		}
+	private void setRoom(Room room) {
+		Vector3 pos = InfoProjekt.cameraManager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+		GAME_STORAGE.setRoom(room, (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
 	}
 
 	private void drawOutline() {
@@ -341,4 +339,6 @@ public class GameScreen extends InputAdapter implements Screen {
 	public void hide() {
 
 	}
+
+	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
 }
