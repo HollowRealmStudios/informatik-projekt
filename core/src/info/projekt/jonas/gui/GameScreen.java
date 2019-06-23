@@ -29,6 +29,7 @@ import info.projekt.jonas.util.MyNameJeffException;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.*;
@@ -158,9 +159,12 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	private void handleMouseKeys() {
 		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
-			setRoom(Registry.getRoom(selectedRoom));
-			WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
-			System.out.println("Requesting room " + selectedRoom);
+			if (GAME_STORAGE.currency >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
+				setRoom(Registry.getRoom(selectedRoom));
+				GAME_STORAGE.currency -= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost();
+				updateCurrency();
+				WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
+			}
 		} catch (ArrayIndexOutOfBoundsException e) {
 			System.out.println("Not in a valid location");
 		} finally {
