@@ -111,7 +111,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		dwellerList.stage.draw();
 		dwellerList.stage.act(Gdx.graphics.getDeltaTime());
 		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
+		dwellerList.dwellerGui.stage.draw();
 	}
 
 	@Override
@@ -187,6 +187,7 @@ public class GameScreen extends InputAdapter implements Screen {
 			dwellerList.hide();
 			roomGui.table.setVisible(false);
 			buildGui.table.setVisible(false);
+			dwellerList.dwellerGui.hide();
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
 			field.setVisible(true);

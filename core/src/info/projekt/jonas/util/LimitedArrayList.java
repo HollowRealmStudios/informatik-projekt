@@ -12,7 +12,7 @@ public class LimitedArrayList<T> extends ArrayList<T> {
 
 	@Override
 	public boolean add(Object o) {
-		if(size() < size) super.add((T)o);
+		if (size() < size) super.add((T) o);
 		else throw new ArrayIndexOutOfBoundsException(size() + 1 + " is out of size " + size());
 		return true;
 	}

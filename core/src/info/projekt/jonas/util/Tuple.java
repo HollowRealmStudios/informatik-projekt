@@ -1,22 +1,39 @@
 package info.projekt.jonas.util;
 
-public class Tuple<V, K> {
+import java.io.Serializable;
 
-    private  V v;
-    private  K k;
+public class Tuple<V, K> implements Serializable {
 
-    public Tuple(V v, K k) {
-        this.v = v;
-        this.k = k;
-    }
+	private V v;
+	private K k;
 
-    public V getOne() { return v; }
+	public Tuple(V v, K k) {
+		this.v = v;
+		this.k = k;
+	}
 
-    public K getTwo() { return k; }
+	public Tuple() {
+	}
 
-    public Object[] asArray() {
-        return new Object[]{v, k};
-    }
+	public void setOne(V one) {
+		v = one;
+	}
+
+	public void setTwo(K two) {
+		k = two;
+	}
+
+	public V getOne() {
+		return v;
+	}
+
+	public K getTwo() {
+		return k;
+	}
+
+	public Object[] asArray() {
+		return new Object[]{v, k};
+	}
 }
 
 

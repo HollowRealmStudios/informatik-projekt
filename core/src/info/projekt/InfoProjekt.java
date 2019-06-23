@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class InfoProjekt extends Game {
 
-	public static NameList list = new NameList();
+	public static NameList list;
 	private final Logger logger = new Logger("Info Projekt");
 	public static GameStorage GAME_STORAGE;
 	public static SpriteBatch batch;
@@ -62,7 +62,8 @@ public class InfoProjekt extends Game {
 			e.printStackTrace();
 		}
 		Registry.registerRooms();
-		logger.debug(Registry.allToString());
+		System.out.println(Registry.allToString());
+		list = new NameList();
 	}
 
 	@Override

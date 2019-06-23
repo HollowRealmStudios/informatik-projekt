@@ -9,8 +9,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static info.projekt.jonas.gui.RenderUtils.*;
 import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
+import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
 public abstract class Room implements Serializable {
 
@@ -103,7 +103,8 @@ public abstract class Room implements Serializable {
 		if (!batch.isDrawing()) batch.begin();
 		batch.draw(getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
 		for (int i = 0; i < dwellers.size(); i++) {
-			if(dwellers.get(i) != null) batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100, y * CELL_HEIGHT + 20);
+			if (dwellers.get(i) != null)
+				batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100, y * CELL_HEIGHT + 20);
 		}
 	}
 }

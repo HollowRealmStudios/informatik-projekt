@@ -6,6 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
@@ -43,6 +44,7 @@ public class DwellerList {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
 					dwellerGui.show(tuple.getTwo());
+					hide();
 				}
 			});
 			table.row();
@@ -51,9 +53,9 @@ public class DwellerList {
 		table.setVisible(true);
 	}
 
-	private LimitedArrayList<Tuple<Label, Dweller>> getDwellers() {
-		LimitedArrayList<Tuple<Label, Dweller>> buttons = new LimitedArrayList<>(4);
-		InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new Label(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
+	private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
+		LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
+		InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
 		return buttons;
 	}
 

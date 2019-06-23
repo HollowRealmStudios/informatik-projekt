@@ -4,7 +4,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.items.WeaponItem;
@@ -76,6 +75,8 @@ public class Registry {
 	 * @see Item
 	 */
 	public static Item getItem(String name) {
+
+		if (!ITEMS.containsKey(name)) throw new IllegalArgumentException(name + " doesn't exist");
 		return ITEMS.get(name);
 	}
 
