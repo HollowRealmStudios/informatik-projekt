@@ -61,7 +61,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("EngineRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -71,7 +71,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("SewageTreatmentPlant");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -81,7 +81,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("Kitchen");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 
@@ -92,7 +92,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("MedRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -101,7 +101,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("Barracks");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -110,7 +110,7 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-				GameScreen.buttonTable.setVisible(true);
+
 				GameScreen.setSelectedRoom("Storage");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}

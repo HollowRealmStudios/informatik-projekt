@@ -35,10 +35,13 @@ import java.util.concurrent.ThreadLocalRandom;
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
+/**
+ * @author Christoph
+ * @author Jonas
+ */
 public class GameScreen extends InputAdapter implements Screen {
 
 	public static InputManager manager;
-	public static Table buttonTable;
 	private static Mode mode = Mode.SELECT;
 	private static String selectedRoom = "Kitchen";
 	private TextField field;
@@ -76,31 +79,40 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	@Override
 	public void show() {
-		if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
+
+        dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        buildMenuButton.setPosition(1f / 7f * WIDTH,1f / 28f * HEIGHT);
+	    dwellerListButton.setPosition(6f / 7f * WIDTH,1f / 28f * HEIGHT);
+
+
+
+
+	    if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
 		EMPTY = new Texture("room_empty.png");
 		field = new TextField("", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
 		field.setVisible(false);
+
+
 		roomGui = new RoomGui();
 		buildGui = new BuildGui();
 		dwellerList = new DwellerList();
-		//dwellerList.hide();
 		buildGui.table.setVisible(false);
 		stage = new Stage(new ScreenViewport());
-		buttonTable = new Table();
-		buttonTable.setOrigin(HALF_WIDTH, HALF_HEIGHT);
+
+
+
 		currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
-		dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-		buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
 		currency.setPosition(50, HEIGHT - 50);
 		currency.setFontScale(3);
-		buttonTable.add(buildMenuButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f).setActorY(500);
-		buttonTable.row().padTop(HEIGHT * 3f / 7f);
-		buttonTable.add(dwellerListButton).height(HEIGHT * 1f / 14f).width(WIDTH * 1f / 14f);
+		stage.addActor(buildMenuButton);
+		stage.addActor(dwellerListButton);
 		stage.addActor(currency);
 		stage.addActor(field);
+
 		addListeners();
-		stage.addActor(buttonTable);
+
 		manager = new InputManager();
 		manager.addProcessor(this);
 		manager.addProcessor(stage);
