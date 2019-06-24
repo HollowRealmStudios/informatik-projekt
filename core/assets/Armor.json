@@ -16,7 +16,9 @@
       "texture": "PowerArmour.png",
       "name": "Power Suit",
       "protection": 5,
-      "deviation": 2
+      "deviation": 2,
+
+
     },{
       "texture": "armor.png",
       "name": "Exoskelett",
