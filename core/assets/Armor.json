@@ -28,7 +28,8 @@
       "texture": "armor.png",
       "name": "Laborkittel",
       "protection": 2,
-      "deviation": 3
+      "deviation": 3,
+
     },{
       "texture": "armor.png",
       "name": "Anzug",
