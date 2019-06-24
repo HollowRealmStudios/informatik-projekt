@@ -54,7 +54,6 @@ public class GameScreen extends InputAdapter implements Screen {
     private BuildGui buildGui;
     private DwellerList dwellerList;
     private RoomGui roomGui;
-    private ItemSelector selector;
 
     public static void setMode(Mode mode) {
         switch (mode) {
@@ -100,7 +99,6 @@ public class GameScreen extends InputAdapter implements Screen {
         roomGui = new RoomGui();
         buildGui = new BuildGui();
         dwellerList = new DwellerList();
-        selector = new ItemSelector();
         buildGui.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
 
@@ -148,8 +146,8 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerList.stage.act(Gdx.graphics.getDeltaTime());
         dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
         dwellerList.dwellerGui.stage.draw();
-        selector.stage.act(Gdx.graphics.getDeltaTime());
-        selector.stage.draw();
+        dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
+        dwellerList.dwellerGui.selector.stage.draw();
     }
 
     @Override
@@ -283,7 +281,7 @@ public class GameScreen extends InputAdapter implements Screen {
                         field.setVisible(false);
                         break;
                     case "items":
-                        selector.show(Registry.getITEMS());
+                        dwellerList.dwellerGui.selector.show(Registry.getITEMS());
                         field.setText("");
                         field.setVisible(false);
                         break;
