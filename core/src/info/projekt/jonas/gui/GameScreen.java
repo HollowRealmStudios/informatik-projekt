@@ -83,9 +83,9 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenuButton.setPosition(1f / 7f * WIDTH,1f / 28f * HEIGHT);
-	    dwellerListButton.setPosition(6f / 7f * WIDTH,1f / 28f * HEIGHT);
-
-
+	    dwellerListButton.setPosition(1f / 7f * WIDTH,24f / 28f * HEIGHT);
+        buildMenuButton.setSize(1f / 28f * WIDTH,1f / 28f * HEIGHT);
+        dwellerListButton.setSize(1f / 28f * WIDTH,1f / 28f * HEIGHT);
 
 
 	    if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
