@@ -85,13 +85,13 @@
       "deviation": 2
     },
     {
-      "texture": "shotgun.png",
+      "texture": "1000Voices.png",
       "name": "1000 Voices",
       "damage": 9,
       "deviation": 2
     },
     {
-      "texture": "shotgun.png",
+      "texture": "TurtleShell.png",
       "name": "Turtleshell",
       "damage": 2,
       "deviation": 1
@@ -103,7 +103,7 @@
       "deviation": 0
     },
     {
-      "texture": "shotgun.png",
+      "texture": "Grenade.png",
       "name": "Grenade",
       "damage": 8,
       "deviation": 1
@@ -133,7 +133,7 @@
       "deviation": 5
     },
     {
-      "texture": "shotgun.png",
+      "texture": "Null.png",
       "name": "Gexe's Skills",
       "damage": 13,
       "deviation": 2
