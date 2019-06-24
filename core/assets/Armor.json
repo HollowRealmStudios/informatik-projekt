@@ -13,10 +13,12 @@
       "protection": 0,
       "deviation": 1
     },{
-      "texture": "armor.png",
+      "texture": "PowerArmour.png",
       "name": "Power Suit",
       "protection": 5,
-      "deviation": 2
+      "deviation": 2,
+
+
     },{
       "texture": "armor.png",
       "name": "Exoskelett",
@@ -26,7 +28,7 @@
       "texture": "armor.png",
       "name": "Laborkittel",
       "protection": 2,
-      "deviation": 3
+      "deviation": 3,
     },{
       "texture": "armor.png",
       "name": "Anzug",
