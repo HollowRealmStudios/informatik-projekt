@@ -15,27 +15,27 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class DwellerGui {
 
-	public Stage stage;
-	private Table table;
+    public Stage stage;
+    private Table table;
 
-	public DwellerGui() {
-		stage = new Stage(new ScreenViewport());
-		table = new Table();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-		stage.addActor(table);
-	}
+    public DwellerGui() {
+        stage = new Stage(new ScreenViewport());
+        table = new Table();
+        table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+        stage.addActor(table);
+    }
 
-	public void show(Dweller dweller) {
-		table.reset();
-		dweller.prettyPrint().forEach(s -> table.add(new Label(s, new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")))));
-		table.row();
-		table.add(new ImageButton(new TextureRegionDrawable(dweller.getArmor().getTexture()))).size(200, 200);
-		table.add(new ImageButton(new TextureRegionDrawable(dweller.getWeapon().getTexture()))).size(200, 200);
-		table.setVisible(true);
-	}
+    public void show(Dweller dweller) {
+        table.reset();
+        dweller.prettyPrint().forEach(s -> table.add(new Label(s, new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")))));
+        table.row();
+        table.add(new ImageButton(new TextureRegionDrawable(dweller.getArmor().getTexture()))).size(200, 200);
+        table.add(new ImageButton(new TextureRegionDrawable(dweller.getWeapon().getTexture()))).size(200, 200);
+        table.setVisible(true);
+    }
 
-	public void hide() {
-		table.setVisible(false);
-	}
+    public void hide() {
+        table.setVisible(false);
+    }
 
 }

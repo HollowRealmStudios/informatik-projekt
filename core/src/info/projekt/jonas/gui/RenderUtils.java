@@ -12,26 +12,26 @@ import java.awt.*;
  */
 public class RenderUtils {
 
-	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-	public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
-	public static final int HALF_WIDTH = WIDTH / 2;
-	public static final int HALF_HEIGHT = HEIGHT / 2;
-	public static final int CELL_WIDTH = 400;
-	public static final int CELL_HEIGHT = 200;
+    public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+    public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+    public static final int HALF_WIDTH = WIDTH / 2;
+    public static final int HALF_HEIGHT = HEIGHT / 2;
+    public static final int CELL_WIDTH = 400;
+    public static final int CELL_HEIGHT = 200;
 
-	/**
-	 * Clears the screen
-	 *
-	 * @param c The background color
-	 */
-	public static void clearScreen(Color c) {
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);
-	}
+    /**
+     * Clears the screen
+     *
+     * @param c The background color
+     */
+    public static void clearScreen(Color c) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);
+    }
 
-	public static void drawBackground(SpriteBatch batch, Texture texture) {
-		batch.begin();
-		batch.draw(texture, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
-		batch.end();
-	}
+    public static void drawBackground(SpriteBatch batch, Texture texture) {
+        batch.begin();
+        batch.draw(texture, 0, 0, Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
+        batch.end();
+    }
 }

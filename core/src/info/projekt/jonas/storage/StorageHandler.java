@@ -7,13 +7,13 @@ import java.io.*;
  */
 public class StorageHandler {
 
-	private static final String FILE = "Storage.dat";
+    private static final String FILE = "Storage.dat";
 
-	public static GameStorage loadGame() throws IOException, ClassNotFoundException {
-		return (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
-	}
+    public static GameStorage loadGame() throws IOException, ClassNotFoundException {
+        return (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
+    }
 
-	public static void saveGame(GameStorage storage) throws IOException {
-		new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
-	}
+    public static void saveGame(GameStorage storage) throws IOException {
+        new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
+    }
 }

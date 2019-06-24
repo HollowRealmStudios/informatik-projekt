@@ -7,10 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public interface Animated {
 
-	public Texture getNextFrame();
+    public Texture getNextFrame();
 
-	public void resetAnimation();
+    public void resetAnimation();
 
-	public int getFrameCount();
+    public int getFrameCount();
 
 }

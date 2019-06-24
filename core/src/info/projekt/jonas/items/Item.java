@@ -9,31 +9,31 @@ import java.io.Serializable;
  */
 public abstract class Item implements Serializable {
 
-	/**
-	 * The name of the item
-	 */
-	public final String name;
+    /**
+     * The name of the item
+     */
+    public final String name;
 
-	/**
-	 * The texture of the item
-	 */
-	protected transient Texture texture;
+    /**
+     * The texture of the item
+     */
+    protected transient Texture texture;
 
-	/**
-	 * The default constructor
-	 *
-	 * @param texture the item's texture
-	 * @param name    the item's name
-	 */
-	protected Item(Texture texture, String name) {
-		this.texture = texture;
-		this.name = name;
-	}
+    /**
+     * The default constructor
+     *
+     * @param texture the item's texture
+     * @param name    the item's name
+     */
+    protected Item(Texture texture, String name) {
+        this.texture = texture;
+        this.name = name;
+    }
 
-	public Texture getTexture() {
-		if (texture == null) texture = new Texture(name);
-		return texture;
-	}
+    public Texture getTexture() {
+        if (texture == null) texture = new Texture(name);
+        return texture;
+    }
 
-	public abstract String toString();
+    public abstract String toString();
 }

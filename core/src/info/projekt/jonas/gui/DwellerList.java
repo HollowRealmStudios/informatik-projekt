@@ -19,49 +19,49 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class DwellerList {
 
-	public Stage stage;
-	public DwellerGui dwellerGui;
-	private Table table;
+    public Stage stage;
+    public DwellerGui dwellerGui;
+    private Table table;
 
-	public DwellerList() {
-		stage = new Stage(new ScreenViewport());
-		table = new Table();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-		stage.addActor(table);
-		dwellerGui = new DwellerGui();
-	}
+    public DwellerList() {
+        stage = new Stage(new ScreenViewport());
+        table = new Table();
+        table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+        stage.addActor(table);
+        dwellerGui = new DwellerGui();
+    }
 
-	public void show() {
-		table.reset();
-		Label label = new Label("Dwellers: ", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
-		label.setFontScale(2.5f);
-		table.add(label).padTop(30f);
-		table.row();
-		GameScreen.manager.addProcessor(stage);
-		getDwellers().forEach(tuple -> {
-			table.add(tuple.getOne()).padTop(20f);
-			tuple.getOne().addListener(new ClickListener() {
-				@Override
-				public void clicked(InputEvent event, float x, float y) {
-					dwellerGui.show(tuple.getTwo());
-					hide();
-				}
-			});
-			table.row();
-		});
+    public void show() {
+        table.reset();
+        Label label = new Label("Dwellers: ", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+        label.setFontScale(2.5f);
+        table.add(label).padTop(30f);
+        table.row();
+        GameScreen.manager.addProcessor(stage);
+        getDwellers().forEach(tuple -> {
+            table.add(tuple.getOne()).padTop(20f);
+            tuple.getOne().addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    dwellerGui.show(tuple.getTwo());
+                    hide();
+                }
+            });
+            table.row();
+        });
 
-		table.setVisible(true);
-	}
+        table.setVisible(true);
+    }
 
-	private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
-		LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
-		InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
-		return buttons;
-	}
+    private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
+        LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
+        InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
+        return buttons;
+    }
 
-	public void hide() {
-		table.setVisible(false);
-		GameScreen.manager.removeProcessor(stage);
-	}
+    public void hide() {
+        table.setVisible(false);
+        GameScreen.manager.removeProcessor(stage);
+    }
 
 }
