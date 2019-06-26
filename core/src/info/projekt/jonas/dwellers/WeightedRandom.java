@@ -28,23 +28,7 @@ public class WeightedRandom {
         DEFAULT_MAP.put(10, 1);
     }
 
-    /**
-     * get a random int with a specific weight map
-     *
-     * @param hashMap the weight map
-     * @return a new int
-     */
-    public static int newInt(HashMap<Integer, Integer> hashMap) {
-        ArrayList<Integer> full = new ArrayList<>();
-        for (Map.Entry<Integer, Integer> next : hashMap.entrySet()) {
-            for (int i = 0; i < next.getValue(); i++) {
-                full.add(next.getKey());
-            }
-        }
-        return full.get(ThreadLocalRandom.current().nextInt(0, full.size()));
-    }
-
-    /**
+	/**
      * get a random int with the default weight map
      *
      * @return a new int

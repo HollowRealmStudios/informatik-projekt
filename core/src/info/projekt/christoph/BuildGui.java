@@ -16,10 +16,11 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 /**
  * @author Christoph
  */
+@SuppressWarnings("SpellCheckingInspection")
 public class BuildGui {
 
-    public Stage stage;
-    public Table table;
+    public final Stage stage;
+    public final Table table;
 
     public BuildGui() {
 

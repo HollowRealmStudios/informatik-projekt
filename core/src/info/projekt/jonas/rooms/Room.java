@@ -12,14 +12,16 @@ import java.util.ArrayList;
 import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
 
+@SuppressWarnings({"EmptyMethod", "unused"})
 public abstract class Room implements Serializable {
 
     private final String name;
-    protected LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
+    @SuppressWarnings("WeakerAccess")
+    protected final LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
     private int cost = 0;
     private int level = 1;
     private transient ArrayList<Texture> textures = new ArrayList<>();
-    private ArrayList<String> textureNames = new ArrayList<>();
+    private final ArrayList<String> textureNames = new ArrayList<>();
 
     protected Room(@NotNull String name, @NotNull String texture, @NotNull String... textures) {
         this.name = name;
@@ -43,6 +45,7 @@ public abstract class Room implements Serializable {
         return cost;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void setCost(int cost) {
         this.cost = cost;
     }

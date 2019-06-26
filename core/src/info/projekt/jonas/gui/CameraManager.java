@@ -19,19 +19,7 @@ public class CameraManager {
         update();
     }
 
-    /**
-     * Sets the camera's viewport size
-     *
-     * @param width  the viewport's width
-     * @param height the viewport's height
-     */
-    public void setCameraSize(int width, int height) {
-        camera.viewportWidth = width;
-        camera.viewportHeight = height;
-        update();
-    }
-
-    /**
+	/**
      * updates the camera. Call after updating any parameters
      */
     private void update() {
@@ -64,6 +52,7 @@ public class CameraManager {
      *
      * @param vector the vector to translate, given in x an y coordinates
      */
+    @SuppressWarnings("unused")
     public void translateAbsolute(Vector2 vector) {
         camera.position.set(vector, 0f);
         update();

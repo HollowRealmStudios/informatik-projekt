@@ -4,7 +4,6 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Logger;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
@@ -28,9 +27,8 @@ public class InfoProjekt extends Game {
     public static SpriteBatch batch;
     public static ShapeRenderer renderer;
     public static CameraManager cameraManager;
-    private final Logger logger = new Logger("Info Projekt");
 
-    public static void loadGame() {
+	public static void loadGame() {
         try {
             GAME_STORAGE = StorageHandler.loadGame();
         } catch (IOException | ClassNotFoundException e) {

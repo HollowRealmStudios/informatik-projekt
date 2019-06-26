@@ -18,12 +18,13 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 //FIXME
+@SuppressWarnings("WeakerAccess")
 public class RoomGui {
 
-    public Stage stage;
-    public Table table;
+    public final Stage stage;
+    public final Table table;
     private Dweller dweller;
-    private Label info;
+    private final Label info;
 
 
     public RoomGui() {
@@ -79,6 +80,7 @@ public class RoomGui {
         return buttons;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void hide() {
         table.setVisible(false);
         GameScreen.manager.removeProcessor(stage);

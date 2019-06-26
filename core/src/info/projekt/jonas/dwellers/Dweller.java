@@ -14,23 +14,20 @@ import java.util.Arrays;
 /**
  * @author Jonas
  */
+@SuppressWarnings("unused")
 public class Dweller implements Serializable {
 
     private final String completeName;
-    private Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
+    private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
     private transient Texture texture;
-    private GENDER gender;
-    private String name;
-    private String surname;
-    private int strength;
-    private int intelligence;
-    private int charisma;
-    private int creativity;
+    private final GENDER gender;
+	private final int strength;
+    private final int intelligence;
+    private final int charisma;
+    private final int creativity;
 
     public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
-        this.name = name;
-        this.surname = surname;
-        this.completeName = surname + ", " + name;
+	    this.completeName = surname + ", " + name;
         this.gender = gender;
         this.strength = MathUtils.clamp(strength, 0, 10);
         this.intelligence = MathUtils.clamp(intelligence, 0, 10);
@@ -80,7 +77,7 @@ public class Dweller implements Serializable {
     }
 
     public ArrayList<String> prettyPrint() {
-        return new ArrayList<>(Arrays.asList(completeName + "   ", String.valueOf(strength) + "   ", String.valueOf(intelligence) + "   ", String.valueOf(charisma) + "   ", String.valueOf(creativity)));
+        return new ArrayList<>(Arrays.asList(completeName + "   ", strength + "   ", intelligence + "   ", charisma + "   ", String.valueOf(creativity)));
     }
 
     @Override

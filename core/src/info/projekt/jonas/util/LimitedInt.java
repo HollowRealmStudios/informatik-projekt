@@ -1,9 +1,12 @@
 package info.projekt.jonas.util;
 
+@SuppressWarnings("unused")
 public class LimitedInt extends Number {
 
-    private int i, lower, upper;
-    private boolean overflow;
+    private int i;
+	private final int lower;
+	private final int upper;
+    private final boolean overflow;
 
     public LimitedInt(int lower, int upper, boolean overflow) {
         this.lower = lower;

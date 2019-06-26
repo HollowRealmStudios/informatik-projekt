@@ -12,7 +12,7 @@ public class WeaponItem extends Item {
     /**
      * The damage of the weapon
      */
-    private int damage;
+    private final int damage;
 
     /**
      * The default constructor
@@ -26,16 +26,7 @@ public class WeaponItem extends Item {
         this.damage = (deviation == 0 ? damage : ThreadLocalRandom.current().nextBoolean() ? damage - ThreadLocalRandom.current().nextInt(deviation) : damage + ThreadLocalRandom.current().nextInt(deviation));
     }
 
-    /**
-     * get the weapon's damage
-     *
-     * @return the damage
-     */
-    public int getDamage() {
-        return damage;
-    }
-
-    @Override
+	@Override
     public String toString() {
         return name + ", Texture: " + texture + ", Damage: " + damage;
     }

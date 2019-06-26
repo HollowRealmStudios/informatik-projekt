@@ -12,7 +12,7 @@ public class ArmorItem extends Item {
     /**
      * The protection of the armor
      */
-    private int protection;
+    private final int protection;
 
     /**
      * The default constructor

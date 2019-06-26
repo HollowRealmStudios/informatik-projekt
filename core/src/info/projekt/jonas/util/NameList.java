@@ -14,18 +14,19 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class NameList {
 
-    private ArrayList<Dweller> dwellersMale = new ArrayList<>();
-    private ArrayList<Dweller> dwellersFemale = new ArrayList<>();
+    private final ArrayList<Dweller> dwellersMale = new ArrayList<>();
+    private final ArrayList<Dweller> dwellersFemale = new ArrayList<>();
 
     public NameList() {
         try {
             URL url = new URL("https://uinames.com/api?region=United%20States&minlen=4&maxlen=10&gender=male&amount=100");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            BufferedReader in = null;
+            BufferedReader in;
             try {
                 in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             } catch (UnknownHostException e) {
@@ -62,7 +63,7 @@ public class NameList {
             }
             String inputLine;
             StringBuilder content = new StringBuilder();
-            while ((inputLine = in.readLine()) != null) {
+            while ((inputLine = Objects.requireNonNull(in).readLine()) != null) {
                 content.append(inputLine);
             }
             in.close();

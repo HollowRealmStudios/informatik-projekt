@@ -31,9 +31,6 @@ public class Tuple<V, K> implements Serializable {
         k = two;
     }
 
-    public Object[] asArray() {
-        return new Object[]{v, k};
-    }
 }
 
 

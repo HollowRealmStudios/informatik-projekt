@@ -20,8 +20,8 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class ItemSelector {
 
-    public Stage stage;
-    private Table table;
+    public final Stage stage;
+    private final Table table;
 
     public ItemSelector() {
         stage = new Stage(new ScreenViewport());
@@ -54,6 +54,7 @@ public class ItemSelector {
         table.setVisible(true);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void hide() {
         GameScreen.manager.removeProcessor(stage);
         table.setVisible(false);

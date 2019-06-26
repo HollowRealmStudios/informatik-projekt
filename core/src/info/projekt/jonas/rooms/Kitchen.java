@@ -8,11 +8,13 @@ public class Kitchen extends Room {
         setCost(400);
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void produce() {
 
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void consume() {
 

@@ -23,12 +23,8 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  */
 public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
 
-    private GameScreen gameScreen;
-    private InfoProjekt source;
-    private TextButton newGame;
-    private TextButton loadGame;
-    private Table table;
-    private Stage stage;
+	private final InfoProjekt source;
+	private Stage stage;
 
     public TitleScreen(InfoProjekt source) {
         this.source = source;
@@ -38,9 +34,9 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
-        table = new Table();
-        newGame = new TextButton("New Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
-        loadGame = new TextButton("Load Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+	    Table table = new Table();
+	    TextButton newGame = new TextButton("New Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+	    TextButton loadGame = new TextButton("Load Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
         newGame.getLabel().setFontScale(2, 2);
         loadGame.getLabel().setFontScale(2, 2);
         table.background(new TextureRegionDrawable(new Texture("TitleScreenBackground.png"))).setSize(WIDTH, HEIGHT);

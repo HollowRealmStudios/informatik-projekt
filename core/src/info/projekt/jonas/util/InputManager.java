@@ -9,7 +9,7 @@ import java.util.Map;
 public class InputManager extends InputMultiplexer {
 
 
-    private HashMap<InputProcessor, Integer> processors = new HashMap<>();
+    private final HashMap<InputProcessor, Integer> processors = new HashMap<>();
 
     public void suspendProcessor(InputProcessor processor, int clicks) {
         processors.put(processor, clicks);

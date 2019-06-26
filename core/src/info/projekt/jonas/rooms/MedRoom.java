@@ -1,6 +1,7 @@
 package info.projekt.jonas.rooms;
 
 //FIXME
+@SuppressWarnings("unused")
 public class MedRoom extends Room {
 
     public MedRoom() {

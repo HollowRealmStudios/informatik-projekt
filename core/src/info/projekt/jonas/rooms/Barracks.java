@@ -2,6 +2,7 @@ package info.projekt.jonas.rooms;
 
 
 //FIXME
+@SuppressWarnings("unused")
 public class Barracks extends Room {
 
     public Barracks() {

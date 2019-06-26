@@ -18,9 +18,9 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class DwellerGui {
 
-    public Stage stage;
-    private Table table;
-    public ItemSelector selector;
+    public final Stage stage;
+    private final Table table;
+    public final ItemSelector selector;
 
 
     public DwellerGui() {

@@ -1,6 +1,7 @@
 package info.projekt.jonas.rooms;
 
 //FIXME
+@SuppressWarnings("unused")
 public class EngineRoom extends Room {
 
     public EngineRoom() {
