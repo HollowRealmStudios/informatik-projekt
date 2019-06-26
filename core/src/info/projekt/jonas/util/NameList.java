@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class NameList {
@@ -24,7 +25,15 @@ public class NameList {
             URL url = new URL("https://uinames.com/api?region=United%20States&minlen=4&maxlen=10&gender=male&amount=100");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader in = null;
+            try {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } catch (UnknownHostException e) {
+                for (int i = 0; i < 100; i++) {
+                    dwellersMale.add(new Dweller("Name", "Name", GENDER.MALE, 0, 0, 0, 0));
+                }
+                return;
+            }
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {
@@ -44,7 +53,13 @@ public class NameList {
             URL url = new URL("https://uinames.com/api?region=United%20States&minlen=4&maxlen=10&gender=female&amount=100");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader in = null;
+            try {
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            } catch (UnknownHostException e) {
+                dwellersFemale.add(new Dweller("Name", "Name", GENDER.FEMALE, 0, 0, 0, 0));
+
+            }
             String inputLine;
             StringBuilder content = new StringBuilder();
             while ((inputLine = in.readLine()) != null) {

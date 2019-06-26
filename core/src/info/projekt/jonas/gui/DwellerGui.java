@@ -40,7 +40,7 @@ public class DwellerGui {
         v.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                selector.show(Registry.getITEMS());
+                selector.show(Registry.getITEMS(), dweller);
             }
         });
         table.add(v).size(200, 200);
@@ -48,7 +48,7 @@ public class DwellerGui {
         k.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                selector.show(Registry.getITEMS());
+                selector.show(Registry.getITEMS(), dweller);
             }
         });
         table.add(k).size(200, 200);
@@ -59,5 +59,4 @@ public class DwellerGui {
         GameScreen.manager.removeProcessor(stage);
         table.setVisible(false);
     }
-
 }

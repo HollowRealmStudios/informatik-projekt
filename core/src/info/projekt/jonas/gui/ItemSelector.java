@@ -7,7 +7,10 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.Item;
+import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.util.LimitedInt;
 
 import java.util.HashMap;
@@ -27,7 +30,8 @@ public class ItemSelector {
         stage.addActor(table);
     }
 
-    public void show(HashMap<String, Item> map) {
+    public void show(HashMap<String, Item> map, Dweller dweller) {
+        GameScreen.hideGuis();
         table.reset();
         LimitedInt i = new LimitedInt(0, Math.toIntExact(Math.round(Math.sqrt(map.size()))), true);
         map.forEach((v, k) -> {
@@ -36,6 +40,10 @@ public class ItemSelector {
                 @Override
                 public void clicked(InputEvent event, float x, float y) {
                     System.out.println(k.toString());
+                    if(k instanceof  ArmorItem) dweller.setArmor((ArmorItem) k);
+                    else dweller.setWeapon((WeaponItem) k);
+                    hide();
+                    GameScreen.dwellerList.dwellerGui.show(dweller);
                 }
             });
             table.add(b);

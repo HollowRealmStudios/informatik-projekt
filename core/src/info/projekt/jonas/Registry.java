@@ -45,8 +45,7 @@ public class Registry {
     }
 
     public static void registerRooms() {
-        Reflections reflections = new Reflections("info.projekt.jonas.rooms");
-        reflections.getSubTypesOf(Room.class).forEach((Class c) -> {
+        new Reflections("info.projekt.jonas.rooms").getSubTypesOf(Room.class).forEach((Class c) -> {
             try {
                 ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
             } catch (InstantiationException | IllegalAccessException e) {
@@ -82,12 +81,6 @@ public class Registry {
 
         if (!ITEMS.containsKey(name)) throw new IllegalArgumentException(name + " doesn't exist");
         return ITEMS.get(name);
-    }
-
-    public static String roomsToString() {
-        StringBuilder b = new StringBuilder();
-        ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
-        return b.toString();
     }
 
     public static String allToString() {

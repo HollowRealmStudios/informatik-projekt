@@ -42,6 +42,9 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  */
 public class GameScreen extends InputAdapter implements Screen {
 
+
+    public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
+
     public static InputManager manager;
     private static Mode mode = Mode.SELECT;
     private static String selectedRoom = "Kitchen";
@@ -51,9 +54,9 @@ public class GameScreen extends InputAdapter implements Screen {
     private Texture EMPTY;
     private Label currency;
     private Stage stage;
-    private BuildGui buildGui;
-    private DwellerList dwellerList;
-    private RoomGui roomGui;
+    private static BuildGui buildGui;
+    public static DwellerList dwellerList;
+    private static RoomGui roomGui;
 
     public static void setMode(Mode mode) {
         switch (mode) {
@@ -87,7 +90,6 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerListButton.setPosition(1f / 7f * WIDTH, 24f / 28f * HEIGHT);
         buildMenuButton.setSize(1f / 28f * WIDTH, 1f / 28f * HEIGHT);
         dwellerListButton.setSize(1f / 28f * WIDTH, 1f / 28f * HEIGHT);
-
 
         if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
         EMPTY = new Texture("room_empty.png");
@@ -223,10 +225,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     private void handleMiscKeys() {
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            dwellerList.hide();
-            roomGui.table.setVisible(false);
-            buildGui.table.setVisible(false);
-            dwellerList.dwellerGui.hide();
+            hideGuis();
         }
         if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
             field.setVisible(true);
@@ -277,11 +276,6 @@ public class GameScreen extends InputAdapter implements Screen {
                         Dweller dweller = list.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
                         GAME_STORAGE.addDweller(dweller);
                         GAME_STORAGE.getRooms()[0][0].addDweller(dweller);
-                        field.setText("");
-                        field.setVisible(false);
-                        break;
-                    case "items":
-                        dwellerList.dwellerGui.selector.show(Registry.getITEMS());
                         field.setText("");
                         field.setVisible(false);
                         break;
@@ -347,6 +341,13 @@ public class GameScreen extends InputAdapter implements Screen {
         WORK_THREAD.stop();
     }
 
+    public static void hideGuis() {
+        dwellerList.hide();
+        roomGui.table.setVisible(false);
+        buildGui.table.setVisible(false);
+        dwellerList.dwellerGui.hide();
+    }
+
     @Override
     public void resize(int width, int height) {
         stage.getViewport().update(width, height, true);
@@ -366,6 +367,4 @@ public class GameScreen extends InputAdapter implements Screen {
     public void hide() {
 
     }
-
-    public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
 }
