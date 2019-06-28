@@ -27,6 +27,8 @@ import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.util.InputManager;
 import info.projekt.jonas.util.MyNameJeffException;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 import java.io.IOException;
@@ -61,7 +63,7 @@ public class GameScreen extends InputAdapter implements Screen {
     static DwellerList dwellerList;
     private static RoomGui roomGui;
 
-    public static void setMode(Mode mode) {
+    public static void setMode(@NotNull Mode mode) {
         switch (mode) {
             case PLACE:
                 renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
@@ -169,7 +171,7 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerList.dwellerGui.stage.draw();
         dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
         dwellerList.dwellerGui.selector.stage.draw();
-        updateResources();
+        updateGui();
     }
 
     @Override
@@ -198,7 +200,6 @@ public class GameScreen extends InputAdapter implements Screen {
             if (GAME_STORAGE.currency >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
                 setRoom(Registry.getRoom(selectedRoom));
                 GAME_STORAGE.currency -= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost();
-                updateCurrency();
                 WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -210,7 +211,6 @@ public class GameScreen extends InputAdapter implements Screen {
             try {
                 if (getSelectedRoom().upgradable() && (GAME_STORAGE.currency >= getCost(getSelectedRoom()))) {
                     GAME_STORAGE.currency -= getCost(getSelectedRoom());
-                    updateCurrency();
                     getSelectedRoom().upgrade();
                     WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
                 }
@@ -272,7 +272,6 @@ public class GameScreen extends InputAdapter implements Screen {
                         break;
                     case "money":
                         GAME_STORAGE.currency += 1000;
-                        updateCurrency();
                         field.setText("");
                         field.setVisible(false);
                         break;
@@ -323,6 +322,7 @@ public class GameScreen extends InputAdapter implements Screen {
         });
     }
 
+    @Nullable
     private Room getSelectedRoom() {
         Vector3 pos = InfoProjekt.cameraManager.getCamera().unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
         if ((int) Math.floor(pos.x / CELL_WIDTH) >= 0 && (int) Math.floor(pos.y / CELL_HEIGHT) >= 0)
@@ -346,19 +346,17 @@ public class GameScreen extends InputAdapter implements Screen {
         renderer.end();
     }
 
-    private int getCost(Room room) {
+    private int getCost(@NotNull Room room) {
         return room.getLevel() * room.getCost();
     }
 
-    private void updateCurrency() {
-        currency.setText(Integer.toString(GAME_STORAGE.currency));
-    }
-
-    private void updateResources() {
+    private void updateGui() {
+	    currency.setText(Integer.toString(GAME_STORAGE.currency));
 	    food.setText(Integer.toString(GAME_STORAGE.food.get()));
 	    water.setText(Integer.toString(GAME_STORAGE.water.get()));
 	    energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
     }
+
 
     @SuppressWarnings("deprecated")
     @Override
