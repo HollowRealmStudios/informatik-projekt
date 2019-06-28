@@ -30,6 +30,7 @@ public class Settings {
     private Music andi;
 
     public Settings() {
+        volume = 100f;
         music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         andi = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         music.play();
