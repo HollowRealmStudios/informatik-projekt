@@ -26,9 +26,9 @@ public class Settings {
         close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
         close.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
         close.setVisible(false);
-        volumeSlider = new Slider(0f,100f,1f,true,new Slider.SliderStyle(new TextureRegionDrawable(new Texture("badlogic.jpg")),new TextureRegionDrawable(new Texture("Arrow.png"))));
-        volumeSlider.setPosition(12f / 28f * WIDTH, 7f / 28f * HEIGHT);
-        volumeSlider.setSize(1f / 14f * WIDTH, 7f / 14f * HEIGHT);
+        volumeSlider = new Slider(0f,100f,1f,false,new Slider.SliderStyle(new TextureRegionDrawable(new Texture("Slider.png")),new TextureRegionDrawable(new Texture("Arrow.png"))));
+        volumeSlider.setPosition(7f / 28f * WIDTH, 14f / 28f * HEIGHT);
+        volumeSlider.setSize(7f / 14f * WIDTH, 1f / 28f * HEIGHT);
         volumeSlider.setVisible(false);
         stage.addActor(close);
         stage.addActor(volumeSlider);
