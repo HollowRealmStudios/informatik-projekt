@@ -62,6 +62,27 @@ public class GameScreen extends InputAdapter implements Screen {
     private static BuildGui buildGui;
     static DwellerList dwellerList;
     private static RoomGui roomGui;
+    private ImageButton mainMenuButton;
+    private ImageButton mmQuests;
+    private ImageButton mmStats;
+    private ImageButton mmSettings;
+    private ImageButton mmStorage;
+    private boolean mainMenuActivated;
+
+    public void hideMainMenuButtons() {
+        mmStorage.setVisible(false);
+        mmStats.setVisible(false);
+        mmQuests.setVisible(false);
+        mmSettings.setVisible(false);
+    }
+
+    public void showMainMenuButtons() {
+        mmStorage.setVisible(true);
+        mmStats.setVisible(true);
+        mmQuests.setVisible(true);
+        mmSettings.setVisible(true);
+    }
+
 
     public static void setMode(@NotNull Mode mode) {
         switch (mode) {
@@ -89,12 +110,34 @@ public class GameScreen extends InputAdapter implements Screen {
     @Override
     public void show() {
 
+        mainMenuActivated = false;
+
         dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
-        buildMenuButton.setPosition(1f / 7f * WIDTH, 1f / 28f * HEIGHT);
-        dwellerListButton.setPosition(1f / 7f * WIDTH, 24f / 28f * HEIGHT);
-        buildMenuButton.setSize(1f / 28f * WIDTH, 1f / 28f * HEIGHT);
-        dwellerListButton.setSize(1f / 28f * WIDTH, 1f / 28f * HEIGHT);
+        mainMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        mmQuests = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        mmSettings = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        mmStats = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+        mmStorage = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+
+        buildMenuButton.setPosition(1f / 28f * WIDTH, 1f / 28f * HEIGHT);
+        dwellerListButton.setPosition(1f / 28f * WIDTH, 24f / 28f * HEIGHT);
+        mainMenuButton.setPosition(25f / 28f * WIDTH, 1f / 28f * HEIGHT);
+        mmSettings.setPosition(25f / 28f * WIDTH, 3f / 28f * HEIGHT);
+        mmStats.setPosition(25f / 28f * WIDTH, 5f / 28f * HEIGHT);
+        mmStorage.setPosition(25f / 28f * WIDTH, 7f / 28f * HEIGHT);
+        mmQuests.setPosition(25f / 28f * WIDTH, 9f / 28f * HEIGHT);
+
+        buildMenuButton.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        dwellerListButton.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        mainMenuButton.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        mmSettings.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        mmStats.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        mmStorage.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+        mmQuests.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
+
+
+
 
         if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
         EMPTY = new Texture("room_empty.png");
@@ -111,20 +154,20 @@ public class GameScreen extends InputAdapter implements Screen {
 
 
         currency = new Label(Integer.toString(GAME_STORAGE.currency), SKIN);
-	    currency.setFontScale(3);
-	    currency.setPosition(50, HEIGHT - 50);
+        currency.setFontScale(3);
+        currency.setPosition(50, HEIGHT - 50);
 
         food = new Label(Integer.toString(GAME_STORAGE.food.get()), SKIN);
-	    food.setFontScale(3);
-	    food.setPosition((float) (WIDTH / 3.0 - (food.getWidth() / 2)), HEIGHT - 50);
+        food.setFontScale(3);
+        food.setPosition((float) (WIDTH / 3.0 - (food.getWidth() / 2)), HEIGHT - 50);
 
-	    energy = new Label(Integer.toString(GAME_STORAGE.energy.get()), SKIN);
-	    energy.setFontScale(3);
-	    energy.setPosition(HALF_WIDTH - (energy.getWidth() / 2), HEIGHT - 50);
+        energy = new Label(Integer.toString(GAME_STORAGE.energy.get()), SKIN);
+        energy.setFontScale(3);
+        energy.setPosition(HALF_WIDTH - (energy.getWidth() / 2), HEIGHT - 50);
 
         water = new Label(Integer.toString(GAME_STORAGE.water.get()), SKIN);
-	    water.setFontScale(3);
-	    water.setPosition((float) (2 * WIDTH / 3.0 - (water.getWidth() / 2)), HEIGHT - 50);
+        water.setFontScale(3);
+        water.setPosition((float) (2 * WIDTH / 3.0 - (water.getWidth() / 2)), HEIGHT - 50);
 
         stage.addActor(buildMenuButton);
         stage.addActor(dwellerListButton);
@@ -133,8 +176,15 @@ public class GameScreen extends InputAdapter implements Screen {
         stage.addActor(energy);
         stage.addActor(water);
         stage.addActor(field);
+        stage.addActor(mainMenuButton);
+        stage.addActor(mmQuests);
+        stage.addActor(mmSettings);
+        stage.addActor(mmStorage);
+        stage.addActor(mmStats);
+
 
         addListeners();
+        hideMainMenuButtons();
 
         manager = new InputManager();
         manager.addProcessor(this);
@@ -318,6 +368,19 @@ public class GameScreen extends InputAdapter implements Screen {
             public void clicked(InputEvent event, float x, float y) {
                 dwellerList.show();
                 manager.suspendProcessor(GameScreen.this, 1);
+            }
+        });
+        mainMenuButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                if(!mainMenuActivated){
+                    showMainMenuButtons();
+                    mainMenuActivated = true;
+                }
+                else if(mainMenuActivated){
+                    hideMainMenuButtons();
+                    mainMenuActivated = false;
+                }
             }
         });
     }
