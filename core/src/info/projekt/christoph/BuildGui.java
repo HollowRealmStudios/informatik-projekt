@@ -49,27 +49,27 @@ public class BuildGui {
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("EngineRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 			}
 		});
 		wroom.addListener(new ClickListener() {
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("SewageTreatmentPlant");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 			}
 		});
 		froom.addListener(new ClickListener() {
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("Kitchen");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 
 			}
 		});
@@ -77,25 +77,25 @@ public class BuildGui {
 
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("MedRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 			}
 		});
 		lroom.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("Barracks");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 			}
 		});
 		sroom.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				table.setVisible(false);
 				GameScreen.setSelectedRoom("Storage");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
+				hide();
 			}
 		});
 		hide();
