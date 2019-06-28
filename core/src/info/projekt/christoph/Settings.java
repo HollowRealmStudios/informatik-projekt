@@ -32,6 +32,14 @@ public class Settings {
     public Settings() {
         music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         andi = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
+        for(int i = 0; i < 20; i++) {
+        	Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3")).play();
+	        try {
+		        Thread.sleep(200);
+	        } catch (InterruptedException e) {
+		        e.printStackTrace();
+	        }
+        }
         music.play();
         music.setLooping(true);
         values = new float[]{0,10,20,30,40,50,60,70,80,90,100};
