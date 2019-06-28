@@ -1,11 +1,15 @@
 package info.projekt.christoph;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -20,8 +24,13 @@ public class Settings {
     private ImageButton close;
     private Slider volumeSlider;
     private float[] values;
+    public float volume;
+    private Music music;
 
     public Settings() {
+        music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
+        music.play();
+        music.setLooping(true);
         values = new float[]{0,10,20,30,40,50,60,70,80,90,100};
         stage = new Stage(new ScreenViewport());
         close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -48,7 +57,15 @@ public class Settings {
             }
         });
         volumeSlider.setVisible(true);
+        close.setVisible(true);
+        volumeSlider.addListener(new ChangeListener() {
+            @Override
+            public void changed (ChangeEvent event, Actor actor){
+                volume = volumeSlider.getValue();
+                music.setVolume(volume / 100);
 
+            }
+        });
     }
 
     public void hide(){
