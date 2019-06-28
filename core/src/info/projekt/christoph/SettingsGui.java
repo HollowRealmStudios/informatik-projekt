@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
 
 
@@ -32,11 +33,14 @@ public class SettingsGui {
     public SettingsGui() {
         //Creating a new stage
         stage = new Stage(new ScreenViewport());
+        GameScreen.multiplexer.addProcessor(stage);
+
         //define the volume of the music, start the music and loop it, define the snapvalues of the volumeslider, define the song
         volume = 100f;
         music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         music.play();
         music.setLooping(true);
+
         //creating a close button, set its position and size, set it invisible
         close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
@@ -50,6 +54,7 @@ public class SettingsGui {
         volumeSlider.setSnapToValues(new float[]{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}, 2.5f);
         volumeSlider.setVisible(false);
         volumeSlider.setValue(volume);
+
 
         //add all actors to the stage
         stage.addActor(close);
@@ -69,16 +74,18 @@ public class SettingsGui {
             }
         });
 
+
+        volumeSlider.setVisible(true);
         close.setVisible(true);
         volumeSlider.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 volume = volumeSlider.getValue();
                 music.setVolume(volume / 100);
+
             }
         });
-	    volumeSlider.setVisible(true);
-	    GameScreen.guiOpen = true;
+        GameScreen.guiOpen = true;
     }
 
     public void hide() {
