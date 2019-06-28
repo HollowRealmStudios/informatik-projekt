@@ -35,6 +35,7 @@ class DwellerGui {
 		table.row();
 		ImageButton v = new ImageButton(new TextureRegionDrawable(dweller.getArmor().getTexture()));
 		v.addListener(new ClickListener() {
+
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				selector.show(Registry.getITEMS(), dweller);
