@@ -22,18 +22,7 @@ public class Settings {
     private float[] values;
 
     public Settings() {
-        values = new float[11];
-        values[0] = 0;
-        values[1] = 10;
-        values[2] = 20;
-        values[3] = 30;
-        values[4] = 40;
-        values[5] = 50;
-        values[6] = 60;
-        values[7] = 70;
-        values[8] = 80;
-        values[9] = 90;
-        values[10] = 100;
+        values = new float[]{0,10,20,30,40,50,60,70,80,90,100};
         stage = new Stage(new ScreenViewport());
         close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
