@@ -22,7 +22,7 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 //FIXME
 @SuppressWarnings("WeakerAccess")
-public class RoomGui {
+public class RoomGui extends Gui {
 
 	public final Stage stage;
 	public final Table table;
@@ -97,4 +97,8 @@ public class RoomGui {
 		room.addDweller(dweller);
 	}
 
+	@Override
+	public boolean isVisible() {
+		return table.isVisible();
+	}
 }

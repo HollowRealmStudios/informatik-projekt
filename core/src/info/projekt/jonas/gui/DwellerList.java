@@ -16,7 +16,7 @@ import info.projekt.jonas.util.Tuple;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-public class DwellerList {
+public class DwellerList extends Gui {
 
     public final Stage stage;
     public final DwellerGui dwellerGui;
@@ -63,4 +63,8 @@ public class DwellerList {
         GameScreen.manager.removeProcessor(stage);
     }
 
+	@Override
+	public boolean isVisible() {
+		return table.isVisible();
+	}
 }
