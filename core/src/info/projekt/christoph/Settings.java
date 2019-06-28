@@ -19,8 +19,21 @@ public class Settings {
     public Stage stage;
     private ImageButton close;
     private Slider volumeSlider;
+    private float[] values;
 
     public Settings() {
+        values = new float[11];
+        values[0] = 0;
+        values[1] = 10;
+        values[2] = 20;
+        values[3] = 30;
+        values[4] = 40;
+        values[5] = 50;
+        values[6] = 60;
+        values[7] = 70;
+        values[8] = 80;
+        values[9] = 90;
+        values[10] = 100;
         stage = new Stage(new ScreenViewport());
         close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
@@ -29,6 +42,7 @@ public class Settings {
         volumeSlider = new Slider(0f,100f,1f,false,new Slider.SliderStyle(new TextureRegionDrawable(new Texture("Slider.png")),new TextureRegionDrawable(new Texture("Arrow.png"))));
         volumeSlider.setPosition(7f / 28f * WIDTH, 14f / 28f * HEIGHT);
         volumeSlider.setSize(7f / 14f * WIDTH, 1f / 28f * HEIGHT);
+        volumeSlider.setSnapToValues(values, 2.5f);
         volumeSlider.setVisible(false);
         stage.addActor(close);
         stage.addActor(volumeSlider);
