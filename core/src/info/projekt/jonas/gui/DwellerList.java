@@ -1,10 +1,8 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -36,7 +34,8 @@ public class DwellerList {
         label.setFontScale(2.5f);
         table.add(label).padTop(30f);
         table.row();
-        GameScreen.manager.addProcessor(stage);
+        GameScreen.multiplexer.addProcessor(stage);
+
         getDwellers().forEach(tuple -> {
             table.add(tuple.getOne()).padTop(20f);
             tuple.getOne().addListener(new ClickListener() {
@@ -50,6 +49,7 @@ public class DwellerList {
         });
 
         table.setVisible(true);
+	    GameScreen.guiOpen = true;
     }
 
     private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
@@ -60,6 +60,7 @@ public class DwellerList {
 
     public void hide() {
         table.setVisible(false);
-        GameScreen.manager.removeProcessor(stage);
+        GameScreen.multiplexer.removeProcessor(stage);
+	    GameScreen.guiOpen = false;
     }
 }

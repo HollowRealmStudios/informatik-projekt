@@ -10,7 +10,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.LimitedArrayList;
@@ -44,7 +43,7 @@ public class RoomGui {
 
 	public void show(@NotNull Room room) {
 		table.reset();
-		GameScreen.manager.addProcessor(stage);
+		GameScreen.multiplexer.addProcessor(stage);
 		info.setText(room.getName() + ", " + room.getLevel());
 		table.add(info);
 		table.row().padTop(20f);
@@ -78,6 +77,7 @@ public class RoomGui {
 			table.add(button);
 		}
 		table.setVisible(true);
+		GameScreen.guiOpen = true;
 	}
 
 	@NotNull
@@ -90,7 +90,8 @@ public class RoomGui {
 	@SuppressWarnings("WeakerAccess")
 	public void hide() {
 		table.setVisible(false);
-		GameScreen.manager.removeProcessor(stage);
+		GameScreen.multiplexer.removeProcessor(stage);
+		GameScreen.guiOpen = false;
 	}
 
 	public void click(@NotNull Room room) {

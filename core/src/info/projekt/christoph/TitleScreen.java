@@ -6,7 +6,6 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -50,7 +49,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
             public void clicked(InputEvent event, float x, float y) {
                 InfoProjekt.newGame();
                 source.setScreen(new GameScreen());
-                Gdx.input.setInputProcessor(GameScreen.manager);
+                Gdx.input.setInputProcessor(GameScreen.multiplexer);
             }
         });
         loadGame.addListener(new ClickListener() {
@@ -58,7 +57,7 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
             public void clicked(InputEvent event, float x, float y) {
                 InfoProjekt.loadGame();
                 source.setScreen(new GameScreen());
-                Gdx.input.setInputProcessor(GameScreen.manager);
+                Gdx.input.setInputProcessor(GameScreen.multiplexer);
             }
         });
     }

@@ -1,5 +1,5 @@
 package info.projekt.andre;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings("unused")
 public class main {
 }

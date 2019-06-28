@@ -30,7 +30,7 @@ class DwellerGui {
 
 	void show(Dweller dweller) {
 		table.reset();
-		GameScreen.manager.addProcessor(stage);
+		GameScreen.multiplexer.addProcessor(stage);
 		dweller.prettyPrint().forEach(s -> table.add(new Label(s, SKIN)));
 		table.row();
 		ImageButton v = new ImageButton(new TextureRegionDrawable(dweller.getArmor().getTexture()));
@@ -51,11 +51,13 @@ class DwellerGui {
 		});
 		table.add(k).size(200, 200);
 		table.setVisible(true);
+		GameScreen.guiOpen = true;
 	}
 
 	void hide() {
-		GameScreen.manager.removeProcessor(stage);
+		GameScreen.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
+		GameScreen.guiOpen = false;
 	}
 
 }

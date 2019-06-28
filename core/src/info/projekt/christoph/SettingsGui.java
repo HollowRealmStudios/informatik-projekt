@@ -13,13 +13,14 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.jonas.gui.GameScreen;
 
 
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 
-public class Settings {
+public class SettingsGui {
 
     public Stage stage;
     private ImageButton close;
@@ -29,12 +30,12 @@ public class Settings {
     private Music music;
 
 
-    public Settings() {
+    public SettingsGui() {
         //Creating a new stage
         stage = new Stage(new ScreenViewport());
-
         //define the volume of the music, start the music and loop it, define the snapvalues of the volumeslider, define the song
         volume = 100f;
+        music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         music.play();
         music.setLooping(true);
         values = new float[]{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
@@ -82,22 +83,13 @@ public class Settings {
                 music.setVolume(volume / 100);
             }
         });
-
+	    volumeSlider.setVisible(true);
     }
 
     public void hide() {
-
         //set all actors invisible
         close.setVisible(false);
         volumeSlider.setVisible(false);
+	    GameScreen.guiOpen = false;
     }
 }
-
-   /* for(int i = 0; i < 20; i++) {
-        	Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3")).play();
-	        try {
-		        Thread.sleep(200);
-	        } catch (InterruptedException e) {
-		        e.printStackTrace();
-	        }
-        }*/

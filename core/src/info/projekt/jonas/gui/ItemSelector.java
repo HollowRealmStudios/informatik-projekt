@@ -50,13 +50,15 @@ public class ItemSelector {
             i.add(1);
             if (i.get() == 0) table.row();
         });
-        GameScreen.manager.addProcessor(stage);
+        GameScreen.multiplexer.addProcessor(stage);
         table.setVisible(true);
+	    GameScreen.guiOpen = true;
     }
 
     @SuppressWarnings("WeakerAccess")
     public void hide() {
-        GameScreen.manager.removeProcessor(stage);
+        GameScreen.multiplexer.removeProcessor(stage);
         table.setVisible(false);
+	    GameScreen.guiOpen = false;
     }
 }

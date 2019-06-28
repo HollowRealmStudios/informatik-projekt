@@ -20,33 +20,21 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 public class BuildGui {
 
 	public final Stage stage;
-	public final Table table;
+	private final Table table;
 
 	public BuildGui() {
-
-		//new Stage and Table are created
 		stage = new Stage(new ScreenViewport());
 		table = new Table();
 
-
-		//giving the ImageButtons their textures
-		//electricity
 		ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("EngineRoom/EngineRoom_1.png")));
-		//water
 		ImageButton wroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
-		//food
 		ImageButton froom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
-		//health
 		ImageButton hroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
-		//living
 		ImageButton lroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
-		//storage
 		ImageButton sroom = new ImageButton(new TextureRegionDrawable(new Texture("Background.png")));
 
-		//sets the background to finalDay.png
 		table.background(new TextureRegionDrawable(new Texture("finalDay.PNG"))).setSize(WIDTH, HEIGHT);
 
-		//place the buttons with an space of WIDTH (of monitor) * 1/28
 		table.add(eroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f)).padLeft((WIDTH * 1f / 28f));
 		table.add(wroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
 		table.add(froom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
@@ -54,7 +42,7 @@ public class BuildGui {
 		table.add(hroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f)).padLeft((WIDTH * 1f / 28f));
 		table.add(lroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
 		table.add(sroom).width((WIDTH * (2f / 7f))).height((HEIGHT * 0.4f)).padRight((WIDTH * 1f / 28f));
-		//adds buttonTable as an actor of stage
+
 		stage.addActor(table);
 
 		eroom.addListener(new ClickListener() {
@@ -62,7 +50,6 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("EngineRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -72,7 +59,6 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("SewageTreatmentPlant");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -82,7 +68,6 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("Kitchen");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 
@@ -93,7 +78,6 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("MedRoom");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -102,7 +86,6 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("Barracks");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
@@ -111,10 +94,22 @@ public class BuildGui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				table.setVisible(false);
-
 				GameScreen.setSelectedRoom("Storage");
 				GameScreen.setMode(GameScreen.Mode.PLACE);
 			}
 		});
+		hide();
+	}
+
+	public void show() {
+		GameScreen.multiplexer.addProcessor(stage);
+		table.setVisible(true);
+		GameScreen.guiOpen = true;
+	}
+
+	public void hide() {
+		GameScreen.multiplexer.removeProcessor(stage);
+		table.setVisible(false);
+		GameScreen.guiOpen = false;
 	}
 }
