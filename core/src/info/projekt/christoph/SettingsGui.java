@@ -69,8 +69,6 @@ public class SettingsGui {
             }
         });
 
-
-        volumeSlider.setVisible(true);
         close.setVisible(true);
         volumeSlider.addListener(new ChangeListener() {
             @Override
@@ -80,6 +78,7 @@ public class SettingsGui {
             }
         });
 	    volumeSlider.setVisible(true);
+	    GameScreen.guiOpen = true;
     }
 
     public void hide() {
