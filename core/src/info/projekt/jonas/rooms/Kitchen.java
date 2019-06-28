@@ -1,6 +1,7 @@
 package info.projekt.jonas.rooms;
 
-//FIXME
+import static info.projekt.InfoProjekt.GAME_STORAGE;
+
 public class Kitchen extends Room {
 
     public Kitchen() {
@@ -11,12 +12,12 @@ public class Kitchen extends Room {
     @SuppressWarnings("unused")
     @Override
     public void produce() {
-
+	    dwellers.forEach(d -> GAME_STORAGE.food.add(d.getCreativity()));
     }
 
     @SuppressWarnings("unused")
     @Override
     public void consume() {
-
+	    dwellers.forEach(d -> GAME_STORAGE.energy.subtract(4));
     }
 }

@@ -2,6 +2,7 @@ package info.projekt.jonas.storage;
 
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.util.LimitedInt;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -20,11 +21,11 @@ public class GameStorage implements Serializable {
 
     public int currency;
 
-    public int food;
+    public LimitedInt food = new LimitedInt(0, 1000, false);
 
-    public int energy;
+    public LimitedInt energy = new LimitedInt(0, 1000, false);
 
-    public int water;
+    public LimitedInt water = new LimitedInt(0, 1000, false);
 
     public void addDweller(Dweller dweller) {
         DWELLERS.add(dweller);

@@ -14,8 +14,7 @@ import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.Tuple;
 
-import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class DwellerList {
 
@@ -33,7 +32,7 @@ public class DwellerList {
 
     public void show() {
         table.reset();
-        Label label = new Label("Dwellers: ", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+        Label label = new Label("Dwellers: ", SKIN);
         label.setFontScale(2.5f);
         table.add(label).padTop(30f);
         table.row();
@@ -55,7 +54,7 @@ public class DwellerList {
 
     private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
         LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
-        InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
+        InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), SKIN), dweller)));
         return buttons;
     }
 

@@ -35,8 +35,8 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
     public void show() {
         stage = new Stage(new ScreenViewport());
 	    Table table = new Table();
-	    TextButton newGame = new TextButton("New Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
-	    TextButton loadGame = new TextButton("Load Game", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+	    TextButton newGame = new TextButton("New Game", SKIN);
+	    TextButton loadGame = new TextButton("Load Game", SKIN);
         newGame.getLabel().setFontScale(2, 2);
         loadGame.getLabel().setFontScale(2, 2);
         table.background(new TextureRegionDrawable(new Texture("TitleScreenBackground.png"))).setSize(WIDTH, HEIGHT);

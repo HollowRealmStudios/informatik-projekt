@@ -1,7 +1,9 @@
 package info.projekt.jonas.util;
 
+import java.io.Serializable;
+
 @SuppressWarnings("unused")
-public class LimitedInt extends Number {
+public class LimitedInt extends Number implements Serializable {
 
     private int i;
 	private final int lower;

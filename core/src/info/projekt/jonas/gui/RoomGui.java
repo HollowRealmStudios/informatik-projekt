@@ -14,8 +14,7 @@ import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 
-import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 //FIXME
 @SuppressWarnings("WeakerAccess")
@@ -31,7 +30,7 @@ public class RoomGui {
         stage = new Stage(new ScreenViewport());
         table = new Table();
         table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-        info = new Label("", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+        info = new Label("", SKIN);
         info.setFontScale(2.5f);
         table.add(info);
         table.row().padTop(30f);
@@ -76,7 +75,7 @@ public class RoomGui {
 
     private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers(Room room) {
         LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
-        room.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"))), dweller)));
+        room.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), SKIN), dweller)));
         return buttons;
     }
 

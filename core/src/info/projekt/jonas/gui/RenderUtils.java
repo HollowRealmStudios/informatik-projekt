@@ -2,6 +2,7 @@ package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.awt.*;
 
@@ -16,6 +17,8 @@ public class RenderUtils {
     public static final int HALF_HEIGHT = HEIGHT / 2;
     public static final int CELL_WIDTH = 400;
     public static final int CELL_HEIGHT = 200;
+
+    public static final Skin SKIN = new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"));
 
     /**
      * Clears the screen

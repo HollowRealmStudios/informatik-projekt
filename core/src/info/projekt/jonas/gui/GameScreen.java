@@ -53,9 +53,12 @@ public class GameScreen extends InputAdapter implements Screen {
     private ImageButton dwellerListButton;
     private Texture EMPTY;
     private Label currency;
+    private Label food;
+    private Label water;
+    private Label energy;
     private Stage stage;
     private static BuildGui buildGui;
-    public static DwellerList dwellerList;
+    static DwellerList dwellerList;
     private static RoomGui roomGui;
 
     public static void setMode(Mode mode) {
@@ -93,7 +96,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
         if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
         EMPTY = new Texture("room_empty.png");
-        field = new TextField("", new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
+        field = new TextField("", SKIN);
         field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
         field.setVisible(false);
 
@@ -105,12 +108,28 @@ public class GameScreen extends InputAdapter implements Screen {
         stage = new Stage(new ScreenViewport());
 
 
-        currency = new Label(Integer.toString(GAME_STORAGE.currency), new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json")));
-        currency.setPosition(50, HEIGHT - 50);
-        currency.setFontScale(3);
+        currency = new Label(Integer.toString(GAME_STORAGE.currency), SKIN);
+	    currency.setFontScale(3);
+	    currency.setPosition(50, HEIGHT - 50);
+
+        food = new Label(Integer.toString(GAME_STORAGE.food.get()), SKIN);
+	    food.setFontScale(3);
+	    food.setPosition((float) (WIDTH / 3.0 - (food.getWidth() / 2)), HEIGHT - 50);
+
+	    energy = new Label(Integer.toString(GAME_STORAGE.energy.get()), SKIN);
+	    energy.setFontScale(3);
+	    energy.setPosition(HALF_WIDTH - (energy.getWidth() / 2), HEIGHT - 50);
+
+        water = new Label(Integer.toString(GAME_STORAGE.water.get()), SKIN);
+	    water.setFontScale(3);
+	    water.setPosition((float) (2 * WIDTH / 3.0 - (water.getWidth() / 2)), HEIGHT - 50);
+
         stage.addActor(buildMenuButton);
         stage.addActor(dwellerListButton);
         stage.addActor(currency);
+        stage.addActor(food);
+        stage.addActor(energy);
+        stage.addActor(water);
         stage.addActor(field);
 
         addListeners();
@@ -150,6 +169,7 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerList.dwellerGui.stage.draw();
         dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
         dwellerList.dwellerGui.selector.stage.draw();
+        updateResources();
     }
 
     @Override
@@ -266,9 +286,9 @@ public class GameScreen extends InputAdapter implements Screen {
                     case "jeff":
                         throw new MyNameJeffException();
                     case "resources":
-                        GAME_STORAGE.water += 1000;
-                        GAME_STORAGE.energy += 1000;
-                        GAME_STORAGE.food += 1000;
+                        GAME_STORAGE.water.add(1000);
+                        GAME_STORAGE.energy.add(1000);
+                        GAME_STORAGE.food.add(1000);
                         field.setText("");
                         field.setVisible(false);
                         break;
@@ -334,6 +354,12 @@ public class GameScreen extends InputAdapter implements Screen {
         currency.setText(Integer.toString(GAME_STORAGE.currency));
     }
 
+    private void updateResources() {
+	    food.setText(Integer.toString(GAME_STORAGE.food.get()));
+	    water.setText(Integer.toString(GAME_STORAGE.water.get()));
+	    energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
+    }
+
     @SuppressWarnings("deprecated")
     @Override
     public void dispose() {
@@ -341,7 +367,7 @@ public class GameScreen extends InputAdapter implements Screen {
         WORK_THREAD.stop();
     }
 
-    public static void hideGuis() {
+    static void hideGuis() {
         dwellerList.hide();
         roomGui.table.setVisible(false);
         buildGui.table.setVisible(false);

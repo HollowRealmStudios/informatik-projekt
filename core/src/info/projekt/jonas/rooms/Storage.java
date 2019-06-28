@@ -1,6 +1,5 @@
 package info.projekt.jonas.rooms;
 
-//FIXME
 @SuppressWarnings("unused")
 public class Storage extends Room {
 
