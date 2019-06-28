@@ -52,6 +52,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
     public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
 
+    public static boolean guiOpen = false;
     public static InputManager manager;
     private static Mode mode = Mode.SELECT;
     private static String selectedRoom = "Kitchen";
@@ -293,8 +294,10 @@ public class GameScreen extends InputAdapter implements Screen {
 
 
     private void manageInput() {
-    	if(dwellerList.isVisible() || field.isVisible() || buildGui.isVisible() || settings.isVisible()) manager.removeProcessor(this);
-    	else manager.addProcessor(this);
+    	if(manager != null) {
+		    if (guiOpen) manager.removeProcessor(this);
+		    else manager.addProcessor(this);
+	    }
     }
 
     private void handleMoveKeys() {

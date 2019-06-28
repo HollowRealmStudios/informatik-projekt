@@ -13,7 +13,7 @@ import info.projekt.jonas.dwellers.Dweller;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-class DwellerGui extends Gui {
+class DwellerGui {
 
 	final Stage stage;
 	private final Table table;
@@ -58,8 +58,4 @@ class DwellerGui extends Gui {
 		table.setVisible(false);
 	}
 
-	@Override
-	public boolean isVisible() {
-		return table.isVisible();
-	}
 }

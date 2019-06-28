@@ -18,7 +18,7 @@ import java.util.HashMap;
 import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
-public class ItemSelector extends Gui {
+public class ItemSelector {
 
     public final Stage stage;
     private final Table table;
@@ -59,9 +59,4 @@ public class ItemSelector extends Gui {
         GameScreen.manager.removeProcessor(stage);
         table.setVisible(false);
     }
-
-	@Override
-	public boolean isVisible() {
-		return table.isVisible();
-	}
 }
