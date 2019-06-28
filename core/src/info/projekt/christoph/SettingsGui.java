@@ -25,8 +25,7 @@ public class SettingsGui {
     public Stage stage;
     private ImageButton close;
     private Slider volumeSlider;
-    private float[] values;
-    public float volume;
+    private float volume;
     private Music music;
 
 
@@ -38,9 +37,6 @@ public class SettingsGui {
         music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
         music.play();
         music.setLooping(true);
-        values = new float[]{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100};
-        music = Gdx.audio.newMusic(Gdx.files.internal("Nein jetzt hältst du die Schnauze! (Remix).mp3"));
-
         //creating a close button, set its position and size, set it invisible
         close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
@@ -51,7 +47,7 @@ public class SettingsGui {
         volumeSlider = new Slider(0f, 100f, 1f, false, new Slider.SliderStyle(new TextureRegionDrawable(new Texture("Slider.png")), new TextureRegionDrawable(new Texture("Arrow.png"))));
         volumeSlider.setPosition(7f / 28f * WIDTH, 14f / 28f * HEIGHT);
         volumeSlider.setSize(7f / 14f * WIDTH, 1f / 28f * HEIGHT);
-        volumeSlider.setSnapToValues(values, 2.5f);
+        volumeSlider.setSnapToValues(new float[]{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}, 2.5f);
         volumeSlider.setVisible(false);
         volumeSlider.setValue(volume);
 
