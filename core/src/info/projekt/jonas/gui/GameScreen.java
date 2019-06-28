@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.christoph.BuildGui;
+import info.projekt.christoph.Settings;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Kitchen;
@@ -68,6 +69,7 @@ public class GameScreen extends InputAdapter implements Screen {
     private ImageButton mmSettings;
     private ImageButton mmStorage;
     private boolean mainMenuActivated;
+    private static Settings settings;
 
     public void hideMainMenuButtons() {
         mmStorage.setVisible(false);
@@ -137,8 +139,6 @@ public class GameScreen extends InputAdapter implements Screen {
         mmQuests.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 
 
-
-
         if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
         EMPTY = new Texture("room_empty.png");
         field = new TextField("", SKIN);
@@ -149,6 +149,7 @@ public class GameScreen extends InputAdapter implements Screen {
         roomGui = new RoomGui();
         buildGui = new BuildGui();
         dwellerList = new DwellerList();
+        settings = new Settings();
         buildGui.table.setVisible(false);
         stage = new Stage(new ScreenViewport());
 
@@ -191,6 +192,7 @@ public class GameScreen extends InputAdapter implements Screen {
         manager.addProcessor(stage);
         manager.addProcessor(buildGui.stage);
         manager.addProcessor(dwellerList.stage);
+        manager.addProcessor(settings.stage);
         Gdx.input.setInputProcessor(manager);
         WORK_THREAD.start();
     }
@@ -221,6 +223,8 @@ public class GameScreen extends InputAdapter implements Screen {
         dwellerList.dwellerGui.stage.draw();
         dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
         dwellerList.dwellerGui.selector.stage.draw();
+        settings.stage.act(Gdx.graphics.getDeltaTime());
+        settings.stage.draw();
         updateGui();
     }
 
@@ -373,16 +377,22 @@ public class GameScreen extends InputAdapter implements Screen {
         mainMenuButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                if(!mainMenuActivated){
+                if (!mainMenuActivated) {
                     showMainMenuButtons();
                     mainMenuActivated = true;
-                }
-                else if(mainMenuActivated){
+                } else if (mainMenuActivated) {
                     hideMainMenuButtons();
                     mainMenuActivated = false;
                 }
             }
         });
+        mmSettings.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+            settings.show();
+            }
+        });
+
     }
 
     @Nullable
@@ -414,10 +424,10 @@ public class GameScreen extends InputAdapter implements Screen {
     }
 
     private void updateGui() {
-	    currency.setText(Integer.toString(GAME_STORAGE.currency));
-	    food.setText(Integer.toString(GAME_STORAGE.food.get()));
-	    water.setText(Integer.toString(GAME_STORAGE.water.get()));
-	    energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
+        currency.setText(Integer.toString(GAME_STORAGE.currency));
+        food.setText(Integer.toString(GAME_STORAGE.food.get()));
+        water.setText(Integer.toString(GAME_STORAGE.water.get()));
+        energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
     }
 
 
