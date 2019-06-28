@@ -30,10 +30,14 @@ import info.projekt.jonas.util.InputManager;
 import info.projekt.jonas.util.MyNameJeffException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.reflections.ReflectionUtils;
+import org.reflections.Reflections;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.*;
@@ -71,14 +75,14 @@ public class GameScreen extends InputAdapter implements Screen {
     private boolean mainMenuActivated;
     private static Settings settings;
 
-    public void hideMainMenuButtons() {
+    private void hideMainMenuButtons() {
         mmStorage.setVisible(false);
         mmStats.setVisible(false);
         mmQuests.setVisible(false);
         mmSettings.setVisible(false);
     }
 
-    public void showMainMenuButtons() {
+    private void showMainMenuButtons() {
         mmStorage.setVisible(true);
         mmStats.setVisible(true);
         mmQuests.setVisible(true);
@@ -109,9 +113,11 @@ public class GameScreen extends InputAdapter implements Screen {
         }
     }
 
+    @SuppressWarnings("all")
     @Override
     public void show() {
 
+    	manageInput();
         mainMenuActivated = false;
 
         dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
@@ -226,6 +232,7 @@ public class GameScreen extends InputAdapter implements Screen {
         settings.stage.act(Gdx.graphics.getDeltaTime());
         settings.stage.draw();
         updateGui();
+        manageInput();
     }
 
     @Override
@@ -282,6 +289,12 @@ public class GameScreen extends InputAdapter implements Screen {
             getSelectedRoom().getDwellers().forEach(d -> System.out.println(d.toString()));
             setMode(Mode.NONE);
         }
+    }
+
+
+    private void manageInput() {
+    	if(dwellerList.isVisible() || field.isVisible() || buildGui.isVisible() || settings.isVisible()) manager.removeProcessor(this);
+    	else manager.addProcessor(this);
     }
 
     private void handleMoveKeys() {

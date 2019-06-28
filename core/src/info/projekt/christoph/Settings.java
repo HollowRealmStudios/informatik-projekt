@@ -13,12 +13,13 @@ import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.jonas.gui.Gui;
 
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 
-public class Settings {
+public class Settings extends Gui {
 
     public Stage stage;
     private ImageButton close;
@@ -74,4 +75,8 @@ public class Settings {
     }
 
 
+	@Override
+	public boolean isVisible() {
+		return volumeSlider.isVisible();
+	}
 }

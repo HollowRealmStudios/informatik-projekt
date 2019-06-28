@@ -13,7 +13,7 @@ import info.projekt.jonas.dwellers.Dweller;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-class DwellerGui {
+class DwellerGui extends Gui {
 
 	final Stage stage;
 	private final Table table;
@@ -56,5 +56,10 @@ class DwellerGui {
 	void hide() {
 		GameScreen.manager.removeProcessor(stage);
 		table.setVisible(false);
+	}
+
+	@Override
+	public boolean isVisible() {
+		return table.isVisible();
 	}
 }

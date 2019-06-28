@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.Gui;
 
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
@@ -17,7 +18,7 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
  * @author Christoph
  */
 @SuppressWarnings("SpellCheckingInspection")
-public class BuildGui {
+public class BuildGui extends Gui {
 
     public final Stage stage;
     public final Table table;
@@ -117,4 +118,9 @@ public class BuildGui {
             }
         });
     }
+
+	@Override
+	public boolean isVisible() {
+		return table.isVisible();
+	}
 }
