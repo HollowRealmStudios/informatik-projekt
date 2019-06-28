@@ -78,5 +78,6 @@ public class Settings extends Gui {
 	@Override
 	public boolean isVisible() {
 		return volumeSlider.isVisible();
+
 	}
 }
