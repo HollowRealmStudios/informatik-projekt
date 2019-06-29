@@ -58,7 +58,7 @@ public class GameScreen extends InputAdapter implements Screen {
 	private Label energy;
 	private Stage stage;
 	private static BuildGui buildGui;
-	static DwellerList dwellerList;
+	private static DwellerList dwellerList;
 	private static RoomGui roomGui;
 	private ImageButton mainMenuButton;
 	private ImageButton mmQuests;
@@ -245,17 +245,8 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void handleMouseKeys() {
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
-			if (GAME_STORAGE.currency >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
-				setRoom(Registry.getRoom(selectedRoom));
-				GAME_STORAGE.currency -= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost();
-				WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
-			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Not in a valid location");
-		} finally {
-			setMode(Mode.NONE);
-		}
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && getSelectedRoom() != null) roomGui.show(getSelectedRoom());
+
 		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.UPGRADE && getSelectedRoom() != null)
 			try {
 				if (getSelectedRoom().upgradable() && (GAME_STORAGE.currency >= getCost(getSelectedRoom()))) {
