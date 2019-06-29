@@ -7,13 +7,17 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
+import info.projekt.jonas.gui.DwellerList;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.GuiManager;
+import info.projekt.jonas.gui.RoomGui;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.util.NameList;
 
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 
 /**
  * @author Jonas
