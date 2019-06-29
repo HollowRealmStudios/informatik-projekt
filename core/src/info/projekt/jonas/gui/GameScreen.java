@@ -227,6 +227,7 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void keyDown() {
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) hideGuis();
 		if(!guiOpen) {
 			handleGuiKeys();
 			handleMiscKeys();
@@ -290,9 +291,6 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void handleMiscKeys() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-			hideGuis();
-		}
 		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
 			field.setVisible(true);
 			stage.setKeyboardFocus(field);
