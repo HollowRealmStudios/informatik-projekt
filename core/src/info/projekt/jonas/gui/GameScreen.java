@@ -18,12 +18,12 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.SettingsGui;
+import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.rooms.Room;
-import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.util.MyNameJeffException;
 import info.projekt.jonas.util.NameList;
+import org.apache.commons.lang3.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -41,9 +41,7 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  */
 public class GameScreen extends Gui {
 
-	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
-
-	private static Mode mode = Mode.SELECT;
+	static boolean moving;
 	private static String selectedRoom = "Kitchen";
 	private TextField field;
 	private ImageButton buildMenuButton;
@@ -128,30 +126,6 @@ public class GameScreen extends Gui {
 		WORK_THREAD.start();
 	}
 
-
-	public static void setMode(@NotNull Mode mode) {
-		switch (mode) {
-			case PLACE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.PLACE;
-				break;
-			case SELECT:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
-				GameScreen.mode = Mode.SELECT;
-				break;
-			case UPGRADE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
-				GameScreen.mode = Mode.UPGRADE;
-				break;
-			case MOVE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
-				GameScreen.mode = Mode.UPGRADE;
-			case NONE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.NONE;
-		}
-	}
-
 	private void hideMainMenuButtons() {
 		mmStorage.setVisible(false);
 		mmStats.setVisible(false);
@@ -182,15 +156,13 @@ public class GameScreen extends Gui {
 	public void act(float f) {
 		if (multiplexer.getProcessors().contains(this, true)) {
 			keyDown();
-			render();
-			drawOutline();
 			updateGui();
 			stage.act(f);
 			stage.draw();
 		}
 	}
 
-	private void render() {
+	public void render() {
 		Gdx.gl.glLineWidth(10);
 		RenderUtils.clearScreen(new Color(64, 29, 14));
 		batch.begin();
@@ -201,6 +173,7 @@ public class GameScreen extends Gui {
 			}
 		}
 		batch.end();
+		drawOutline();
 	}
 
 	@Override
@@ -215,41 +188,19 @@ public class GameScreen extends Gui {
 			handleMiscKeys();
 			handleMouseKeys();
 			handleMoveKeys();
-			handleOutlineKeys();
 		}
 	}
 
-	private void handleOutlineKeys() {
-		if (Gdx.input.isKeyPressed(Input.Keys.F1)) setMode(Mode.SELECT);
-		if (Gdx.input.isKeyPressed(Input.Keys.F2)) setMode(Mode.PLACE);
-		if (Gdx.input.isKeyPressed(Input.Keys.F3)) setMode(Mode.UPGRADE);
-
-	}
-
 	private void handleMouseKeys() {
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && getSelectedRoom() != null)
-			Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
-
-		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.UPGRADE && getSelectedRoom() != null)
-			try {
-				if (getSelectedRoom().upgradable() && (GAME_STORAGE.currency >= getCost(getSelectedRoom()))) {
-					GAME_STORAGE.currency -= getCost(getSelectedRoom());
-					getSelectedRoom().upgrade();
-					WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
-				}
-			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("Not in a valid location");
-			} finally {
-				setMode(Mode.NONE);
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			if(moving && getSelectedRoom() != null) {
+				moving = false;
+				getSelectedRoom().addDweller(RoomGui.selected);
+				RoomGui.selected = null;
 			}
-		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.SELECT && getSelectedRoom() != null) {
-			System.out.println("Show");
-			Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
-		} else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.MOVE && getSelectedRoom() != null) {
-			Objects.requireNonNull(((RoomGui) GuiProvider.requestGui(RoomGui.class))).click(getSelectedRoom());
-			System.out.println("<--------------------------------------------------------------------------------------->");
-			getSelectedRoom().getDwellers().forEach(d -> System.out.println(d.toString()));
-			setMode(Mode.NONE);
+			else if (getSelectedRoom() != null)
+				Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
+			else try { setRoom(Registry.getRoom(selectedRoom)); } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 		}
 	}
 
@@ -382,10 +333,6 @@ public class GameScreen extends Gui {
 		renderer.begin(ShapeRenderer.ShapeType.Line);
 		renderer.rect((int) Math.floor(pos.x / CELL_WIDTH) * CELL_WIDTH, (int) Math.floor(pos.y / CELL_HEIGHT) * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 		renderer.end();
-	}
-
-	private int getCost(@NotNull Room room) {
-		return room.getLevel() * room.getCost();
 	}
 
 	private void updateGui() {

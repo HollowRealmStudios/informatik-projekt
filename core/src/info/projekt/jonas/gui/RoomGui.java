@@ -13,20 +13,21 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.InfoProjekt.WORK_THREAD;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-//FIXME
-@SuppressWarnings("WeakerAccess")
 public class RoomGui extends Gui {
 
-	public final Stage stage;
-	public final Table table;
-	private final Label info;
+	public static Dweller selected;
+	private Stage stage;
+	private Table table;
+	private Label info;
 	private Dweller dweller;
 
 
@@ -43,7 +44,7 @@ public class RoomGui extends Gui {
 	}
 
 	@Override
-	public void show(Object... o) {
+	public void show(@NotNull Object... o) {
 		Room room = (Room) o[0];
 		table.reset();
 		InfoProjekt.multiplexer.addProcessor(stage);
@@ -55,9 +56,11 @@ public class RoomGui extends Gui {
 			label.getOne().addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					dweller = label.getTwo();
-					room.removeDweller(dweller);
-					GameScreen.setMode(GameScreen.Mode.MOVE);
+					if (selected == null) {
+						selected = label.getTwo();
+						room.removeDweller(selected);
+						GameScreen.moving = true;
+					}
 					hide();
 				}
 			});
@@ -66,18 +69,19 @@ public class RoomGui extends Gui {
 		if (room.upgradable()) {
 			ImageButton button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 			button.setScale(5, 5);
+			if (room.upgradable()) table.add(button);
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					if (room.upgradable() && GAME_STORAGE.currency >= room.getCost() + (room.getLevel() * 200)) {
+					if (GAME_STORAGE.currency >= room.getCost() + (room.getLevel() * 200)) {
 						GAME_STORAGE.currency -= room.getCost() + (room.getLevel() * 200);
+						WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
 						room.upgrade();
 						info.setText(room.getName() + ", " + room.getLevel());
-
+						if (!room.upgradable()) table.removeActor(button);
 					}
 				}
 			});
-			table.add(button);
 		}
 		table.setVisible(true);
 		RenderUtils.guiOpen = true;
@@ -101,9 +105,5 @@ public class RoomGui extends Gui {
 		table.setVisible(false);
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		RenderUtils.guiOpen = false;
-	}
-
-	public void click(@NotNull Room room) {
-		room.addDweller(dweller);
 	}
 }

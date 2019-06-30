@@ -53,7 +53,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("EngineRoom");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 			}
 		});
@@ -62,7 +61,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("SewageTreatmentPlant");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 			}
 		});
@@ -71,7 +69,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("Kitchen");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 
 			}
@@ -81,7 +78,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("MedRoom");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 			}
 		});
@@ -89,7 +85,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("Barracks");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 			}
 		});
@@ -97,7 +92,6 @@ public class BuildGui extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				GameScreen.setSelectedRoom("Storage");
-				GameScreen.setMode(GameScreen.Mode.PLACE);
 				hide();
 			}
 		});

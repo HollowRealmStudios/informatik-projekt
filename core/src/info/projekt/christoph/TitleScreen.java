@@ -32,7 +32,6 @@ public class TitleScreen extends Gui {
 	public TitleScreen() {
 		stage = new Stage(new ScreenViewport());
 		table = new Table();
-		hide();
 	}
 
 	private void loadGame() {

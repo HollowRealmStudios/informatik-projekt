@@ -5,11 +5,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.christoph.BuildGui;
-import info.projekt.christoph.SettingsGui;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
-import info.projekt.jonas.gui.*;
+import info.projekt.jonas.gui.CameraManager;
+import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.GuiProvider;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.threads.WorkThread;
@@ -52,6 +52,8 @@ public class InfoProjekt extends Game {
 	public void render() {
 		renderer.setProjectionMatrix(cameraManager.getMatrix());
 		batch.setProjectionMatrix(cameraManager.getMatrix());
+		if (GuiProvider.requestGui(GameScreen.class) != null)
+			((GameScreen) GuiProvider.requestGui(GameScreen.class)).render();
 		GuiProvider.getGuis().forEach(g -> g.act(Gdx.graphics.getDeltaTime()));
 	}
 
