@@ -1,6 +1,5 @@
 package info.projekt.christoph;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -66,32 +65,29 @@ public class TitleScreen extends Gui {
 			public void clicked(InputEvent event, float x, float y) {
 				newGame();
 				GAME_STORAGE.getRooms()[0][0] = new Kitchen();
-				GuiProvider.registerGui(DwellerGui.class);
-				GuiProvider.registerGui(DwellerList.class);
-				GuiProvider.registerGui(ItemSelector.class);
-				GuiProvider.registerGui(RoomGui.class);
-				GuiProvider.registerGui(BuildGui.class);
-				GuiProvider.registerGui(SettingsGui.class);
-				GuiProvider.registerGui(GameScreen.class);
-				hideAllGuis();
-				Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
+				register();
 			}
 		});
 		loadGame.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				loadGame();
-				GuiProvider.registerGui(DwellerGui.class);
-				GuiProvider.registerGui(DwellerList.class);
-				GuiProvider.registerGui(ItemSelector.class);
-				GuiProvider.registerGui(RoomGui.class);
-				GuiProvider.registerGui(BuildGui.class);
-				GuiProvider.registerGui(SettingsGui.class);
-				GuiProvider.registerGui(GameScreen.class);
-				Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
+				register();
 			}
 		});
 		table.setVisible(true);
+	}
+
+	private void register() {
+		GuiProvider.registerGui(DwellerGui.class);
+		GuiProvider.registerGui(DwellerList.class);
+		GuiProvider.registerGui(ItemSelector.class);
+		GuiProvider.registerGui(RoomGui.class);
+		GuiProvider.registerGui(BuildGui.class);
+		GuiProvider.registerGui(SettingsGui.class);
+		GuiProvider.registerGui(GameScreen.class);
+		hide();
+		Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
 	}
 
 	@Override

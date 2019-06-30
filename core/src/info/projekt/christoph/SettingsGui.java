@@ -23,7 +23,7 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 public class SettingsGui extends Gui {
 
-	public Stage stage;
+	private Stage stage;
 	private ImageButton close;
 	private Slider volumeSlider;
 	private float volume;

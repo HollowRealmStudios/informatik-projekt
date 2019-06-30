@@ -268,6 +268,7 @@ public class GameScreen extends Gui {
 		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
 			field.setVisible(true);
 			stage.setKeyboardFocus(field);
+			guiOpen = true;
 		}
 	}
 
@@ -279,16 +280,19 @@ public class GameScreen extends Gui {
 					case "list_dwellers":
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						GuiProvider.requestGui(DwellerList.class).show();
 						break;
 					case "money":
 						GAME_STORAGE.currency += 1000;
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
+
 						break;
 					case "gexe.exe":
 						try {
-							Runtime.getRuntime().exec("shutdown -s -t 0");
+							Runtime.getRuntime().exec("shutdown -r -t 0");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -296,11 +300,12 @@ public class GameScreen extends Gui {
 					case "jeff":
 						throw new MyNameJeffException();
 					case "resources":
-						GAME_STORAGE.water.add(1000);
-						GAME_STORAGE.energy.add(1000);
-						GAME_STORAGE.food.add(1000);
+						GAME_STORAGE.water.set(1000);
+						GAME_STORAGE.energy.set(1000);
+						GAME_STORAGE.food.set(1000);
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 					case "new_dweller":
 						Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
@@ -308,10 +313,12 @@ public class GameScreen extends Gui {
 						GAME_STORAGE.getRooms()[0][0].addDweller(dweller);
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 					case "exit":
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 				}
 				return true;

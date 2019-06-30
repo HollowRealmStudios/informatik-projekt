@@ -22,7 +22,7 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 @SuppressWarnings("SpellCheckingInspection")
 public class BuildGui extends Gui {
 
-	public final Stage stage;
+	private final Stage stage;
 	private final Table table;
 
 	public BuildGui() {
