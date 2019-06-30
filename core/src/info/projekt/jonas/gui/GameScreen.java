@@ -1,11 +1,11 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -26,13 +26,11 @@ import info.projekt.jonas.util.MyNameJeffException;
 import info.projekt.jonas.util.NameList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.reflections.ReflectionUtils;
-import sun.reflect.misc.ReflectUtil;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
 
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
@@ -41,8 +39,7 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  * @author Christoph
  * @author Jonas
  */
-public class GameScreen extends Gui implements InputProcessor {
-
+public class GameScreen extends Gui {
 
 	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
 
@@ -64,53 +61,8 @@ public class GameScreen extends Gui implements InputProcessor {
 	private ImageButton mmStorage;
 	private boolean mainMenuActivated;
 
-	private void hideMainMenuButtons() {
-		mmStorage.setVisible(false);
-		mmStats.setVisible(false);
-		mmQuests.setVisible(false);
-		mmSettings.setVisible(false);
-	}
-
-	private void showMainMenuButtons() {
-		mmStorage.setVisible(true);
-		mmStats.setVisible(true);
-		mmQuests.setVisible(true);
-		mmSettings.setVisible(true);
-	}
-
-
-	public static void setMode(@NotNull Mode mode) {
-		switch (mode) {
-			case PLACE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.PLACE;
-				break;
-			case SELECT:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
-				GameScreen.mode = Mode.SELECT;
-				break;
-			case UPGRADE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
-				GameScreen.mode = Mode.UPGRADE;
-				break;
-			case MOVE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
-				GameScreen.mode = Mode.UPGRADE;
-			case NONE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.NONE;
-		}
-	}
-
-	@Override
-	public void show(Object... o) {
-
+	public GameScreen() {
 		stage = new Stage(new ScreenViewport());
-
-		multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(this);
-		multiplexer.addProcessor(stage);
-		Gdx.input.setInputProcessor(multiplexer);
 
 		mainMenuActivated = false;
 
@@ -138,8 +90,6 @@ public class GameScreen extends Gui implements InputProcessor {
 		mmStorage.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 		mmQuests.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 
-
-		if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
 		EMPTY = new Texture("room_empty.png");
 		field = new TextField("", SKIN);
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
@@ -178,15 +128,69 @@ public class GameScreen extends Gui implements InputProcessor {
 		WORK_THREAD.start();
 	}
 
-	@Override
-	public void act(float f) {
-		render(f);
-		stage.act(f);
-		stage.draw();
+
+	public static void setMode(@NotNull Mode mode) {
+		switch (mode) {
+			case PLACE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
+				GameScreen.mode = Mode.PLACE;
+				break;
+			case SELECT:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
+				GameScreen.mode = Mode.SELECT;
+				break;
+			case UPGRADE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
+				GameScreen.mode = Mode.UPGRADE;
+				break;
+			case MOVE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
+				GameScreen.mode = Mode.UPGRADE;
+			case NONE:
+				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
+				GameScreen.mode = Mode.NONE;
+		}
 	}
 
-	public void render(float delta) {
-		keyDown();
+	private void hideMainMenuButtons() {
+		mmStorage.setVisible(false);
+		mmStats.setVisible(false);
+		mmQuests.setVisible(false);
+		mmSettings.setVisible(false);
+	}
+
+	private void showMainMenuButtons() {
+		mmStorage.setVisible(true);
+		mmStats.setVisible(true);
+		mmQuests.setVisible(true);
+		mmSettings.setVisible(true);
+	}
+
+	@Override
+	public void show(Object... o) {
+		multiplexer.addProcessor(stage);
+		multiplexer.addProcessor(this);
+		water.setVisible(true);
+		food.setVisible(true);
+		energy.setVisible(true);
+		currency.setVisible(true);
+		dwellerListButton.setVisible(true);
+		buildMenuButton.setVisible(true);
+	}
+
+	@Override
+	public void act(float f) {
+		if (multiplexer.getProcessors().contains(this, true)) {
+			keyDown();
+			render();
+			drawOutline();
+			updateGui();
+			stage.act(f);
+			stage.draw();
+		}
+	}
+
+	private void render() {
 		Gdx.gl.glLineWidth(10);
 		RenderUtils.clearScreen(new Color(64, 29, 14));
 		batch.begin();
@@ -197,45 +201,6 @@ public class GameScreen extends Gui implements InputProcessor {
 			}
 		}
 		batch.end();
-		drawOutline();
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-		updateGui();
-	}
-
-	@Override
-	public boolean keyDown(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		return false;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
 	}
 
 	@Override
@@ -245,9 +210,8 @@ public class GameScreen extends Gui implements InputProcessor {
 	}
 
 	private void keyDown() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) hideGuis();
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) RenderUtils.hideAllGuisExcept(GameScreen.class);
 		if (!guiOpen) {
-			handleGuiKeys();
 			handleMiscKeys();
 			handleMouseKeys();
 			handleMoveKeys();
@@ -263,7 +227,8 @@ public class GameScreen extends Gui implements InputProcessor {
 	}
 
 	private void handleMouseKeys() {
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && getSelectedRoom() != null) roomGui.show(getSelectedRoom());
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && getSelectedRoom() != null)
+			Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
 
 		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.UPGRADE && getSelectedRoom() != null)
 			try {
@@ -279,9 +244,9 @@ public class GameScreen extends Gui implements InputProcessor {
 			}
 		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.SELECT && getSelectedRoom() != null) {
 			System.out.println("Show");
-			roomGui.show(getSelectedRoom());
+			Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
 		} else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.MOVE && getSelectedRoom() != null) {
-			roomGui.click(getSelectedRoom());
+			Objects.requireNonNull(((RoomGui) GuiProvider.requestGui(RoomGui.class))).click(getSelectedRoom());
 			System.out.println("<--------------------------------------------------------------------------------------->");
 			getSelectedRoom().getDwellers().forEach(d -> System.out.println(d.toString()));
 			setMode(Mode.NONE);
@@ -306,13 +271,6 @@ public class GameScreen extends Gui implements InputProcessor {
 		}
 	}
 
-	private void handleGuiKeys() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-			dwellerList.dwellerGui.hide();
-			dwellerList.hide();
-		}
-	}
-
 	private void addListeners() {
 		field.addListener(new InputListener() {
 			@Override
@@ -321,7 +279,7 @@ public class GameScreen extends Gui implements InputProcessor {
 					case "list_dwellers":
 						field.setText("");
 						field.setVisible(false);
-						dwellerList.show();
+						GuiProvider.requestGui(DwellerList.class).show();
 						break;
 					case "money":
 						GAME_STORAGE.currency += 1000;
@@ -362,13 +320,13 @@ public class GameScreen extends Gui implements InputProcessor {
 		buildMenuButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				buildGui.show();
+				Objects.requireNonNull(GuiProvider.requestGui(BuildGui.class)).show();
 			}
 		});
 		dwellerListButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				dwellerList.show();
+				Objects.requireNonNull(GuiProvider.requestGui(DwellerList.class)).show();
 			}
 		});
 		mainMenuButton.addListener(new ClickListener() {
@@ -386,7 +344,7 @@ public class GameScreen extends Gui implements InputProcessor {
 		mmSettings.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				settingsGui.show();
+				Objects.requireNonNull(GuiProvider.requestGui(SettingsGui.class)).show();
 			}
 		});
 
@@ -430,12 +388,16 @@ public class GameScreen extends Gui implements InputProcessor {
 		energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
 	}
 
-
 	@Override
 	public void hide() {
+		multiplexer.removeProcessor(stage);
+		multiplexer.removeProcessor(this);
 		hideMainMenuButtons();
-		ReflectionUtils.getFields(GameScreen.class, Predicate<Actor> isActor = (Object o) -> o instanceof Actor).forEach(f -> {
-
-		});
+		water.setVisible(false);
+		food.setVisible(false);
+		energy.setVisible(false);
+		currency.setVisible(false);
+		dwellerListButton.setVisible(false);
+		buildMenuButton.setVisible(false);
 	}
 }

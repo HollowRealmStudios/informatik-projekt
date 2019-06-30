@@ -8,7 +8,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
-import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.Gui;
 import info.projekt.jonas.gui.RenderUtils;

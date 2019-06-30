@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.LimitedArrayList;
@@ -25,8 +26,8 @@ public class RoomGui extends Gui {
 
 	public final Stage stage;
 	public final Table table;
-	private Dweller dweller;
 	private final Label info;
+	private Dweller dweller;
 
 
 	public RoomGui() {
@@ -43,9 +44,9 @@ public class RoomGui extends Gui {
 
 	@Override
 	public void show(Object... o) {
-		Room room = (Room)o[0];
+		Room room = (Room) o[0];
 		table.reset();
-		GameScreen.multiplexer.addProcessor(stage);
+		InfoProjekt.multiplexer.addProcessor(stage);
 		info.setText(room.getName() + ", " + room.getLevel());
 		table.add(info);
 		table.row().padTop(20f);
@@ -79,7 +80,13 @@ public class RoomGui extends Gui {
 			table.add(button);
 		}
 		table.setVisible(true);
-		GameScreen.guiOpen = true;
+		RenderUtils.guiOpen = true;
+	}
+
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
 	}
 
 	@NotNull
@@ -92,8 +99,8 @@ public class RoomGui extends Gui {
 	@Override
 	public void hide() {
 		table.setVisible(false);
-		GameScreen.multiplexer.removeProcessor(stage);
-		GameScreen.guiOpen = false;
+		InfoProjekt.multiplexer.removeProcessor(stage);
+		RenderUtils.guiOpen = false;
 	}
 
 	public void click(@NotNull Room room) {

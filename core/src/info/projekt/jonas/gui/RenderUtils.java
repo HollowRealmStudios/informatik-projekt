@@ -11,24 +11,32 @@ import java.awt.*;
  */
 public class RenderUtils {
 
-	public static boolean guiOpen = false;
 	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
-    public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
-    public static final int HALF_WIDTH = WIDTH / 2;
-    public static final int HALF_HEIGHT = HEIGHT / 2;
-    public static final int CELL_WIDTH = 400;
-    public static final int CELL_HEIGHT = 200;
+	public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
+	public static final int HALF_WIDTH = WIDTH / 2;
+	public static final int HALF_HEIGHT = HEIGHT / 2;
+	public static final int CELL_WIDTH = 400;
+	public static final int CELL_HEIGHT = 200;
+	public static final Skin SKIN = new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"));
+	public static boolean guiOpen = false;
 
-    public static final Skin SKIN = new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"));
+	/**
+	 * Clears the screen
+	 *
+	 * @param c The background color
+	 */
+	public static void clearScreen(Color c) {
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);
+	}
 
-    /**
-     * Clears the screen
-     *
-     * @param c The background color
-     */
-    public static void clearScreen(Color c) {
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);
-    }
+	public static void hideAllGuis() {
+		GuiProvider.getGuis().forEach(Gui::hide);
+	}
 
+	public static void hideAllGuisExcept(Class<? extends Gui> gui) {
+		GuiProvider.getGuis().forEach(g -> {
+			if(!g.getClass().equals(gui)) g.hide();
+		});
+	}
 }
