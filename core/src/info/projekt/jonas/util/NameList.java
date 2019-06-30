@@ -4,16 +4,15 @@ import com.badlogic.gdx.Gdx;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.dwellers.WeightedRandom;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class NameList {
 
-	private final ArrayList<Dweller> dwellersMale = new ArrayList<>();
-	private final ArrayList<Dweller> dwellersFemale = new ArrayList<>();
+	private static final ArrayList<Dweller> dwellersMale = new ArrayList<>();
+	private static final ArrayList<Dweller> dwellersFemale = new ArrayList<>();
 
-	public NameList() {
+	static {
 		Scanner male = new Scanner(Gdx.files.internal("Male.txt").read());
 		Scanner female = new Scanner(Gdx.files.internal("Female.txt").read());
 		while (male.hasNextLine()) {
@@ -26,13 +25,12 @@ public class NameList {
 		female.close();
 	}
 
-	public Dweller nextDweller(Dweller.GENDER gender) {
-		if(gender == Dweller.GENDER.MALE) {
+	public static Dweller nextDweller(Dweller.GENDER gender) {
+		if (gender == Dweller.GENDER.MALE) {
 			Dweller d = dwellersMale.get(0);
 			dwellersMale.remove(d);
 			return d;
-		}
-		else {
+		} else {
 			Dweller d = dwellersFemale.get(0);
 			dwellersFemale.remove(d);
 			return d;

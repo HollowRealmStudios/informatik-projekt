@@ -10,24 +10,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.threads.WorkThread;
 import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.InfoProjekt.WORK_THREAD;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-//FIXME
-@SuppressWarnings("WeakerAccess")
-public class RoomGui {
+public class RoomGui extends Gui {
 
-	public final Stage stage;
-	public final Table table;
-	private Dweller dweller;
+	static Dweller selected;
+	private final Stage stage;
+	private final Table table;
 	private final Label info;
-
 
 	public RoomGui() {
 		stage = new Stage(new ScreenViewport());
@@ -41,9 +41,11 @@ public class RoomGui {
 		table.setVisible(false);
 	}
 
-	public void show(@NotNull Room room) {
+	@Override
+	public void show(@NotNull Object... o) {
+		Room room = (Room) o[0];
 		table.reset();
-		GameScreen.multiplexer.addProcessor(stage);
+		InfoProjekt.multiplexer.addProcessor(stage);
 		info.setText(room.getName() + ", " + room.getLevel());
 		table.add(info);
 		table.row().padTop(20f);
@@ -52,9 +54,11 @@ public class RoomGui {
 			label.getOne().addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					dweller = label.getTwo();
-					room.removeDweller(dweller);
-					GameScreen.setMode(GameScreen.Mode.MOVE);
+					if (selected == null) {
+						selected = label.getTwo();
+						room.removeDweller(selected);
+						GameScreen.moving = true;
+					}
 					hide();
 				}
 			});
@@ -63,21 +67,28 @@ public class RoomGui {
 		if (room.upgradable()) {
 			ImageButton button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 			button.setScale(5, 5);
+			if (room.upgradable()) table.add(button);
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					if (room.upgradable() && GAME_STORAGE.currency >= room.getCost() + (room.getLevel() * 200)) {
+					if (GAME_STORAGE.currency >= room.getCost() + (room.getLevel() * 200)) {
 						GAME_STORAGE.currency -= room.getCost() + (room.getLevel() * 200);
+						WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
 						room.upgrade();
 						info.setText(room.getName() + ", " + room.getLevel());
-
+						if (!room.upgradable()) table.removeActor(button);
 					}
 				}
 			});
-			table.add(button);
 		}
 		table.setVisible(true);
-		GameScreen.guiOpen = true;
+		RenderUtils.guiOpen = true;
+	}
+
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
 	}
 
 	@NotNull
@@ -87,14 +98,10 @@ public class RoomGui {
 		return buttons;
 	}
 
-	@SuppressWarnings("WeakerAccess")
+	@Override
 	public void hide() {
 		table.setVisible(false);
-		GameScreen.multiplexer.removeProcessor(stage);
-		GameScreen.guiOpen = false;
-	}
-
-	public void click(@NotNull Room room) {
-		room.addDweller(dweller);
+		InfoProjekt.multiplexer.removeProcessor(stage);
+		RenderUtils.guiOpen = false;
 	}
 }

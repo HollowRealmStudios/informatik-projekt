@@ -14,53 +14,58 @@ import info.projekt.jonas.util.Tuple;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-public class DwellerList {
+public class DwellerList extends Gui {
 
-    public final Stage stage;
-    public final DwellerGui dwellerGui;
-    private final Table table;
+	private final Stage stage;
+	private final Table table;
 
-    public DwellerList() {
-        stage = new Stage(new ScreenViewport());
-        table = new Table();
-        table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-        stage.addActor(table);
-        dwellerGui = new DwellerGui();
-    }
+	public DwellerList() {
+		stage = new Stage(new ScreenViewport());
+		table = new Table();
+		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		stage.addActor(table);
+	}
 
-    public void show() {
-        table.reset();
-        Label label = new Label("Dwellers: ", SKIN);
-        label.setFontScale(2.5f);
-        table.add(label).padTop(30f);
-        table.row();
-        GameScreen.multiplexer.addProcessor(stage);
+	@Override
+	public void show(Object... o) {
+		InfoProjekt.multiplexer.addProcessor(stage);
+		table.reset();
+		Label label = new Label("Dwellers: ", SKIN);
+		label.setFontScale(2.5f);
+		table.add(label).padTop(30f);
+		table.row();
+		getDwellers().forEach(tuple -> {
+			table.add(tuple.getOne()).padTop(20f);
+			tuple.getOne().addListener(new ClickListener() {
+				@Override
+				public void clicked(InputEvent event, float x, float y) {
+					GuiProvider.requestGui(DwellerGui.class).show(tuple.getTwo());
+					hide();
+				}
+			});
+			table.row();
+		});
 
-        getDwellers().forEach(tuple -> {
-            table.add(tuple.getOne()).padTop(20f);
-            tuple.getOne().addListener(new ClickListener() {
-                @Override
-                public void clicked(InputEvent event, float x, float y) {
-                    dwellerGui.show(tuple.getTwo());
-                    hide();
-                }
-            });
-            table.row();
-        });
+		table.setVisible(true);
+		RenderUtils.guiOpen = true;
+	}
 
-        table.setVisible(true);
-	    GameScreen.guiOpen = true;
-    }
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
+	}
 
-    private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
-        LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
-        InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), SKIN), dweller)));
-        return buttons;
-    }
+	private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
+		LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
+		InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), SKIN), dweller)));
+		return buttons;
+	}
 
-    public void hide() {
-        table.setVisible(false);
-        GameScreen.multiplexer.removeProcessor(stage);
-	    GameScreen.guiOpen = false;
-    }
+	@Override
+	public void hide() {
+		table.setVisible(false);
+		InfoProjekt.multiplexer.removeProcessor(stage);
+		RenderUtils.guiOpen = false;
+	}
 }

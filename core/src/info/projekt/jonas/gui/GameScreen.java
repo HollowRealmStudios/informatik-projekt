@@ -1,6 +1,7 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.*;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
@@ -19,12 +20,9 @@ import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.SettingsGui;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.rooms.Room;
-import info.projekt.jonas.threads.WorkThread;
-import info.projekt.jonas.util.InputManager;
 import info.projekt.jonas.util.MyNameJeffException;
-import org.jetbrains.annotations.NotNull;
+import info.projekt.jonas.util.NameList;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -39,82 +37,28 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  * @author Christoph
  * @author Jonas
  */
-public class GameScreen extends InputAdapter implements Screen {
+public class GameScreen extends Gui {
 
-
-	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
-
-	public static boolean guiOpen = false;
-	public static InputMultiplexer multiplexer;
-	private static Mode mode = Mode.SELECT;
+	static boolean moving;
 	private static String selectedRoom = "Kitchen";
-	private TextField field;
-	private ImageButton buildMenuButton;
-	private ImageButton dwellerListButton;
-	private Texture EMPTY;
-	private Label currency;
-	private Label food;
-	private Label water;
-	private Label energy;
-	private Stage stage;
-	private static BuildGui buildGui;
-	static DwellerList dwellerList;
-	private static RoomGui roomGui;
-	private ImageButton mainMenuButton;
-	private ImageButton mmQuests;
-	private ImageButton mmStats;
-	private ImageButton mmSettings;
-	private ImageButton mmStorage;
+	private final TextField field;
+	private final ImageButton buildMenuButton;
+	private final ImageButton dwellerListButton;
+	private final Texture EMPTY;
+	private final Label currency;
+	private final Label food;
+	private final Label water;
+	private final Label energy;
+	private final Stage stage;
+	private final ImageButton mainMenuButton;
+	private final ImageButton mmQuests;
+	private final ImageButton mmStats;
+	private final ImageButton mmSettings;
+	private final ImageButton mmStorage;
 	private boolean mainMenuActivated;
-	private static SettingsGui settingsGui;
 
-	private void hideMainMenuButtons() {
-		mmStorage.setVisible(false);
-		mmStats.setVisible(false);
-		mmQuests.setVisible(false);
-		mmSettings.setVisible(false);
-	}
-
-	private void showMainMenuButtons() {
-		mmStorage.setVisible(true);
-		mmStats.setVisible(true);
-		mmQuests.setVisible(true);
-		mmSettings.setVisible(true);
-	}
-
-
-	public static void setMode(@NotNull Mode mode) {
-		switch (mode) {
-			case PLACE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.PLACE;
-				break;
-			case SELECT:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.PURPLE);
-				GameScreen.mode = Mode.SELECT;
-				break;
-			case UPGRADE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.BLUE);
-				GameScreen.mode = Mode.UPGRADE;
-				break;
-			case MOVE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.YELLOW);
-				GameScreen.mode = Mode.UPGRADE;
-			case NONE:
-				renderer.setColor(com.badlogic.gdx.graphics.Color.GREEN);
-				GameScreen.mode = Mode.NONE;
-		}
-	}
-
-	@Override
-	public void show() {
-
+	public GameScreen() {
 		stage = new Stage(new ScreenViewport());
-
-		multiplexer = new InputMultiplexer();
-		multiplexer.addProcessor(this);
-		multiplexer.addProcessor(stage);
-		Gdx.input.setInputProcessor(multiplexer);
 
 		mainMenuActivated = false;
 
@@ -142,19 +86,10 @@ public class GameScreen extends InputAdapter implements Screen {
 		mmStorage.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 		mmQuests.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 
-
-		if (GAME_STORAGE.getRooms()[0][0] == null) GAME_STORAGE.getRooms()[0][0] = new Kitchen();
 		EMPTY = new Texture("room_empty.png");
 		field = new TextField("", SKIN);
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
 		field.setVisible(false);
-
-
-		roomGui = new RoomGui();
-		buildGui = new BuildGui();
-		dwellerList = new DwellerList();
-		settingsGui = new SettingsGui();
-		dwellerList.dwellerGui.hide();
 
 		currency = new Label(Integer.toString(GAME_STORAGE.currency), SKIN);
 		currency.setFontScale(3);
@@ -189,9 +124,43 @@ public class GameScreen extends InputAdapter implements Screen {
 		WORK_THREAD.start();
 	}
 
+	private void hideMainMenuButtons() {
+		mmStorage.setVisible(false);
+		mmStats.setVisible(false);
+		mmQuests.setVisible(false);
+		mmSettings.setVisible(false);
+	}
+
+	private void showMainMenuButtons() {
+		mmStorage.setVisible(true);
+		mmStats.setVisible(true);
+		mmQuests.setVisible(true);
+		mmSettings.setVisible(true);
+	}
+
 	@Override
-	public void render(float delta) {
-		keyDown();
+	public void show(Object... o) {
+		multiplexer.addProcessor(stage);
+		multiplexer.addProcessor(this);
+		water.setVisible(true);
+		food.setVisible(true);
+		energy.setVisible(true);
+		currency.setVisible(true);
+		dwellerListButton.setVisible(true);
+		buildMenuButton.setVisible(true);
+	}
+
+	@Override
+	public void act(float f) {
+		if (multiplexer.getProcessors().contains(this, true)) {
+			keyDown();
+			updateGui();
+			stage.act(f);
+			stage.draw();
+		}
+	}
+
+	public void render() {
 		Gdx.gl.glLineWidth(10);
 		RenderUtils.clearScreen(new Color(64, 29, 14));
 		batch.begin();
@@ -203,21 +172,6 @@ public class GameScreen extends InputAdapter implements Screen {
 		}
 		batch.end();
 		drawOutline();
-		stage.act(Gdx.graphics.getDeltaTime());
-		stage.draw();
-		buildGui.stage.act(Gdx.graphics.getDeltaTime());
-		buildGui.stage.draw();
-		roomGui.stage.act(Gdx.graphics.getDeltaTime());
-		roomGui.stage.draw();
-		dwellerList.stage.draw();
-		dwellerList.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.stage.draw();
-		dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.selector.stage.draw();
-		settingsGui.stage.act(Gdx.graphics.getDeltaTime());
-		settingsGui.stage.draw();
-		updateGui();
 	}
 
 	@Override
@@ -227,80 +181,43 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void keyDown() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) hideGuis();
-		if(!guiOpen) {
-			handleGuiKeys();
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) RenderUtils.hideAllGuisExcept(GameScreen.class);
+		if (!guiOpen) {
 			handleMiscKeys();
 			handleMouseKeys();
 			handleMoveKeys();
-			handleOutlineKeys();
 		}
-	}
-
-	private void handleOutlineKeys() {
-		if (Gdx.input.isKeyPressed(Input.Keys.F1)) setMode(Mode.SELECT);
-		if (Gdx.input.isKeyPressed(Input.Keys.F2)) setMode(Mode.PLACE);
-		if (Gdx.input.isKeyPressed(Input.Keys.F3)) setMode(Mode.UPGRADE);
-
 	}
 
 	private void handleMouseKeys() {
-		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.PLACE && getSelectedRoom() == null) try {
-			if (GAME_STORAGE.currency >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
-				setRoom(Registry.getRoom(selectedRoom));
-				GAME_STORAGE.currency -= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost();
-				WORK_THREAD.notify(WorkThread.NOTIFICATION.PLACED);
+		if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+			if(moving && getSelectedRoom() != null) {
+				moving = false;
+				getSelectedRoom().addDweller(RoomGui.selected);
+				RoomGui.selected = null;
 			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			System.out.println("Not in a valid location");
-		} finally {
-			setMode(Mode.NONE);
-		}
-		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.UPGRADE && getSelectedRoom() != null)
-			try {
-				if (getSelectedRoom().upgradable() && (GAME_STORAGE.currency >= getCost(getSelectedRoom()))) {
-					GAME_STORAGE.currency -= getCost(getSelectedRoom());
-					getSelectedRoom().upgrade();
-					WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
-				}
-			} catch (ArrayIndexOutOfBoundsException e) {
-				System.out.println("Not in a valid location");
-			} finally {
-				setMode(Mode.NONE);
-			}
-		else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.SELECT && getSelectedRoom() != null) {
-			System.out.println("Show");
-			roomGui.show(getSelectedRoom());
-		} else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && mode == Mode.MOVE && getSelectedRoom() != null) {
-			roomGui.click(getSelectedRoom());
-			System.out.println("<--------------------------------------------------------------------------------------->");
-			getSelectedRoom().getDwellers().forEach(d -> System.out.println(d.toString()));
-			setMode(Mode.NONE);
+			else if (getSelectedRoom() != null)
+				Objects.requireNonNull(GuiProvider.requestGui(RoomGui.class)).show(getSelectedRoom());
+			else try { setRoom(Registry.getRoom(selectedRoom)); } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {}
 		}
 	}
 
 	private void handleMoveKeys() {
-			if (Gdx.input.isKeyPressed(Input.Keys.W))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
-			else if (Gdx.input.isKeyPressed(Input.Keys.S))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
-			if (Gdx.input.isKeyPressed(Input.Keys.A))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
-			else if (Gdx.input.isKeyPressed(Input.Keys.D))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
+		if (Gdx.input.isKeyPressed(Input.Keys.W))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
+		else if (Gdx.input.isKeyPressed(Input.Keys.S))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
+		else if (Gdx.input.isKeyPressed(Input.Keys.D))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
 	}
 
 	private void handleMiscKeys() {
 		if (Gdx.input.isKeyPressed(Input.Keys.CONTROL_LEFT)) {
 			field.setVisible(true);
 			stage.setKeyboardFocus(field);
-		}
-	}
-
-	private void handleGuiKeys() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-			dwellerList.dwellerGui.hide();
-			dwellerList.hide();
+			guiOpen = true;
 		}
 	}
 
@@ -312,16 +229,19 @@ public class GameScreen extends InputAdapter implements Screen {
 					case "list_dwellers":
 						field.setText("");
 						field.setVisible(false);
-						dwellerList.show();
+						guiOpen = false;
+						GuiProvider.requestGui(DwellerList.class).show();
 						break;
 					case "money":
 						GAME_STORAGE.currency += 1000;
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
+
 						break;
 					case "gexe.exe":
 						try {
-							Runtime.getRuntime().exec("shutdown -s -t 0");
+							Runtime.getRuntime().exec("shutdown -r -t 0");
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -329,22 +249,25 @@ public class GameScreen extends InputAdapter implements Screen {
 					case "jeff":
 						throw new MyNameJeffException();
 					case "resources":
-						GAME_STORAGE.water.add(1000);
-						GAME_STORAGE.energy.add(1000);
-						GAME_STORAGE.food.add(1000);
+						GAME_STORAGE.water.set(1000);
+						GAME_STORAGE.energy.set(1000);
+						GAME_STORAGE.food.set(1000);
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 					case "new_dweller":
-						Dweller dweller = list.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
+						Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
 						GAME_STORAGE.addDweller(dweller);
 						GAME_STORAGE.getRooms()[0][0].addDweller(dweller);
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 					case "exit":
 						field.setText("");
 						field.setVisible(false);
+						guiOpen = false;
 						break;
 				}
 				return true;
@@ -353,13 +276,13 @@ public class GameScreen extends InputAdapter implements Screen {
 		buildMenuButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				buildGui.show();
+				Objects.requireNonNull(GuiProvider.requestGui(BuildGui.class)).show();
 			}
 		});
 		dwellerListButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				dwellerList.show();
+				Objects.requireNonNull(GuiProvider.requestGui(DwellerList.class)).show();
 			}
 		});
 		mainMenuButton.addListener(new ClickListener() {
@@ -377,7 +300,7 @@ public class GameScreen extends InputAdapter implements Screen {
 		mmSettings.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				settingsGui.show();
+				Objects.requireNonNull(GuiProvider.requestGui(SettingsGui.class)).show();
 			}
 		});
 
@@ -410,10 +333,6 @@ public class GameScreen extends InputAdapter implements Screen {
 		renderer.end();
 	}
 
-	private int getCost(@NotNull Room room) {
-		return room.getLevel() * room.getCost();
-	}
-
 	private void updateGui() {
 		currency.setText(Integer.toString(GAME_STORAGE.currency));
 		food.setText(Integer.toString(GAME_STORAGE.food.get()));
@@ -421,38 +340,16 @@ public class GameScreen extends InputAdapter implements Screen {
 		energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
 	}
 
-
-	@SuppressWarnings("deprecated")
-	@Override
-	public void dispose() {
-		stage.dispose();
-		WORK_THREAD.stop();
-	}
-
-	static void hideGuis() {
-		dwellerList.hide();
-		dwellerList.dwellerGui.hide();
-		roomGui.hide();
-		buildGui.hide();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
-	}
-
-	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
-
 	@Override
 	public void hide() {
-
+		multiplexer.removeProcessor(stage);
+		multiplexer.removeProcessor(this);
+		hideMainMenuButtons();
+		water.setVisible(false);
+		food.setVisible(false);
+		energy.setVisible(false);
+		currency.setVisible(false);
+		dwellerListButton.setVisible(false);
+		buildMenuButton.setVisible(false);
 	}
 }
