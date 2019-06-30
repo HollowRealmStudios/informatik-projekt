@@ -21,7 +21,7 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 //FIXME
 @SuppressWarnings("WeakerAccess")
-public class RoomGui {
+public class RoomGui extends Gui {
 
 	public final Stage stage;
 	public final Table table;
@@ -41,7 +41,9 @@ public class RoomGui {
 		table.setVisible(false);
 	}
 
-	public void show(@NotNull Room room) {
+	@Override
+	public void show(Object... o) {
+		Room room = (Room)o[0];
 		table.reset();
 		GameScreen.multiplexer.addProcessor(stage);
 		info.setText(room.getName() + ", " + room.getLevel());
@@ -87,7 +89,7 @@ public class RoomGui {
 		return buttons;
 	}
 
-	@SuppressWarnings("WeakerAccess")
+	@Override
 	public void hide() {
 		table.setVisible(false);
 		GameScreen.multiplexer.removeProcessor(stage);

@@ -13,14 +13,14 @@ import info.projekt.jonas.dwellers.Dweller;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-class DwellerGui {
+public class DwellerGui extends Gui {
 
 	final Stage stage;
 	private final Table table;
 	final ItemSelector selector;
 
 
-	DwellerGui() {
+	public DwellerGui() {
 		stage = new Stage(new ScreenViewport());
 		table = new Table();
 		selector = new ItemSelector();
@@ -28,7 +28,9 @@ class DwellerGui {
 		stage.addActor(table);
 	}
 
-	void show(Dweller dweller) {
+	@Override
+	public void show(Object... o) {
+		Dweller dweller = (Dweller) o[0];
 		table.reset();
 		GameScreen.multiplexer.addProcessor(stage);
 		dweller.prettyPrint().forEach(s -> table.add(new Label(s, SKIN)));
@@ -54,7 +56,8 @@ class DwellerGui {
 		GameScreen.guiOpen = true;
 	}
 
-	void hide() {
+	@Override
+	public void hide() {
 		GameScreen.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
 		GameScreen.guiOpen = false;

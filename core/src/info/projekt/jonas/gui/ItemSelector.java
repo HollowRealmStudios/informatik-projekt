@@ -48,7 +48,7 @@ public class ItemSelector extends Gui {
 					if(k instanceof  ArmorItem) dweller.setArmor((ArmorItem) k);
 					else dweller.setWeapon((WeaponItem) k);
 					hide();
-					GameScreen.dwellerList.dwellerGui.show(dweller);
+					GuiProvider.requestGui(DwellerGui.class).show(dweller);
 				}
 			});
 			table.add(b);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -17,20 +18,21 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.SettingsGui;
-import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.threads.WorkThread;
-import info.projekt.jonas.util.InputManager;
 import info.projekt.jonas.util.MyNameJeffException;
+import info.projekt.jonas.util.NameList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.reflections.ReflectionUtils;
+import sun.reflect.misc.ReflectUtil;
 
 import java.awt.*;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Predicate;
 
 import static info.projekt.InfoProjekt.*;
 import static info.projekt.jonas.gui.RenderUtils.*;
@@ -39,13 +41,11 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  * @author Christoph
  * @author Jonas
  */
-public class GameScreen extends InputAdapter implements Screen {
+public class GameScreen extends Gui implements InputProcessor {
 
 
 	public enum Mode {NONE, SELECT, UPGRADE, PLACE, MOVE}
 
-	public static boolean guiOpen = false;
-	public static InputMultiplexer multiplexer;
 	private static Mode mode = Mode.SELECT;
 	private static String selectedRoom = "Kitchen";
 	private TextField field;
@@ -57,16 +57,12 @@ public class GameScreen extends InputAdapter implements Screen {
 	private Label water;
 	private Label energy;
 	private Stage stage;
-	private static BuildGui buildGui;
-	private static DwellerList dwellerList;
-	private static RoomGui roomGui;
 	private ImageButton mainMenuButton;
 	private ImageButton mmQuests;
 	private ImageButton mmStats;
 	private ImageButton mmSettings;
 	private ImageButton mmStorage;
 	private boolean mainMenuActivated;
-	private static SettingsGui settingsGui;
 
 	private void hideMainMenuButtons() {
 		mmStorage.setVisible(false);
@@ -107,7 +103,7 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	@Override
-	public void show() {
+	public void show(Object... o) {
 
 		stage = new Stage(new ScreenViewport());
 
@@ -149,13 +145,6 @@ public class GameScreen extends InputAdapter implements Screen {
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
 		field.setVisible(false);
 
-
-		roomGui = new RoomGui();
-		buildGui = new BuildGui();
-		dwellerList = new DwellerList();
-		settingsGui = new SettingsGui();
-		dwellerList.dwellerGui.hide();
-
 		currency = new Label(Integer.toString(GAME_STORAGE.currency), SKIN);
 		currency.setFontScale(3);
 		currency.setPosition(50, HEIGHT - 50);
@@ -190,6 +179,12 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	@Override
+	public void act(float f) {
+		render(f);
+		stage.act(f);
+		stage.draw();
+	}
+
 	public void render(float delta) {
 		keyDown();
 		Gdx.gl.glLineWidth(10);
@@ -205,19 +200,42 @@ public class GameScreen extends InputAdapter implements Screen {
 		drawOutline();
 		stage.act(Gdx.graphics.getDeltaTime());
 		stage.draw();
-		buildGui.stage.act(Gdx.graphics.getDeltaTime());
-		buildGui.stage.draw();
-		roomGui.stage.act(Gdx.graphics.getDeltaTime());
-		roomGui.stage.draw();
-		dwellerList.stage.draw();
-		dwellerList.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.stage.draw();
-		dwellerList.dwellerGui.selector.stage.act(Gdx.graphics.getDeltaTime());
-		dwellerList.dwellerGui.selector.stage.draw();
-		settingsGui.stage.act(Gdx.graphics.getDeltaTime());
-		settingsGui.stage.draw();
 		updateGui();
+	}
+
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
+	}
+
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
 	}
 
 	@Override
@@ -228,7 +246,7 @@ public class GameScreen extends InputAdapter implements Screen {
 
 	private void keyDown() {
 		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) hideGuis();
-		if(!guiOpen) {
+		if (!guiOpen) {
 			handleGuiKeys();
 			handleMiscKeys();
 			handleMouseKeys();
@@ -271,14 +289,14 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 	private void handleMoveKeys() {
-			if (Gdx.input.isKeyPressed(Input.Keys.W))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
-			else if (Gdx.input.isKeyPressed(Input.Keys.S))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
-			if (Gdx.input.isKeyPressed(Input.Keys.A))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
-			else if (Gdx.input.isKeyPressed(Input.Keys.D))
-				InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
+		if (Gdx.input.isKeyPressed(Input.Keys.W))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10));
+		else if (Gdx.input.isKeyPressed(Input.Keys.S))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(0, Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10));
+		if (Gdx.input.isKeyPressed(Input.Keys.A))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? -20 : -10, 0));
+		else if (Gdx.input.isKeyPressed(Input.Keys.D))
+			InfoProjekt.cameraManager.translateRelative(new Vector2(Gdx.input.isKeyPressed(Input.Keys.SHIFT_LEFT) ? 20 : 10, 0));
 	}
 
 	private void handleMiscKeys() {
@@ -327,7 +345,7 @@ public class GameScreen extends InputAdapter implements Screen {
 						field.setVisible(false);
 						break;
 					case "new_dweller":
-						Dweller dweller = list.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
+						Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
 						GAME_STORAGE.addDweller(dweller);
 						GAME_STORAGE.getRooms()[0][0].addDweller(dweller);
 						field.setText("");
@@ -413,37 +431,11 @@ public class GameScreen extends InputAdapter implements Screen {
 	}
 
 
-	@SuppressWarnings("deprecated")
-	@Override
-	public void dispose() {
-		stage.dispose();
-		WORK_THREAD.stop();
-	}
-
-	static void hideGuis() {
-		dwellerList.hide();
-		dwellerList.dwellerGui.hide();
-		roomGui.hide();
-		buildGui.hide();
-	}
-
-	@Override
-	public void resize(int width, int height) {
-		stage.getViewport().update(width, height, true);
-	}
-
-	@Override
-	public void pause() {
-
-	}
-
-	@Override
-	public void resume() {
-
-	}
-
 	@Override
 	public void hide() {
+		hideMainMenuButtons();
+		ReflectionUtils.getFields(GameScreen.class, Predicate<Actor> isActor = (Object o) -> o instanceof Actor).forEach(f -> {
 
+		});
 	}
 }

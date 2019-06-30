@@ -15,13 +15,17 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.Gui;
+import info.projekt.jonas.gui.RenderUtils;
 
+
+import java.awt.image.renderable.RenderableImage;
 
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 
-public class SettingsGui {
+public class SettingsGui extends Gui {
 
     public Stage stage;
     private ImageButton close;
@@ -33,7 +37,7 @@ public class SettingsGui {
     public SettingsGui() {
         //Creating a new stage
         stage = new Stage(new ScreenViewport());
-        GameScreen.multiplexer.addProcessor(stage);
+        InfoProjekt.multiplexer.addProcessor(stage);
 
         //define the volume of the music, start the music and loop it, define the snapvalues of the volumeslider, define the song
         volume = 100f;
@@ -62,8 +66,8 @@ public class SettingsGui {
 
     }
 
-
-    public void show() {
+	@Override
+    public void show(Object... o) {
 
         //setting all actors visible and add their listener
         close.setVisible(true);
@@ -85,13 +89,20 @@ public class SettingsGui {
 
             }
         });
-        GameScreen.guiOpen = true;
+        RenderUtils.guiOpen = true;
     }
 
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
+	}
+
+	@Override
     public void hide() {
         //set all actors invisible
         close.setVisible(false);
         volumeSlider.setVisible(false);
-	    GameScreen.guiOpen = false;
+	    RenderUtils.guiOpen = false;
     }
 }

@@ -11,7 +11,8 @@ import java.awt.*;
  */
 public class RenderUtils {
 
-    public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
+	public static boolean guiOpen = false;
+	public static final int WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width;
     public static final int HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height;
     public static final int HALF_WIDTH = WIDTH / 2;
     public static final int HALF_HEIGHT = HEIGHT / 2;

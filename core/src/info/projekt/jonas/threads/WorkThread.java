@@ -4,6 +4,7 @@ import com.badlogic.gdx.utils.Logger;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.util.NameList;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -28,7 +29,7 @@ public class WorkThread {
                 consumeResources();
                 pass++;
                 if (pass > 200) if (ThreadLocalRandom.current().nextBoolean()) {
-                    GAME_STORAGE.addDweller(InfoProjekt.list.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE));
+                    GAME_STORAGE.addDweller(NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE));
                     pass = 0;
                     GAME_STORAGE.getDwellers().forEach(d -> LOGGER.debug(d.toString()));
                 }

@@ -8,8 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.Gui;
+import info.projekt.jonas.gui.RenderUtils;
 
+import static info.projekt.InfoProjekt.multiplexer;
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
@@ -17,7 +21,7 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
  * @author Christoph
  */
 @SuppressWarnings("SpellCheckingInspection")
-public class BuildGui {
+public class BuildGui extends Gui {
 
 	public final Stage stage;
 	private final Table table;
@@ -101,15 +105,23 @@ public class BuildGui {
 		hide();
 	}
 
-	public void show() {
-		GameScreen.multiplexer.addProcessor(stage);
+	@Override
+	public void show(Object... o) {
+		multiplexer.addProcessor(stage);
 		table.setVisible(true);
-		GameScreen.guiOpen = true;
+		RenderUtils.guiOpen = true;
 	}
 
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
+	}
+
+	@Override
 	public void hide() {
-		GameScreen.multiplexer.removeProcessor(stage);
+		multiplexer.removeProcessor(stage);
 		table.setVisible(false);
-		GameScreen.guiOpen = false;
+		RenderUtils.guiOpen = false;
 	}
 }

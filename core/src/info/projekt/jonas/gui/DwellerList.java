@@ -14,7 +14,7 @@ import info.projekt.jonas.util.Tuple;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
-public class DwellerList {
+public class DwellerList extends Gui {
 
     public final Stage stage;
     public final DwellerGui dwellerGui;
@@ -28,7 +28,8 @@ public class DwellerList {
         dwellerGui = new DwellerGui();
     }
 
-    public void show() {
+    @Override
+    public void show(Object... o) {
         table.reset();
         Label label = new Label("Dwellers: ", SKIN);
         label.setFontScale(2.5f);
@@ -58,6 +59,7 @@ public class DwellerList {
         return buttons;
     }
 
+    @Override
     public void hide() {
         table.setVisible(false);
         GameScreen.multiplexer.removeProcessor(stage);

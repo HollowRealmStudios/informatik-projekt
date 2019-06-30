@@ -1,8 +1,6 @@
 package info.projekt.christoph;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -13,6 +11,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.Gui;
+import info.projekt.jonas.storage.GameStorage;
+import info.projekt.jonas.storage.StorageHandler;
+
+import java.io.IOException;
 
 import static info.projekt.jonas.gui.RenderUtils.*;
 
@@ -20,20 +23,34 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  * @author Christoph
  * @author Jonas
  */
-public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
+public class TitleScreen extends Gui {
 
 	private final InfoProjekt source;
-	private Stage stage;
+	private Table table;
+	public Stage stage;
 
-    public TitleScreen(InfoProjekt source) {
+
+	public TitleScreen(InfoProjekt source) {
         this.source = source;
     }
 
+	private void loadGame() {
+		try {
+			InfoProjekt.GAME_STORAGE = StorageHandler.loadGame();
+		} catch (IOException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
 
-    @Override
-    public void show() {
-        stage = new Stage(new ScreenViewport());
-	    Table table = new Table();
+	public void newGame() {
+		InfoProjekt.GAME_STORAGE = new GameStorage();
+	}
+
+
+	@Override
+    public void show(Object... o) {
+	    stage = new Stage(new ScreenViewport());
+	    table = new Table();
 	    TextButton newGame = new TextButton("New Game", SKIN);
 	    TextButton loadGame = new TextButton("Load Game", SKIN);
         newGame.getLabel().setFontScale(2, 2);
@@ -47,91 +64,28 @@ public class TitleScreen implements com.badlogic.gdx.Screen, InputProcessor {
         newGame.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                InfoProjekt.newGame();
+                newGame();
                 source.setScreen(new GameScreen());
-                Gdx.input.setInputProcessor(GameScreen.multiplexer);
             }
         });
         loadGame.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                InfoProjekt.loadGame();
+                loadGame();
                 source.setScreen(new GameScreen());
-                Gdx.input.setInputProcessor(GameScreen.multiplexer);
             }
         });
     }
 
-    @Override
-    public void render(float delta) {
-        stage.act(Gdx.graphics.getDeltaTime());
-        stage.draw();
-    }
+	@Override
+	public void act(float f) {
+		stage.act(f);
+		stage.draw();
+	}
 
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
+	@Override
     public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
-    @Override
-    public boolean keyDown(int keycode) {
-        if (keycode == Input.Keys.ESCAPE) System.exit(0);
-        return false;
-    }
-
-    @Override
-    public boolean keyUp(int keycode) {
-        return false;
-    }
-
-    @Override
-    public boolean keyTyped(char character) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-        return false;
-    }
-
-    @Override
-    public boolean touchDragged(int screenX, int screenY, int pointer) {
-        return false;
-    }
-
-    @Override
-    public boolean mouseMoved(int screenX, int screenY) {
-        return false;
-    }
-
-    @Override
-    public boolean scrolled(int amount) {
-        return false;
+		table.setVisible(false);
     }
 }
 
