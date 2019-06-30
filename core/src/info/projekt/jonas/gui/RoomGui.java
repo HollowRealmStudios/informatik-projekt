@@ -24,12 +24,10 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class RoomGui extends Gui {
 
-	public static Dweller selected;
-	private Stage stage;
-	private Table table;
-	private Label info;
-	private Dweller dweller;
-
+	static Dweller selected;
+	private final Stage stage;
+	private final Table table;
+	private final Label info;
 
 	public RoomGui() {
 		stage = new Stage(new ScreenViewport());

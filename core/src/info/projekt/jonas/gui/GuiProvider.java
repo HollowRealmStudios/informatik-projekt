@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class GuiProvider {
 
-	private static ArrayList<Gui> guis = new ArrayList<>();
+	private static final ArrayList<Gui> guis = new ArrayList<>();
 
 	public static void registerGui(@NotNull Class<? extends Gui> gui) {
 		try {
@@ -16,6 +16,7 @@ public class GuiProvider {
 		}
 	}
 
+	@SuppressWarnings("ConstantConditions")
 	@NotNull
 	public static Gui requestGui(@NotNull Class<? extends Gui> c) {
 		for (Gui gui : guis) if (gui.getClass().equals(c)) return gui;

@@ -11,14 +11,6 @@ public class InputManager extends InputMultiplexer {
 
 	private final HashMap<InputProcessor, Integer> processors = new HashMap<>();
 
-	public void suspendProcessor(InputProcessor processor, int clicks) {
-		processors.put(processor, clicks);
-	}
-
-	public boolean isSuspended(InputProcessor processor) {
-		return processors.containsKey(processor);
-	}
-
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		for (Map.Entry<InputProcessor, Integer> entry : processors.entrySet()) {

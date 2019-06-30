@@ -23,11 +23,11 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 public class SettingsGui extends Gui {
 
-	private Stage stage;
-	private ImageButton close;
-	private Slider volumeSlider;
+	private final Stage stage;
+	private final ImageButton close;
+	private final Slider volumeSlider;
 	private float volume;
-	private Music music;
+	private final Music music;
 
 
 	public SettingsGui() {

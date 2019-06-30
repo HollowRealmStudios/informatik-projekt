@@ -21,11 +21,11 @@ public class GameStorage implements Serializable {
 
 	public int currency;
 
-	public LimitedInt food = new LimitedInt(0, 1000, false);
+	public final LimitedInt food = new LimitedInt(0, 1000, false);
 
-	public LimitedInt energy = new LimitedInt(0, 1000, false);
+	public final LimitedInt energy = new LimitedInt(0, 1000, false);
 
-	public LimitedInt water = new LimitedInt(0, 1000, false);
+	public final LimitedInt water = new LimitedInt(0, 1000, false);
 
 	public void addDweller(Dweller dweller) {
 		DWELLERS.add(dweller);

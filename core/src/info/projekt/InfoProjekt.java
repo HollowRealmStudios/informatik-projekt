@@ -52,6 +52,7 @@ public class InfoProjekt extends Game {
 	public void render() {
 		renderer.setProjectionMatrix(cameraManager.getMatrix());
 		batch.setProjectionMatrix(cameraManager.getMatrix());
+		//noinspection ConstantConditions
 		if (GuiProvider.requestGui(GameScreen.class) != null)
 			((GameScreen) GuiProvider.requestGui(GameScreen.class)).render();
 		GuiProvider.getGuis().forEach(g -> g.act(Gdx.graphics.getDeltaTime()));

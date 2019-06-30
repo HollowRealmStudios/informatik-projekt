@@ -83,10 +83,4 @@ public class Registry {
 		return ITEMS.get(name);
 	}
 
-	public static String allToString() {
-		StringBuilder b = new StringBuilder();
-		ROOMS.forEach((key, value) -> b.append(value.getClass().getSimpleName()).append("\n"));
-		ITEMS.forEach((key, value) -> b.append(value.toString()).append("\n"));
-		return b.toString();
-	}
 }

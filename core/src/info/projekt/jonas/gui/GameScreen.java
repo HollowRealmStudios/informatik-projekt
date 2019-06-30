@@ -23,8 +23,6 @@ import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.MyNameJeffException;
 import info.projekt.jonas.util.NameList;
-import org.apache.commons.lang3.ObjectUtils;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
@@ -43,20 +41,20 @@ public class GameScreen extends Gui {
 
 	static boolean moving;
 	private static String selectedRoom = "Kitchen";
-	private TextField field;
-	private ImageButton buildMenuButton;
-	private ImageButton dwellerListButton;
-	private Texture EMPTY;
-	private Label currency;
-	private Label food;
-	private Label water;
-	private Label energy;
-	private Stage stage;
-	private ImageButton mainMenuButton;
-	private ImageButton mmQuests;
-	private ImageButton mmStats;
-	private ImageButton mmSettings;
-	private ImageButton mmStorage;
+	private final TextField field;
+	private final ImageButton buildMenuButton;
+	private final ImageButton dwellerListButton;
+	private final Texture EMPTY;
+	private final Label currency;
+	private final Label food;
+	private final Label water;
+	private final Label energy;
+	private final Stage stage;
+	private final ImageButton mainMenuButton;
+	private final ImageButton mmQuests;
+	private final ImageButton mmStats;
+	private final ImageButton mmSettings;
+	private final ImageButton mmStorage;
 	private boolean mainMenuActivated;
 
 	public GameScreen() {

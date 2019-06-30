@@ -16,8 +16,8 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class DwellerList extends Gui {
 
-	private Stage stage;
-	private Table table;
+	private final Stage stage;
+	private final Table table;
 
 	public DwellerList() {
 		stage = new Stage(new ScreenViewport());

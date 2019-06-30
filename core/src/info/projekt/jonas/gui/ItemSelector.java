@@ -21,7 +21,7 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class ItemSelector extends Gui {
 
-	public final Stage stage;
+	private final Stage stage;
 	private final Table table;
 
 	public ItemSelector() {

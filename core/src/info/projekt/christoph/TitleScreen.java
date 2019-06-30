@@ -26,8 +26,8 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  */
 public class TitleScreen extends Gui {
 
-	private Stage stage;
-	private Table table;
+	private final Stage stage;
+	private final Table table;
 
 	public TitleScreen() {
 		stage = new Stage(new ScreenViewport());
