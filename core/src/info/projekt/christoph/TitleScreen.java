@@ -85,6 +85,7 @@ public class TitleScreen extends Gui {
 		GuiProvider.registerGui(BuildGui.class);
 		GuiProvider.registerGui(SettingsGui.class);
 		GuiProvider.registerGui(GameScreen.class);
+		GuiProvider.registerGui(ExplorationGui.class);
 		hide();
 		Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
 	}
