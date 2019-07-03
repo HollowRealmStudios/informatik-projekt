@@ -41,6 +41,7 @@ public class TitleScreen extends Gui {
 	}
 
 	private void newGame() {
+
 		InfoProjekt.GAME_STORAGE = new GameStorage();
 	}
 
