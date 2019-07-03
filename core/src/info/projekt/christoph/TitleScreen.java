@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.*;
+import info.projekt.jonas.rooms.EntranceRoom;
 import info.projekt.jonas.rooms.Kitchen;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
@@ -34,16 +35,16 @@ public class TitleScreen extends Gui {
 
 	private void loadGame() {
 		try {
-			InfoProjekt.GAME_STORAGE = StorageHandler.loadGame();
+			GAME_STORAGE = StorageHandler.loadGame();
 		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 
 	private void newGame() {
-		InfoProjekt.GAME_STORAGE = new GameStorage();
+		GAME_STORAGE = new GameStorage();
+		GAME_STORAGE.setRoom(new EntranceRoom(), 0, 49);
 	}
-
 
 	@Override
 	public void dispose() {
