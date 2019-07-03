@@ -25,20 +25,23 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 public class RoomGui extends Gui {
 
 	static Dweller selected;
-	private final Stage stage;
 	private final Table table;
 	private final Label info;
 
 	public RoomGui() {
-		stage = new Stage(new ScreenViewport());
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-		info = new Label("", SKIN);
+		info = new Label("", STYLE);
 		info.setFontScale(2.5f);
 		table.add(info);
 		table.row().padTop(30f);
 		stage.addActor(table);
 		table.setVisible(false);
+	}
+
+	@Override
+	public void dispose() {
+		stage.dispose();
 	}
 
 	@Override

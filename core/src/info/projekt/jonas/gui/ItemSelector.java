@@ -21,14 +21,17 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 public class ItemSelector extends Gui {
 
-	private final Stage stage;
 	private final Table table;
 
 	public ItemSelector() {
-		stage = new Stage(new ScreenViewport());
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 		stage.addActor(table);
+	}
+
+	@Override
+	public void dispose() {
+		stage.dispose();
 	}
 
 	@Override

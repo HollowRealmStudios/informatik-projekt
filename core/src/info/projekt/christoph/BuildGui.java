@@ -22,11 +22,9 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 @SuppressWarnings("SpellCheckingInspection")
 public class BuildGui extends Gui {
 
-	private final Stage stage;
 	private final Table table;
 
 	public BuildGui() {
-		stage = new Stage(new ScreenViewport());
 		table = new Table();
 
 		ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("EngineRoom/EngineRoom_1.png")));
@@ -96,6 +94,11 @@ public class BuildGui extends Gui {
 			}
 		});
 		hide();
+	}
+
+	@Override
+	public void dispose() {
+		stage.dispose();
 	}
 
 	@Override

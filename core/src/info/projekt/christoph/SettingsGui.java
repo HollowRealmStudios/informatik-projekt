@@ -23,7 +23,6 @@ import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
 public class SettingsGui extends Gui {
 
-	private final Stage stage;
 	private final ImageButton close;
 	private final Slider volumeSlider;
 	private float volume;
@@ -31,8 +30,6 @@ public class SettingsGui extends Gui {
 
 
 	public SettingsGui() {
-		//Creating a new stage
-		stage = new Stage(new ScreenViewport());
 		InfoProjekt.multiplexer.addProcessor(stage);
 
 		//define the volume of the music, start the music and loop it, define the snapvalues of the volumeslider, define the song
@@ -60,6 +57,11 @@ public class SettingsGui extends Gui {
 		stage.addActor(close);
 		stage.addActor(volumeSlider);
 
+	}
+
+	@Override
+	public void dispose() {
+		stage.dispose();
 	}
 
 	@Override

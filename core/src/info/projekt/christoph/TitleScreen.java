@@ -26,11 +26,9 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  */
 public class TitleScreen extends Gui {
 
-	private final Stage stage;
 	private final Table table;
 
 	public TitleScreen() {
-		stage = new Stage(new ScreenViewport());
 		table = new Table();
 	}
 
@@ -46,6 +44,11 @@ public class TitleScreen extends Gui {
 		InfoProjekt.GAME_STORAGE = new GameStorage();
 	}
 
+
+	@Override
+	public void dispose() {
+		stage.dispose();
+	}
 
 	@Override
 	public void show(Object... o) {

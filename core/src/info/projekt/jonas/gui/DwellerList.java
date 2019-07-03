@@ -16,23 +16,24 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 
 public class DwellerList extends Gui {
 
-	private final Stage stage;
 	private final Table table;
 
 	public DwellerList() {
-		stage = new Stage(new ScreenViewport());
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 		stage.addActor(table);
 	}
 
 	@Override
+	public void dispose() {
+		stage.dispose();
+	}
+
+	@Override
 	public void show(Object... o) {
 		InfoProjekt.multiplexer.addProcessor(stage);
 		table.reset();
-		Label label = new Label("Dwellers: ", SKIN);
-		label.setFontScale(2.5f);
-		table.add(label).padTop(30f);
+		table.add(new Label("Dwellers: ", STYLE)).padTop(30f);
 		table.row();
 		getDwellers().forEach(tuple -> {
 			table.add(tuple.getOne()).padTop(20f);

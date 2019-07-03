@@ -11,11 +11,9 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 public class ExplorationGui extends Gui {
 
     private Table table;
-    private Stage stage;
     private TextField field;
 
     public ExplorationGui() {
-        stage = new Stage(new ScreenViewport());
         table = new Table();
         table.setPosition(HALF_WIDTH, HALF_HEIGHT);
         field = new TextField("", SKIN);
@@ -23,6 +21,11 @@ public class ExplorationGui extends Gui {
         stage.addActor(table);
         table.add(field).size(500, 500);
         hide();
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 
     @Override

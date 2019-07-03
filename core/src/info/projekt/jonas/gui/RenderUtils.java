@@ -1,7 +1,10 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 import java.awt.*;
@@ -18,6 +21,8 @@ public class RenderUtils {
 	public static final int CELL_WIDTH = 400;
 	public static final int CELL_HEIGHT = 200;
 	public static final Skin SKIN = new Skin(Gdx.files.internal("tracer/skin/tracer-ui.json"));
+	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("Ubuntu.fnt"));
+	public static final Label.LabelStyle STYLE = new Label.LabelStyle(FONT, com.badlogic.gdx.graphics.Color.BLACK);
 	public static boolean guiOpen = false;
 
 	/**
