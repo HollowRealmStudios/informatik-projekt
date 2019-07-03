@@ -4,12 +4,6 @@ import info.projekt.jonas.gui.Gui;
 
 public class LoadingScreen extends Gui {
 
-
-    @Override
-    public void dispose() {
-        stage.dispose();
-    }
-
     @Override
     public void show(Object... o) {
 
@@ -17,11 +11,17 @@ public class LoadingScreen extends Gui {
 
     @Override
     public void act(float f) {
-
+        stage.act(f);
+        stage.draw();
     }
 
     @Override
     public void hide() {
 
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
     }
 }

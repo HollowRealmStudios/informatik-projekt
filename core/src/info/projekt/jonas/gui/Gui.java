@@ -6,6 +6,7 @@ import info.projekt.jonas.util.InputManager;
 
 public abstract class Gui extends InputManager {
 
+
     protected Stage stage = new Stage(new ScreenViewport());
 
     public abstract void dispose();
