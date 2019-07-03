@@ -4,9 +4,9 @@ import info.projekt.jonas.util.InputManager;
 
 public abstract class Gui extends InputManager {
 
-	public abstract void show(Object... o);
+    public abstract void show(Object... o);
 
-	public abstract void act(float f);
+    public abstract void act(float f);
 
-	public abstract void hide();
+    public abstract void hide();
 }

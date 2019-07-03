@@ -219,6 +219,7 @@ public class GameScreen extends Gui {
 			stage.setKeyboardFocus(field);
 			guiOpen = true;
 		}
+		if(Gdx.input.isKeyPressed(Input.Keys.F)) GuiProvider.requestGui(ExplorationGui.class).show();
 	}
 
 	private void addListeners() {
