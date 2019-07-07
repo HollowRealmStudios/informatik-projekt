@@ -21,7 +21,7 @@ public class CraftingRecipe {
 		return ingredients;
 	}
 
-	public boolean enoughIngredients(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
+	private boolean enoughIngredients(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
 		for (Map.Entry<CraftingComponent, Integer> entry : ingredients.entrySet()) {
 			if (!(this.ingredients.containsKey(entry.getKey()) && entry.getValue() >= this.ingredients.get(entry.getKey())))
 				return false;

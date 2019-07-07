@@ -1,6 +1,7 @@
 package info.projekt.jonas.storage;
 
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.items.CraftingComponent;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.InfoCenter;
@@ -9,6 +10,7 @@ import info.projekt.jonas.util.LimitedInt;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * @author Jonas
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 public class GameStorage implements Serializable {
 
 	private final Room[][] ROOMS = new Room[5][50];
+
+	public final HashMap<CraftingComponent, Integer> COMPONENTS = new HashMap<>();
 
 	public final LimitedArrayList<Item> ITEMS = new LimitedArrayList<>(InfoCenter.storageCapacity);
 
