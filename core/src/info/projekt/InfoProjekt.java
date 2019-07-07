@@ -41,10 +41,12 @@ public class InfoProjekt extends Game {
 		try {
 			Registry.registerArmors();
 			Registry.registerWeapons();
+			Registry.registerRooms();
+			Registry.registerComponents();
+			Registry.registerRecipes();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		Registry.registerRooms();
 		Objects.requireNonNull(GuiProvider.requestGui(TitleScreen.class)).show();
 		Registry.debug();
 	}

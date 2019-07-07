@@ -63,8 +63,6 @@ public class TitleScreen extends Gui {
 		InfoProjekt.multiplexer.addProcessor(stage);
 		TextButton newGame = new TextButton("New Game", SKIN);
 		TextButton loadGame = new TextButton("Load Game", SKIN);
-		newGame.getLabel().setFontScale(2, 2);
-		loadGame.getLabel().setFontScale(2, 2);
 		table.background(new TextureRegionDrawable(new Texture("TitleScreenBackground.png"))).setSize(WIDTH, HEIGHT);
 		table.add(newGame).width(HALF_WIDTH).height(HEIGHT / 10);
 		table.row().padTop(50);
