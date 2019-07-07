@@ -46,6 +46,7 @@ public class InfoProjekt extends Game {
 		}
 		Registry.registerRooms();
 		Objects.requireNonNull(GuiProvider.requestGui(TitleScreen.class)).show();
+		Registry.debug();
 	}
 
 	@Override

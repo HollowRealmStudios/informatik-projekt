@@ -2,16 +2,13 @@ package info.projekt.christoph;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.*;
-import info.projekt.jonas.rooms.EntranceRoom;
-import info.projekt.jonas.rooms.Kitchen;
+import info.projekt.jonas.rooms.*;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 
@@ -19,6 +16,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.InfoProjekt.WORK_THREAD;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
@@ -44,6 +42,15 @@ public class TitleScreen extends Gui {
 	private void newGame() {
 		GAME_STORAGE = new GameStorage();
 		GAME_STORAGE.setRoom(new EntranceRoom(), 0, 49);
+		GAME_STORAGE.setRoom(new EngineRoom(), 1, 49);
+		GAME_STORAGE.setRoom(new SewageTreatmentPlant(), 2, 49);
+		GAME_STORAGE.setRoom(new KitchenRoom(), 3, 49);
+		GAME_STORAGE.setRoom(new BarrackRoom(), 4, 49);
+		GAME_STORAGE.setRoom(new MineshaftRoom(), 0, 0);
+		GAME_STORAGE.setRoom(new MineshaftRoom(), 1, 0);
+		GAME_STORAGE.setRoom(new MineshaftRoom(), 2, 0);
+		GAME_STORAGE.setRoom(new MineshaftRoom(), 3, 0);
+		GAME_STORAGE.setRoom(new MineshaftRoom(), 4, 0);
 	}
 
 	@Override
@@ -67,7 +74,6 @@ public class TitleScreen extends Gui {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
 				newGame();
-				GAME_STORAGE.getRooms()[0][0] = new Kitchen();
 				register();
 			}
 		});
@@ -90,8 +96,10 @@ public class TitleScreen extends Gui {
 		GuiProvider.registerGui(SettingsGui.class);
 		GuiProvider.registerGui(GameScreen.class);
 		GuiProvider.registerGui(ExplorationGui.class);
-		hide();
+		GuiProvider.registerGui(ItemList.class);
 		Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
+		WORK_THREAD.start();
+		hide();
 	}
 
 	@Override

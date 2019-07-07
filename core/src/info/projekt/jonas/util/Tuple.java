@@ -2,6 +2,9 @@ package info.projekt.jonas.util;
 
 import java.io.Serializable;
 
+/**
+ * @author Jonas
+ */
 public class Tuple<V, K> implements Serializable {
 
 	private V v;

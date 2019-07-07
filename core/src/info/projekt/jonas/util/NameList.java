@@ -6,7 +6,11 @@ import info.projekt.jonas.dwellers.WeightedRandom;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * @author Jonas
+ */
 public class NameList {
 
 	private static final ArrayList<Dweller> dwellersMale = new ArrayList<>();
@@ -27,11 +31,11 @@ public class NameList {
 
 	public static Dweller nextDweller(Dweller.GENDER gender) {
 		if (gender == Dweller.GENDER.MALE) {
-			Dweller d = dwellersMale.get(0);
+			Dweller d = dwellersMale.get(ThreadLocalRandom.current().nextInt(0, dwellersMale.size()));
 			dwellersMale.remove(d);
 			return d;
 		} else {
-			Dweller d = dwellersFemale.get(0);
+			Dweller d = dwellersFemale.get(ThreadLocalRandom.current().nextInt(0, dwellersFemale.size()));
 			dwellersFemale.remove(d);
 			return d;
 		}

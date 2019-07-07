@@ -12,13 +12,11 @@ public abstract class Item implements Serializable {
 	/**
 	 * The name of the item
 	 */
-	@SuppressWarnings("WeakerAccess")
 	public final String name;
 
 	/**
 	 * The texture of the item
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected transient Texture texture;
 
 	/**
@@ -27,7 +25,6 @@ public abstract class Item implements Serializable {
 	 * @param texture the item's texture
 	 * @param name    the item's name
 	 */
-	@SuppressWarnings("WeakerAccess")
 	protected Item(Texture texture, String name) {
 		this.texture = texture;
 		this.name = name;

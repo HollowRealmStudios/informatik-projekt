@@ -1,11 +1,13 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 
@@ -30,7 +32,7 @@ public class RenderUtils {
 	 *
 	 * @param c The background color
 	 */
-	public static void clearScreen(Color c) {
+	public static void clearScreen(@NotNull Color c) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);
 	}
@@ -39,9 +41,15 @@ public class RenderUtils {
 		GuiProvider.getGuis().forEach(Gui::hide);
 	}
 
+	public static void drawBackground(@NotNull SpriteBatch batch, Texture texture) {
+		batch.begin();
+		batch.draw(texture, 0, 0, WIDTH, HEIGHT);
+		batch.end();
+	}
+
 	public static void hideAllGuisExcept(Class<? extends Gui> gui) {
 		GuiProvider.getGuis().forEach(g -> {
-			if(!g.getClass().equals(gui)) g.hide();
+			if (!g.getClass().equals(gui)) g.hide();
 		});
 	}
 }

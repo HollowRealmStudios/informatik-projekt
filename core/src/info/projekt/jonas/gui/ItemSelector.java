@@ -1,24 +1,26 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.util.LimitedInt;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
 import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
+/**
+ * @author Jonas
+ */
 public class ItemSelector extends Gui {
 
 	private final Table table;
@@ -35,7 +37,7 @@ public class ItemSelector extends Gui {
 	}
 
 	@Override
-	public void show(Object... o) {
+	public void show(@NotNull Object... o) {
 		@SuppressWarnings("unchecked")
 		HashMap<String, Item> map = (HashMap<String, Item>) o[0];
 		Dweller dweller = (Dweller) o[1];
@@ -47,7 +49,6 @@ public class ItemSelector extends Gui {
 			b.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					System.out.println(k.toString());
 					if (k instanceof ArmorItem) dweller.setArmor((ArmorItem) k);
 					else dweller.setWeapon((WeaponItem) k);
 					hide();
@@ -73,6 +74,7 @@ public class ItemSelector extends Gui {
 	public void hide() {
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
+		GuiProvider.requestGui(GameScreen.class).show();
 		RenderUtils.guiOpen = false;
 	}
 }

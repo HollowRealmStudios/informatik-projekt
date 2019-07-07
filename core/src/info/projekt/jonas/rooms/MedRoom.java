@@ -1,7 +1,8 @@
 package info.projekt.jonas.rooms;
 
-//FIXME
-@SuppressWarnings("unused")
+/**
+ * @author Jonas
+ */
 public class MedRoom extends Room {
 
 	public MedRoom() {
@@ -17,5 +18,10 @@ public class MedRoom extends Room {
 	@Override
 	public void consume() {
 
+	}
+
+	@Override
+	public boolean enoughResources() {
+		return true;
 	}
 }

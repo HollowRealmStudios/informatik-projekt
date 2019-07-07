@@ -4,6 +4,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+/**
+ * @author Jonas
+ */
 public class GuiProvider {
 
 	private static final ArrayList<Gui> guis = new ArrayList<>();

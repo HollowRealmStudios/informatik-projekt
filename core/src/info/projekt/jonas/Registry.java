@@ -8,6 +8,7 @@ import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.rooms.Room;
+import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
 
 import java.io.FileReader;
@@ -16,7 +17,6 @@ import java.util.HashMap;
 
 /**
  * @author Jonas
- * Registry used to register new rooms, dwellers and items
  */
 public class Registry {
 
@@ -61,6 +61,7 @@ public class Registry {
 	 * @return the room with the name specified
 	 * @see Room
 	 */
+	@Nullable
 	public static Room getRoom(String name) {
 		try {
 			return ROOMS.get(name).getClass().newInstance();
@@ -83,4 +84,13 @@ public class Registry {
 		return ITEMS.get(name);
 	}
 
+
+	public static void debug() {
+		StringBuilder b = new StringBuilder();
+		ITEMS.forEach((v, k) -> {
+			b.append(k.toString());
+			b.append("\n");
+		});
+		System.out.println(b.toString());
+	}
 }

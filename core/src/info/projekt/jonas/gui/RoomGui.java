@@ -2,14 +2,12 @@ package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.rooms.Room;
@@ -22,6 +20,9 @@ import static info.projekt.InfoProjekt.GAME_STORAGE;
 import static info.projekt.InfoProjekt.WORK_THREAD;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
+/**
+ * @author Jonas
+ */
 public class RoomGui extends Gui {
 
 	static Dweller selected;
@@ -32,7 +33,6 @@ public class RoomGui extends Gui {
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 		info = new Label("", STYLE);
-		info.setFontScale(2.5f);
 		table.add(info);
 		table.row().padTop(30f);
 		stage.addActor(table);
@@ -51,7 +51,7 @@ public class RoomGui extends Gui {
 		InfoProjekt.multiplexer.addProcessor(stage);
 		info.setText(room.getName() + ", " + room.getLevel());
 		table.add(info);
-		table.row().padTop(20f);
+		table.row();
 		getDwellers(room).forEach(label -> {
 			table.add(label.getOne()).padTop(20f);
 			label.getOne().addListener(new ClickListener() {
@@ -65,8 +65,8 @@ public class RoomGui extends Gui {
 					hide();
 				}
 			});
+			table.row();
 		});
-		table.row().padTop(20f);
 		if (room.upgradable()) {
 			ImageButton button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 			button.setScale(5, 5);

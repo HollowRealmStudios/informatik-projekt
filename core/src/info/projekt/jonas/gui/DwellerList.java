@@ -1,19 +1,22 @@
 package info.projekt.jonas.gui;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.Tuple;
 
+import java.util.ArrayList;
+
 import static info.projekt.jonas.gui.RenderUtils.*;
 
+/**
+ * @author Jonas
+ */
 public class DwellerList extends Gui {
 
 	private final Table table;
@@ -57,8 +60,8 @@ public class DwellerList extends Gui {
 		stage.draw();
 	}
 
-	private LimitedArrayList<Tuple<TextButton, Dweller>> getDwellers() {
-		LimitedArrayList<Tuple<TextButton, Dweller>> buttons = new LimitedArrayList<>(4);
+	private ArrayList<Tuple<TextButton, Dweller>> getDwellers() {
+		ArrayList<Tuple<TextButton, Dweller>> buttons = new ArrayList<>();
 		InfoProjekt.GAME_STORAGE.getDwellers().forEach(dweller -> buttons.add(new Tuple<>(new TextButton(dweller.toString(), SKIN), dweller)));
 		return buttons;
 	}

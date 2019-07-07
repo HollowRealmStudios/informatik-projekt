@@ -2,7 +2,9 @@ package info.projekt.jonas.util;
 
 import java.io.Serializable;
 
-@SuppressWarnings("unused")
+/**
+ * @author Jonas
+ */
 public class LimitedInt extends Number implements Serializable {
 
 	private final int lower;

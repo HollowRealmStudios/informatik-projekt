@@ -1,11 +1,12 @@
 package info.projekt.jonas.rooms;
 
 
-//FIXME
-@SuppressWarnings("unused")
-public class Barracks extends Room {
+/**
+ * @author Jonas
+ */
+public class BarrackRoom extends Room {
 
-	public Barracks() {
+	public BarrackRoom() {
 		super("Barracks", "Barracks/Barracks_1.png", "Barracks/Barracks_2.png", "Barracks/Barracks_3.png");
 		setCost(800);
 	}
@@ -18,5 +19,10 @@ public class Barracks extends Room {
 	@Override
 	public void consume() {
 
+	}
+
+	@Override
+	public boolean enoughResources() {
+		return true;
 	}
 }

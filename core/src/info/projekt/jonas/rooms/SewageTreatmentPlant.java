@@ -2,7 +2,9 @@ package info.projekt.jonas.rooms;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
 
-@SuppressWarnings("unused")
+/**
+ * @author Jonas
+ */
 public class SewageTreatmentPlant extends Room {
 
 	public SewageTreatmentPlant() {
@@ -12,12 +14,16 @@ public class SewageTreatmentPlant extends Room {
 
 	@Override
 	public void produce() {
-		dwellers.forEach(d -> GAME_STORAGE.water.add(d.getIntelligence()));
+		dwellers.forEach(d -> GAME_STORAGE.water.add(3 * d.getIntelligence()));
 	}
 
 	@Override
 	public void consume() {
-		dwellers.forEach(d -> GAME_STORAGE.energy.subtract(4));
-		dwellers.forEach(d -> GAME_STORAGE.food.subtract(4));
+
+	}
+
+	@Override
+	public boolean enoughResources() {
+		return true;
 	}
 }

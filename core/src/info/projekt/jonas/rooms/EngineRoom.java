@@ -2,7 +2,9 @@ package info.projekt.jonas.rooms;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
 
-@SuppressWarnings("unused")
+/**
+ * @author Jonas
+ */
 public class EngineRoom extends Room {
 
 	public EngineRoom() {
@@ -12,11 +14,15 @@ public class EngineRoom extends Room {
 
 	@Override
 	public void produce() {
-		dwellers.forEach(d -> GAME_STORAGE.energy.add(d.getStrength()));
+		dwellers.forEach(d -> GAME_STORAGE.energy.add(3 * d.getStrength()));
 	}
 
 	@Override
-	public void consume() {
-		dwellers.forEach(d -> GAME_STORAGE.food.subtract(4));
+	public void consume() {dwellers.forEach(d -> GAME_STORAGE.food.subtract(4));
+	}
+
+	@Override
+	public boolean enoughResources() {
+		return true;
 	}
 }

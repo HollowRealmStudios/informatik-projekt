@@ -56,7 +56,7 @@ public class Dweller implements Serializable {
 	}
 
 	public Texture getTexture() {
-		if (texture == null) texture = new Texture(gender == GENDER.MALE ? "Male.png" : "Female.png");
+		if (texture == null) texture = new Texture(gender == GENDER.MALE ? "Dweller.png" : "Female.png");
 		return texture;
 	}
 

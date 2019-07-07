@@ -1,44 +1,58 @@
 package info.projekt.jonas.threads;
 
-import com.badlogic.gdx.utils.Logger;
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.NameList;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.jonas.gui.GameScreen.notification;
+import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
-public class WorkThread {
+/**
+ * @author Jonas
+ */
+public class WorkThread extends Thread {
 
+	public enum NOTIFICATION {PLACED, UPGRADED, DWELLER}
 
-	private final Logger LOGGER = new Logger("Work Thread");
-	private final Thread thread;
 	private boolean newDweller;
 	private boolean roomPlaced;
 	private boolean roomUpgraded;
 	private int pass;
+	private final int delay;
 
 	public WorkThread(int delay) {
-		thread = new Thread(() -> {
-			while (true) {
-				LOGGER.debug(GAME_STORAGE.energy + " | " + GAME_STORAGE.water + " | " + GAME_STORAGE.food);
-				notifyRooms();
-				generateResources();
-				consumeResources();
-				pass++;
-				if (pass > 200) if (ThreadLocalRandom.current().nextBoolean()) {
-					GAME_STORAGE.addDweller(NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE));
-					pass = 0;
-					GAME_STORAGE.getDwellers().forEach(d -> LOGGER.debug(d.toString()));
+		this.delay = delay;
+	}
+
+	@Override
+	public void run() {
+		while (true) {
+			notifyRooms();
+			generateResources();
+			consumeResources();
+			pass++;
+			if (pass > 5) if (ThreadLocalRandom.current().nextBoolean()) {
+				if (GAME_STORAGE.getRooms()[0][49].getDwellers().size() <= 3 && !GameScreen.moving) {
+					Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
+					GAME_STORAGE.addDweller(dweller);
+					GAME_STORAGE.getRooms()[0][49].addDweller(dweller);
+					notification.setPosition(HALF_WIDTH, 100, 1);
+					notification.show("New Dweller: " + dweller.toString(), 5);
+				} else {
+					notification.show("Your entrance is full!", 5);
 				}
-				try {
-					Thread.sleep(delay);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+				pass = 0;
 			}
-		});
+			try {
+				Thread.sleep(delay);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	private void notifyRooms() {
@@ -61,6 +75,7 @@ public class WorkThread {
 		for (Room[] rooms : GAME_STORAGE.getRooms()) {
 			for (Room room : rooms) {
 				if (room != null) {
+
 					room.produce();
 				}
 			}
@@ -77,15 +92,6 @@ public class WorkThread {
 		}
 	}
 
-	public void start() {
-		thread.start();
-	}
-
-	@SuppressWarnings("deprecation")
-	public void stop() {
-		thread.stop();
-	}
-
 	public void notify(NOTIFICATION notification) {
 		switch (notification) {
 			case PLACED:
@@ -99,6 +105,4 @@ public class WorkThread {
 				break;
 		}
 	}
-
-	public enum NOTIFICATION {PLACED, UPGRADED, DWELLER}
 }

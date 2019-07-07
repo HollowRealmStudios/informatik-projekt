@@ -6,13 +6,11 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.gui.Gui;
 import info.projekt.jonas.gui.RenderUtils;
@@ -20,7 +18,9 @@ import info.projekt.jonas.gui.RenderUtils;
 import static info.projekt.jonas.gui.RenderUtils.HEIGHT;
 import static info.projekt.jonas.gui.RenderUtils.WIDTH;
 
-
+/**
+ * @author Christoph
+ */
 public class SettingsGui extends Gui {
 
 	private final ImageButton close;
@@ -39,13 +39,13 @@ public class SettingsGui extends Gui {
 		music.setLooping(true);
 
 		//creating a close button, set its position and size, set it invisible
-		close = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
+		close = new ImageButton(new TextureRegionDrawable(new Texture("Close.png")));
 		close.setPosition(20f / 28f * WIDTH, 20f / 28f * HEIGHT);
 		close.setSize(1f / 14f * WIDTH, 1f / 14f * HEIGHT);
 		close.setVisible(false);
 
 		//creating a volumeslider ( define its minimum and maximum, the step size and 1: slider; 2: knob pictures ),set its position, set its size, set its snapvalues, set it invisible, set its value to the current volume level
-		volumeSlider = new Slider(0f, 100f, 1f, false, new Slider.SliderStyle(new TextureRegionDrawable(new Texture("Slider.png")), new TextureRegionDrawable(new Texture("Arrow.png"))));
+		volumeSlider = new Slider(0f, 100f, 1f, false, new Slider.SliderStyle(new TextureRegionDrawable(new Texture("Slider.png")), new TextureRegionDrawable(new Texture("Cursor.png"))));
 		volumeSlider.setPosition(7f / 28f * WIDTH, 14f / 28f * HEIGHT);
 		volumeSlider.setSize(7f / 14f * WIDTH, 1f / 28f * HEIGHT);
 		volumeSlider.setSnapToValues(new float[]{0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100}, 2.5f);
