@@ -21,13 +21,23 @@ public class CraftingRecipe {
 		return ingredients;
 	}
 
-	public boolean enoughIgredients(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
+	public boolean enoughIngredients(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
 		for (Map.Entry<CraftingComponent, Integer> entry : ingredients.entrySet()) {
 			if (!(this.ingredients.containsKey(entry.getKey()) && entry.getValue() >= this.ingredients.get(entry.getKey())))
 				return false;
 		}
 		return true;
 	}
+
+	public Item craft(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
+		if(!enoughIngredients(ingredients)) throw new IllegalArgumentException("Not enough or fitting ingredients");
+		for (Map.Entry<CraftingComponent, Integer> entry : ingredients.entrySet()) {
+			entry.setValue(entry.getValue() - this.ingredients.get(entry.getKey()));
+			ingredients.put(entry.getKey(), entry.getValue());
+		}
+		return result;
+	}
+
 
 	@Override
 	public String toString() {
