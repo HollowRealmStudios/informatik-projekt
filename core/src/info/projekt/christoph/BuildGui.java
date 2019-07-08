@@ -25,7 +25,7 @@ public class BuildGui extends Gui {
 	public BuildGui() {
 		table = new Table();
 
-		ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("EngineRoom/EngineRoom_1.png")));
+		ImageButton eroom = new ImageButton(new TextureRegionDrawable(new Texture("EngineSell.png")));
 		ImageButton wroom = new ImageButton(new TextureRegionDrawable(new Texture("SewageTreatmentPlant/SewageTreatmentPlant_1.png")));
 		ImageButton froom = new ImageButton(new TextureRegionDrawable(new Texture("Kitchen/Kitchen_1.png")));
 		ImageButton hroom = new ImageButton(new TextureRegionDrawable(new Texture("MedRoom/MedRoom_1.png")));
