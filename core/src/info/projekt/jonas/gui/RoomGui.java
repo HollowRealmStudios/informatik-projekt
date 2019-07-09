@@ -18,7 +18,8 @@ import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
 import static info.projekt.InfoProjekt.WORK_THREAD;
-import static info.projekt.jonas.gui.RenderUtils.*;
+import static info.projekt.jonas.gui.RenderUtils.SKIN;
+import static info.projekt.jonas.gui.RenderUtils.STYLE;
 
 /**
  * @author Jonas
@@ -28,11 +29,13 @@ public class RoomGui extends Gui {
 	static Dweller selected;
 	private final Table table;
 	private final Label info;
+	private final ImageButton button;
 
 	public RoomGui() {
 		table = new Table();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		table.setFillParent(true);
 		info = new Label("", STYLE);
+		button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 		table.add(info);
 		table.row().padTop(30f);
 		stage.addActor(table);
@@ -60,22 +63,22 @@ public class RoomGui extends Gui {
 					if (selected == null) {
 						selected = label.getTwo();
 						room.removeDweller(selected);
-						GameScreen.moving = true;
+						GameScreenGui.moving = true;
 					}
 					hide();
 				}
 			});
 			table.row();
+			table.validate();
 		});
 		if (room.upgradable()) {
-			ImageButton button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 			button.setScale(5, 5);
 			if (room.upgradable()) table.add(button);
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					if (GAME_STORAGE.currency >= room.getCost() + (room.getLevel() * 200)) {
-						GAME_STORAGE.currency -= room.getCost() + (room.getLevel() * 200);
+					if (GAME_STORAGE.currency.get() >= room.getCost() + (room.getLevel() * 200)) {
+						GAME_STORAGE.currency.subtract(room.getCost() + (room.getLevel() * 200));
 						WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
 						room.upgrade();
 						info.setText(room.getName() + ", " + room.getLevel());

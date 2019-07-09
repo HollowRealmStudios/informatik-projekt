@@ -5,6 +5,7 @@ import static info.projekt.InfoProjekt.GAME_STORAGE;
 /**
  * @author Jonas
  */
+@Buildable
 public class KitchenRoom extends Room {
 
 	public KitchenRoom() {
@@ -12,13 +13,11 @@ public class KitchenRoom extends Room {
 		setCost(400);
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void produce() {
 		dwellers.forEach(d -> GAME_STORAGE.food.add(3 * d.getCreativity()));
 	}
 
-	@SuppressWarnings("unused")
 	@Override
 	public void consume() {
 

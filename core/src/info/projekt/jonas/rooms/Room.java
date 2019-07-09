@@ -86,7 +86,7 @@ public abstract class Room implements Serializable {
 		return dwellers;
 	}
 
-	private Texture getTexture() {
+	public Texture getTexture() {
 		if (textures == null) {
 			textures = new ArrayList<>();
 			for (String s : textureNames) {

@@ -1,14 +1,13 @@
 package info.projekt.jonas.threads;
 
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.NameList;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
-import static info.projekt.jonas.gui.GameScreen.notification;
+import static info.projekt.jonas.gui.GameScreenGui.notification;
 import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 
 /**
@@ -35,15 +34,15 @@ public class WorkThread extends Thread {
 			generateResources();
 			consumeResources();
 			pass++;
-			if (pass > 5) if (ThreadLocalRandom.current().nextBoolean()) {
-				if (GAME_STORAGE.getRooms()[0][49].getDwellers().size() <= 3 && !GameScreen.moving) {
+			if (pass > 5 && ThreadLocalRandom.current().nextBoolean()) {
+				if (GAME_STORAGE.getRooms()[0][49].getDwellers().size() < 4) {
 					Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
 					GAME_STORAGE.addDweller(dweller);
 					GAME_STORAGE.getRooms()[0][49].addDweller(dweller);
 					notification.setPosition(HALF_WIDTH, 100, 1);
-					notification.show("New Dweller: " + dweller.toString(), 5);
+					notification.show("New Dweller: " + dweller.toString(), 2);
 				} else {
-					notification.show("Your entrance is full!", 5);
+					notification.show("Your entrance is full!", 2);
 				}
 				pass = 0;
 			}

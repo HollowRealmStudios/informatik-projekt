@@ -21,7 +21,7 @@ public class WeaponItem extends Item {
 	 * @param damage    the weapon's damage
 	 * @param deviation the deviation from the weapon's damage, can be scaled up or down
 	 */
-	public WeaponItem(Texture texture, String name, int damage, int deviation) {
+	public WeaponItem(String texture, String name, int damage, int deviation) {
 		super(texture, name);
 		this.damage = (deviation == 0 ? damage : ThreadLocalRandom.current().nextBoolean() ? damage - ThreadLocalRandom.current().nextInt(deviation) : damage + ThreadLocalRandom.current().nextInt(deviation));
 	}
@@ -29,5 +29,10 @@ public class WeaponItem extends Item {
 	@Override
 	public String toString() {
 		return name + ", Texture: " + texture + ", Damage: " + damage;
+	}
+
+	@Override
+	public String prettyPrint() {
+		return name + " (Damage: " + damage + ")";
 	}
 }

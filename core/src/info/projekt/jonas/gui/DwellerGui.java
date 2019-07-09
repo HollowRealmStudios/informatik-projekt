@@ -13,7 +13,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static info.projekt.InfoProjekt.GAME_STORAGE;
 import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
@@ -47,7 +46,7 @@ public class DwellerGui extends Gui {
 		v.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Objects.requireNonNull(GuiProvider.requestGui(ItemSelector.class)).show(Registry.getITEMS(), dweller);
+				Objects.requireNonNull(GuiProvider.requestGui(ItemSelectorGui.class)).show(Registry.getItems(), dweller);
 			}
 		});
 		table.add(v).size(200, 200);
@@ -55,7 +54,7 @@ public class DwellerGui extends Gui {
 		k.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Objects.requireNonNull(GuiProvider.requestGui(ItemSelector.class)).show(Registry.getITEMS(), dweller);
+				Objects.requireNonNull(GuiProvider.requestGui(ItemSelectorGui.class)).show(Registry.getItems(), dweller);
 			}
 		});
 		table.add(k).size(200, 200);

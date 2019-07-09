@@ -18,6 +18,7 @@ import info.projekt.christoph.BuildGui;
 import info.projekt.christoph.SettingsGui;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.InfoCenter;
 import info.projekt.jonas.util.MyNameJeffException;
@@ -36,7 +37,7 @@ import static info.projekt.jonas.gui.RenderUtils.*;
  * @author Christoph
  * @author Jonas
  */
-public class GameScreen extends Gui {
+public class GameScreenGui extends Gui {
 
 	public static boolean moving;
 	private static String selectedRoom = "";
@@ -56,7 +57,7 @@ public class GameScreen extends Gui {
 	public static final Notification notification = new Notification("", STYLE);
 	private boolean mainMenuActivated;
 
-	public GameScreen() {
+	public GameScreenGui() {
 		mainMenuActivated = false;
 		dwellerListButton = new ImageButton(new TextureRegionDrawable(new Texture("Dwellers.png")));
 		buildMenuButton = new ImageButton(new TextureRegionDrawable(new Texture("Build.png")));
@@ -88,7 +89,7 @@ public class GameScreen extends Gui {
 		field.setPosition(HALF_WIDTH - field.getWidth() / 2, HALF_HEIGHT - field.getHeight() / 2);
 		field.setVisible(false);
 
-		currency = new Label(Integer.toString(GAME_STORAGE.currency), STYLE);
+		currency = new Label(Integer.toString(GAME_STORAGE.currency.get()), STYLE);
 		currency.setPosition(50, HEIGHT - 100);
 
 		food = new Label(Integer.toString(GAME_STORAGE.food.get()), STYLE);
@@ -173,7 +174,7 @@ public class GameScreen extends Gui {
 		batch.end();
 		drawOutline();
 		InfoCenter.recalculate();
-		GAME_STORAGE.ITEMS.setSize(InfoCenter.storageCapacity);
+		GAME_STORAGE.ITEMS.setSize(InfoCenter.itemCapacity);
 		keyDown();
 	}
 
@@ -184,7 +185,7 @@ public class GameScreen extends Gui {
 	}
 
 	private void keyDown() {
-		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) RenderUtils.hideAllGuisExcept(GameScreen.class);
+		if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) RenderUtils.hideAllGuisExcept(GameScreenGui.class);
 		if (!guiOpen) {
 			handleMiscKeys();
 			handleMoveKeys();
@@ -200,10 +201,10 @@ public class GameScreen extends Gui {
 				RoomGui.selected = null;
 			} else if (getSelectedRoom() != null)
 				getSelectedRoom().clicked();
-			else if (!selectedRoom.equals("") && GAME_STORAGE.currency >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
+			else if (!selectedRoom.equals("") && GAME_STORAGE.currency.get() >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
 				try {
 					setRoom(Registry.getRoom(selectedRoom));
-					GAME_STORAGE.currency -= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost();
+					GAME_STORAGE.currency.subtract(Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost());
 				} catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
 				} finally {
 					selectedRoom = "";
@@ -242,10 +243,10 @@ public class GameScreen extends Gui {
 						field.setText("");
 						field.setVisible(false);
 						guiOpen = false;
-						GuiProvider.requestGui(DwellerList.class).show();
+						GuiProvider.requestGui(DwellerListGui.class).show();
 						break;
 					case "money":
-						GAME_STORAGE.currency += 100000;
+						GAME_STORAGE.currency.add(100000);
 						field.setText("");
 						field.setVisible(false);
 						guiOpen = false;
@@ -289,6 +290,19 @@ public class GameScreen extends Gui {
 						guiOpen = false;
 						GuiProvider.requestGui(ItemList.class).show(GAME_STORAGE.ITEMS);
 						break;
+					case "components":
+						field.setText("");
+						field.setVisible(false);
+						guiOpen = false;
+						GuiProvider.requestGui(ItemList.class).show(GAME_STORAGE.COMPONENTS);
+						break;
+					case "new_item":
+						field.setText("");
+						field.setVisible(false);
+						guiOpen = false;
+						if (InfoCenter.isItemSpace())
+							GAME_STORAGE.ITEMS.add((Item) Registry.getItems().values().toArray()[ThreadLocalRandom.current().nextInt(0, Registry.getItems().size())]);
+						break;
 				}
 				return true;
 			}
@@ -302,7 +316,7 @@ public class GameScreen extends Gui {
 		dwellerListButton.addListener(new ClickListener() {
 			@Override
 			public void clicked(InputEvent event, float x, float y) {
-				Objects.requireNonNull(GuiProvider.requestGui(DwellerList.class)).show();
+				Objects.requireNonNull(GuiProvider.requestGui(DwellerListGui.class)).show();
 			}
 		});
 		mainMenuButton.addListener(new ClickListener() {
@@ -356,7 +370,7 @@ public class GameScreen extends Gui {
 	}
 
 	private void updateGui() {
-		currency.setText(Integer.toString(GAME_STORAGE.currency));
+		currency.setText(Integer.toString(GAME_STORAGE.currency.get()));
 		food.setText(Integer.toString(GAME_STORAGE.food.get()));
 		water.setText(Integer.toString(GAME_STORAGE.water.get()));
 		energy.setText(Integer.toString(GAME_STORAGE.energy.get()));

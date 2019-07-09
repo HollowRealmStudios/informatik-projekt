@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.christoph.TitleScreen;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.CameraManager;
-import info.projekt.jonas.gui.GameScreen;
+import info.projekt.jonas.gui.GameScreenGui;
 import info.projekt.jonas.gui.GuiProvider;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
@@ -56,8 +56,8 @@ public class InfoProjekt extends Game {
 		renderer.setProjectionMatrix(cameraManager.getMatrix());
 		batch.setProjectionMatrix(cameraManager.getMatrix());
 		//noinspection ConstantConditions
-		if (GuiProvider.requestGui(GameScreen.class) != null)
-			((GameScreen) GuiProvider.requestGui(GameScreen.class)).render();
+		if (GuiProvider.requestGui(GameScreenGui.class) != null)
+			((GameScreenGui) GuiProvider.requestGui(GameScreenGui.class)).render();
 		GuiProvider.getGuis().forEach(g -> g.act(Gdx.graphics.getDeltaTime()));
 	}
 

@@ -2,6 +2,7 @@
   "recipes": [
     {
       "ingredients":[["Iron Ingot", 10], ["Stone Chunk", 5], ["Gold Chunk", 1]],
+      "time": 10,
       "result": "Hazmat Suit"
     }
   ]

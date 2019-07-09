@@ -5,40 +5,45 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import info.projekt.InfoProjekt;
 import info.projekt.jonas.items.Item;
+import info.projekt.jonas.util.LimitedInt;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
-import static info.projekt.jonas.gui.RenderUtils.*;
+import static info.projekt.jonas.gui.RenderUtils.STYLE;
 
 public class ItemList extends Gui {
 
-	private final Table table;
-
-	public ItemList() {
-		table = new Table();
-		stage.addActor(table);
-	}
+	private Table table;
 
 	@Override
 	public void dispose() {
 		stage.dispose();
 	}
 
+	public ItemList() {
+		table = new Table();
+		table.setFillParent(true);
+	}
+
 	@Override
 	public void show(@NotNull Object... o) {
-		ArrayList<Item> items = (ArrayList<Item>) o[0];
 		table.reset();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		ArrayList<Item> items = (ArrayList<Item>) o[0];
+		AtomicInteger i = new AtomicInteger(1);
 		items.forEach(item -> {
-
-			table.addActor(new Image(item.getTexture()));
-			table.addActor(new Label(item.toString(), STYLE));
-			table.row();
+			table.add(new Image(item.getTexture())).padRight(10);
+			Label l = new Label(item.prettyPrint(), STYLE);
+			l.setFontScale(0.3f);
+			table.add(l).padRight(50);
+			if(i.get() % 3 == 0) table.row();
+			i.incrementAndGet();
 		});
 		table.setVisible(true);
-		RenderUtils.guiOpen = true;
 		InfoProjekt.multiplexer.addProcessor(stage);
+		stage.addActor(table);
+		RenderUtils.guiOpen = true;
 	}
 
 	@Override
@@ -49,8 +54,8 @@ public class ItemList extends Gui {
 
 	@Override
 	public void hide() {
+		InfoProjekt.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
 		RenderUtils.guiOpen = false;
-		InfoProjekt.multiplexer.removeProcessor(stage);
 	}
 }

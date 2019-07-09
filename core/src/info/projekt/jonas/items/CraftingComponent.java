@@ -1,7 +1,5 @@
 package info.projekt.jonas.items;
 
-import com.badlogic.gdx.graphics.Texture;
-
 public class CraftingComponent extends Item {
 
 	private int rarity;
@@ -14,11 +12,7 @@ public class CraftingComponent extends Item {
 		return name;
 	}
 
-	public Texture getTexture() {
-		return texture;
-	}
-
-	public CraftingComponent(Texture texture, String name, int rarity) {
+	public CraftingComponent(String texture, String name, int rarity) {
 		super(texture, name);
 		this.rarity = rarity;
 	}
@@ -26,5 +20,10 @@ public class CraftingComponent extends Item {
 	@Override
 	public String toString() {
 		return "Name: " + name + ", Rarity: " + rarity;
+	}
+
+	@Override
+	public String prettyPrint() {
+		return name + " (Rarity: " + rarity + ")";
 	}
 }

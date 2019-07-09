@@ -1,6 +1,5 @@
 package info.projekt.jonas;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
@@ -31,7 +30,7 @@ public class Registry {
 		JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
 		for (JsonValue object : in.asArray()) {
 			JsonObject obj = object.asObject();
-			ITEMS.put(obj.get("name").asString(), new WeaponItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
+			ITEMS.put(obj.get("name").asString(), new WeaponItem(obj.get("texture").asString(), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
 		}
 	}
 
@@ -39,7 +38,7 @@ public class Registry {
 		JsonArray in = JsonObject.readFrom(new FileReader("Armor.json")).get("armors").asArray();
 		for (JsonValue object : in.asArray()) {
 			JsonObject obj = object.asObject();
-			ITEMS.put(obj.get("name").asString(), new ArmorItem(new Texture(obj.get("texture").asString()), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
+			ITEMS.put(obj.get("name").asString(), new ArmorItem(obj.get("texture").asString(), obj.get("name").asString(), obj.get("protection").asInt(), obj.get("deviation").asInt()));
 		}
 	}
 
@@ -47,7 +46,7 @@ public class Registry {
 		JsonArray in = JsonObject.readFrom(new FileReader("Components.json")).get("components").asArray();
 		for (JsonValue object : in.asArray()) {
 			JsonObject obj = object.asObject();
-			COMPONENTS.put(obj.get("name").asString(), new CraftingComponent(new Texture(obj.get("name").asString().replace(" ", "") + ".png"), obj.get("name").asString(), obj.get("rarity").asInt()));
+			COMPONENTS.put(obj.get("name").asString(), new CraftingComponent(obj.get("name").asString().replace(" ", "") + ".png", obj.get("name").asString(), obj.get("rarity").asInt()));
 		}
 	}
 
@@ -57,14 +56,14 @@ public class Registry {
 			JsonObject obj = object.asObject();
 			Item result = Registry.getItem(obj.get("result").asString());
 			ArrayList<Tuple<CraftingComponent, Integer>> ingredients = new ArrayList<>();
-			for(JsonValue value : obj.get("ingredients").asArray()) {
-				ingredients.add(new Tuple<CraftingComponent, Integer>(Registry.getComponents(value.asArray().get(0).asString()), value.asArray().get(1).asInt()));
+			for (JsonValue value : obj.get("ingredients").asArray()) {
+				ingredients.add(new Tuple<CraftingComponent, Integer>(Registry.getComponent(value.asArray().get(0).asString()), value.asArray().get(1).asInt()));
 			}
-			RECIPES.add(new CraftingRecipe(result, ingredients));
+			RECIPES.add(new CraftingRecipe(result, ingredients, obj.get("time").asInt()));
 		}
 	}
 
-	public static HashMap<String, Item> getITEMS() {
+	public static HashMap<String, Item> getItems() {
 		return ITEMS;
 	}
 
@@ -95,6 +94,10 @@ public class Registry {
 		return null;
 	}
 
+	public static HashMap<String, Room> getRooms() {
+		return ROOMS;
+	}
+
 	/**
 	 * Return an Item by its name
 	 *
@@ -108,7 +111,11 @@ public class Registry {
 		return ITEMS.get(name);
 	}
 
-	public static CraftingComponent getComponents(@NotNull String s) {
+	public static HashMap<String, CraftingComponent> getComponents() {
+		return COMPONENTS;
+	}
+
+	public static CraftingComponent getComponent(@NotNull String s) {
 		return COMPONENTS.get(s);
 	}
 
@@ -135,5 +142,9 @@ public class Registry {
 			b.append("\n");
 		});
 		System.out.println(b.toString());
+	}
+
+	public static ArrayList<CraftingRecipe> getRecipes() {
+		return RECIPES;
 	}
 }

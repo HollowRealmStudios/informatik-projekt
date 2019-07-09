@@ -5,6 +5,7 @@ import static info.projekt.InfoProjekt.GAME_STORAGE;
 /**
  * @author Jonas
  */
+@Buildable
 public class SewageTreatmentPlant extends Room {
 
 	public SewageTreatmentPlant() {

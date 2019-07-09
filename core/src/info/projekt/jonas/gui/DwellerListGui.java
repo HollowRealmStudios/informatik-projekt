@@ -17,11 +17,11 @@ import static info.projekt.jonas.gui.RenderUtils.*;
 /**
  * @author Jonas
  */
-public class DwellerList extends Gui {
+public class DwellerListGui extends Gui {
 
 	private final Table table;
 
-	public DwellerList() {
+	public DwellerListGui() {
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 		stage.addActor(table);

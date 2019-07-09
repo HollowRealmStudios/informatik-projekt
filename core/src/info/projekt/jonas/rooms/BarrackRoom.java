@@ -4,6 +4,7 @@ package info.projekt.jonas.rooms;
 /**
  * @author Jonas
  */
+@Buildable
 public class BarrackRoom extends Room {
 
 	public BarrackRoom() {

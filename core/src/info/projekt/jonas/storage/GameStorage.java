@@ -6,6 +6,7 @@ import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.InfoCenter;
 import info.projekt.jonas.util.LimitedArrayList;
+import info.projekt.jonas.util.LimitedHashMap;
 import info.projekt.jonas.util.LimitedInt;
 
 import java.io.Serializable;
@@ -19,13 +20,13 @@ public class GameStorage implements Serializable {
 
 	private final Room[][] ROOMS = new Room[5][50];
 
-	public final HashMap<CraftingComponent, Integer> COMPONENTS = new HashMap<>();
+	public final LimitedArrayList<CraftingComponent> COMPONENTS = new LimitedArrayList<>(InfoCenter.componentCapacity);
 
-	public final LimitedArrayList<Item> ITEMS = new LimitedArrayList<>(InfoCenter.storageCapacity);
+	public final LimitedArrayList<Item> ITEMS = new LimitedArrayList<>(InfoCenter.itemCapacity);
 
 	private final ArrayList<Dweller> DWELLERS = new ArrayList<>();
 
-	public int currency;
+	public final LimitedInt currency = new LimitedInt(0, 1000000, false);
 
 	public final LimitedInt food = new LimitedInt(0, 1000, false);
 

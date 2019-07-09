@@ -5,44 +5,57 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class CraftingRecipe {
 
 	private HashMap<CraftingComponent, Integer> ingredients = new HashMap<>();
 	private Item result;
+	private int time;
 
-	public CraftingRecipe(Item result, @NotNull ArrayList<Tuple<CraftingComponent, Integer>> tuples) {
+	public CraftingRecipe(Item result, @NotNull ArrayList<Tuple<CraftingComponent, Integer>> tuples, int time) {
 		tuples.forEach(t -> ingredients.put(t.getOne(), t.getTwo()));
 		this.result = result;
+		this.time = time;
 	}
 
 	public HashMap<CraftingComponent, Integer> getIngredients() {
 		return ingredients;
 	}
 
-	private boolean enoughIngredients(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
-		for (Map.Entry<CraftingComponent, Integer> entry : ingredients.entrySet()) {
-			if (!(this.ingredients.containsKey(entry.getKey()) && entry.getValue() >= this.ingredients.get(entry.getKey())))
-				return false;
-		}
-		return true;
+	public boolean enoughIngredients(@NotNull ArrayList<CraftingComponent> ingredients) {
+		ArrayList<CraftingComponent> components = new ArrayList<>();
+		this.ingredients.forEach((v, k) -> {
+			for (int i = 0; i < k; i++) components.add(v);
+		});
+		return ingredients.containsAll(components);
 	}
 
-	public Item craft(@NotNull HashMap<CraftingComponent, Integer> ingredients) {
-		if(!enoughIngredients(ingredients)) throw new IllegalArgumentException("Not enough or fitting ingredients");
-		for (Map.Entry<CraftingComponent, Integer> entry : ingredients.entrySet()) {
-			entry.setValue(entry.getValue() - this.ingredients.get(entry.getKey()));
-			ingredients.put(entry.getKey(), entry.getValue());
-		}
-		return result;
+	public Item craft(@NotNull ArrayList<CraftingComponent> ingredients) {
+		ArrayList<CraftingComponent> components = new ArrayList<>();
+		this.ingredients.forEach((v, k) -> {
+			for (int i = 0; i < k; i++) components.add(v);
+		});
+		if (ingredients.containsAll(components)) return result;
+		return null;
 	}
 
+	public int getTime() {
+		return time;
+	}
 
 	@Override
 	public String toString() {
 		StringBuilder b = new StringBuilder();
-		ingredients.forEach((v, k) -> b.append(v.name).append(" * ").append(k).append(", "));
+		ingredients.forEach((v, k) -> b.append(v.name).append(" * ").append(k));
+		b.append(" time: ").append(time);
+		b.append(" => ").append(result.name);
+		return b.toString();
+	}
+
+	public String prettyPrint() {
+		StringBuilder b = new StringBuilder();
+		ingredients.forEach((v, k) -> b.append(v.name).append(" * ").append(k));
+		b.append(" time: ").append(time);
 		b.append(" => ").append(result.name);
 		return b.toString();
 	}

@@ -26,5 +26,9 @@ public class LimitedArrayList<T> extends ArrayList<T> implements Serializable {
 		else throw new ArrayIndexOutOfBoundsException((size() + 1) + " is out of size " + size());
 		return true;
 	}
+
+	public boolean isSpace() {
+		return size() + 1 <= size;
+	}
 }
 

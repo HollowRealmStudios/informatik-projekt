@@ -21,11 +21,11 @@ import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
 /**
  * @author Jonas
  */
-public class ItemSelector extends Gui {
+public class ItemSelectorGui extends Gui {
 
 	private final Table table;
 
-	public ItemSelector() {
+	public ItemSelectorGui() {
 		table = new Table();
 		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
 		stage.addActor(table);
@@ -74,7 +74,7 @@ public class ItemSelector extends Gui {
 	public void hide() {
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
-		GuiProvider.requestGui(GameScreen.class).show();
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		RenderUtils.guiOpen = false;
 	}
 }

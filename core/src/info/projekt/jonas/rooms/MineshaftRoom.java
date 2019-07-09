@@ -1,14 +1,14 @@
 package info.projekt.jonas.rooms;
 
-import info.projekt.InfoProjekt;
 import info.projekt.jonas.Registry;
+import info.projekt.jonas.items.CraftingComponent;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.util.InfoCenter;
 
 import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
-import static info.projekt.jonas.gui.GameScreen.notification;
+import static info.projekt.jonas.gui.GameScreenGui.notification;
 
 public class MineshaftRoom extends Room {
 
@@ -21,13 +21,16 @@ public class MineshaftRoom extends Room {
 	@Override
 	public void produce() {
 		getDwellers().forEach(d -> pass++);
-		if (pass >= 10) {
-			InfoCenter.recalculate();
-			if (InfoCenter.storageCapacity >= GAME_STORAGE.ITEMS.size()) {
-				GAME_STORAGE.ITEMS.add((Item) Registry.getITEMS().values().toArray()[ThreadLocalRandom.current().nextInt(0, Registry.getITEMS().values().toArray().length - 1)]);
+		if (pass > 10) {
+			if (InfoCenter.isItemSpace()) {
+				GAME_STORAGE.COMPONENTS.add((CraftingComponent) Registry.getComponents().values().toArray()[ThreadLocalRandom.current().nextInt(0, Registry.getComponents().size() - 1)]);
 				notification.show("New item acquired", 2);
 			} else notification.show("Not enough storage space", 4);
-			pass = 0;
+			if (pass > 10) {
+				GAME_STORAGE.ITEMS.add((Item) Registry.getItems().values().toArray()[ThreadLocalRandom.current().nextInt(0, Registry.getItems().values().toArray().length - 1)]);
+				notification.show("New component acquired", 2);
+				pass = 0;
+			} else notification.show("Not enough storage space", 4);
 		}
 	}
 

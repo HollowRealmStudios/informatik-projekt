@@ -87,15 +87,16 @@ public class TitleScreen extends Gui {
 
 	private void register() {
 		GuiProvider.registerGui(DwellerGui.class);
-		GuiProvider.registerGui(DwellerList.class);
-		GuiProvider.registerGui(ItemSelector.class);
+		GuiProvider.registerGui(DwellerListGui.class);
+		GuiProvider.registerGui(ItemSelectorGui.class);
 		GuiProvider.registerGui(RoomGui.class);
 		GuiProvider.registerGui(BuildGui.class);
 		GuiProvider.registerGui(SettingsGui.class);
-		GuiProvider.registerGui(GameScreen.class);
+		GuiProvider.registerGui(GameScreenGui.class);
 		GuiProvider.registerGui(ExplorationGui.class);
 		GuiProvider.registerGui(ItemList.class);
-		Objects.requireNonNull(GuiProvider.requestGui(GameScreen.class)).show();
+		GuiProvider.registerGui(WorkshopGui.class);
+		Objects.requireNonNull(GuiProvider.requestGui(GameScreenGui.class)).show();
 		WORK_THREAD.start();
 		hide();
 	}
