@@ -161,6 +161,12 @@
       "Importance": 60,
       "Cause": "is not there",
       "Fix": "add loading screen"
+    },
+    {
+      "Issue": "can't delete rooms",
+      "Importance": -1,
+      "Cause": "not planed because the rooms don't know their positions",
+      "Fix": "someone adds a delete function"
     }
   ]
 }
