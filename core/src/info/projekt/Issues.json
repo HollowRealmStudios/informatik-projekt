@@ -136,6 +136,12 @@
       "Importance": 30,
       "Cause": "is not there",
       "Fix": "mark it green if yes, red if not OR only show the ones which can be crafted"
+    },
+    {
+      "Issue": "Write a journal text and implement it",
+      "Importance": 30,
+      "Cause": "dump players",
+      "Fix": "andre writes a text and someone implements it"
     }
   ]
 }
