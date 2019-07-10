@@ -70,7 +70,8 @@
       "Issue": "too much resources are produced",
       "Importance": 90,
       "Cause": "wrong resource production/consumption",
-      "Fix": "remake resource production/consumption"},
+      "Fix": "remake resource production/consumption"
+    },
     {
       "Issue": "Add descriptions to labels, i.e. currency, water,...",
       "Importance": 50,
@@ -140,8 +141,26 @@
     {
       "Issue": "Write a journal text and implement it",
       "Importance": 30,
-      "Cause": "dump players",
+      "Cause": "dumb players",
       "Fix": "andre writes a text and someone implements it"
+    },
+    {
+      "Issue": "buttons to big",
+      "Importance": 30,
+      "Cause": "are not relative",
+      "Fix": "make it relative ( christoph )"
+    },
+    {
+      "Issue": "no title on title screen",
+      "Importance": 90,
+      "Cause": "",
+      "Fix": "add title to title screen picture"
+    },
+    {
+      "Issue": "no loading screen",
+      "Importance": 60,
+      "Cause": "is not there",
+      "Fix": "add loading screen"
     }
   ]
 }
