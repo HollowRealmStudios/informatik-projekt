@@ -130,6 +130,12 @@
       "Importance": 30,
       "Cause": "idk",
       "Fix": "Button for jumping to top and bottom of the map"
+    },
+    {
+      "Issue": "no check if you have enough resources in crafting",
+      "Importance": 30,
+      "Cause": "is not there",
+      "Fix": "mark it green if yes, red if not OR only show the ones which can be crafted"
     }
   ]
 }
