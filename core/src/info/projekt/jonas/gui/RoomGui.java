@@ -38,7 +38,6 @@ public class RoomGui extends Gui {
 		button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
 		table.add(info);
 		table.row().padTop(30f);
-		stage.addActor(table);
 		table.setVisible(false);
 	}
 
@@ -69,11 +68,9 @@ public class RoomGui extends Gui {
 				}
 			});
 			table.row();
-			table.validate();
 		});
-		if (room.upgradable()) {
 			button.setScale(5, 5);
-			if (room.upgradable()) table.add(button);
+			table.add(button);
 			button.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
@@ -82,11 +79,11 @@ public class RoomGui extends Gui {
 						WORK_THREAD.notify(WorkThread.NOTIFICATION.UPGRADED);
 						room.upgrade();
 						info.setText(room.getName() + ", " + room.getLevel());
-						if (!room.upgradable()) table.removeActor(button);
 					}
 				}
 			});
-		}
+		if (!room.upgradable()) table.removeActor(button);
+		stage.addActor(table);
 		table.setVisible(true);
 		RenderUtils.guiOpen = true;
 	}
