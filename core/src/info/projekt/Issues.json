@@ -32,9 +32,15 @@
     },
     {
       "Issue": "no use for meds",
-      "Importance": 10,
+      "Importance": 30,
       "Cause": "dwellers don't take damage",
-      "Fix": "add damage ( mines ) "
+      "Fix": "add damage ( mines )"
+    },
+    {
+      "Issue": "use of medicines",
+      "Importance": 30,
+      "Cause": "no use until now",
+      "Fix": "add warnings low health, add health bar to dweller gui and button to heal"
     },
     {
       "Issue": "too much resources are produced",
@@ -112,6 +118,12 @@
       "Importance": 50,
       "Cause": "Not implemented",
       "Fix": "Add to GameScreen handle mouse"
+    },
+    {
+      "Issue": "room gui",
+      "Importance": 30,
+      "Cause": "ask Jonas",
+      "Fix": "already wip by Jonas"
     }
   ]
 }
