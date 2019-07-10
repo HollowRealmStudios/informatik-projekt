@@ -1,10 +1,52 @@
 {
   "Issues": [
     {
-      "Issue": "Sth",
-      "Importance": -1,
-      "Cause": "Ka",
-      "Fix": "Delete everything"
+      "Issue": "Add descriptions to labels, i.e. currency, water,...",
+      "Importance": 50,
+      "Cause": "Not added",
+      "Fix": "Find fitting symbols / descriptions and add them in the update function in GameScreen"
+    },
+    {
+      "Issue": "Add more crafting recipes and materials with textures",
+      "Importance": 10,
+      "Cause": "Not added",
+      "Fix": "Add components and recipes to json files, add textures to assets files"
+    },
+    {
+      "Issue": "Fix crafting",
+      "Importance": 10,
+      "Cause": "Not added",
+      "Fix": "Add the actual ability to craft items by removing the materials, if available and adding the item to the player's storage"
+    },
+    {
+      "Issue": "Unify look of the button",
+      "Importance": 50,
+      "Cause": "Not yet implemented / wrong background",
+      "Fix": "Fix the already available textures, add the ones that are still missing"
+    },
+    {
+      "Issue": "Notification is not centered",
+      "Importance": 50,
+      "Cause": "Scene2d is hard to use",
+      "Fix": "Center it in WorkThread"
+    },
+    {
+      "Issue": "Upgrading is not working properly",
+      "Importance": 80,
+      "Cause": "Maybe problem in RoomGui / GameScreen?",
+      "Fix": "Don't know have to look further into it"
+    },
+    {
+      "Issue": "Fix pretty printing",
+      "Importance": 20,
+      "Cause": "Maybe problem in RoomGui / GameScreen?",
+      "Fix": "Don't know have to look further into it"
+    },
+    {
+      "Issue": "Add notification when the player doesn't have enough money",
+      "Importance": 50,
+      "Cause": "Not implemented",
+      "Fix": "Add to GameScreen handle mouse"
     }
   ]
 }
