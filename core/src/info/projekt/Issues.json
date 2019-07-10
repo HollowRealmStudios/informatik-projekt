@@ -124,6 +124,12 @@
       "Importance": 30,
       "Cause": "ask Jonas",
       "Fix": "already wip by Jonas"
+    },
+    {
+      "Issue": "Long time for going to mines and back",
+      "Importance": 30,
+      "Cause": "idk",
+      "Fix": "Button for jumping to top and bottom of the map"
     }
   ]
 }
