@@ -132,10 +132,10 @@
       "Fix": "Button for jumping to top and bottom of the map"
     },
     {
-      "Issue": "Write a journal text and implement it",
+      "Issue": "no check if you have enough resources in crafting",
       "Importance": 30,
-      "Cause": "dump players",
-      "Fix": "andre writes a text and someone implements it"
+      "Cause": "is not there",
+      "Fix": "mark it green if yes, red if not OR only show the ones which can be crafted"
     }
   ]
 }
