@@ -17,6 +17,8 @@ import java.util.Arrays;
 @SuppressWarnings("unused")
 public class Dweller implements Serializable {
 
+	public enum GENDER {MALE, FEMALE}
+
 	private final String completeName;
 	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
 	private final GENDER gender;
@@ -84,6 +86,4 @@ public class Dweller implements Serializable {
 	public String toString() {
 		return completeName + ", " + strength + ", " + intelligence + ", " + charisma + ", " + creativity;
 	}
-
-	public enum GENDER {MALE, FEMALE}
 }
