@@ -57,7 +57,6 @@ public class GameScreenGui extends Gui {
     private final ImageButton mmStorage;
     public static final Notification notification = new Notification("", STYLE);
     private boolean mainMenuActivated;
-    private int delay = 0;
 
     public GameScreenGui() {
         mainMenuActivated = false;
@@ -160,8 +159,6 @@ public class GameScreenGui extends Gui {
             stage.act(f);
             stage.draw();
             handleMoveKeys();
-            if(delay == 0) handleMouseKeys();
-            else delay--;
         }
     }
 
@@ -182,30 +179,33 @@ public class GameScreenGui extends Gui {
     }
 
     @Override
-    public boolean scrolled(int amount) {
-        InfoProjekt.cameraManager.setZoom(InfoProjekt.cameraManager.getZoom() + (amount > 0 ? 0.02f : -0.02f));
-        return false;
-    }
-
-    private void handleMouseKeys() {
-        if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            delay = 20;
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        if (button == Input.Buttons.LEFT && !guiOpen) {
             if (moving && getSelectedRoom() != null && getSelectedRoom().getDwellers().size() != 4) {
                 moving = false;
                 getSelectedRoom().addDweller(RoomGui.selected);
                 RoomGui.selected = null;
+                return true;
             } else if (getSelectedRoom() != null)
                 getSelectedRoom().clicked();
-            else if (!selectedRoom.equals("") && GAME_STORAGE.currency.get() >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
-                try {
-                    setRoom(Registry.getRoom(selectedRoom));
-                    GAME_STORAGE.currency.subtract(Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost());
-                } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
-                } finally {
-                    selectedRoom = "";
-                }
+            return true;
+        } else if (!selectedRoom.equals("") && GAME_STORAGE.currency.get() >= Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost()) {
+            try {
+                setRoom(Registry.getRoom(selectedRoom));
+                GAME_STORAGE.currency.subtract(Objects.requireNonNull(Registry.getRoom(selectedRoom)).getCost());
+                return true;
+            } catch (ArrayIndexOutOfBoundsException | NullPointerException ignored) {
+            } finally {
+                selectedRoom = "";
             }
         }
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        InfoProjekt.cameraManager.setZoom(InfoProjekt.cameraManager.getZoom() + (amount > 0 ? 0.02f : -0.02f));
+        return false;
     }
 
     private void handleMoveKeys() {
@@ -371,7 +371,7 @@ public class GameScreenGui extends Gui {
     }
 
     private void updateGui() {
-        currency.setText(Integer.toString(delay));
+        currency.setText(Integer.toString(GAME_STORAGE.currency.get()));
         food.setText(Integer.toString(GAME_STORAGE.food.get()));
         water.setText(Integer.toString(GAME_STORAGE.water.get()));
         energy.setText(Integer.toString(GAME_STORAGE.energy.get()));
