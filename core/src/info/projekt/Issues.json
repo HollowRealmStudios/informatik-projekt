@@ -1,6 +1,71 @@
 {
   "Issues": [
     {
+      "Issue": "buttons bleiben sichtbar wenn ein gui offen ist",
+      "Importance": 60,
+      "Cause": "werden nicht unsichtbar gemacht?!?",
+      "Fix": "unsichtbar machen wenn gui geöffnet wird"
+    },
+    {
+      "Issue": "zu schnell zu viele bewohner",
+      "Importance": 70,
+      "Cause": "no delay",
+      "Fix": "add random delays"
+    },
+    {
+      "Issue": "no background is displayed when gui is open",
+      "Importance": 30,
+      "Cause": "no background is drawn",
+      "Fix": "add background to all guis"
+    },
+    {
+      "Issue": "no background picture in game",
+      "Importance": 10,
+      "Cause": "only brown color is drawn and andre didn't make a background",
+      "Fix": "andre has to make a background and we set it as background of the game"
+    },
+    {
+      "Issue": "black frame is missing from picture",
+      "Importance": 50,
+      "Cause": "andre is too stupid to make similar graphics",
+      "Fix": "andre"
+    },
+    {
+      "Issue": "no use for meds",
+      "Importance": 10,
+      "Cause": "dwellers don't take damage",
+      "Fix": "add damage ( mines ) "
+    },
+    {
+      "Issue": "too much resources are produced",
+      "Importance": 90,
+      "Cause": "wrong resource production/consumption",
+      "Fix": "remake resource production/consumption"
+    },
+    {
+      "Issue": "ctrl-panel",
+      "Importance": 1,
+      "Cause": "used during tests",
+      "Fix": "remove after finishing"
+    },
+    {
+      "Issue": "missing textures for women",
+      "Importance": 50,
+      "Cause": "andre",
+      "Fix": "andre"
+    },
+    {
+      "Issue": "dweller list no character for skill points",
+      "Importance": 20,
+      "Cause": "no character is printed",
+      "Fix": "print character in front of the skill point"
+    },
+    {
+      "Issue": "too much resources are produced",
+      "Importance": 90,
+      "Cause": "wrong resource production/consumption",
+      "Fix": "remake resource production/consumption"},
+    {
       "Issue": "Add descriptions to labels, i.e. currency, water,...",
       "Importance": 50,
       "Cause": "Not added",
