@@ -36,7 +36,7 @@ public class CraftingRecipe {
 			for (int i = 0; i < k; i++) components.add(v);
 		});
 		if (ingredients.containsAll(components)) return result;
-		return null;
+		else throw new IllegalArgumentException("Not enough resources");
 	}
 
 	public int getTime() {
@@ -54,7 +54,7 @@ public class CraftingRecipe {
 
 	public String prettyPrint() {
 		StringBuilder b = new StringBuilder();
-		ingredients.forEach((v, k) -> b.append(v.name).append(" * ").append(k));
+		ingredients.forEach((v, k) -> b.append(v.name).append(" * ").append(k).append(",  "));
 		b.append(" time: ").append(time);
 		b.append(" => ").append(result.name);
 		return b.toString();

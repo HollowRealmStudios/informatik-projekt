@@ -34,12 +34,11 @@ public class WorkThread extends Thread {
 			generateResources();
 			consumeResources();
 			pass++;
-			if (pass > 5 && ThreadLocalRandom.current().nextBoolean()) {
+			if (pass > 300 && ThreadLocalRandom.current().nextBoolean()) {
 				if (GAME_STORAGE.getRooms()[0][49].getDwellers().size() < 4) {
 					Dweller dweller = NameList.nextDweller(ThreadLocalRandom.current().nextBoolean() ? Dweller.GENDER.MALE : Dweller.GENDER.FEMALE);
 					GAME_STORAGE.addDweller(dweller);
 					GAME_STORAGE.getRooms()[0][49].addDweller(dweller);
-					notification.setPosition(HALF_WIDTH, 100, 1);
 					notification.show("New Dweller: " + dweller.toString(), 2);
 				} else {
 					notification.show("Your entrance is full!", 2);

@@ -26,6 +26,7 @@ public class Dweller implements Serializable {
 	private final int intelligence;
 	private final int charisma;
 	private final int creativity;
+	private int health;
 	private transient Texture texture;
 
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
@@ -79,7 +80,7 @@ public class Dweller implements Serializable {
 	}
 
 	public ArrayList<String> prettyPrint() {
-		return new ArrayList<>(Arrays.asList(completeName + "   ", strength + "   ", intelligence + "   ", charisma + "   ", String.valueOf(creativity)));
+		return new ArrayList<>(Arrays.asList(completeName + "   ", "Str:" + strength + "   ", "Int" + intelligence + "   ", "Char:" + charisma + "   ", "Creat:" + creativity));
 	}
 
 	@Override

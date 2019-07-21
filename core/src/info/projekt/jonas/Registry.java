@@ -123,7 +123,7 @@ public class Registry {
 		StringBuilder b = new StringBuilder();
 		b.append("------------------------------Items------------------------------\n");
 		ITEMS.forEach((v, k) -> {
-			b.append(k.toString());
+			b.append(k.prettyPrint());
 			b.append("\n");
 		});
 		b.append("------------------------------Rooms------------------------------\n");
@@ -133,12 +133,12 @@ public class Registry {
 		});
 		b.append("----------------------------Components----------------------------\n");
 		COMPONENTS.forEach((v, k) -> {
-			b.append(k.toString());
+			b.append(k.prettyPrint());
 			b.append("\n");
 		});
 		b.append("-----------------------------Recipes-------------------------------\n");
 		RECIPES.forEach(k -> {
-			b.append(k.toString());
+			b.append(k.prettyPrint());
 			b.append("\n");
 		});
 		System.out.println(b.toString());

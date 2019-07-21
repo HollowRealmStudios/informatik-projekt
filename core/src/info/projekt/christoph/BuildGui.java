@@ -8,12 +8,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.GameScreenGui;
 import info.projekt.jonas.gui.Gui;
+import info.projekt.jonas.gui.GuiProvider;
 import info.projekt.jonas.gui.RenderUtils;
 import info.projekt.jonas.rooms.Buildable;
 
 import static info.projekt.InfoProjekt.multiplexer;
-import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
  * @author Christoph
@@ -26,9 +26,8 @@ public class BuildGui extends Gui {
 	public BuildGui() {
 
 		table = new Table();
-
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
-
+		table.setFillParent(true);
+		table.background(BACKGROUND);
 		Registry.getRooms().forEach((k, v) -> {
 			if (v.getClass().isAnnotationPresent(Buildable.class)) {
 				ImageButton button = new ImageButton(new TextureRegionDrawable(v.getTexture()));
@@ -43,9 +42,7 @@ public class BuildGui extends Gui {
 				table.row();
 			}
 		});
-
 		stage.addActor(table);
-
 		hide();
 	}
 
@@ -58,6 +55,7 @@ public class BuildGui extends Gui {
 	public void show(Object... o) {
 		multiplexer.addProcessor(stage);
 		table.setVisible(true);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 		RenderUtils.guiOpen = true;
 	}
 
@@ -71,6 +69,7 @@ public class BuildGui extends Gui {
 	public void hide() {
 		multiplexer.removeProcessor(stage);
 		table.setVisible(false);
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		RenderUtils.guiOpen = false;
 	}
 }

@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.viewport.ScreenViewport;
  */
 public abstract class Gui extends InputAdapter {
 
-
 	protected Stage stage = new Stage(new ScreenViewport());
 
 	public abstract void dispose();

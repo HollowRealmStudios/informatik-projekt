@@ -23,8 +23,10 @@ public class DwellerListGui extends Gui {
 
 	public DwellerListGui() {
 		table = new Table();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		table.setFillParent(true);
+		table.background(BACKGROUND);
 		stage.addActor(table);
+		table.setVisible(false);
 	}
 
 	@Override
@@ -51,6 +53,7 @@ public class DwellerListGui extends Gui {
 		});
 
 		table.setVisible(true);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 		RenderUtils.guiOpen = true;
 	}
 
@@ -69,6 +72,7 @@ public class DwellerListGui extends Gui {
 	@Override
 	public void hide() {
 		table.setVisible(false);
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		RenderUtils.guiOpen = false;
 	}

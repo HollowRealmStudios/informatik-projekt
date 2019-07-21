@@ -18,8 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
 import static info.projekt.InfoProjekt.WORK_THREAD;
-import static info.projekt.jonas.gui.RenderUtils.SKIN;
-import static info.projekt.jonas.gui.RenderUtils.STYLE;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
  * @author Jonas
@@ -34,10 +33,9 @@ public class RoomGui extends Gui {
 	public RoomGui() {
 		table = new Table();
 		table.setFillParent(true);
+		table.background(BACKGROUND);
 		info = new Label("", STYLE);
 		button = new ImageButton(new TextureRegionDrawable(new Texture("Arrow.png")));
-		table.add(info);
-		table.row().padTop(30f);
 		table.setVisible(false);
 	}
 
@@ -85,6 +83,7 @@ public class RoomGui extends Gui {
 		if (!room.upgradable()) table.removeActor(button);
 		stage.addActor(table);
 		table.setVisible(true);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 		RenderUtils.guiOpen = true;
 	}
 
@@ -104,6 +103,7 @@ public class RoomGui extends Gui {
 	@Override
 	public void hide() {
 		table.setVisible(false);
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		RenderUtils.guiOpen = false;
 	}

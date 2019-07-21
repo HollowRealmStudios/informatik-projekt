@@ -11,9 +11,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static info.projekt.jonas.gui.RenderUtils.BACKGROUND;
 import static info.projekt.jonas.gui.RenderUtils.STYLE;
 
-public class ItemList extends Gui {
+public class ItemListGui extends Gui {
 
 	private Table table;
 
@@ -22,9 +23,11 @@ public class ItemList extends Gui {
 		stage.dispose();
 	}
 
-	public ItemList() {
+	public ItemListGui() {
 		table = new Table();
 		table.setFillParent(true);
+		table.background(BACKGROUND);
+		table.setVisible(false);
 	}
 
 	@Override
@@ -43,6 +46,7 @@ public class ItemList extends Gui {
 		table.setVisible(true);
 		InfoProjekt.multiplexer.addProcessor(stage);
 		stage.addActor(table);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 		RenderUtils.guiOpen = true;
 	}
 
@@ -56,6 +60,7 @@ public class ItemList extends Gui {
 	public void hide() {
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		table.setVisible(false);
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		RenderUtils.guiOpen = false;
 	}
 }

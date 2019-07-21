@@ -15,8 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 
-import static info.projekt.jonas.gui.RenderUtils.HALF_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.HALF_WIDTH;
+import static info.projekt.jonas.gui.RenderUtils.*;
 
 /**
  * @author Jonas
@@ -27,8 +26,10 @@ public class ItemSelectorGui extends Gui {
 
 	public ItemSelectorGui() {
 		table = new Table();
-		table.setPosition(HALF_WIDTH, HALF_HEIGHT);
+		table.setFillParent(true);
+		table.background(BACKGROUND);
 		stage.addActor(table);
+		table.setVisible(false);
 	}
 
 	@Override
@@ -61,6 +62,7 @@ public class ItemSelectorGui extends Gui {
 		});
 		InfoProjekt.multiplexer.addProcessor(stage);
 		table.setVisible(true);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 		RenderUtils.guiOpen = true;
 	}
 

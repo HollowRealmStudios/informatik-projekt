@@ -12,6 +12,7 @@ import info.projekt.jonas.util.Tuple;
 import java.util.ArrayList;
 
 import static info.projekt.InfoProjekt.GAME_STORAGE;
+import static info.projekt.jonas.gui.RenderUtils.BACKGROUND;
 import static info.projekt.jonas.gui.RenderUtils.SKIN;
 
 public class WorkshopGui extends Gui {
@@ -21,6 +22,8 @@ public class WorkshopGui extends Gui {
 	public WorkshopGui() {
 		table = new Table();
 		table.setFillParent(true);
+		table.background(BACKGROUND);
+		table.setVisible(false);
 	}
 
 	@Override
@@ -35,6 +38,7 @@ public class WorkshopGui extends Gui {
 				t.getOne().addListener(new ClickListener() {
 					@Override
 					public void clicked(InputEvent event, float x, float y) {
+						System.out.println("Craft");
 						t.getTwo().craft(GAME_STORAGE.COMPONENTS);
 					}
 				});
@@ -45,6 +49,7 @@ public class WorkshopGui extends Gui {
 		InfoProjekt.multiplexer.addProcessor(stage);
 		RenderUtils.guiOpen = true;
 		table.setVisible(true);
+		GuiProvider.requestGui(GameScreenGui.class).hide();
 	}
 
 	@Override
@@ -57,6 +62,7 @@ public class WorkshopGui extends Gui {
 	public void hide() {
 		InfoProjekt.multiplexer.removeProcessor(stage);
 		RenderUtils.guiOpen = false;
+		GuiProvider.requestGui(GameScreenGui.class).show();
 		table.setVisible(false);
 	}
 
