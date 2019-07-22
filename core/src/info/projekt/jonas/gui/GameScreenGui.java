@@ -69,21 +69,21 @@ public class GameScreenGui extends Gui {
         mmStats = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
         mmStorage = new ImageButton(new TextureRegionDrawable(new Texture("badlogic.jpg")));
 
-        buildMenuButton.setSize(100, 100);
-        dwellerListButton.setSize(100, 100);
-        mainMenuButton.setSize(100, 100);
-        mmSettings.setSize(100, 100);
-        mmStats.setSize(100, 100);
-        mmStorage.setSize(100, 100);
-        mmQuests.setSize(100, 100);
+        buildMenuButton.setSize(WIDTH / 14f , WIDTH / 14f );
+        dwellerListButton.setSize(WIDTH / 14f , WIDTH / 14f );
+        mainMenuButton.setSize(WIDTH / 14f , WIDTH / 14f );
+        mmSettings.setSize(WIDTH / 14f , WIDTH / 14f );
+        mmStats.setSize(WIDTH / 14f , WIDTH / 14f );
+        mmStorage.setSize(WIDTH / 14f , WIDTH / 14f );
+        mmQuests.setSize(WIDTH / 14f , WIDTH / 14f );
 
-        dwellerListButton.setPosition(100, 100);
-        buildMenuButton.setPosition(100, 250);
-        mainMenuButton.setPosition(WIDTH - 200, 100);
-        mmSettings.setPosition(WIDTH - 200, 250);
-        mmStats.setPosition(WIDTH - 200, 400);
-        mmStorage.setPosition(WIDTH - 200, 550);
-        mmQuests.setPosition(WIDTH - 200, 700);
+        dwellerListButton.setPosition(WIDTH * 1f / 14f, HEIGHT * 1f / 14f);
+        buildMenuButton.setPosition(WIDTH * 1f / 14f, HEIGHT * 4f / 14f);
+        mainMenuButton.setPosition(WIDTH * 12f / 14f, HEIGHT * 1f / 14f);
+        mmSettings.setPosition(WIDTH * 12f / 14f, HEIGHT * 3f / 14f);
+        mmStats.setPosition(WIDTH * 12f / 14f, HEIGHT * 5f / 14f);
+        mmStorage.setPosition(WIDTH * 12f / 14f, HEIGHT * 7f / 14f);
+        mmQuests.setPosition(WIDTH * 12f / 14f, HEIGHT * 9f / 14f);
 
         EMPTY = new Texture("room_empty.png");
 
