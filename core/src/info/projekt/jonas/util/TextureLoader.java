@@ -2,6 +2,7 @@ package info.projekt.jonas.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import info.projekt.jonas.rooms.Room;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
 
 import java.io.IOException;
@@ -19,6 +20,10 @@ public class TextureLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static Texture[] getRoomTextures(Class<? extends Room> room) {
+		return new Texture[] {TEXTURES.get(room.getSimpleName() + "/1.png"), TEXTURES.get(room.getSimpleName() + "/2.png"), TEXTURES.get(room.getSimpleName() + "/3.png")};
 	}
 
 	public static Texture getTexture(String path) {

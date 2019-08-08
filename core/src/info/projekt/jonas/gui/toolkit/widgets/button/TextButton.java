@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.jonas.util.WidgetUtil;
+import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 
 public class TextButton extends Button {
 

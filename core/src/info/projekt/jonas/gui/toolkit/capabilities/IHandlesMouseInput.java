@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public interface IHandlesMouseInput {
 
-	boolean onMouseEvent(HashMap<Integer, Boolean> keys);
+	boolean onMouseEvent();
 
 }

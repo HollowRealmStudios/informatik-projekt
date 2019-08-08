@@ -29,14 +29,8 @@ public class GameScreen extends Layer {
 	}
 
 	@Override
-	public void update() {
-		super.update();
-	}
-
-	@Override
 	public boolean handleKeyboard(KeyManager manager) {
 		if(manager.getKeys().get(Input.Keys.W)) {
-			System.out.println("passthrough successful");
 			camera.position.y += 5;
 			camera.update();
 			return true;

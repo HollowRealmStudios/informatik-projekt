@@ -5,11 +5,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import info.projekt.jonas.util.WidgetUtil;
+import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 
 public class Label extends Widget {
 
-	private boolean centerX, centerY;
 	private String text;
 	private BitmapFont font;
 	private int x, y;
@@ -24,20 +23,17 @@ public class Label extends Widget {
 	public Label centerY() {
 		Label l = this;
 		l.y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font, text) / 2;
-		centerY = true;
 		return l;
 	}
 
 	public Label centerX() {
 		Label l = this;
 		l.x = Gdx.graphics.getWidth() / 2 - WidgetUtil.getTextWidth(font, text) / 2;
-		centerX = true;
 		return l;
 	}
 
 	public void setText(String text) {
 		this.text = text;
-		if(centerX) centerX();
 	}
 
 	@Override

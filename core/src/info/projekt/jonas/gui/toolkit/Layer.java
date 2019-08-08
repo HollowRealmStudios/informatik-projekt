@@ -28,10 +28,8 @@ public class Layer {
 		this.widgets.addAll(widgets);
 	}
 
-	public void update() {
-		for (Widget widget : widgets) {
-			if (widget instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates) widget).onUpdate();
-		}
+	public final void update() {
+		if(this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates)this).onUpdate();
 	}
 
 	public boolean handleKeyboard(KeyManager manager) {
@@ -45,7 +43,7 @@ public class Layer {
 	public boolean handleMouse(KeyManager manager) {
 		for (Widget widget : widgets) {
 			if (widget instanceof IHandlesMouseInput)
-				return ((IHandlesMouseInput) widget).onMouseEvent(manager.getButtons());
+				return ((IHandlesMouseInput) widget).onMouseEvent();
 		}
 		return false;
 	}

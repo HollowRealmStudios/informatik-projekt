@@ -3,7 +3,7 @@ package info.projekt.jonas.gui;
 import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
 
-import static info.projekt.jonas.gui.RenderUtils.FONT;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 
 /**
  * @author Jonas

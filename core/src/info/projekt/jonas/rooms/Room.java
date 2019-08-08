@@ -4,112 +4,33 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import info.projekt.jonas.dwellers.Dweller;
 import info.projekt.jonas.util.LimitedArrayList;
+import info.projekt.jonas.util.StreamArray;
+import info.projekt.jonas.util.TextureLoader;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import static info.projekt.jonas.gui.RenderUtils.CELL_HEIGHT;
-import static info.projekt.jonas.gui.RenderUtils.CELL_WIDTH;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_HEIGHT;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_WIDTH;
 
 /**
  * @author Jonas
  */
 public abstract class Room implements Serializable {
 
-	protected final LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
-	private final String name;
-	private final ArrayList<String> textureNames = new ArrayList<>();
-	private int cost = 0;
-	private int level = 1;
-	private transient ArrayList<Texture> textures = new ArrayList<>();
-
-	protected Room(@NotNull String name, @NotNull String texture, @NotNull String... textures) {
-		this.name = name;
-		this.textures.add(new Texture(texture));
-		textureNames.add(texture);
-		for (String s : textures) {
-			this.textures.add(new Texture(s));
-			textureNames.add(s);
-		}
-	}
-
-	public int getLevel() {
-		return level;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getCost() {
-		return cost;
-	}
-
-	public void setCost(int cost) {
-		this.cost = cost;
-	}
-
-	public abstract void produce();
-
-	public abstract void consume();
-
-	public abstract boolean enoughResources();
-
-	public void clicked() {
-
-	};
-
-	public void onTick() {
-	}
-
-	public void onPlace() {
-	}
-
-	public void onUpgrade() {
-	}
-
-	public void onNewDweller() {
-	}
-
-	public void addDweller(Dweller dweller) {
-		dwellers.add(dweller);
-	}
-
-	public void removeDweller(Dweller dweller) {
-		dwellers.remove(dweller);
-	}
-
-	public LimitedArrayList<Dweller> getDwellers() {
-		return dwellers;
-	}
+	private StreamArray<Dweller> dwellers = new StreamArray<>(new Dweller[4]);
+	private transient Texture[] textures = TextureLoader.getRoomTextures(this.getClass());
+	private int level;
 
 	public Texture getTexture() {
-		if (textures == null) {
-			textures = new ArrayList<>();
-			for (String s : textureNames) {
-				textures.add(new Texture(s));
-			}
-		}
-		return textures.get(level - 1);
-	}
-
-	public boolean upgradable() {
-		return level < textures.size();
-	}
-
-	public void upgrade() {
-		if (level == textures.size())
-			throw new IllegalArgumentException("A level " + textures.size() + " room can't be upgraded any further");
-		level++;
+		return textures[0];
 	}
 
 	public void draw(SpriteBatch batch, int x, int y) {
-		if (!batch.isDrawing()) batch.begin();
-		batch.draw(getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
-		for (int i = 0; i < dwellers.size(); i++) {
-			if (dwellers.get(i) != null)
-				batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100, y * CELL_HEIGHT);
-		}
+		batch.begin();
+		batch.draw(textures[level], x * CELL_WIDTH, y * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
+		batch.end();
 	}
+
 }

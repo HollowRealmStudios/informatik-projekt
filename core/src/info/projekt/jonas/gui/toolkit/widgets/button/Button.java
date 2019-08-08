@@ -19,8 +19,8 @@ public abstract class Button extends Widget implements IHandlesMouseInput {
 	}
 
 	@Override
-	public boolean onMouseEvent(HashMap<Integer, Boolean> keys) {
-		if (keys.get(Input.Buttons.LEFT) && hitbox.contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+	public boolean onMouseEvent() {
+		if (hitbox.contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
 			action.run();
 			return true;
 		}

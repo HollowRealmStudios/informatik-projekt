@@ -9,11 +9,19 @@ public class StorageHandler {
 
 	private static final String FILE = "Storage.dat";
 
-	public static GameStorage loadGame() throws IOException, ClassNotFoundException {
-		return (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
+	public static GameStorage loadGame() {
+		try {
+			return (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
+		} catch (IOException | ClassNotFoundException e) {
+			return new GameStorage();
+		}
 	}
 
-	public static void saveGame(GameStorage storage) throws IOException {
-		new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
+	public static void saveGame(GameStorage storage) {
+		try {
+			new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

@@ -3,6 +3,7 @@ package info.projekt.jonas.gui.toolkit;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.util.StreamArray;
 import org.reflections.Reflections;
 
@@ -11,9 +12,13 @@ import java.util.Stack;
 
 public class LayerSupervisor {
 
-	enum HANDLING {PASS_THROUGH, IGNORE, CLOSE_ON_SUCCESSFUL_PASS_THROUGH}
+	public static final int BACKGROUND_LAYER = 0;
+	public static final int OVERLAY_LAYER = 1;
+	public static final int GUI_LAYER = 2;
 
-	public static final Stack<Class<? extends Layer>> LAYER_STACK = new Stack<>();
+	public enum HANDLING {PASS_THROUGH, CLOSE_ON_SUCCESSFUL_PASS_THROUGH}
+
+	public static final Stack<LayerRequest> LAYER_STACK = new Stack<>();
 	private final HashMap<Class<? extends Layer>, Layer> LAYERS = new HashMap<>();
 	private final HANDLING handling = HANDLING.PASS_THROUGH;
 	private final StreamArray<Layer> layers = new StreamArray<>(new Layer[3]);
@@ -61,11 +66,13 @@ public class LayerSupervisor {
 			}
 		}
 		//System.out.println("Keyboard handled by layer " + i);
-		i = 2;
-		for (Layer layer : layers.t) {
-			if (layer != null) {
-				if (layer.handleMouse(manager)) break;
-				i--;
+		if(manager.isMouseClicked()) {
+			i = 2;
+			for (Layer layer : layers.t) {
+				if (layer != null) {
+					if (layer.handleMouse(manager)) break;
+					i--;
+				}
 			}
 		}
 		//System.out.println("Mouse handled by layer " + i);
@@ -76,14 +83,16 @@ public class LayerSupervisor {
 	}
 
 	public void update() {
+		manager.update();
 		layers.stream().forEach(layer -> {
 			if (layer != null) layer.update();
 		});
 		passThrough();
 		checkForQuit();
 		if (!LAYER_STACK.isEmpty()) {
-			layers.t[2] = null;
-			layers.t[2] = LAYERS.get(LAYER_STACK.pop());
+			LayerRequest request = LAYER_STACK.pop();
+			if (layers.t[request.layerNumber] == null || request.force)
+				layers.t[request.layerNumber] = LAYERS.get(request.layer);
 		}
 	}
 }

@@ -1,4 +1,4 @@
-package info.projekt.jonas.util;
+package info.projekt.jonas.gui.toolkit.util;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.GlyphLayout;

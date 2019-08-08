@@ -5,7 +5,6 @@ import info.projekt.jonas.items.CraftingComponent;
 import info.projekt.jonas.items.Item;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.LimitedArrayList;
-import info.projekt.jonas.util.LimitedInt;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,7 +14,9 @@ import java.util.ArrayList;
  */
 public class GameStorage implements Serializable {
 
-	private final Room[][] ROOMS = new Room[5][50];
+	public static final GameStorage INSTANCE = StorageHandler.loadGame();
+
+	private final Room[][] rooms = new Room[50][50];
 
 	public final LimitedArrayList<CraftingComponent> COMPONENTS = new LimitedArrayList<>(0);
 
@@ -23,27 +24,23 @@ public class GameStorage implements Serializable {
 
 	private final ArrayList<Dweller> DWELLERS = new ArrayList<>();
 
-	public final LimitedInt currency = new LimitedInt(0, 1000000, false);
+	public int currency = 0;
 
-	public final LimitedInt food = new LimitedInt(0, 1000, false);
+	public int food = 0;
 
-	public final LimitedInt energy = new LimitedInt(0, 1000, false);
+	public int energy = 0;
 
-	public final LimitedInt water = new LimitedInt(0, 1000, false);
-
-	public void addDweller(Dweller dweller) {
-		DWELLERS.add(dweller);
-	}
+	public int water = 0;
 
 	public ArrayList<Dweller> getDwellers() {
 		return DWELLERS;
 	}
 
-	public Room[][] getRooms() {
-		return ROOMS;
+	public Room getRoomAt(int x, int y) {
+		return rooms[x][y];
 	}
 
-	public void setRoom(Room room, int x, int y) {
-		ROOMS[x][y] = room;
+	public void setRoomAt(Room room, int x, int y) {
+		rooms[x][y] = room;
 	}
 }
