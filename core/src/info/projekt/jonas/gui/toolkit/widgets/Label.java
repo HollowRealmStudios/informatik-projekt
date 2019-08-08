@@ -21,6 +21,13 @@ public class Label extends Widget {
 		this.y = y;
 	}
 
+	public Label centerY() {
+		Label l = this;
+		l.y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font, text) / 2;
+		centerY = true;
+		return l;
+	}
+
 	public Label centerX() {
 		Label l = this;
 		l.x = Gdx.graphics.getWidth() / 2 - WidgetUtil.getTextWidth(font, text) / 2;

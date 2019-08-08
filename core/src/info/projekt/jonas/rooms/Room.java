@@ -3,8 +3,6 @@ package info.projekt.jonas.rooms;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.gui.GuiProvider;
-import info.projekt.jonas.gui.RoomGui;
 import info.projekt.jonas.util.LimitedArrayList;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +57,7 @@ public abstract class Room implements Serializable {
 	public abstract boolean enoughResources();
 
 	public void clicked() {
-		GuiProvider.requestGui(RoomGui.class).show(this);
+
 	};
 
 	public void onTick() {
