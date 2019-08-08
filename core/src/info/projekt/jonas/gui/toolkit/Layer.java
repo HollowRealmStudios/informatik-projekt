@@ -12,11 +12,7 @@ import java.util.Collection;
 
 public class Layer {
 
-	private boolean debug;
-
-	public void setDebug(boolean debug) {
-		this.debug = debug;
-	}
+	private boolean debug = true;
 
 	private ArrayList<Widget> widgets = new ArrayList<>();
 
