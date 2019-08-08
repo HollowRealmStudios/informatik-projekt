@@ -36,7 +36,6 @@ public class InfoProjekt extends Game {
 	@Override
 	public void render() {
 		stopwatch.start();
-		System.out.println(Gdx.input.getX() + " / " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
 		RenderUtils.clearScreen(Color.BLACK);
 		supervisor.update();
 		supervisor.draw();

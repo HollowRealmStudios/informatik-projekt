@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 info face="Ubuntu Regular" size=50 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
 common lineHeight=59 base=48 scaleW=512 scaleH=512 pages=1 packed=0
 page id=0 file="Ubuntu.png"
@@ -108,7 +107,7 @@ kerning first=89 second=97 amount=-2
 kerning first=113 second=106 amount=2
 kerning first=117 second=119 amount=-1
 kerning first=117 second=121 amount=-1
-=======
+
 info face="Ubuntu Regular" size=60 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
 common lineHeight=70 base=57 scaleW=512 scaleH=512 pages=1 packed=0
 page id=0 file="Ubuntu.png"
@@ -222,39 +221,39 @@ kerning first=89 second=114 amount=-2
 kerning first=117 second=121 amount=-1
 kerning first=99 second=93 amount=-2
 kerning first=65 second=119 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=92 second=119 amount=-1
 kerning first=110 second=119 amount=-1
 kerning first=101 second=119 amount=-1
 kerning first=119 second=119 amount=1
-<<<<<<< HEAD
+
 kerning first=89 second=109 amount=-2
 kerning first=66 second=58 amount=-1
 kerning first=70 second=120 amount=-2
 kerning first=122 second=99 amount=-1
 kerning first=86 second=99 amount=-2
 kerning first=65 second=89 amount=-4
-=======
+
 kerning first=66 second=58 amount=-1
 kerning first=70 second=120 amount=-2
 kerning first=122 second=99 amount=-1
 kerning first=86 second=99 amount=-3
 kerning first=65 second=89 amount=-5
->>>>>>> Began entire rewrite of codebase
+
 kerning first=47 second=89 amount=2
 kerning first=89 second=79 amount=-2
 kerning first=44 second=79 amount=-2
 kerning first=88 second=121 amount=-1
 kerning first=99 second=46 amount=1
 kerning first=90 second=46 amount=1
-<<<<<<< HEAD
+
 kerning first=117 second=125 amount=-1
 kerning first=90 second=125 amount=-1
 kerning first=75 second=86 amount=1
 kerning first=84 second=86 amount=1
 kerning first=81 second=106 amount=1
 kerning first=80 second=65 amount=-2
-=======
+
 kerning first=81 second=46 amount=-2
 kerning first=68 second=89 amount=-2
 kerning first=117 second=125 amount=-1
@@ -264,23 +263,23 @@ kerning first=84 second=86 amount=2
 kerning first=81 second=106 amount=1
 kerning first=87 second=117 amount=-1
 kerning first=80 second=65 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=66 second=86 amount=-1
 kerning first=39 second=86 amount=1
 kerning first=123 second=85 amount=-1
 kerning first=103 second=42 amount=-1
 kerning first=112 second=42 amount=-1
 kerning first=121 second=42 amount=-1
-<<<<<<< HEAD
+
 kerning first=76 second=42 amount=-7
-=======
+
 kerning first=76 second=42 amount=-8
->>>>>>> Began entire rewrite of codebase
+
 kerning first=94 second=42 amount=-1
 kerning first=40 second=83 amount=-1
 kerning first=67 second=83 amount=1
 kerning first=76 second=83 amount=1
-<<<<<<< HEAD
+
 kerning first=76 second=71 amount=-2
 kerning first=70 second=63 amount=1
 kerning first=97 second=63 amount=-1
@@ -296,7 +295,7 @@ kerning first=101 second=39 amount=-1
 kerning first=79 second=93 amount=-2
 kerning first=88 second=93 amount=-2
 kerning first=97 second=93 amount=-1
-=======
+
 kerning first=70 second=63 amount=1
 kerning first=97 second=63 amount=-2
 kerning first=79 second=63 amount=-2
@@ -311,12 +310,12 @@ kerning first=79 second=93 amount=-3
 kerning first=88 second=93 amount=-2
 kerning first=97 second=93 amount=-2
 kerning first=115 second=93 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=65 second=100 amount=-1
 kerning first=125 second=90 amount=-2
 kerning first=44 second=90 amount=1
 kerning first=89 second=90 amount=1
-<<<<<<< HEAD
+
 kerning first=102 second=45 amount=-2
 kerning first=75 second=45 amount=-2
 kerning first=84 second=45 amount=-2
@@ -327,7 +326,7 @@ kerning first=114 second=47 amount=-2
 kerning first=41 second=88 amount=-1
 kerning first=86 second=39 amount=1
 kerning first=84 second=97 amount=-2
-=======
+
 kerning first=69 second=65 amount=1
 kerning first=47 second=81 amount=-2
 kerning first=102 second=45 amount=-2
@@ -340,12 +339,12 @@ kerning first=114 second=47 amount=-3
 kerning first=41 second=88 amount=-2
 kerning first=86 second=39 amount=1
 kerning first=84 second=97 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=125 second=87 amount=-1
 kerning first=89 second=87 amount=1
 kerning first=44 second=87 amount=-2
 kerning first=80 second=41 amount=-1
-<<<<<<< HEAD
+
 kerning first=98 second=41 amount=-1
 kerning first=89 second=41 amount=1
 kerning first=65 second=67 amount=-1
@@ -367,7 +366,7 @@ kerning first=46 second=81 amount=-2
 kerning first=70 second=44 amount=-3
 kerning first=91 second=81 amount=-2
 kerning first=79 second=44 amount=-2
-=======
+
 kerning first=71 second=41 amount=-1
 kerning first=98 second=41 amount=-2
 kerning first=89 second=41 amount=1
@@ -394,12 +393,12 @@ kerning first=46 second=81 amount=-2
 kerning first=70 second=44 amount=-4
 kerning first=79 second=44 amount=-2
 kerning first=64 second=81 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=88 second=44 amount=1
 kerning first=125 second=41 amount=-1
 kerning first=69 second=123 amount=-1
 kerning first=87 second=123 amount=-1
-<<<<<<< HEAD
+
 kerning first=46 second=65 amount=1
 kerning first=64 second=65 amount=-1
 kerning first=82 second=65 amount=1
@@ -418,7 +417,7 @@ kerning first=76 second=111 amount=-1
 kerning first=70 second=109 amount=-1
 kerning first=96 second=118 amount=-1
 kerning first=119 second=120 amount=1
-=======
+
 kerning first=46 second=65 amount=2
 kerning first=64 second=65 amount=-2
 kerning first=82 second=65 amount=2
@@ -436,28 +435,28 @@ kerning first=67 second=113 amount=-1
 kerning first=76 second=111 amount=-1
 kerning first=70 second=109 amount=-2
 kerning first=96 second=118 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=69 second=118 amount=-1
 kerning first=123 second=118 amount=-1
 kerning first=114 second=118 amount=1
 kerning first=90 second=79 amount=-2
 kerning first=104 second=121 amount=-1
-<<<<<<< HEAD
+
 kerning first=34 second=74 amount=-6
 kerning first=70 second=74 amount=-4
 kerning first=79 second=74 amount=-1
 kerning first=88 second=74 amount=1
-=======
+
 kerning first=70 second=74 amount=-5
 kerning first=79 second=74 amount=-1
 kerning first=88 second=74 amount=1
 kerning first=46 second=89 amount=-5
->>>>>>> Began entire rewrite of codebase
+
 kerning first=58 second=86 amount=-1
 kerning first=82 second=67 amount=-1
 kerning first=40 second=86 amount=1
 kerning first=67 second=86 amount=1
-<<<<<<< HEAD
+
 kerning first=76 second=86 amount=-5
 kerning first=75 second=89 amount=1
 kerning first=82 second=46 amount=1
@@ -477,7 +476,7 @@ kerning first=103 second=39 amount=-1
 kerning first=94 second=39 amount=-1
 kerning first=76 second=39 amount=-6
 kerning first=86 second=113 amount=-2
-=======
+
 kerning first=76 second=86 amount=-6
 kerning first=75 second=89 amount=1
 kerning first=82 second=46 amount=1
@@ -499,14 +498,14 @@ kerning first=94 second=39 amount=-2
 kerning first=76 second=39 amount=-8
 kerning first=122 second=113 amount=-1
 kerning first=86 second=113 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=67 second=99 amount=-1
 kerning first=76 second=99 amount=-1
 kerning first=45 second=90 amount=-1
 kerning first=81 second=90 amount=-1
 kerning first=95 second=42 amount=-1
 kerning first=104 second=42 amount=-1
-<<<<<<< HEAD
+
 kerning first=67 second=40 amount=-1
 kerning first=84 second=121 amount=-1
 kerning first=111 second=121 amount=-1
@@ -519,7 +518,7 @@ kerning first=75 second=119 amount=-2
 kerning first=81 second=63 amount=-2
 kerning first=89 second=84 amount=2
 kerning first=44 second=84 amount=-3
-=======
+
 kerning first=84 second=64 amount=-3
 kerning first=84 second=121 amount=-1
 kerning first=75 second=121 amount=-1
@@ -534,12 +533,12 @@ kerning first=81 second=63 amount=-2
 kerning first=89 second=58 amount=-2
 kerning first=89 second=84 amount=2
 kerning first=44 second=84 amount=-4
->>>>>>> Began entire rewrite of codebase
+
 kerning first=125 second=84 amount=-1
 kerning first=80 second=111 amount=-1
 kerning first=85 second=97 amount=-1
 kerning first=68 second=64 amount=-1
-<<<<<<< HEAD
+
 kerning first=67 second=88 amount=1
 kerning first=76 second=88 amount=1
 kerning first=87 second=58 amount=-1
@@ -559,7 +558,7 @@ kerning first=90 second=101 amount=-1
 kerning first=86 second=44 amount=-4
 kerning first=68 second=44 amount=-2
 kerning first=70 second=58 amount=-1
-=======
+
 kerning first=86 second=64 amount=-2
 kerning first=67 second=88 amount=1
 kerning first=76 second=88 amount=1
@@ -577,56 +576,56 @@ kerning first=96 second=63 amount=-2
 kerning first=90 second=101 amount=-1
 kerning first=86 second=44 amount=-4
 kerning first=68 second=44 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=90 second=100 amount=-1
 kerning first=99 second=100 amount=-1
 kerning first=90 second=40 amount=-1
 kerning first=88 second=118 amount=-1
 kerning first=115 second=118 amount=-1
 kerning first=124 second=118 amount=-1
-<<<<<<< HEAD
+
 kerning first=97 second=118 amount=-1
 kerning first=47 second=81 amount=-1
 kerning first=87 second=44 amount=-2
 kerning first=65 second=81 amount=-1
 kerning first=122 second=123 amount=-1
-=======
+
 kerning first=114 second=44 amount=-3
 kerning first=87 second=44 amount=-2
 kerning first=65 second=81 amount=-1
 kerning first=122 second=123 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=86 second=123 amount=-1
 kerning first=90 second=41 amount=-1
 kerning first=126 second=41 amount=-1
 kerning first=117 second=41 amount=-1
-<<<<<<< HEAD
-=======
+
+
 kerning first=88 second=117 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=70 second=117 amount=-1
 kerning first=81 second=87 amount=-1
 kerning first=122 second=116 amount=-1
 kerning first=110 second=34 amount=-2
-<<<<<<< HEAD
+
 kerning first=101 second=34 amount=-1
 kerning first=92 second=34 amount=-1
 kerning first=65 second=34 amount=-4
-=======
+
 kerning first=101 second=34 amount=-2
 kerning first=92 second=34 amount=-2
 kerning first=65 second=34 amount=-5
->>>>>>> Began entire rewrite of codebase
+
 kerning first=67 second=64 amount=-1
 kerning first=69 second=91 amount=-1
 kerning first=100 second=125 amount=-1
 kerning first=82 second=125 amount=-1
 kerning first=91 second=125 amount=-1
-<<<<<<< HEAD
+
 kerning first=89 second=114 amount=-2
-=======
+
 kerning first=64 second=79 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=82 second=79 amount=-1
 kerning first=121 second=121 amount=-1
 kerning first=112 second=121 amount=-1
@@ -635,7 +634,7 @@ kerning first=94 second=121 amount=-1
 kerning first=46 second=79 amount=-2
 kerning first=76 second=121 amount=-1
 kerning first=67 second=121 amount=-1
-<<<<<<< HEAD
+
 kerning first=41 second=84 amount=-1
 kerning first=81 second=65 amount=-1
 kerning first=90 second=65 amount=1
@@ -653,7 +652,7 @@ kerning first=91 second=67 amount=-2
 kerning first=84 second=119 amount=-4
 kerning first=111 second=119 amount=-1
 kerning first=70 second=97 amount=-3
-=======
+
 kerning first=44 second=74 amount=2
 kerning first=80 second=74 amount=-6
 kerning first=89 second=74 amount=-7
@@ -668,14 +667,14 @@ kerning first=96 second=125 amount=-1
 kerning first=91 second=67 amount=-3
 kerning first=84 second=119 amount=-5
 kerning first=111 second=119 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=89 second=120 amount=-1
 kerning first=107 second=120 amount=1
 kerning first=116 second=120 amount=1
 kerning first=90 second=111 amount=-1
 kerning first=99 second=111 amount=-1
 kerning first=59 second=87 amount=-1
-<<<<<<< HEAD
+
 kerning first=88 second=71 amount=-1
 kerning first=70 second=71 amount=-1
 kerning first=34 second=71 amount=-1
@@ -694,7 +693,7 @@ kerning first=84 second=103 amount=-3
 kerning first=34 second=65 amount=-4
 kerning first=70 second=65 amount=-2
 kerning first=88 second=65 amount=1
-=======
+
 kerning first=70 second=79 amount=-1
 kerning first=70 second=71 amount=-1
 kerning first=34 second=71 amount=-1
@@ -710,7 +709,7 @@ kerning first=117 second=63 amount=-2
 kerning first=34 second=65 amount=-5
 kerning first=70 second=65 amount=-3
 kerning first=88 second=65 amount=2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=84 second=120 amount=-1
 kerning first=81 second=33 amount=-1
 kerning first=46 second=87 amount=-2
@@ -722,7 +721,7 @@ kerning first=82 second=90 amount=1
 kerning first=64 second=90 amount=-2
 kerning first=46 second=90 amount=1
 kerning first=41 second=71 amount=-1
-<<<<<<< HEAD
+
 kerning first=80 second=47 amount=-3
 kerning first=59 second=71 amount=-1
 kerning first=98 second=47 amount=-1
@@ -731,7 +730,7 @@ kerning first=45 second=74 amount=-1
 kerning first=81 second=74 amount=-1
 kerning first=123 second=79 amount=-1
 kerning first=69 second=79 amount=-1
-=======
+
 kerning first=80 second=47 amount=-4
 kerning first=59 second=71 amount=-1
 kerning first=98 second=47 amount=-1
@@ -742,12 +741,12 @@ kerning first=65 second=44 amount=2
 kerning first=45 second=74 amount=-2
 kerning first=81 second=74 amount=-1
 kerning first=123 second=79 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=87 second=79 amount=-1
 kerning first=90 second=89 amount=1
 kerning first=87 second=64 amount=-1
 kerning first=69 second=117 amount=-1
-<<<<<<< HEAD
+
 kerning first=87 second=117 amount=-1
 kerning first=115 second=93 amount=-1
 kerning first=90 second=119 amount=-1
@@ -758,7 +757,7 @@ kerning first=98 second=122 amount=-1
 kerning first=66 second=88 amount=-1
 kerning first=79 second=46 amount=-2
 kerning first=100 second=34 amount=-1
-=======
+
 kerning first=90 second=119 amount=-1
 kerning first=111 second=39 amount=-2
 kerning first=93 second=39 amount=-2
@@ -767,7 +766,7 @@ kerning first=98 second=122 amount=-1
 kerning first=66 second=88 amount=-1
 kerning first=79 second=46 amount=-2
 kerning first=100 second=34 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=114 second=120 amount=1
 kerning first=59 second=67 amount=-1
 kerning first=41 second=67 amount=-1
@@ -778,7 +777,7 @@ kerning first=92 second=42 amount=-1
 kerning first=84 second=123 amount=-1
 kerning first=97 second=125 amount=-1
 kerning first=115 second=125 amount=-1
-<<<<<<< HEAD
+
 kerning first=79 second=125 amount=-1
 kerning first=89 second=81 amount=-2
 kerning first=67 second=111 amount=-1
@@ -813,7 +812,7 @@ kerning first=97 second=121 amount=-1
 kerning first=68 second=74 amount=-1
 kerning first=86 second=74 amount=-5
 kerning first=75 second=47 amount=1
-=======
+
 kerning first=79 second=125 amount=-2
 kerning first=89 second=81 amount=-2
 kerning first=67 second=111 amount=-1
@@ -848,28 +847,28 @@ kerning first=115 second=121 amount=-1
 kerning first=97 second=121 amount=-1
 kerning first=68 second=74 amount=-1
 kerning first=86 second=74 amount=-6
->>>>>>> Began entire rewrite of codebase
+
 kerning first=111 second=47 amount=-1
 kerning first=125 second=118 amount=-1
 kerning first=71 second=118 amount=-1
 kerning first=89 second=118 amount=-1
-<<<<<<< HEAD
+
 kerning first=107 second=99 amount=-1
 kerning first=89 second=99 amount=-2
-=======
+
 kerning first=107 second=99 amount=-2
 kerning first=89 second=99 amount=-3
 kerning first=66 second=46 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=84 second=46 amount=-4
 kerning first=102 second=46 amount=-3
 kerning first=75 second=122 amount=1
 kerning first=111 second=122 amount=-1
 kerning first=69 second=101 amount=-1
-<<<<<<< HEAD
-=======
+
+
 kerning first=87 second=101 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=82 second=64 amount=-1
 kerning first=99 second=120 amount=1
 kerning first=99 second=44 amount=1
@@ -884,7 +883,7 @@ kerning first=123 second=42 amount=-1
 kerning first=87 second=42 amount=-1
 kerning first=69 second=42 amount=-1
 kerning first=90 second=67 amount=-2
-<<<<<<< HEAD
+
 kerning first=64 second=74 amount=-1
 kerning first=70 second=91 amount=-1
 kerning first=87 second=71 amount=-1
@@ -899,7 +898,7 @@ kerning first=118 second=93 amount=-1
 kerning first=116 second=100 amount=-1
 kerning first=80 second=100 amount=-1
 kerning first=95 second=34 amount=-1
-=======
+
 kerning first=64 second=74 amount=-2
 kerning first=87 second=71 amount=-1
 kerning first=123 second=71 amount=-2
@@ -911,7 +910,7 @@ kerning first=118 second=93 amount=-2
 kerning first=116 second=100 amount=-1
 kerning first=80 second=100 amount=-1
 kerning first=95 second=34 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=88 second=89 amount=1
 kerning first=59 second=86 amount=-1
 kerning first=41 second=86 amount=-2
@@ -919,7 +918,7 @@ kerning first=80 second=33 amount=-1
 kerning first=91 second=41 amount=-1
 kerning first=109 second=41 amount=-1
 kerning first=89 second=88 amount=1
-<<<<<<< HEAD
+
 kerning first=125 second=88 amount=-1
 kerning first=44 second=65 amount=1
 kerning first=86 second=63 amount=1
@@ -948,7 +947,7 @@ kerning first=39 second=87 amount=1
 kerning first=68 second=83 amount=-1
 kerning first=87 second=84 amount=1
 kerning first=96 second=39 amount=-1
-=======
+
 kerning first=44 second=65 amount=2
 kerning first=86 second=63 amount=1
 kerning first=68 second=63 amount=-2
@@ -977,12 +976,12 @@ kerning first=125 second=125 amount=-1
 kerning first=68 second=83 amount=-1
 kerning first=87 second=84 amount=1
 kerning first=96 second=39 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=76 second=103 amount=-1
 kerning first=76 second=118 amount=-2
 kerning first=100 second=119 amount=-1
 kerning first=118 second=119 amount=1
-<<<<<<< HEAD
+
 kerning first=98 second=93 amount=-1
 kerning first=116 second=93 amount=-1
 kerning first=80 second=93 amount=-2
@@ -995,7 +994,7 @@ kerning first=87 second=110 amount=-1
 kerning first=90 second=45 amount=-3
 kerning first=102 second=44 amount=-3
 kerning first=84 second=44 amount=-4
-=======
+
 kerning first=98 second=93 amount=-2
 kerning first=116 second=93 amount=-2
 kerning first=80 second=93 amount=-2
@@ -1012,45 +1011,45 @@ kerning first=84 second=44 amount=-4
 kerning first=66 second=44 amount=-1
 kerning first=70 second=111 amount=-1
 kerning first=88 second=111 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=67 second=67 amount=-1
 kerning first=69 second=44 amount=1
 kerning first=79 second=40 amount=-1
 kerning first=82 second=81 amount=-1
 kerning first=96 second=41 amount=-1
 kerning first=75 second=115 amount=1
-<<<<<<< HEAD
+
 kerning first=94 second=93 amount=-1
 kerning first=95 second=63 amount=-1
-=======
+
 kerning first=94 second=93 amount=-2
 kerning first=95 second=63 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=86 second=59 amount=-1
 kerning first=117 second=118 amount=-1
 kerning first=99 second=118 amount=1
 kerning first=79 second=64 amount=-1
 kerning first=88 second=113 amount=-1
 kerning first=70 second=113 amount=-1
-<<<<<<< HEAD
+
 kerning first=65 second=39 amount=-4
 kerning first=120 second=123 amount=-1
 kerning first=84 second=87 amount=1
 kerning first=87 second=99 amount=-1
 kerning first=69 second=99 amount=-1
 kerning first=70 second=122 amount=-1
-=======
+
 kerning first=65 second=39 amount=-5
 kerning first=120 second=123 amount=-1
 kerning first=87 second=99 amount=-1
 kerning first=69 second=99 amount=-1
 kerning first=70 second=122 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=75 second=100 amount=-1
 kerning first=79 second=90 amount=-1
 kerning first=39 second=81 amount=-1
 kerning first=118 second=121 amount=1
-<<<<<<< HEAD
+
 kerning first=89 second=46 amount=-3
 kerning first=34 second=87 amount=1
 kerning first=90 second=34 amount=-1
@@ -1068,7 +1067,7 @@ kerning first=121 second=34 amount=-1
 kerning first=126 second=119 amount=-1
 kerning first=89 second=103 amount=-2
 kerning first=42 second=74 amount=-6
-=======
+
 kerning first=89 second=46 amount=-4
 kerning first=34 second=87 amount=1
 kerning first=90 second=34 amount=-2
@@ -1088,14 +1087,14 @@ kerning first=126 second=119 amount=-1
 kerning first=107 second=103 amount=-2
 kerning first=89 second=103 amount=-3
 kerning first=42 second=74 amount=-7
->>>>>>> Began entire rewrite of codebase
+
 kerning first=85 second=47 amount=-2
 kerning first=79 second=88 amount=-1
 kerning first=91 second=85 amount=-2
 kerning first=66 second=125 amount=-1
 kerning first=65 second=65 amount=2
 kerning first=102 second=125 amount=2
-<<<<<<< HEAD
+
 kerning first=91 second=63 amount=-1
 kerning first=75 second=67 amount=-2
 kerning first=39 second=67 amount=-1
@@ -1109,7 +1108,7 @@ kerning first=103 second=93 amount=-1
 kerning first=121 second=93 amount=-1
 kerning first=95 second=119 amount=-1
 kerning first=67 second=45 amount=-1
-=======
+
 kerning first=91 second=63 amount=-2
 kerning first=93 second=67 amount=-1
 kerning first=75 second=67 amount=-2
@@ -1128,40 +1127,40 @@ kerning first=121 second=93 amount=-2
 kerning first=90 second=71 amount=-2
 kerning first=95 second=119 amount=-1
 kerning first=67 second=45 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=70 second=100 amount=-1
 kerning first=88 second=100 amount=-1
 kerning first=104 second=118 amount=-1
 kerning first=116 second=45 amount=-2
 kerning first=87 second=86 amount=1
-<<<<<<< HEAD
+
 kerning first=114 second=63 amount=-2
 kerning first=76 second=81 amount=-2
 kerning first=40 second=81 amount=-1
 kerning first=85 second=74 amount=-1
 kerning first=101 second=41 amount=-1
 kerning first=109 second=121 amount=-1
-=======
+
 kerning first=114 second=63 amount=-3
 kerning first=58 second=81 amount=-1
 kerning first=40 second=81 amount=-2
 kerning first=85 second=74 amount=-1
 kerning first=101 second=41 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=76 second=46 amount=1
 kerning first=90 second=117 amount=-1
 kerning first=47 second=87 amount=1
 kerning first=65 second=87 amount=-1
-<<<<<<< HEAD
+
 kerning first=68 second=39 amount=-1
-=======
+
 kerning first=68 second=39 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=97 second=42 amount=-1
 kerning first=115 second=42 amount=-1
 kerning first=65 second=122 amount=1
 kerning first=80 second=91 amount=-1
-<<<<<<< HEAD
+
 kerning first=47 second=65 amount=-2
 kerning first=91 second=90 amount=-2
 kerning first=87 second=97 amount=-1
@@ -1184,7 +1183,7 @@ kerning first=69 second=113 amount=-1
 kerning first=87 second=114 amount=-1
 kerning first=98 second=120 amount=-1
 kerning first=90 second=64 amount=-1
-=======
+
 kerning first=47 second=65 amount=-3
 kerning first=91 second=81 amount=-3
 kerning first=91 second=90 amount=-2
@@ -1211,13 +1210,13 @@ kerning first=87 second=114 amount=-1
 kerning first=98 second=120 amount=-1
 kerning first=90 second=64 amount=-1
 kerning first=88 second=67 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=70 second=67 amount=-1
 kerning first=34 second=67 amount=-1
 kerning first=75 second=101 amount=-1
 kerning first=84 second=101 amount=-3
 kerning first=120 second=101 amount=-1
-<<<<<<< HEAD
+
 kerning first=87 second=111 amount=-1
 kerning first=87 second=81 amount=-1
 kerning first=69 second=81 amount=-1
@@ -1244,7 +1243,7 @@ kerning first=116 second=113 amount=-1
 kerning first=107 second=113 amount=-1
 kerning first=80 second=113 amount=-1
 kerning first=89 second=113 amount=-2
-=======
+
 kerning first=87 second=81 amount=-1
 kerning first=69 second=81 amount=-2
 kerning first=69 second=111 amount=-1
@@ -1269,12 +1268,12 @@ kerning first=116 second=113 amount=-1
 kerning first=107 second=113 amount=-2
 kerning first=80 second=113 amount=-1
 kerning first=89 second=113 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=65 second=123 amount=-1
 kerning first=75 second=81 amount=-2
 kerning first=119 second=63 amount=-2
 kerning first=65 second=115 amount=1
-<<<<<<< HEAD
+
 kerning first=122 second=125 amount=-1
 kerning first=68 second=125 amount=-1
 kerning first=95 second=125 amount=-1
@@ -1282,29 +1281,29 @@ kerning first=70 second=89 amount=1
 kerning first=46 second=74 amount=1
 kerning first=126 second=121 amount=-1
 kerning first=99 second=121 amount=1
-=======
+
 kerning first=104 second=125 amount=-1
 kerning first=122 second=125 amount=-1
 kerning first=68 second=125 amount=-2
 kerning first=95 second=125 amount=-1
 kerning first=93 second=71 amount=-1
 kerning first=126 second=121 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=90 second=121 amount=-1
 kerning first=102 second=120 amount=1
 kerning first=111 second=120 amount=-1
 kerning first=120 second=120 amount=1
-<<<<<<< HEAD
+
 kerning first=39 second=71 amount=-1
 kerning first=84 second=71 amount=-1
 kerning first=75 second=71 amount=-2
-=======
+
 kerning first=75 second=120 amount=2
 kerning first=39 second=71 amount=-1
 kerning first=84 second=71 amount=-2
 kerning first=75 second=71 amount=-2
 kerning first=75 second=47 amount=1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=67 second=117 amount=-1
 kerning first=88 second=119 amount=-2
 kerning first=109 second=118 amount=-1
@@ -1312,7 +1311,7 @@ kerning first=118 second=118 amount=1
 kerning first=97 second=119 amount=-1
 kerning first=124 second=119 amount=-1
 kerning first=115 second=119 amount=-1
-<<<<<<< HEAD
+
 kerning first=91 second=118 amount=-1
 kerning first=100 second=118 amount=-1
 kerning first=118 second=99 amount=-1
@@ -1320,7 +1319,7 @@ kerning first=40 second=79 amount=-1
 kerning first=58 second=79 amount=-1
 kerning first=67 second=79 amount=-1
 kerning first=76 second=79 amount=-2
-=======
+
 kerning first=76 second=40 amount=-1
 kerning first=91 second=118 amount=-1
 kerning first=100 second=118 amount=-1
@@ -1330,7 +1329,7 @@ kerning first=40 second=79 amount=-2
 kerning first=58 second=79 amount=-1
 kerning first=67 second=79 amount=-1
 kerning first=76 second=79 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=68 second=46 amount=-2
 kerning first=86 second=46 amount=-4
 kerning first=125 second=42 amount=-1
@@ -1342,7 +1341,7 @@ kerning first=87 second=119 amount=-1
 kerning first=114 second=119 amount=1
 kerning first=123 second=119 amount=-1
 kerning first=84 second=109 amount=-2
-<<<<<<< HEAD
+
 kerning first=44 second=89 amount=-4
 kerning first=66 second=63 amount=-1
 kerning first=93 second=63 amount=-1
@@ -1354,7 +1353,7 @@ kerning first=68 second=41 amount=-2
 kerning first=90 second=39 amount=-1
 kerning first=81 second=39 amount=-1
 kerning first=117 second=39 amount=-1
-=======
+
 kerning first=44 second=89 amount=-5
 kerning first=66 second=63 amount=-1
 kerning first=93 second=63 amount=-2
@@ -1366,7 +1365,7 @@ kerning first=68 second=41 amount=-2
 kerning first=90 second=39 amount=-2
 kerning first=81 second=39 amount=-1
 kerning first=117 second=39 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=112 second=125 amount=-1
 kerning first=121 second=125 amount=-1
 kerning first=76 second=125 amount=-1
@@ -1375,47 +1374,47 @@ kerning first=94 second=125 amount=-1
 kerning first=103 second=125 amount=-1
 kerning first=87 second=59 amount=-1
 kerning first=93 second=42 amount=-1
-<<<<<<< HEAD
-=======
+
+
 kerning first=82 second=122 amount=1
 kerning first=65 second=85 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=114 second=113 amount=-1
 kerning first=59 second=89 amount=-2
 kerning first=76 second=90 amount=1
 kerning first=85 second=90 amount=-1
 kerning first=67 second=90 amount=1
 kerning first=44 second=83 amount=1
-<<<<<<< HEAD
+
 kerning first=86 second=103 amount=-2
 kerning first=59 second=81 amount=-1
 kerning first=41 second=81 amount=-1
 kerning first=86 second=81 amount=-1
-=======
+
 kerning first=86 second=103 amount=-3
 kerning first=59 second=81 amount=-1
 kerning first=41 second=81 amount=-1
 kerning first=86 second=81 amount=-1
 kerning first=79 second=87 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=122 second=103 amount=-1
 kerning first=91 second=88 amount=-2
 kerning first=64 second=88 amount=-2
 kerning first=82 second=88 amount=1
 kerning first=46 second=88 amount=1
-<<<<<<< HEAD
+
 kerning first=119 second=111 amount=-1
 kerning first=34 second=86 amount=1
 kerning first=76 second=34 amount=-6
-=======
+
 kerning first=34 second=86 amount=1
 kerning first=76 second=34 amount=-8
->>>>>>> Began entire rewrite of codebase
+
 kerning first=79 second=86 amount=-1
 kerning first=88 second=86 amount=1
 kerning first=70 second=86 amount=1
 kerning first=66 second=93 amount=-2
-<<<<<<< HEAD
+
 kerning first=75 second=93 amount=-1
 kerning first=84 second=93 amount=-2
 kerning first=102 second=93 amount=2
@@ -1431,7 +1430,7 @@ kerning first=90 second=91 amount=-1
 kerning first=99 second=45 amount=-2
 kerning first=107 second=101 amount=-1
 kerning first=91 second=79 amount=-2
-=======
+
 kerning first=75 second=93 amount=-2
 kerning first=84 second=93 amount=-2
 kerning first=102 second=93 amount=2
@@ -1448,12 +1447,12 @@ kerning first=81 second=91 amount=-1
 kerning first=99 second=45 amount=-2
 kerning first=107 second=101 amount=-2
 kerning first=91 second=79 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=111 second=118 amount=-1
 kerning first=87 second=89 amount=1
 kerning first=82 second=47 amount=1
 kerning first=118 second=47 amount=-2
-<<<<<<< HEAD
+
 kerning first=65 second=119 amount=-1
 kerning first=76 second=120 amount=1
 kerning first=90 second=93 amount=-2
@@ -1464,7 +1463,7 @@ kerning first=112 second=41 amount=-1
 kerning first=103 second=41 amount=-1
 kerning first=121 second=41 amount=-1
 kerning first=94 second=41 amount=-1
-=======
+
 kerning first=88 second=45 amount=-2
 kerning first=90 second=93 amount=-3
 kerning first=40 second=41 amount=5
@@ -1475,14 +1474,14 @@ kerning first=103 second=41 amount=-1
 kerning first=121 second=41 amount=-1
 kerning first=94 second=41 amount=-1
 kerning first=85 second=44 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=34 second=81 amount=-1
 kerning first=58 second=85 amount=-1
 kerning first=70 second=81 amount=-1
 kerning first=88 second=81 amount=-1
 kerning first=86 second=40 amount=-2
 kerning first=68 second=40 amount=-1
-<<<<<<< HEAD
+
 kerning first=79 second=63 amount=-2
 kerning first=69 second=74 amount=1
 kerning first=75 second=117 amount=-1
@@ -1491,7 +1490,7 @@ kerning first=79 second=34 amount=-1
 kerning first=124 second=34 amount=-1
 kerning first=115 second=34 amount=-1
 kerning first=97 second=34 amount=-1
-=======
+
 kerning first=98 second=125 amount=-1
 kerning first=75 second=117 amount=-1
 kerning first=88 second=34 amount=-2
@@ -1499,7 +1498,7 @@ kerning first=79 second=34 amount=-1
 kerning first=124 second=34 amount=-2
 kerning first=115 second=34 amount=-2
 kerning first=97 second=34 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=82 second=123 amount=-1
 kerning first=81 second=64 amount=-1
 kerning first=68 second=87 amount=-1
@@ -1507,18 +1506,18 @@ kerning first=86 second=87 amount=1
 kerning first=41 second=87 amount=-1
 kerning first=122 second=100 amount=-1
 kerning first=84 second=118 amount=-1
-<<<<<<< HEAD
+
 kerning first=86 second=100 amount=-2
-=======
+
 kerning first=86 second=100 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=98 second=121 amount=-1
 kerning first=89 second=121 amount=-1
 kerning first=80 second=121 amount=1
 kerning first=71 second=121 amount=-1
 kerning first=125 second=121 amount=-1
 kerning first=67 second=120 amount=1
-<<<<<<< HEAD
+
 kerning first=91 second=42 amount=-1
 kerning first=100 second=42 amount=-1
 kerning first=109 second=42 amount=-1
@@ -1530,7 +1529,7 @@ kerning first=74 second=122 amount=-1
 kerning first=109 second=63 amount=-1
 kerning first=39 second=74 amount=-6
 kerning first=69 second=116 amount=-1
-=======
+
 kerning first=76 second=120 amount=1
 kerning first=91 second=42 amount=-1
 kerning first=100 second=42 amount=-1
@@ -1545,7 +1544,7 @@ kerning first=109 second=63 amount=-2
 kerning first=39 second=74 amount=-7
 kerning first=69 second=116 amount=-1
 kerning first=80 second=119 amount=1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=98 second=119 amount=-1
 kerning first=89 second=119 amount=-1
 kerning first=125 second=119 amount=-1
@@ -1557,7 +1556,7 @@ kerning first=65 second=118 amount=-1
 kerning first=41 second=79 amount=-1
 kerning first=59 second=79 amount=-1
 kerning first=86 second=79 amount=-1
-<<<<<<< HEAD
+
 kerning first=88 second=45 amount=-1
 kerning first=75 second=74 amount=1
 kerning first=84 second=74 amount=-4
@@ -1577,7 +1576,7 @@ kerning first=94 second=63 amount=-1
 kerning first=67 second=63 amount=1
 kerning first=86 second=111 amount=-2
 kerning first=90 second=63 amount=-1
-=======
+
 kerning first=85 second=65 amount=-1
 kerning first=75 second=74 amount=2
 kerning first=84 second=74 amount=-5
@@ -1597,41 +1596,41 @@ kerning first=94 second=63 amount=-2
 kerning first=67 second=63 amount=1
 kerning first=86 second=111 amount=-3
 kerning first=90 second=63 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=90 second=99 amount=-1
 kerning first=70 second=59 amount=-1
 kerning first=109 second=125 amount=-1
 kerning first=76 second=122 amount=1
-<<<<<<< HEAD
+
 kerning first=95 second=39 amount=-1
-=======
+
 kerning first=95 second=39 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=112 second=122 amount=-1
 kerning first=85 second=122 amount=-1
 kerning first=68 second=90 amount=-1
 kerning first=41 second=90 amount=-1
-<<<<<<< HEAD
+
 kerning first=89 second=86 amount=2
 kerning first=44 second=86 amount=-4
-=======
+
 kerning first=44 second=86 amount=-5
->>>>>>> Began entire rewrite of codebase
+
 kerning first=114 second=46 amount=-3
 kerning first=118 second=113 amount=-1
 kerning first=69 second=46 amount=1
 kerning first=87 second=46 amount=-2
 kerning first=125 second=86 amount=-1
-<<<<<<< HEAD
-=======
+
+
 kerning first=88 second=101 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=117 second=42 amount=-1
 kerning first=126 second=42 amount=-1
 kerning first=90 second=42 amount=-1
 kerning first=75 second=84 amount=1
 kerning first=84 second=84 amount=1
-<<<<<<< HEAD
+
 kerning first=96 second=34 amount=-1
 kerning first=87 second=34 amount=1
 kerning first=69 second=34 amount=-1
@@ -1672,7 +1671,7 @@ kerning first=89 second=67 amount=-2
 kerning first=75 second=103 amount=-1
 kerning first=79 second=65 amount=-1
 kerning first=89 second=111 amount=-2
-=======
+
 kerning first=96 second=34 amount=-2
 kerning first=87 second=34 amount=1
 kerning first=69 second=34 amount=-1
@@ -1720,19 +1719,19 @@ kerning first=84 second=58 amount=-5
 kerning first=75 second=103 amount=-1
 kerning first=79 second=65 amount=-1
 kerning first=89 second=111 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=76 second=100 amount=-1
 kerning first=119 second=121 amount=1
 kerning first=101 second=121 amount=-1
 kerning first=65 second=121 amount=-1
-<<<<<<< HEAD
+
 kerning first=65 second=46 amount=1
 kerning first=70 second=110 amount=-1
-=======
+
 kerning first=65 second=46 amount=2
 kerning first=70 second=110 amount=-2
 kerning first=76 second=81 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=86 second=71 amount=-1
 kerning first=107 second=47 amount=1
 kerning first=119 second=46 amount=-2
@@ -1741,17 +1740,17 @@ kerning first=82 second=120 amount=1
 kerning first=99 second=103 amount=-1
 kerning first=70 second=93 amount=-2
 kerning first=65 second=117 amount=-1
-<<<<<<< HEAD
+
 kerning first=88 second=111 amount=-1
 kerning first=70 second=114 amount=-1
-=======
+
 kerning first=70 second=114 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=86 second=97 amount=-1
 kerning first=68 second=97 amount=-1
 kerning first=90 second=74 amount=1
 kerning first=76 second=44 amount=1
-<<<<<<< HEAD
+
 kerning first=45 second=89 amount=-2
 kerning first=81 second=89 amount=-2
 kerning first=99 second=119 amount=1
@@ -1770,7 +1769,7 @@ kerning first=87 second=87 amount=1
 kerning first=94 second=34 amount=-1
 kerning first=95 second=41 amount=-1
 kerning first=65 second=42 amount=-3
-=======
+
 kerning first=45 second=89 amount=-3
 kerning first=81 second=89 amount=-2
 kerning first=87 second=39 amount=1
@@ -1792,12 +1791,12 @@ kerning first=95 second=41 amount=-1
 kerning first=93 second=118 amount=-1
 kerning first=65 second=42 amount=-4
 kerning first=119 second=42 amount=1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=101 second=42 amount=-1
 kerning first=124 second=125 amount=-1
 kerning first=88 second=125 amount=-1
 kerning first=80 second=40 amount=-1
-<<<<<<< HEAD
+
 kerning first=123 second=41 amount=-1
 kerning first=67 second=123 amount=-1
 kerning first=91 second=87 amount=-2
@@ -1805,7 +1804,7 @@ kerning first=68 second=65 amount=-1
 kerning first=88 second=84 amount=1
 kerning first=91 second=86 amount=-1
 kerning first=84 second=65 amount=-3
-=======
+
 kerning first=85 second=123 amount=-1
 kerning first=67 second=123 amount=-2
 kerning first=91 second=87 amount=-2
@@ -1815,13 +1814,13 @@ kerning first=88 second=84 amount=1
 kerning first=70 second=84 amount=1
 kerning first=91 second=86 amount=-2
 kerning first=84 second=65 amount=-4
->>>>>>> Began entire rewrite of codebase
+
 kerning first=87 second=113 amount=-1
 kerning first=90 second=85 amount=-1
 kerning first=84 second=114 amount=-2
 kerning first=46 second=83 amount=1
 kerning first=64 second=83 amount=-1
-<<<<<<< HEAD
+
 kerning first=117 second=93 amount=-1
 kerning first=80 second=118 amount=1
 kerning first=84 second=111 amount=-3
@@ -1832,7 +1831,7 @@ kerning first=86 second=93 amount=-1
 kerning first=104 second=93 amount=-1
 kerning first=84 second=58 amount=-4
 kerning first=89 second=58 amount=-2
-=======
+
 kerning first=117 second=93 amount=-2
 kerning first=80 second=118 amount=1
 kerning first=84 second=111 amount=-3
@@ -1840,12 +1839,12 @@ kerning first=122 second=93 amount=-2
 kerning first=68 second=93 amount=-3
 kerning first=86 second=93 amount=-2
 kerning first=104 second=93 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=81 second=86 amount=-1
 kerning first=45 second=86 amount=-1
 kerning first=125 second=89 amount=-1
 kerning first=89 second=89 amount=2
-<<<<<<< HEAD
+
 kerning first=91 second=71 amount=-2
 kerning first=124 second=121 amount=-1
 kerning first=41 second=74 amount=-1
@@ -1853,7 +1852,7 @@ kerning first=47 second=79 amount=-1
 kerning first=66 second=47 amount=-1
 kerning first=84 second=47 amount=-4
 kerning first=102 second=47 amount=-2
-=======
+
 kerning first=91 second=71 amount=-3
 kerning first=124 second=121 amount=-1
 kerning first=41 second=74 amount=-1
@@ -1861,12 +1860,12 @@ kerning first=47 second=79 amount=-2
 kerning first=66 second=47 amount=-1
 kerning first=84 second=47 amount=-5
 kerning first=102 second=47 amount=-3
->>>>>>> Began entire rewrite of codebase
+
 kerning first=98 second=118 amount=-1
 kerning first=116 second=99 amount=-1
 kerning first=75 second=46 amount=1
 kerning first=81 second=97 amount=-1
-<<<<<<< HEAD
+
 kerning first=84 second=122 amount=-1
 kerning first=66 second=122 amount=-1
 kerning first=64 second=87 amount=-1
@@ -1874,7 +1873,7 @@ kerning first=84 second=117 amount=-2
 kerning first=75 second=99 amount=-1
 kerning first=90 second=44 amount=1
 kerning first=76 second=89 amount=-6
-=======
+
 kerning first=84 second=122 amount=-2
 kerning first=66 second=122 amount=-1
 kerning first=64 second=87 amount=-1
@@ -1883,13 +1882,13 @@ kerning first=84 second=117 amount=-2
 kerning first=75 second=99 amount=-1
 kerning first=90 second=44 amount=1
 kerning first=76 second=89 amount=-7
->>>>>>> Began entire rewrite of codebase
+
 kerning first=58 second=89 amount=-2
 kerning first=76 second=119 amount=-2
 kerning first=40 second=89 amount=1
 kerning first=94 second=119 amount=-1
 kerning first=112 second=119 amount=-1
-<<<<<<< HEAD
+
 kerning first=91 second=39 amount=-1
 kerning first=96 second=42 amount=-1
 kerning first=114 second=42 amount=1
@@ -1901,7 +1900,7 @@ kerning first=107 second=100 amount=-1
 kerning first=65 second=84 amount=-3
 kerning first=47 second=84 amount=1
 kerning first=68 second=34 amount=-1
-=======
+
 kerning first=91 second=39 amount=-2
 kerning first=96 second=42 amount=-1
 kerning first=114 second=42 amount=1
@@ -1914,7 +1913,7 @@ kerning first=107 second=100 amount=-2
 kerning first=65 second=84 amount=-4
 kerning first=47 second=84 amount=2
 kerning first=68 second=34 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=104 second=34 amount=-2
 kerning first=86 second=34 amount=1
 kerning first=86 second=86 amount=2
@@ -1922,7 +1921,7 @@ kerning first=68 second=86 amount=-1
 kerning first=100 second=41 amount=-1
 kerning first=80 second=88 amount=-1
 kerning first=44 second=88 amount=1
-<<<<<<< HEAD
+
 kerning first=89 second=65 amount=-4
 kerning first=125 second=65 amount=-1
 kerning first=115 second=39 amount=-1
@@ -1941,7 +1940,7 @@ kerning first=58 second=71 amount=-1
 kerning first=75 second=42 amount=-2
 kerning first=80 second=125 amount=-1
 kerning first=98 second=125 amount=-1
-=======
+
 kerning first=89 second=65 amount=-5
 kerning first=125 second=65 amount=-1
 kerning first=115 second=39 amount=-2
@@ -1964,12 +1963,12 @@ kerning first=58 second=71 amount=-1
 kerning first=91 second=121 amount=-1
 kerning first=75 second=42 amount=-2
 kerning first=80 second=125 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=66 second=87 amount=-1
 kerning first=90 second=123 amount=-2
 kerning first=120 second=103 amount=-1
 kerning first=59 second=85 amount=-1
-<<<<<<< HEAD
+
 kerning first=41 second=83 amount=-1
 kerning first=123 second=39 amount=-1
 kerning first=87 second=39 amount=1
@@ -1988,7 +1987,7 @@ kerning first=89 second=93 amount=-1
 kerning first=75 second=79 amount=-2
 kerning first=103 second=118 amount=-1
 kerning first=69 second=65 amount=1
-=======
+
 kerning first=80 second=97 amount=-1
 kerning first=41 second=83 amount=-1
 kerning first=123 second=39 amount=-2
@@ -2006,64 +2005,64 @@ kerning first=125 second=93 amount=-2
 kerning first=71 second=93 amount=-1
 kerning first=89 second=93 amount=-2
 kerning first=103 second=118 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=87 second=65 amount=-1
 kerning first=123 second=65 amount=-1
 kerning first=102 second=119 amount=1
 kerning first=75 second=113 amount=-1
-<<<<<<< HEAD
+
 kerning first=75 second=44 amount=1
 kerning first=84 second=89 amount=1
-=======
+
 kerning first=89 second=67 amount=-2
 kerning first=69 second=71 amount=-2
 kerning first=75 second=44 amount=1
 kerning first=84 second=89 amount=2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=66 second=89 amount=-1
 kerning first=65 second=101 amount=-1
 kerning first=34 second=79 amount=-1
 kerning first=88 second=79 amount=-1
-<<<<<<< HEAD
+
 kerning first=70 second=79 amount=-1
 kerning first=76 second=67 amount=-2
 kerning first=58 second=67 amount=-1
 kerning first=40 second=67 amount=-1
 kerning first=65 second=86 amount=-3
-=======
+
 kerning first=76 second=67 amount=-3
 kerning first=58 second=67 amount=-1
 kerning first=40 second=67 amount=-2
 kerning first=65 second=86 amount=-4
->>>>>>> Began entire rewrite of codebase
+
 kerning first=47 second=86 amount=2
 kerning first=88 second=40 amount=-1
 kerning first=70 second=40 amount=-1
 kerning first=90 second=81 amount=-2
-<<<<<<< HEAD
-=======
+
+
 kerning first=123 second=41 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=87 second=41 amount=-1
 kerning first=66 second=39 amount=-1
 kerning first=126 second=118 amount=-1
 kerning first=90 second=118 amount=-1
 kerning first=82 second=63 amount=-1
 kerning first=118 second=63 amount=-2
-<<<<<<< HEAD
+
 kerning first=100 second=63 amount=-1
 kerning first=88 second=64 amount=-1
-=======
+
 kerning first=100 second=63 amount=-2
 kerning first=88 second=64 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=86 second=117 amount=-1
 kerning first=70 second=64 amount=-1
 kerning first=122 second=117 amount=-1
 kerning first=75 second=123 amount=-1
 kerning first=90 second=103 amount=-1
 kerning first=110 second=39 amount=-2
-<<<<<<< HEAD
+
 kerning first=92 second=39 amount=-1
 kerning first=84 second=100 amount=-3
 kerning first=120 second=100 amount=-1
@@ -2077,7 +2076,7 @@ kerning first=79 second=87 amount=-1
 kerning first=81 second=34 amount=-1
 kerning first=117 second=34 amount=-1
 kerning first=122 second=111 amount=-1
-=======
+
 kerning first=92 second=39 amount=-2
 kerning first=84 second=100 amount=-3
 kerning first=120 second=100 amount=-1
@@ -2091,18 +2090,18 @@ kerning first=81 second=34 amount=-1
 kerning first=117 second=34 amount=-2
 kerning first=122 second=111 amount=-1
 kerning first=110 second=63 amount=-2
->>>>>>> Began entire rewrite of codebase
+
 kerning first=90 second=116 amount=-1
 kerning first=114 second=121 amount=1
 kerning first=96 second=121 amount=-1
 kerning first=91 second=84 amount=-2
-<<<<<<< HEAD
+
 kerning first=100 second=39 amount=-1
 kerning first=79 second=89 amount=-2
 kerning first=112 second=34 amount=-2
 kerning first=80 second=103 amount=-1
 kerning first=87 second=74 amount=-3
-=======
+
 kerning first=64 second=67 amount=-1
 kerning first=100 second=39 amount=-2
 kerning first=123 second=81 amount=-2
@@ -2112,14 +2111,14 @@ kerning first=116 second=103 amount=-1
 kerning first=80 second=103 amount=-1
 kerning first=69 second=74 amount=1
 kerning first=87 second=74 amount=-4
->>>>>>> Began entire rewrite of codebase
+
 kerning first=123 second=74 amount=-1
 kerning first=76 second=47 amount=1
 kerning first=112 second=47 amount=-1
 kerning first=88 second=88 amount=1
 kerning first=64 second=85 amount=-1
 kerning first=46 second=85 amount=-1
-<<<<<<< HEAD
+
 kerning first=122 second=113 amount=-1
 kerning first=93 second=125 amount=-1
 kerning first=111 second=125 amount=-1
@@ -2147,7 +2146,7 @@ kerning first=87 second=63 amount=1
 kerning first=123 second=63 amount=-1
 kerning first=67 second=81 amount=-1
 kerning first=88 second=123 amount=-1
-=======
+
 kerning first=74 second=65 amount=-1
 kerning first=93 second=125 amount=-1
 kerning first=111 second=125 amount=-1
@@ -2180,7 +2179,7 @@ kerning first=123 second=63 amount=-2
 kerning first=67 second=81 amount=-1
 kerning first=88 second=123 amount=-2
 kerning first=74 second=41 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=92 second=41 amount=-1
 kerning first=110 second=41 amount=-1
 kerning first=65 second=99 amount=-1
@@ -2189,17 +2188,17 @@ kerning first=93 second=90 amount=-1
 kerning first=75 second=90 amount=1
 kerning first=39 second=90 amount=-1
 kerning first=67 second=46 amount=1
-<<<<<<< HEAD
+
 kerning first=65 second=64 amount=-1
 kerning first=88 second=42 amount=-1
 kerning first=124 second=42 amount=-1
-=======
+
 kerning first=85 second=46 amount=-1
 kerning first=65 second=64 amount=-1
 kerning first=88 second=42 amount=-2
 kerning first=124 second=42 amount=-1
 kerning first=74 second=122 amount=-1
->>>>>>> Began entire rewrite of codebase
+
 kerning first=67 second=44 amount=1
 kerning first=120 second=113 amount=-1
 kerning first=84 second=113 amount=-3
