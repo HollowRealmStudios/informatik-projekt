@@ -7,10 +7,14 @@ import info.projekt.jonas.gui.toolkit.capabilities.IHandlesPassiveUpdates;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.util.StreamArray;
+import info.projekt.jonas.util.TextureLoader;
 import org.reflections.Reflections;
 
 import java.util.HashMap;
 import java.util.Stack;
+
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HEIGHT;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.WIDTH;
 
 public class LayerSupervisor {
 
@@ -50,9 +54,15 @@ public class LayerSupervisor {
 	}
 
 	public void draw() {
-		layers.stream().forEach(layer -> {
-			if (layer != null) layer.draw(batch, renderer);
-		});
+		for (int i = 0; i <= 2; i++) {
+			if(i == 2 && layers.t[i] != null) {
+				batch.begin();
+				batch.draw(TextureLoader.getTexture("Back.png"), 0, 0, WIDTH, HEIGHT);
+				batch.end();
+			}
+			if (layers.t[i] != null) layers.t[i].draw(batch, renderer);
+		}
+
 	}
 
 	private void passThrough() {
@@ -79,7 +89,9 @@ public class LayerSupervisor {
 		manager.update();
 		passThrough();
 		checkForQuit();
-		LAYERS.values().forEach(layer -> {if(layer instanceof IHandlesPassiveUpdates) ((IHandlesPassiveUpdates)layer).onPassiveUpdate();});
+		LAYERS.values().forEach(layer -> {
+			if (layer instanceof IHandlesPassiveUpdates) ((IHandlesPassiveUpdates) layer).onPassiveUpdate();
+		});
 		layers.stream().forEach(layer -> {
 			if (layer != null) layer.update();
 		});

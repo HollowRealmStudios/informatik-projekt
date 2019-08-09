@@ -6,6 +6,7 @@ import com.eclipsesource.json.JsonValue;
 import info.projekt.jonas.items.*;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.Tuple;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.reflections.Reflections;
@@ -63,6 +64,7 @@ public class Registry {
 		}
 	}
 
+	@Contract(pure = true)
 	public static HashMap<String, Item> getItems() {
 		return ITEMS;
 	}
@@ -94,6 +96,7 @@ public class Registry {
 		return null;
 	}
 
+	@Contract(pure = true)
 	public static HashMap<String, Room> getRooms() {
 		return ROOMS;
 	}
@@ -111,6 +114,7 @@ public class Registry {
 		return ITEMS.get(name);
 	}
 
+	@Contract(pure = true)
 	public static HashMap<String, CraftingComponent> getComponents() {
 		return COMPONENTS;
 	}

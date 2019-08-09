@@ -12,6 +12,7 @@ import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**
@@ -19,27 +20,27 @@ import java.util.logging.Logger;
  */
 public class InfoProjekt extends Game {
 
-	private final Logger fpsLogger = Logger.getLogger("FPS Logger");
+	private final Logger logger = Logger.getLogger("FPS Logger");
 	private final Stopwatch stopwatch = Stopwatch.createUnstarted();
 	private LayerSupervisor supervisor;
 
 	private void init() {
 		TextureLoader.loadTextures();
+		Registry.registerRooms();
 		supervisor = new LayerSupervisor();
 	}
 
 	private void register() {
+
 		//FIXME
 		//Registry.registerWeapons();
 		//Registry.registerArmors();
 		//Registry.registerComponents();
 		//Registry.registerRecipes();
-		Registry.registerRooms();
 	}
 
 	@Override
 	public void create() {
-		register();
 		init();
 		supervisor.setLayer(new OverlayGui(), LayerSupervisor.OVERLAY_LAYER);
 		supervisor.setLayer(new GameScreen(), LayerSupervisor.BACKGROUND_LAYER);
@@ -52,7 +53,7 @@ public class InfoProjekt extends Game {
 		supervisor.update();
 		supervisor.draw();
 		stopwatch.stop();
-		//fpsLogger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
+		logger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
 		stopwatch.reset();
 	}
 

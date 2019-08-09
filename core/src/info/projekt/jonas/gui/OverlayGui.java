@@ -10,7 +10,7 @@ import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
 import info.projekt.jonas.gui.toolkit.widgets.Notification;
 import info.projekt.jonas.gui.toolkit.widgets.Widget;
-import info.projekt.jonas.gui.toolkit.widgets.button.ImageButton;
+import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
@@ -33,11 +33,11 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 	};
 	private boolean open = false;
 	private final Widget[] opened = new Widget[]{
-			new ImageButton(() -> open = false, 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
+			new ImageButton(() -> NOTIFICATION_STACK.push(new NotificationRequest(RandomStringUtils.randomAlphabetic(ThreadLocalRandom.current().nextInt(5, 50)), 2)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
 			new ImageButton(() -> open = false, 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> StorageHandler.saveGame(GameStorage.INSTANCE), 50, 350, 100, 100, TextureLoader.getTexture("Save.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
-			new ImageButton(() -> NOTIFICATION_STACK.push(new NotificationRequest(RandomStringUtils.randomAlphabetic(ThreadLocalRandom.current().nextInt(5, 50)), 5)), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
+			new ImageButton(() -> Gdx.app.exit(), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
 	};
 
 	private final Widget[] closed = new Widget[]{

@@ -22,5 +22,6 @@ dependencies {
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
     compile group: 'com.intellij', name: 'annotations', version: '12.0'
     compile group: 'com.google.guava', name: 'guava', version: '28.0-jre'
+    compile group: 'org.jetbrains', name: 'annotations', version: '16.0.1'
     implementation 'me.xdrop:fuzzywuzzy:1.2.0'
 }

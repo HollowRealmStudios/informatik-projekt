@@ -1,16 +1,17 @@
-package info.projekt.jonas.gui.toolkit.widgets.button;
+package info.projekt.jonas.gui.toolkit.widgets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import org.jetbrains.annotations.NotNull;
 
 public class ImageButton extends Button {
 
 	private final Texture texture;
 
-	public ImageButton(Runnable action, int x, int y, Texture texture) {
+	public ImageButton(Runnable action, int x, int y, @NotNull Texture texture) {
 		super(action, x, y, texture.getWidth(), texture.getHeight());
 		this.texture = texture;
 	}
@@ -27,14 +28,14 @@ public class ImageButton extends Button {
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(@NotNull SpriteBatch batch) {
 		batch.begin();
 		batch.draw(texture, hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 		batch.end();
 	}
 
 	@Override
-	public void debug(ShapeRenderer renderer) {
+	public void debug(@NotNull ShapeRenderer renderer) {
 		renderer.setColor(Color.RED);
 		renderer.begin(ShapeRenderer.ShapeType.Line);
 		renderer.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);

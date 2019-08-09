@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
+import org.jetbrains.annotations.NotNull;
 
 public class Label extends Widget {
 
@@ -37,14 +38,14 @@ public class Label extends Widget {
 	}
 
 	@Override
-	public void draw(SpriteBatch batch) {
+	public void draw(@NotNull SpriteBatch batch) {
 		batch.begin();
 		font.draw(batch, text, x, y);
 		batch.end();
 	}
 
 	@Override
-	public void debug(ShapeRenderer renderer) {
+	public void debug(@NotNull ShapeRenderer renderer) {
 		renderer.setColor(Color.RED);
 		renderer.begin(ShapeRenderer.ShapeType.Line);
 		renderer.rect(x, y - WidgetUtil.getTextHeight(font, text), WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text));

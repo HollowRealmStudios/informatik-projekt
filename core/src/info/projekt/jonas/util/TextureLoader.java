@@ -2,8 +2,10 @@ package info.projekt.jonas.util;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import info.projekt.jonas.rooms.Room;
 import me.xdrop.fuzzywuzzy.FuzzySearch;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -20,14 +22,12 @@ public class TextureLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		TEXTURES.forEach((v, k) -> System.out.println(v + " --> " + k));
 	}
 
-	public static Texture[] getRoomTextures(Class<? extends Room> room) {
-		return new Texture[] {TEXTURES.get(room.getSimpleName() + "/1.png"), TEXTURES.get(room.getSimpleName() + "/2.png"), TEXTURES.get(room.getSimpleName() + "/3.png")};
-	}
-
+	@Nullable
 	public static Texture getTexture(String path) {
-		if(TEXTURES.get(path) == null && TEXTURES.get("textures/" + path) == null) {
+		if (TEXTURES.get(path) == null && TEXTURES.get("textures/" + path) == null) {
 			System.out.println(TEXTURES.toString());
 			Tuple<String, Integer> closest = new Tuple<>("??????", 0);
 			TEXTURES.forEach((key, value) -> {
@@ -38,9 +38,15 @@ public class TextureLoader {
 			});
 			throw new NullPointerException(path + " was not found. Did you mean " + closest.getOne());
 		}
-		if(TEXTURES.get(path) == null) return TEXTURES.get("textures/" + path);
+		if (TEXTURES.get(path) == null) return TEXTURES.get("textures/" + path);
 		else TEXTURES.get(path);
 		return null;
+	}
+
+	@NotNull
+	@Contract("_ -> new")
+	public static Texture getTextureUnsafe(String path) {
+		return new Texture(Gdx.files.internal(path));
 	}
 
 }

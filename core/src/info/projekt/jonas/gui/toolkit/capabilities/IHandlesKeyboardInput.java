@@ -4,6 +4,6 @@ import java.util.HashMap;
 
 public interface IHandlesKeyboardInput {
 
-	boolean onKeyEvent(HashMap<Integer, Boolean> keys);
+	void onKeyEvent(HashMap<Integer, Boolean> keys);
 
 }

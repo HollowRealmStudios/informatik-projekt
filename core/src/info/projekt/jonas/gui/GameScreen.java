@@ -7,9 +7,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.KeyManager;
 import info.projekt.jonas.gui.toolkit.Layer;
-import info.projekt.jonas.util.TextureLoader;
+import info.projekt.jonas.rooms.EngineRoom;
+import info.projekt.jonas.storage.GameStorage;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_HEIGHT;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_WIDTH;
 
 public class GameScreen extends Layer {
 
@@ -30,23 +33,20 @@ public class GameScreen extends Layer {
 	}
 
 	@Override
-	public void handleKeyboard(KeyManager manager) {
-		if(manager.getKeys().get(Input.Keys.W)) {
+	public void handleKeyboard(@NotNull KeyManager manager) {
+		if (manager.getKeys().get(Input.Keys.W)) {
 			camera.position.y += 5;
 			camera.update();
-			return;
 		}
-		if(manager.getKeys().get(Input.Keys.S)) {
+		if (manager.getKeys().get(Input.Keys.S)) {
 			camera.position.y -= 5;
 			camera.update();
-			return;
 		}
-		if(manager.getKeys().get(Input.Keys.A)) {
+		if (manager.getKeys().get(Input.Keys.A)) {
 			camera.position.x -= 5;
 			camera.update();
-			return;
 		}
-		if(manager.getKeys().get(Input.Keys.D)) {
+		if (manager.getKeys().get(Input.Keys.D)) {
 			camera.position.x += 5;
 			camera.update();
 		}
@@ -56,8 +56,10 @@ public class GameScreen extends Layer {
 	public void draw(SpriteBatch batch, ShapeRenderer renderer) {
 		cameraBatch.setProjectionMatrix(camera.combined);
 		cameraBatch.begin();
-		for (int i = 0; i < 5; i++) {
-			cameraBatch.draw(Objects.requireNonNull(TextureLoader.getTexture("armor.png")), i * 64, 500);
+		for (int x = 0; x < 5; x++) {
+			for (int y = 0; y < 15; y++) {
+				cameraBatch.draw(GameStorage.INSTANCE.getRoomAt(x, y).getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
+			}
 		}
 		cameraBatch.end();
 	}

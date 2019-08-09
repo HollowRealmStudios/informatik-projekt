@@ -1,9 +1,8 @@
-package info.projekt.jonas.gui.toolkit.widgets.button;
+package info.projekt.jonas.gui.toolkit.widgets;
 
 import com.badlogic.gdx.Gdx;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesMouseInput;
 import info.projekt.jonas.gui.toolkit.util.Rectangle;
-import info.projekt.jonas.gui.toolkit.widgets.Widget;
 
 public abstract class Button extends Widget implements IHandlesMouseInput {
 

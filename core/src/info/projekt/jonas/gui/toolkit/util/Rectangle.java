@@ -1,5 +1,7 @@
 package info.projekt.jonas.gui.toolkit.util;
 
+import org.jetbrains.annotations.Contract;
+
 public class Rectangle {
 
 	public int x;
@@ -7,6 +9,7 @@ public class Rectangle {
 	public final int width;
 	public final int height;
 
+	@Contract(pure = true)
 	public Rectangle(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;

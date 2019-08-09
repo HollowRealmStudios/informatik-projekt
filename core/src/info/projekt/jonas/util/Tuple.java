@@ -1,5 +1,7 @@
 package info.projekt.jonas.util;
 
+import org.jetbrains.annotations.Contract;
+
 import java.io.Serializable;
 
 /**
@@ -10,11 +12,13 @@ public class Tuple<V, K> implements Serializable {
 	private V v;
 	private K k;
 
+	@Contract(pure = true)
 	public Tuple(V v, K k) {
 		this.v = v;
 		this.k = k;
 	}
 
+	@Contract(pure = true)
 	public Tuple() {
 	}
 

@@ -1,18 +1,16 @@
 package info.projekt.jonas.gui;
 
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import info.projekt.jonas.gui.toolkit.KeyManager;
+import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
+import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
 import info.projekt.jonas.rooms.Buildable;
-import info.projekt.jonas.storage.Registry;
-import info.projekt.jonas.gui.toolkit.KeyManager;
-import info.projekt.jonas.gui.toolkit.Layer;
-import info.projekt.jonas.gui.toolkit.widgets.button.ImageButton;
 import info.projekt.jonas.rooms.Room;
-import info.projekt.jonas.util.TextureLoader;
+import info.projekt.jonas.storage.Registry;
+import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
 
@@ -23,6 +21,7 @@ public class BuildGui extends Layer {
 
 	private static Class<? extends Room> selected;
 
+	@Contract(pure = true)
 	public static Class<? extends Room> getRoom() {
 		return selected;
 	}
@@ -33,10 +32,11 @@ public class BuildGui extends Layer {
 		for (Room room : Registry.getRooms().values()) {
 			if (Arrays.stream(room.getClass().getAnnotations()).anyMatch(annotation -> annotation instanceof Buildable)) {
 				int cost = ((Buildable) room.getClass().getAnnotations()[0]).cost();
-				ImageButton button = new ImageButton(() -> {selected = room.getClass();
+				ImageButton button = new ImageButton(() -> {
+					selected = room.getClass();
 					LayerSupervisor.LAYER_STACK.push(new LayerRequest(null, LayerSupervisor.GUI_LAYER, true));
 					LayerSupervisor.NOTIFICATION_STACK.push(new NotificationRequest("Selected " + room.getClass().getSimpleName(), 1.5f));
-				}, 0, 0, 200, 100, room.getTexture() != null ? room.getTexture() : TextureLoader.getTexture("room_debug.png"));
+				}, 0, 0, 200, 100, room.getTexture());
 				Label label = new Label(0, 0, String.valueOf(cost), FONT);
 				if (dir) {
 					button.hitbox.x = HALF_WIDTH - 230;
