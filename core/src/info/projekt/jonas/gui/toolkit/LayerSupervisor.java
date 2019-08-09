@@ -16,11 +16,10 @@ public class LayerSupervisor {
 	public static final int OVERLAY_LAYER = 1;
 	public static final int GUI_LAYER = 2;
 
-	public enum HANDLING {PASS_THROUGH, CLOSE_ON_SUCCESSFUL_PASS_THROUGH}
+	public enum HANDLING {PASS_THROUGH, CLOSE_ON_PASS_THROUGH}
 
 	public static final Stack<LayerRequest> LAYER_STACK = new Stack<>();
 	private final HashMap<Class<? extends Layer>, Layer> LAYERS = new HashMap<>();
-	private final HANDLING handling = HANDLING.PASS_THROUGH;
 	private final StreamArray<Layer> layers = new StreamArray<>(new Layer[3]);
 	private final KeyManager manager = new KeyManager();
 
@@ -58,24 +57,24 @@ public class LayerSupervisor {
 	}
 
 	private void passThrough() {
-		int i = 2;
-		for (Layer layer : layers.t) {
-			if (layer != null) {
-				if (layer.handleKeyboard(manager)) break;
-				i--;
-			}
-		}
-		//System.out.println("Keyboard handled by layer " + i);
-		if(manager.isMouseClicked()) {
-			i = 2;
-			for (Layer layer : layers.t) {
-				if (layer != null) {
-					if (layer.handleMouse(manager)) break;
-					i--;
-				}
-			}
-		}
-		//System.out.println("Mouse handled by layer " + i);
+		if(manager.isMouseClicked()) passThroughMouse();
+		passThroughKeyboard();
+	}
+
+	private void passThroughKeyboard() {
+		if(layers.t[GUI_LAYER].handleKeyboard(manager)) return;
+		if(layers.t[OVERLAY_LAYER].handleKeyboard(manager)) return;
+		if(layers.t[BACKGROUND_LAYER].handleKeyboard(manager)) return;
+	}
+
+	private void passThroughMouse() {
+		boolean layer2 = layers.t[GUI_LAYER].handleMouse();
+		boolean layer1 = layers.t[OVERLAY_LAYER].handleMouse();
+		boolean layer0 = layers.t[BACKGROUND_LAYER].handleMouse();
+		System.out.println("2: " + layer2 + "| 1: " + layer1 + " | 0: " + layer0);
+		//if(layers.t[GUI_LAYER].handleMouse()) return;
+		//if(layers.t[OVERLAY_LAYER].handleMouse()) return;
+		//if(layers.t[BACKGROUND_LAYER].handleMouse()) return;
 	}
 
 	private void checkForQuit() {
@@ -84,11 +83,11 @@ public class LayerSupervisor {
 
 	public void update() {
 		manager.update();
+		passThrough();
+		checkForQuit();
 		layers.stream().forEach(layer -> {
 			if (layer != null) layer.update();
 		});
-		passThrough();
-		checkForQuit();
 		if (!LAYER_STACK.isEmpty()) {
 			LayerRequest request = LAYER_STACK.pop();
 			if (layers.t[request.layerNumber] == null || request.force)

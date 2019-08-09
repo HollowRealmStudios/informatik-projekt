@@ -1,11 +1,13 @@
 package info.projekt.jonas.gui.toolkit;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesActiveUpdates;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesKeyboardInput;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesMouseInput;
 import info.projekt.jonas.gui.toolkit.widgets.Widget;
+import info.projekt.jonas.gui.toolkit.widgets.button.Button;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -25,7 +27,7 @@ public class Layer {
 	}
 
 	public final void update() {
-		if(this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates)this).onUpdate();
+		if (this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates) this).onUpdate();
 	}
 
 	public boolean handleKeyboard(KeyManager manager) {
@@ -36,10 +38,13 @@ public class Layer {
 		return false;
 	}
 
-	public boolean handleMouse(KeyManager manager) {
+	public boolean handleMouse() {
 		for (Widget widget : widgets) {
-			if (widget instanceof IHandlesMouseInput)
-				return ((IHandlesMouseInput) widget).onMouseEvent();
+			if (widget instanceof IHandlesMouseInput) {
+				if (((IHandlesMouseInput) widget).onMouseEvent()) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}

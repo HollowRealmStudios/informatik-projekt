@@ -24,8 +24,8 @@ public class OverlayGuiOpened extends Layer implements IHandlesActiveUpdates {
 			new Label((Gdx.graphics.getWidth() / 5) * 2, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.water)), String.valueOf(GameStorage.INSTANCE.water), FONT),
 			new Label((Gdx.graphics.getWidth() / 5) * 3, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.energy)), String.valueOf(GameStorage.INSTANCE.energy), FONT),
 			new Label((Gdx.graphics.getWidth() / 5) * 4, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.food)), String.valueOf(GameStorage.INSTANCE.food), FONT),
-			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
+			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 350, 100, 100, TextureLoader.getTexture("Save.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
@@ -39,7 +39,8 @@ public class OverlayGuiOpened extends Layer implements IHandlesActiveUpdates {
 	@Override
 	public void onUpdate() {
 		GameStorage.INSTANCE.currency++;
-		((Label)widgets[0]).setText(String.valueOf(GameStorage.INSTANCE.currency));
+		((Label) widgets[0]).setText(Gdx.input.getX() + " / " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
+		//((Label)widgets[0]).setText(String.valueOf(GameStorage.INSTANCE.currency));
 		((Label)widgets[1]).setText(String.valueOf(GameStorage.INSTANCE.water));
 		((Label)widgets[2]).setText(String.valueOf(GameStorage.INSTANCE.energy));
 		((Label)widgets[3]).setText(String.valueOf(GameStorage.INSTANCE.food));

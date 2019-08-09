@@ -5,14 +5,13 @@ import com.google.common.base.Stopwatch;
 import info.projekt.jonas.gui.BuildGui;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGuiClosed;
-import info.projekt.jonas.gui.toolkit.util.RenderUtils;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
+import info.projekt.jonas.gui.toolkit.util.RenderUtils;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
 
 import java.awt.*;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
 /**

@@ -34,7 +34,8 @@ public class OverlayGuiClosed extends Layer implements IHandlesActiveUpdates {
 	@Override
 	public void onUpdate() {
 		GameStorage.INSTANCE.currency++;
-		((Label) widgets[0]).setText(String.valueOf(GameStorage.INSTANCE.currency));
+		//((Label) widgets[0]).setText(String.valueOf(GameStorage.INSTANCE.currency));
+		((Label) widgets[0]).setText(Gdx.input.getX() + " / " + (Gdx.graphics.getHeight() - Gdx.input.getY()));
 		((Label) widgets[1]).setText(String.valueOf(GameStorage.INSTANCE.water));
 		((Label) widgets[2]).setText(String.valueOf(GameStorage.INSTANCE.energy));
 		((Label) widgets[3]).setText(String.valueOf(GameStorage.INSTANCE.food));
