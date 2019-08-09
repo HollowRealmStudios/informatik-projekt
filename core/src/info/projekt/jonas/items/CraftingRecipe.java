@@ -8,9 +8,9 @@ import java.util.HashMap;
 
 public class CraftingRecipe {
 
-	private HashMap<CraftingComponent, Integer> ingredients = new HashMap<>();
-	private Item result;
-	private int time;
+	private final HashMap<CraftingComponent, Integer> ingredients = new HashMap<>();
+	private final Item result;
+	private final int time;
 
 	public CraftingRecipe(Item result, @NotNull ArrayList<Tuple<CraftingComponent, Integer>> tuples, int time) {
 		tuples.forEach(t -> ingredients.put(t.getOne(), t.getTwo()));

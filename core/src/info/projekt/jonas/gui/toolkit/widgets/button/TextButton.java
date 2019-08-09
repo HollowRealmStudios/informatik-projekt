@@ -8,9 +8,10 @@ import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 
 public class TextButton extends Button {
 
-	private String text;
-	private BitmapFont font;
-	private int x, y;
+	private final String text;
+	private final BitmapFont font;
+	private final int x;
+	private final int y;
 
 	public TextButton(Runnable action, int x, int y, String text, BitmapFont font) {
 		super(action, x, y, WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text));

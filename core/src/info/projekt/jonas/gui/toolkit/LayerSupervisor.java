@@ -15,16 +15,12 @@ public class LayerSupervisor {
 	public static final int BACKGROUND_LAYER = 0;
 	public static final int OVERLAY_LAYER = 1;
 	public static final int GUI_LAYER = 2;
-
-	public enum HANDLING {PASS_THROUGH, CLOSE_ON_PASS_THROUGH}
-
 	public static final Stack<LayerRequest> LAYER_STACK = new Stack<>();
 	private final HashMap<Class<? extends Layer>, Layer> LAYERS = new HashMap<>();
 	private final StreamArray<Layer> layers = new StreamArray<>(new Layer[3]);
 	private final KeyManager manager = new KeyManager();
-
-	private SpriteBatch batch;
-	private ShapeRenderer renderer;
+	private final SpriteBatch batch;
+	private final ShapeRenderer renderer;
 
 	public LayerSupervisor() {
 		batch = new SpriteBatch();
@@ -57,24 +53,29 @@ public class LayerSupervisor {
 	}
 
 	private void passThrough() {
-		if(manager.isMouseClicked()) passThroughMouse();
+		if (manager.isMouseClicked()) passThroughMouse();
 		passThroughKeyboard();
 	}
 
 	private void passThroughKeyboard() {
-		if(layers.t[GUI_LAYER].handleKeyboard(manager)) return;
-		if(layers.t[OVERLAY_LAYER].handleKeyboard(manager)) return;
-		if(layers.t[BACKGROUND_LAYER].handleKeyboard(manager)) return;
+		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleKeyboard(manager);
+		else layers.t[BACKGROUND_LAYER].handleKeyboard(manager);
+		/*
+		if(layers.t[GUI_LAYER] != null) if(layers.t[GUI_LAYER].handleKeyboard(manager)) return;
+		if(layers.t[OVERLAY_LAYER] != null) if(layers.t[OVERLAY_LAYER].handleKeyboard(manager)) return;
+		if(layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleKeyboard(manager);
+		 */
 	}
 
 	private void passThroughMouse() {
-		boolean layer2 = layers.t[GUI_LAYER].handleMouse();
-		boolean layer1 = layers.t[OVERLAY_LAYER].handleMouse();
-		boolean layer0 = layers.t[BACKGROUND_LAYER].handleMouse();
-		System.out.println("2: " + layer2 + "| 1: " + layer1 + " | 0: " + layer0);
-		//if(layers.t[GUI_LAYER].handleMouse()) return;
-		//if(layers.t[OVERLAY_LAYER].handleMouse()) return;
-		//if(layers.t[BACKGROUND_LAYER].handleMouse()) return;
+		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleMouse();
+		else if (layers.t[OVERLAY_LAYER] != null) layers.t[OVERLAY_LAYER].handleMouse();
+		else if (layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleMouse();
+		/*
+		if(layers.t[GUI_LAYER] != null) if(layers.t[GUI_LAYER].handleMouse()) return;
+		if(layers.t[OVERLAY_LAYER] != null) if(layers.t[OVERLAY_LAYER].handleMouse()) return;
+		if(layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleMouse();
+		 */
 	}
 
 	private void checkForQuit() {
@@ -94,4 +95,6 @@ public class LayerSupervisor {
 				layers.t[request.layerNumber] = LAYERS.get(request.layer);
 		}
 	}
+
+	public enum HANDLING {PASS_THROUGH, CLOSE_ON_PASS_THROUGH}
 }

@@ -1,8 +1,6 @@
 package info.projekt.jonas.rooms;
 
 
-import info.projekt.jonas.rooms.capabilities.IConsume;
-
 /**
  * @author Jonas
  */

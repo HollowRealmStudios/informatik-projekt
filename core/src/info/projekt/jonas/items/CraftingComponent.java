@@ -2,7 +2,7 @@ package info.projekt.jonas.items;
 
 public class CraftingComponent extends Item {
 
-	private int rarity;
+	private final int rarity;
 
 	public int getRarity() {
 		return rarity;

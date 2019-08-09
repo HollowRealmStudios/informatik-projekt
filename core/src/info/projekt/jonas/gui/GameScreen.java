@@ -3,21 +3,18 @@ package info.projekt.jonas.gui;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.KeyManager;
 import info.projekt.jonas.gui.toolkit.Layer;
-import info.projekt.jonas.gui.toolkit.capabilities.IHandlesKeyboardInput;
-import info.projekt.jonas.gui.toolkit.widgets.Widget;
 import info.projekt.jonas.util.TextureLoader;
 
-import java.util.HashMap;
+import java.util.Objects;
 
 public class GameScreen extends Layer {
 
 	public static SpriteBatch cameraBatch;
-	private OrthographicCamera camera;
+	private final OrthographicCamera camera;
 
 	public GameScreen() {
 		cameraBatch = new SpriteBatch();
@@ -26,6 +23,11 @@ public class GameScreen extends Layer {
 		camera.position.set(0, 0, 1);
 		camera.update();
 
+	}
+
+	@Override
+	public boolean handleMouse() {
+		return true;
 	}
 
 	@Override
@@ -58,7 +60,7 @@ public class GameScreen extends Layer {
 		cameraBatch.setProjectionMatrix(camera.combined);
 		cameraBatch.begin();
 		for (int i = 0; i < 5; i++) {
-			cameraBatch.draw(TextureLoader.getTexture("armor.png"), i * 64, 500);
+			cameraBatch.draw(Objects.requireNonNull(TextureLoader.getTexture("armor.png")), i * 64, 500);
 		}
 		cameraBatch.end();
 	}

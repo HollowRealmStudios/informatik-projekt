@@ -4,9 +4,9 @@ import info.projekt.jonas.gui.toolkit.Layer;
 
 public class LayerRequest {
 
-	public boolean force;
-	public Class<? extends Layer> layer;
-	public int layerNumber;
+	public final boolean force;
+	public final Class<? extends Layer> layer;
+	public final int layerNumber;
 
 	public LayerRequest(Class<? extends Layer> layer, int layerNumber, boolean force) {
 		this.layer = layer;

@@ -1,7 +1,5 @@
 package info.projekt.jonas.items;
 
-import com.badlogic.gdx.graphics.Texture;
-
 import java.util.concurrent.ThreadLocalRandom;
 
 /**

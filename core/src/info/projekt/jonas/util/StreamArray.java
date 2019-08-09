@@ -5,7 +5,7 @@ import java.util.stream.Stream;
 
 public class StreamArray<T> {
 
-	public T[] t;
+	public final T[] t;
 
 	public StreamArray(T[] t) {
 		this.t = t;

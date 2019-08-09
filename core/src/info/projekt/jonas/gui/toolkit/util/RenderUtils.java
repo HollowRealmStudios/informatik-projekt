@@ -20,6 +20,10 @@ public class RenderUtils {
 	public static final int CELL_HEIGHT = 200;
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("Ubuntu.fnt"));
 
+	static {
+		FONT.setColor(new com.badlogic.gdx.graphics.Color(1f, 0.180f, 0.215f, 0.8f));
+	}
+
 	public static void clearScreen(@NotNull Color c) {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(c.getRed() / 255f, c.getGreen() / 255f, c.getBlue() / 255f, 1f);

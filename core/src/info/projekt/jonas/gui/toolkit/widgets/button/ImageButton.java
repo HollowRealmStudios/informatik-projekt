@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class ImageButton extends Button {
 
-	private Texture texture;
+	private final Texture texture;
 
 	public ImageButton(Runnable action, int x, int y, Texture texture) {
 		super(action, x, y, texture.getWidth(), texture.getHeight());
@@ -18,6 +18,12 @@ public class ImageButton extends Button {
 	public ImageButton(Runnable action, int x, int y, int width, int height, Texture texture) {
 		super(action, x, y, width, height);
 		this.texture = texture;
+	}
+
+	public ImageButton centerX() {
+		ImageButton button = this;
+		button.hitbox.x = Gdx.graphics.getWidth() / 2 - button.hitbox.width / 2;
+		return button;
 	}
 
 	@Override

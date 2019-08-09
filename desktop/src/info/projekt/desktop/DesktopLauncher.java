@@ -3,8 +3,6 @@ package info.projekt.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import info.projekt.InfoProjekt;
-import info.projekt.jonas.rooms.Room;
-import org.reflections.Reflections;
 
 import java.awt.*;
 

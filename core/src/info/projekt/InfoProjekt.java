@@ -2,7 +2,7 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
-import info.projekt.jonas.gui.BuildGui;
+import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGuiClosed;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
@@ -16,7 +16,6 @@ import java.util.logging.Logger;
 
 /**
  * @author Jonas
- * @author Christoph
  */
 public class InfoProjekt extends Game {
 
@@ -29,11 +28,20 @@ public class InfoProjekt extends Game {
 		supervisor = new LayerSupervisor();
 	}
 
+	private void register() {
+		//FIXME
+		//Registry.registerWeapons();
+		//Registry.registerArmors();
+		//Registry.registerComponents();
+		//Registry.registerRecipes();
+		Registry.registerRooms();
+	}
+
 	@Override
 	public void create() {
+		register();
 		init();
 		supervisor.setLayer(new OverlayGuiClosed(), LayerSupervisor.OVERLAY_LAYER);
-		supervisor.setLayer(new BuildGui(), LayerSupervisor.GUI_LAYER);
 		supervisor.setLayer(new GameScreen(), LayerSupervisor.BACKGROUND_LAYER);
 	}
 

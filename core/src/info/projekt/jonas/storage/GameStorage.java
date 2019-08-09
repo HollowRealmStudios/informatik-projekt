@@ -26,11 +26,11 @@ public class GameStorage implements Serializable {
 
 	public int currency = 0;
 
-	public int food = 0;
+	public final int food = 0;
 
-	public int energy = 0;
+	public final int energy = 0;
 
-	public int water = 0;
+	public final int water = 0;
 
 	public ArrayList<Dweller> getDwellers() {
 		return DWELLERS;

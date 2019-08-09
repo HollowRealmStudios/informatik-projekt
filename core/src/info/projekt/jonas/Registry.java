@@ -57,7 +57,7 @@ public class Registry {
 			Item result = Registry.getItem(obj.get("result").asString());
 			ArrayList<Tuple<CraftingComponent, Integer>> ingredients = new ArrayList<>();
 			for (JsonValue value : obj.get("ingredients").asArray()) {
-				ingredients.add(new Tuple<CraftingComponent, Integer>(Registry.getComponent(value.asArray().get(0).asString()), value.asArray().get(1).asInt()));
+				ingredients.add(new Tuple<>(Registry.getComponent(value.asArray().get(0).asString()), value.asArray().get(1).asInt()));
 			}
 			RECIPES.add(new CraftingRecipe(result, ingredients, obj.get("time").asInt()));
 		}

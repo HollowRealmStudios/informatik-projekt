@@ -1,6 +1,7 @@
 package info.projekt.jonas.items;
 
 import com.badlogic.gdx.graphics.Texture;
+import info.projekt.jonas.util.TextureLoader;
 
 import java.io.Serializable;
 
@@ -29,7 +30,7 @@ public abstract class Item implements Serializable {
 	 */
 	protected Item(String texture, String name) {
 		textureString = texture;
-		this.texture = new Texture(texture);
+		this.texture = TextureLoader.getTexture(texture);
 		this.name = name;
 	}
 

@@ -14,6 +14,7 @@ import info.projekt.jonas.util.TextureLoader;
 
 import java.util.Arrays;
 
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 import static info.projekt.jonas.gui.toolkit.LayerSupervisor.OVERLAY_LAYER;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 
@@ -27,9 +28,8 @@ public class OverlayGuiOpened extends Layer implements IHandlesActiveUpdates {
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 350, 100, 100, TextureLoader.getTexture("Save.png")),
-			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
+			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
 			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
-			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(OverlayGuiClosed.class, OVERLAY_LAYER, true)), 50, 800, 100, 100, TextureLoader.getTexture("Build.png"))
 	};
 
 	public OverlayGuiOpened() {

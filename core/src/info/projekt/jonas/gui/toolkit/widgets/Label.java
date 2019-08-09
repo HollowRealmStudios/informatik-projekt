@@ -10,7 +10,7 @@ import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 public class Label extends Widget {
 
 	private String text;
-	private BitmapFont font;
+	private final BitmapFont font;
 	private int x, y;
 
 	public Label(int x, int y, String text, BitmapFont font) {
