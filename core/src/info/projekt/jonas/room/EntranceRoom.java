@@ -1,4 +1,4 @@
-package info.projekt.jonas.rooms;
+package info.projekt.jonas.room;
 
 /**
  * @author Jonas

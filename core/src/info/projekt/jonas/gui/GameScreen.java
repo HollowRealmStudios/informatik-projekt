@@ -7,16 +7,17 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.KeyManager;
 import info.projekt.jonas.gui.toolkit.Layer;
-import info.projekt.jonas.rooms.EngineRoom;
 import info.projekt.jonas.storage.GameStorage;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_HEIGHT;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_WIDTH;
 
 public class GameScreen extends Layer {
 
-	public static SpriteBatch cameraBatch;
+	private final SpriteBatch cameraBatch;
 	private final OrthographicCamera camera;
 
 	public GameScreen() {
@@ -58,7 +59,7 @@ public class GameScreen extends Layer {
 		cameraBatch.begin();
 		for (int x = 0; x < 5; x++) {
 			for (int y = 0; y < 15; y++) {
-				cameraBatch.draw(GameStorage.INSTANCE.getRoomAt(x, y).getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
+				if(GameStorage.INSTANCE.getRoomAt(x, y) != null) cameraBatch.draw(Objects.requireNonNull(GameStorage.INSTANCE.getRoomAt(x, y)).getTexture(), x * CELL_WIDTH, y * CELL_HEIGHT);
 			}
 		}
 		cameraBatch.end();

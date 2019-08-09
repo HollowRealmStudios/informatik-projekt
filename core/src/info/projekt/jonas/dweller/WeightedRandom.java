@@ -1,4 +1,4 @@
-package info.projekt.jonas.dwellers;
+package info.projekt.jonas.dweller;
 
 import java.util.ArrayList;
 import java.util.HashMap;

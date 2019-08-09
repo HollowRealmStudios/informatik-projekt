@@ -2,6 +2,7 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
+import info.projekt.jonas.dweller.DwellerSpawner;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
@@ -12,6 +13,7 @@ import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
 
 import java.awt.*;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
@@ -20,6 +22,7 @@ import java.util.logging.Logger;
  */
 public class InfoProjekt extends Game {
 
+	private DwellerSpawner spawner;
 	private final Logger logger = Logger.getLogger("FPS Logger");
 	private final Stopwatch stopwatch = Stopwatch.createUnstarted();
 	private LayerSupervisor supervisor;
@@ -28,15 +31,19 @@ public class InfoProjekt extends Game {
 		TextureLoader.loadTextures();
 		Registry.registerRooms();
 		supervisor = new LayerSupervisor();
+		register();
+		spawner = new DwellerSpawner();
 	}
 
 	private void register() {
-
-		//FIXME
-		//Registry.registerWeapons();
-		//Registry.registerArmors();
-		//Registry.registerComponents();
-		//Registry.registerRecipes();
+		try {
+			Registry.registerWeapons();
+			Registry.registerArmors();
+			Registry.registerComponents();
+			Registry.registerRecipes();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

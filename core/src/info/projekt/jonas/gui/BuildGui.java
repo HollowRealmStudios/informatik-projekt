@@ -7,8 +7,8 @@ import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
-import info.projekt.jonas.rooms.Buildable;
-import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.room.Buildable;
+import info.projekt.jonas.room.Room;
 import info.projekt.jonas.storage.Registry;
 import org.jetbrains.annotations.Contract;
 

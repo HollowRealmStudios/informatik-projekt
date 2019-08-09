@@ -1,10 +1,11 @@
 package info.projekt.jonas.storage;
 
-import info.projekt.jonas.dwellers.Dweller;
+import info.projekt.jonas.dweller.Dweller;
 import info.projekt.jonas.items.CraftingComponent;
 import info.projekt.jonas.items.Item;
-import info.projekt.jonas.rooms.Room;
+import info.projekt.jonas.room.Room;
 import info.projekt.jonas.util.LimitedArrayList;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -16,13 +17,13 @@ public class GameStorage implements Serializable {
 
 	public static final transient GameStorage INSTANCE = StorageHandler.loadGame();
 
-	private final Room[][] rooms = new Room[5][15];
+	public Room[][] rooms = new Room[5][15];
 
-	public final LimitedArrayList<CraftingComponent> COMPONENTS = new LimitedArrayList<>(0);
+	public final LimitedArrayList<CraftingComponent> components = new LimitedArrayList<>(0);
 
-	public final LimitedArrayList<Item> ITEMS = new LimitedArrayList<>(0);
+	public final LimitedArrayList<Item> items = new LimitedArrayList<>(0);
 
-	private final ArrayList<Dweller> DWELLERS = new ArrayList<>();
+	private final ArrayList<Dweller> dwellers = new ArrayList<>();
 
 	public int currency = 0;
 
@@ -32,10 +33,15 @@ public class GameStorage implements Serializable {
 
 	public final int water = 0;
 
-	public ArrayList<Dweller> getDwellers() {
-		return DWELLERS;
+	public void addDweller(Dweller dweller) {
+		dwellers.add(dweller);
 	}
 
+	public ArrayList<Dweller> getDwellers() {
+		return dwellers;
+	}
+
+	@Nullable
 	public Room getRoomAt(int x, int y) {
 		return rooms[x][y];
 	}

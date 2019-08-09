@@ -35,7 +35,7 @@ public abstract class Item implements Serializable {
 	}
 
 	public Texture getTexture() {
-		if(texture == null) texture = new Texture(textureString);
+		if(texture == null) texture = TextureLoader.getTexture(textureString);
 		return texture;
 	}
 

@@ -42,7 +42,7 @@ public class LayerSupervisor {
 	}
 
 	public void setLayer(Layer layer, int i) {
-		layers.t[i] = layer;
+		layers.set(i, layer);
 	}
 
 	public SpriteBatch getBatch() {
@@ -50,17 +50,17 @@ public class LayerSupervisor {
 	}
 
 	public Layer getLayer(int i) {
-		return layers.t[i];
+		return layers.get(i);
 	}
 
 	public void draw() {
 		for (int i = 0; i <= 2; i++) {
-			if(i == 2 && layers.t[i] != null) {
+			if(i == 2 && layers.get(i) != null) {
 				batch.begin();
 				batch.draw(TextureLoader.getTexture("Back.png"), 0, 0, WIDTH, HEIGHT);
 				batch.end();
 			}
-			if (layers.t[i] != null) layers.t[i].draw(batch, renderer);
+			if (layers.get(i) != null) layers.get(i).draw(batch, renderer);
 		}
 
 	}
@@ -71,18 +71,18 @@ public class LayerSupervisor {
 	}
 
 	private void passThroughKeyboard() {
-		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleKeyboard(manager);
-		else layers.t[BACKGROUND_LAYER].handleKeyboard(manager);
+		if (layers.get(GUI_LAYER) != null) layers.get(GUI_LAYER).handleKeyboard(manager);
+		else layers.get(BACKGROUND_LAYER).handleKeyboard(manager);
 	}
 
 	private void passThroughMouse() {
-		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleMouse();
-		else if (layers.t[OVERLAY_LAYER] != null) layers.t[OVERLAY_LAYER].handleMouse();
-		else if (layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleMouse();
+		if (layers.get(GUI_LAYER) != null) layers.get(GUI_LAYER).handleMouse();
+		else if (layers.get(OVERLAY_LAYER) != null) layers.get(OVERLAY_LAYER).handleMouse();
+		else if (layers.get(BACKGROUND_LAYER) != null) layers.get(BACKGROUND_LAYER).handleMouse();
 	}
 
 	private void checkForQuit() {
-		if (manager.getKeys().get(Input.Keys.ESCAPE)) layers.t[GUI_LAYER] = null;
+		if (manager.getKeys().get(Input.Keys.ESCAPE)) layers.set(GUI_LAYER, null);
 	}
 
 	public void update() {
@@ -97,8 +97,8 @@ public class LayerSupervisor {
 		});
 		if (!LAYER_STACK.isEmpty()) {
 			LayerRequest request = LAYER_STACK.pop();
-			if (layers.t[request.layerNumber] == null || request.force)
-				layers.t[request.layerNumber] = LAYERS.get(request.layer);
+			if (layers.get(request.layerNumber) == null || request.force)
+				layers.set(request.layerNumber, LAYERS.get(request.layer));
 		}
 	}
 }

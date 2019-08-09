@@ -1,6 +1,7 @@
 package info.projekt.jonas.storage;
 
-import info.projekt.jonas.rooms.EngineRoom;
+import info.projekt.jonas.room.*;
+import info.projekt.jonas.util.Configuration;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
@@ -19,22 +20,13 @@ public class StorageHandler {
 		try {
 			logger.info("Loading game...");
 			GameStorage storage = (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
-			if(storage.getRoomAt(0, 0) == null) {
-				for(int x = 0; x < 5; x++) {
-					for(int y = 0; y < 15; y++) {
-						storage.setRoomAt(new EngineRoom(), x, y);
-					}
-				}
-			}
 			logger.info("Done loading game...");
 			return storage;
 		} catch (IOException | ClassNotFoundException e) {
+			logger.info("Generating world...");
 			GameStorage storage = new GameStorage();
-			for(int x = 0; x < 5; x++) {
-				for(int y = 0; y < 15; y++) {
-					storage.setRoomAt(new EngineRoom(), x, y);
-				}
-			}
+			storage.rooms = newMap();
+			logger.info("Done generating world...");
 			return storage;
 		}
 	}
@@ -47,5 +39,21 @@ public class StorageHandler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@NotNull
+	private static Room[][] newMap() {
+		Room[][] rooms = new Room[Configuration.ROOMS_HOR][Configuration.ROOMS_VER];
+		rooms[0][14] = new EntranceRoom();
+		rooms[1][14] = new SewageTreatmentPlant();
+		rooms[2][14] = new EngineRoom();
+		rooms[3][14] = new KitchenRoom();
+		rooms[4][14] = new BarrackRoom();
+		rooms[0][0] = new MineshaftRoom();
+		rooms[1][0] = new MineshaftRoom();
+		rooms[2][0] = new MineshaftRoom();
+		rooms[3][0] = new MineshaftRoom();
+		rooms[4][0] = new MineshaftRoom();
+		return rooms;
 	}
 }

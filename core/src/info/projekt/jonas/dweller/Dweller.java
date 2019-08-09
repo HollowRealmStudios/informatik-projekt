@@ -1,4 +1,4 @@
-package info.projekt.jonas.dwellers;
+package info.projekt.jonas.dweller;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;

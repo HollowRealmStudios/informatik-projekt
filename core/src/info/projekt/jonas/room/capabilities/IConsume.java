@@ -1,4 +1,4 @@
-package info.projekt.jonas.rooms.capabilities;
+package info.projekt.jonas.room.capabilities;
 
 public interface IConsume {
 

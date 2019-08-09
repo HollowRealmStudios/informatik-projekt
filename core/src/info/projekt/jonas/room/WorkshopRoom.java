@@ -1,4 +1,4 @@
-package info.projekt.jonas.rooms;
+package info.projekt.jonas.room;
 
 @Buildable
 public class WorkshopRoom extends Room {

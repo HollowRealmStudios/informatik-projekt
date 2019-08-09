@@ -37,8 +37,6 @@ public class KeyManager implements InputProcessor {
 		return true;
 	}
 
-
-
 	@Override
 	public boolean keyTyped(char character) {
 		return false;

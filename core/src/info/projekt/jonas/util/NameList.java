@@ -1,8 +1,8 @@
 package info.projekt.jonas.util;
 
 import com.badlogic.gdx.Gdx;
-import info.projekt.jonas.dwellers.Dweller;
-import info.projekt.jonas.dwellers.WeightedRandom;
+import info.projekt.jonas.dweller.Dweller;
+import info.projekt.jonas.dweller.WeightedRandom;
 
 import java.util.ArrayList;
 import java.util.Scanner;
