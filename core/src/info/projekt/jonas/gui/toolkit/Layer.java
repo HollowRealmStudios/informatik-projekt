@@ -18,31 +18,39 @@ public class Layer {
 		widgets.add(widget);
 	}
 
-	public void addWidgets(Collection<Widget> widgets) {
+	protected void addWidgets(Collection<Widget> widgets) {
 		this.widgets.addAll(widgets);
 	}
 
+	protected void removeWidget(Widget widget) { widgets.remove(widget); }
+
+	protected void removeWidgets(Collection<Widget> widgets) { this.widgets.removeAll(widgets); }
+
+	protected void removeAll() {
+		widgets.clear();
+	}
+
 	public final void update() {
-		if (this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates) this).onUpdate();
+		if (this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates) this).onActiveUpdate();
 	}
 
-	public boolean handleKeyboard(KeyManager manager) {
+	public void handleKeyboard(KeyManager manager) {
 		for (Widget widget : widgets) {
-			if (widget instanceof IHandlesKeyboardInput)
-				return ((IHandlesKeyboardInput) widget).onKeyEvent(manager.getKeys());
+			if (widget instanceof IHandlesKeyboardInput) {
+				((IHandlesKeyboardInput) widget).onKeyEvent(manager.getKeys());
+				return;
+			}
 		}
-		return false;
 	}
 
-	public boolean handleMouse() {
+	public void handleMouse() {
 		for (Widget widget : widgets) {
 			if (widget instanceof IHandlesMouseInput) {
 				if (((IHandlesMouseInput) widget).onMouseEvent()) {
-					return true;
+					return;
 				}
 			}
 		}
-		return false;
 	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer renderer) {

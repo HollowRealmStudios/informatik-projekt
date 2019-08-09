@@ -2,12 +2,12 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
-import info.projekt.jonas.Registry;
 import info.projekt.jonas.gui.GameScreen;
-import info.projekt.jonas.gui.OverlayGuiClosed;
+import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.RenderUtils;
 import info.projekt.jonas.storage.GameStorage;
+import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
 
@@ -41,7 +41,7 @@ public class InfoProjekt extends Game {
 	public void create() {
 		register();
 		init();
-		supervisor.setLayer(new OverlayGuiClosed(), LayerSupervisor.OVERLAY_LAYER);
+		supervisor.setLayer(new OverlayGui(), LayerSupervisor.OVERLAY_LAYER);
 		supervisor.setLayer(new GameScreen(), LayerSupervisor.BACKGROUND_LAYER);
 	}
 

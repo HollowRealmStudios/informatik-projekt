@@ -21,7 +21,8 @@ public class RenderUtils {
 	public static final BitmapFont FONT = new BitmapFont(Gdx.files.internal("Ubuntu.fnt"));
 
 	static {
-		FONT.setColor(new com.badlogic.gdx.graphics.Color(1f, 0.180f, 0.215f, 0.8f));
+		//FONT.setColor(new com.badlogic.gdx.graphics.Color(1f, 0.180f, 0.215f, 0.8f));
+		FONT.setColor(com.badlogic.gdx.graphics.Color.WHITE);
 	}
 
 	public static void clearScreen(@NotNull Color c) {

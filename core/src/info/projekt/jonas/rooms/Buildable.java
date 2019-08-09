@@ -7,4 +7,8 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE})
-public @interface Buildable {}
+public @interface Buildable {
+
+	int cost() default 0;
+
+}

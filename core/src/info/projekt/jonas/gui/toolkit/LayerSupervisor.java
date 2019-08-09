@@ -3,7 +3,9 @@ package info.projekt.jonas.gui.toolkit;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.jonas.gui.toolkit.capabilities.IHandlesPassiveUpdates;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.util.StreamArray;
 import org.reflections.Reflections;
 
@@ -16,6 +18,7 @@ public class LayerSupervisor {
 	public static final int OVERLAY_LAYER = 1;
 	public static final int GUI_LAYER = 2;
 	public static final Stack<LayerRequest> LAYER_STACK = new Stack<>();
+	public static final Stack<NotificationRequest> NOTIFICATION_STACK = new Stack<>();
 	private final HashMap<Class<? extends Layer>, Layer> LAYERS = new HashMap<>();
 	private final StreamArray<Layer> layers = new StreamArray<>(new Layer[3]);
 	private final KeyManager manager = new KeyManager();
@@ -60,32 +63,23 @@ public class LayerSupervisor {
 	private void passThroughKeyboard() {
 		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleKeyboard(manager);
 		else layers.t[BACKGROUND_LAYER].handleKeyboard(manager);
-		/*
-		if(layers.t[GUI_LAYER] != null) if(layers.t[GUI_LAYER].handleKeyboard(manager)) return;
-		if(layers.t[OVERLAY_LAYER] != null) if(layers.t[OVERLAY_LAYER].handleKeyboard(manager)) return;
-		if(layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleKeyboard(manager);
-		 */
 	}
 
 	private void passThroughMouse() {
 		if (layers.t[GUI_LAYER] != null) layers.t[GUI_LAYER].handleMouse();
 		else if (layers.t[OVERLAY_LAYER] != null) layers.t[OVERLAY_LAYER].handleMouse();
 		else if (layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleMouse();
-		/*
-		if(layers.t[GUI_LAYER] != null) if(layers.t[GUI_LAYER].handleMouse()) return;
-		if(layers.t[OVERLAY_LAYER] != null) if(layers.t[OVERLAY_LAYER].handleMouse()) return;
-		if(layers.t[BACKGROUND_LAYER] != null) layers.t[BACKGROUND_LAYER].handleMouse();
-		 */
 	}
 
 	private void checkForQuit() {
-		if (manager.getKeys().get(Input.Keys.ESCAPE)) layers.t[2] = null;
+		if (manager.getKeys().get(Input.Keys.ESCAPE)) layers.t[GUI_LAYER] = null;
 	}
 
 	public void update() {
 		manager.update();
 		passThrough();
 		checkForQuit();
+		LAYERS.values().forEach(layer -> {if(layer instanceof IHandlesPassiveUpdates) ((IHandlesPassiveUpdates)layer).onPassiveUpdate();});
 		layers.stream().forEach(layer -> {
 			if (layer != null) layer.update();
 		});
@@ -95,6 +89,4 @@ public class LayerSupervisor {
 				layers.t[request.layerNumber] = LAYERS.get(request.layer);
 		}
 	}
-
-	public enum HANDLING {PASS_THROUGH, CLOSE_ON_PASS_THROUGH}
 }

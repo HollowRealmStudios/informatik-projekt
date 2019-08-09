@@ -26,33 +26,30 @@ public class GameScreen extends Layer {
 	}
 
 	@Override
-	public boolean handleMouse() {
-		return true;
+	public void handleMouse() {
 	}
 
 	@Override
-	public boolean handleKeyboard(KeyManager manager) {
+	public void handleKeyboard(KeyManager manager) {
 		if(manager.getKeys().get(Input.Keys.W)) {
 			camera.position.y += 5;
 			camera.update();
-			return true;
+			return;
 		}
 		if(manager.getKeys().get(Input.Keys.S)) {
 			camera.position.y -= 5;
 			camera.update();
-			return true;
+			return;
 		}
 		if(manager.getKeys().get(Input.Keys.A)) {
 			camera.position.x -= 5;
 			camera.update();
-			return true;
+			return;
 		}
 		if(manager.getKeys().get(Input.Keys.D)) {
 			camera.position.x += 5;
 			camera.update();
-			return true;
 		}
-		return false;
 	}
 
 	@Override

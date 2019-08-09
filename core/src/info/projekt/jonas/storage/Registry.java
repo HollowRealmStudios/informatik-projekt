@@ -1,4 +1,4 @@
-package info.projekt.jonas;
+package info.projekt.jonas.storage;
 
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;

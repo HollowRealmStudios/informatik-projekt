@@ -1,36 +1,63 @@
 package info.projekt.jonas.gui;
 
-import info.projekt.jonas.Registry;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import info.projekt.jonas.gui.toolkit.LayerSupervisor;
+import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
+import info.projekt.jonas.gui.toolkit.widgets.Label;
+import info.projekt.jonas.rooms.Buildable;
+import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.gui.toolkit.KeyManager;
 import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.widgets.button.ImageButton;
 import info.projekt.jonas.rooms.Room;
 import info.projekt.jonas.util.TextureLoader;
 
+import java.util.Arrays;
+
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HALF_WIDTH;
 
 public class BuildGui extends Layer {
+
+	private static Class<? extends Room> selected;
+
+	public static Class<? extends Room> getRoom() {
+		return selected;
+	}
 
 	public BuildGui() {
 		boolean dir = false;
 		int i = 300;
 		for (Room room : Registry.getRooms().values()) {
-			ImageButton button = new ImageButton(() -> System.out.println(room.getClass().getSimpleName()), 0, 0, 200, 100, room.getTexture() != null ? room.getTexture() : TextureLoader.getTexture("room_debug.png"));
-			if (dir) {
-				button.hitbox.x = HALF_WIDTH - 220;
-				button.hitbox.y = i;
-			} else {
-				button.hitbox.x = HALF_WIDTH + 20;
-				button.hitbox.y = i;
-				i += 120;
+			if (Arrays.stream(room.getClass().getAnnotations()).anyMatch(annotation -> annotation instanceof Buildable)) {
+				int cost = ((Buildable) room.getClass().getAnnotations()[0]).cost();
+				ImageButton button = new ImageButton(() -> {selected = room.getClass();
+					LayerSupervisor.LAYER_STACK.push(new LayerRequest(null, LayerSupervisor.GUI_LAYER, true));
+					LayerSupervisor.NOTIFICATION_STACK.push(new NotificationRequest("Selected " + room.getClass().getSimpleName(), 1.5f));
+				}, 0, 0, 200, 100, room.getTexture() != null ? room.getTexture() : TextureLoader.getTexture("room_debug.png"));
+				Label label = new Label(0, 0, String.valueOf(cost), FONT);
+				if (dir) {
+					button.hitbox.x = HALF_WIDTH - 230;
+					button.hitbox.y = i;
+					label.x = HALF_WIDTH - 220;
+					label.y = i + 40;
+				} else {
+					button.hitbox.x = HALF_WIDTH + 10;
+					button.hitbox.y = i;
+					label.x = HALF_WIDTH + 20;
+					label.y = i + 40;
+					i += 120;
+				}
+				dir = !dir;
+				addWidget(button);
+				addWidget(label);
 			}
-			dir = !dir;
-			addWidget(button);
 		}
 	}
 
 	@Override
-	public boolean handleKeyboard(KeyManager manager) {
-		return true;
+	public void handleKeyboard(KeyManager manager) {
 	}
 }

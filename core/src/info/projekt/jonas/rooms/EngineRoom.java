@@ -3,7 +3,7 @@ package info.projekt.jonas.rooms;
 /**
  * @author Jonas
  */
-@Buildable
+@Buildable()
 public class EngineRoom extends Room {
 
 }

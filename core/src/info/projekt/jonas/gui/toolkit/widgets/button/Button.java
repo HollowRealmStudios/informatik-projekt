@@ -8,7 +8,7 @@ import info.projekt.jonas.gui.toolkit.widgets.Widget;
 public abstract class Button extends Widget implements IHandlesMouseInput {
 
 	public final Rectangle hitbox;
-	public final Runnable action;
+	private final Runnable action;
 
 	protected Button(Runnable action, int x, int y, int width, int height) {
 		hitbox = new Rectangle(x, y, width, height);

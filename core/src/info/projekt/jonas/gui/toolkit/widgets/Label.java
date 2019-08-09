@@ -11,7 +11,7 @@ public class Label extends Widget {
 
 	private String text;
 	private final BitmapFont font;
-	private int x, y;
+	public int x, y;
 
 	public Label(int x, int y, String text, BitmapFont font) {
 		this.text = text;

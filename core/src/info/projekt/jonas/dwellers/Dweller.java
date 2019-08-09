@@ -2,7 +2,7 @@ package info.projekt.jonas.dwellers;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import info.projekt.jonas.Registry;
+import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.util.Tuple;
