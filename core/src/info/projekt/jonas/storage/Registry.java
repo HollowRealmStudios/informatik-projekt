@@ -5,6 +5,7 @@ import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
 import info.projekt.jonas.items.*;
 import info.projekt.jonas.room.Room;
+import info.projekt.jonas.util.Color;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -15,12 +16,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * @author Jonas
  */
 public class Registry {
 
+	private static final Logger logger = Logger.getLogger("Registry");
 	private static final HashMap<String, Room> ROOMS = new HashMap<>();
 	private static final HashMap<String, Item> ITEMS = new HashMap<>();
 	private static final HashMap<String, CraftingComponent> COMPONENTS = new HashMap<>();
@@ -33,6 +36,7 @@ public class Registry {
 			JsonObject obj = object.asObject();
 			ITEMS.put(obj.get("name").asString(), new WeaponItem(obj.get("texture").asString(), obj.get("name").asString(), obj.get("damage").asInt(), obj.get("deviation").asInt()));
 		}
+		logger.info(Color.toColor("Registered " + ITEMS.size() + " items", Color.GREEN));
 	}
 
 	public static void registerArmors() throws IOException {
@@ -49,6 +53,7 @@ public class Registry {
 			JsonObject obj = object.asObject();
 			COMPONENTS.put(obj.get("name").asString(), new CraftingComponent(obj.get("name").asString().replace(" ", "") + ".png", obj.get("name").asString(), obj.get("rarity").asInt()));
 		}
+		logger.info(Color.toColor("Registered " + COMPONENTS.size() + " components", Color.GREEN));
 	}
 
 	public static void registerRecipes() throws IOException {
@@ -62,6 +67,7 @@ public class Registry {
 			}
 			RECIPES.add(new CraftingRecipe(result, ingredients, obj.get("time").asInt()));
 		}
+		logger.info(Color.toColor("Registered " + RECIPES.size() + " recipes", Color.GREEN));
 	}
 
 	@Contract(pure = true)
@@ -70,13 +76,14 @@ public class Registry {
 	}
 
 	public static void registerRooms() {
-		new Reflections("info.projekt.jonas.rooms").getSubTypesOf(Room.class).forEach((Class c) -> {
+		new Reflections("info.projekt.jonas.room").getSubTypesOf(Room.class).forEach((Class c) -> {
 			try {
 				ROOMS.put(c.getSimpleName(), (Room) c.newInstance());
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
 			}
 		});
+		logger.info(Color.toColor("Registered " + ROOMS.size() + " rooms", Color.GREEN));
 	}
 
 	/**
@@ -145,7 +152,7 @@ public class Registry {
 			b.append(k.toString());
 			b.append("\n");
 		});
-		System.out.println(b.toString());
+		logger.info(Color.toColor(b.toString(), Color.YELLOW));
 	}
 
 	public static ArrayList<CraftingRecipe> getRecipes() {

@@ -34,7 +34,6 @@ public class GameScreen extends Layer {
 
 	@Override
 	public boolean handleMouse() {
-		System.out.println("handling...");
 		Vector2 pos = unproject();
 		try {
 			Room room = GameStorage.INSTANCE.getRoomAt((int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));

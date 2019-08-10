@@ -22,13 +22,11 @@ public class TextureLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		TEXTURES.forEach((v, k) -> System.out.println(v + " --> " + k));
 	}
 
 	@Nullable
 	public static Texture getTexture(String path) {
 		if (TEXTURES.get(path) == null && TEXTURES.get("textures/" + path) == null) {
-			System.out.println(TEXTURES.toString());
 			Tuple<String, Integer> closest = new Tuple<>("??????", 0);
 			TEXTURES.forEach((key, value) -> {
 				if (FuzzySearch.ratio(path, key) > closest.getTwo()) {

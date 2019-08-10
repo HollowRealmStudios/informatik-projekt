@@ -23,7 +23,6 @@ import java.util.logging.Logger;
  */
 public class InfoProjekt extends Game {
 
-	private DwellerSpawner spawner;
 	private final Logger logger = Logger.getLogger("FPS Logger");
 	private final Stopwatch stopwatch = Stopwatch.createUnstarted();
 	private LayerSupervisor supervisor;
@@ -31,20 +30,17 @@ public class InfoProjekt extends Game {
 	private void init() {
 		TextureLoader.loadTextures();
 		Registry.registerRooms();
-		supervisor = new LayerSupervisor();
-		register();
-		spawner = new DwellerSpawner();
-	}
-
-	private void register() {
 		try {
-			Registry.registerWeapons();
 			Registry.registerArmors();
+			Registry.registerWeapons();
 			Registry.registerComponents();
 			Registry.registerRecipes();
+			if(Configuration.REGISTRY_DEBUG) Registry.debug();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		supervisor = new LayerSupervisor();
+		new DwellerSpawner();
 	}
 
 	@Override

@@ -13,12 +13,14 @@ import info.projekt.jonas.storage.Registry;
 import org.jetbrains.annotations.Contract;
 
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HALF_WIDTH;
 
 public class BuildGui extends Layer {
 
+	String name;
 	private static Class<? extends Room> selected;
 
 	@Contract(pure = true)
