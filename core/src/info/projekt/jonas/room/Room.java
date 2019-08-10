@@ -4,12 +4,18 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import info.projekt.jonas.dweller.Dweller;
+import info.projekt.jonas.gui.toolkit.LayerSupervisor;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
+import info.projekt.jonas.room.capabilities.IConsume;
+import info.projekt.jonas.room.capabilities.IProduce;
+import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.util.StreamArray;
 import info.projekt.jonas.util.TextureLoader;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.Arrays;
 
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_HEIGHT;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_WIDTH;
@@ -28,6 +34,15 @@ public abstract class Room implements Serializable {
 			TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/3.png")
 	};
 	private int level = 0;
+
+	public static Room clone(Class<? extends Room> room) {
+		try {
+			return room.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public void addDweller(Dweller dweller) {
 		dwellers.add(dweller);
@@ -65,7 +80,8 @@ public abstract class Room implements Serializable {
 		if (isTextureNull()) repopulate();
 		batch.draw(textures[level], x * CELL_WIDTH, y * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 		for (int i = 0; i < dwellers.size(); i++)
-			if(dwellers.get(i) != null) batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100 + 10, y * CELL_HEIGHT + 10);
+			if (dwellers.get(i) != null)
+				batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100 + 10, y * CELL_HEIGHT + 10);
 	}
 
 	public int getLevel() {
@@ -73,10 +89,32 @@ public abstract class Room implements Serializable {
 	}
 
 	public boolean isUpgradeable() {
-		return level < 2;
+		if(level == 2) {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Already at max level", 2));
+			return false;
+		}
+		if(Arrays.stream(this.getClass().getAnnotations()).noneMatch(annotation -> annotation instanceof Buildable)) {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("That room can't be upgraded", 2));
+			return false;
+		}
+		else if(GameStorage.INSTANCE.currency < ((Buildable) this.getClass().getAnnotations()[0]).cost()) {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Not enough money", 2));
+			return false;
+		}
+		return true;
 	}
 
 	public void upgrade() {
 		level++;
+		GameStorage.INSTANCE.currency -= ((Buildable) this.getClass().getAnnotations()[0]).cost();
+	}
+
+	protected StreamArray<Dweller> getDwellers() {
+		return dwellers;
+	}
+
+	public void generate() {
+		if(this instanceof IProduce) ((IProduce) this).produce();
+		if(this instanceof IConsume) ((IConsume) this).consume();
 	}
 }

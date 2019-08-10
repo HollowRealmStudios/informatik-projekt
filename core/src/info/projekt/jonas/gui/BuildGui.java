@@ -59,6 +59,10 @@ public class BuildGui extends Layer {
 		}
 	}
 
+	public static void setRoom(Class<? extends Room> o) {
+		selected = o;
+	}
+
 	@Override
 	public void handleKeyboard(KeyManager manager) {
 	}

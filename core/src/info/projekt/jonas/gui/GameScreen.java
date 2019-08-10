@@ -11,6 +11,8 @@ import info.projekt.jonas.gui.toolkit.KeyManager;
 import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
+import info.projekt.jonas.room.Buildable;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.storage.GameStorage;
 import org.jetbrains.annotations.NotNull;
@@ -27,7 +29,7 @@ public class GameScreen extends Layer {
 		cameraBatch = new SpriteBatch();
 		camera = new OrthographicCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		cameraBatch.setProjectionMatrix(camera.combined);
-		camera.position.set(0, 0, 1);
+		camera.position.set(0, 0, 0);
 		camera.update();
 
 	}
@@ -35,16 +37,28 @@ public class GameScreen extends Layer {
 	@Override
 	public boolean handleMouse() {
 		Vector2 pos = unproject();
+		if (BuildGui.getRoom() != null) placeRoom(pos);
+		else openRoom(pos);
+		return true;
+	}
+
+	private void openRoom(Vector2 pos) {
 		try {
 			Room room = GameStorage.INSTANCE.getRoomAt((int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
 			if (room != null) {
 				RoomGui.room = room;
 				LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(RoomGui.class, LayerSupervisor.GUI_LAYER, true));
 			}
-		} catch (ArrayIndexOutOfBoundsException e) {
-			return true;
+		} catch (ArrayIndexOutOfBoundsException ignored) {
 		}
-		return true;
+	}
+
+	private void placeRoom(Vector2 pos) {
+		if (GameStorage.INSTANCE.currency >= ((Buildable) BuildGui.getRoom().getAnnotations()[0]).cost()) {
+			GameStorage.INSTANCE.setRoomAt(Room.clone(BuildGui.getRoom()), (int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
+			GameStorage.INSTANCE.currency -= ((Buildable) BuildGui.getRoom().getAnnotations()[0]).cost();
+		} else LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Not enough cash", 3));
+		BuildGui.setRoom(null);
 	}
 
 	@Override

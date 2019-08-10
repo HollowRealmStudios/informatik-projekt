@@ -2,7 +2,7 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
-import info.projekt.jonas.dweller.DwellerSpawner;
+import info.projekt.jonas.spawner.DwellerSpawner;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;

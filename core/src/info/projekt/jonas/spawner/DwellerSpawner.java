@@ -1,6 +1,7 @@
-package info.projekt.jonas.dweller;
+package info.projekt.jonas.spawner;
 
 import com.badlogic.gdx.utils.Timer;
+import info.projekt.jonas.dweller.Dweller;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.storage.GameStorage;
