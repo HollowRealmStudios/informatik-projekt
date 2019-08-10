@@ -26,15 +26,12 @@ public class RoomGui extends Layer implements IHandlesActiveUpdates {
 		if (room.isUpgradeable()) room.upgrade();
 	}, HALF_WIDTH - 150, HEIGHT - 500, 100, 100, TextureLoader.getTexture("Arrow.png"));
 	private final ImageButton destroy = new ImageButton(() -> {
-		if(Arrays.stream(room.getClass().getAnnotations()).anyMatch(annotation -> annotation instanceof Buildable)) {
+		if (Arrays.stream(room.getClass().getAnnotations()).anyMatch(annotation -> annotation instanceof Buildable)) {
 			GameStorage.INSTANCE.setRoomAt(null, (int) room.getPosition().x, (int) room.getPosition().y);
 			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));
 			GameStorage.INSTANCE.currency += ((Buildable) room.getClass().getAnnotations()[0]).cost() / 2;
-		}
-		else LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("That room can't be destroyed", 2));
+		} else LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("That room can't be destroyed", 2));
 	}, HALF_WIDTH + 50, HEIGHT - 500, 100, 100, TextureLoader.getTexture("Delete.png"));
-
-
 
 	public RoomGui() {
 		addWidget(info);
