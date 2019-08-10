@@ -5,7 +5,9 @@ import com.badlogic.gdx.math.MathUtils;
 import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.WeaponItem;
+import info.projekt.jonas.util.TextureLoader;
 import info.projekt.jonas.util.Tuple;
+import org.jetbrains.annotations.Contract;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -14,7 +16,6 @@ import java.util.Arrays;
 /**
  * @author Jonas
  */
-@SuppressWarnings("unused")
 public class Dweller implements Serializable {
 
 	public enum GENDER {MALE, FEMALE}
@@ -37,6 +38,15 @@ public class Dweller implements Serializable {
 		this.creativity = MathUtils.clamp(creativity, 0, 10);
 	}
 
+	private void repopulate() {
+				texture = TextureLoader.getTextureUnsafe("textures/" + gender.name() + ".png");
+	}
+
+	@Contract(pure = true)
+	private boolean isTextureNull() {
+		return texture == null;
+	}
+
 	public ArmorItem getArmor() {
 		return items.getOne();
 	}
@@ -53,12 +63,8 @@ public class Dweller implements Serializable {
 		items.setTwo(weapon);
 	}
 
-	public GENDER getGender() {
-		return gender;
-	}
-
 	public Texture getTexture() {
-		if (texture == null) texture = new Texture(gender == GENDER.MALE ? "Dweller.png" : "Female.png");
+		if(isTextureNull()) repopulate();
 		return texture;
 	}
 
@@ -76,10 +82,6 @@ public class Dweller implements Serializable {
 
 	public int getCreativity() {
 		return creativity;
-	}
-
-	public ArrayList<String> prettyPrint() {
-		return new ArrayList<>(Arrays.asList(completeName + "   ", strength + "   ", intelligence + "   ", charisma + "   ", String.valueOf(creativity)));
 	}
 
 	@Override

@@ -5,10 +5,16 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesActiveUpdates;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesKeyboardInput;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesMouseInput;
+import info.projekt.jonas.gui.toolkit.util.Rectangle;
 import info.projekt.jonas.gui.toolkit.widgets.Widget;
+import info.projekt.jonas.util.Configuration;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Queue;
+
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HEIGHT;
+import static info.projekt.jonas.gui.toolkit.util.RenderUtils.WIDTH;
 
 public class Layer {
 
@@ -22,15 +28,19 @@ public class Layer {
 		this.widgets.addAll(widgets);
 	}
 
-	protected void removeWidget(Widget widget) { widgets.remove(widget); }
+	protected void removeWidget(Widget widget) {
+		widgets.remove(widget);
+	}
 
-	protected void removeWidgets(Collection<Widget> widgets) { this.widgets.removeAll(widgets); }
+	protected void removeWidgets(Collection<Widget> widgets) {
+		this.widgets.removeAll(widgets);
+	}
 
 	protected void removeAll() {
 		widgets.clear();
 	}
 
-	public final void update() {
+	public void update() {
 		if (this instanceof IHandlesActiveUpdates) ((IHandlesActiveUpdates) this).onActiveUpdate();
 	}
 
@@ -43,22 +53,41 @@ public class Layer {
 		}
 	}
 
-	public void handleMouse() {
+	public boolean handleMouse() {
 		for (Widget widget : widgets) {
 			if (widget instanceof IHandlesMouseInput) {
 				if (((IHandlesMouseInput) widget).onMouseEvent()) {
-					return;
+					return true;
 				}
 			}
 		}
+		return false;
 	}
 
 	public void draw(SpriteBatch batch, ShapeRenderer renderer) {
 		for (Widget widget : widgets) {
 			widget.draw(batch);
-			boolean debug = false;
-			if (debug) widget.debug(renderer);
+			if (Configuration.GUI_DEBUG) widget.debug(renderer);
 		}
+	}
+
+	public Rectangle getBackgroundSize() {
+		final Rectangle rectangle = new Rectangle(1000000, 1000000, 0, 0);
+		widgets.forEach(widget -> {
+			if (widget.getBoundingBox().x < rectangle.x) rectangle.x = widget.getBoundingBox().x;
+			if (widget.getBoundingBox().y < rectangle.y) rectangle.y = widget.getBoundingBox().y;
+		});
+		widgets.forEach(widget -> {
+			if (widget.getBoundingBox().x + widget.getBoundingBox().width > rectangle.x + rectangle.width)
+				rectangle.width = widget.getBoundingBox().x + widget.getBoundingBox().width - rectangle.x;
+			if (widget.getBoundingBox().y + widget.getBoundingBox().height > rectangle.y + rectangle.height)
+				rectangle.height = widget.getBoundingBox().y + widget.getBoundingBox().height - rectangle.y;
+		});
+		rectangle.x = rectangle.x - Configuration.BACKGROUND_MARGIN;
+		rectangle.y = rectangle.y - Configuration.BACKGROUND_MARGIN;
+		rectangle.width = rectangle.width + 2 * Configuration.BACKGROUND_MARGIN;
+		rectangle.height = rectangle.height + 2 * Configuration.BACKGROUND_MARGIN;
+		return rectangle;
 	}
 
 }

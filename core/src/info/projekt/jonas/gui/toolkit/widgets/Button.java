@@ -22,4 +22,9 @@ public abstract class Button extends Widget implements IHandlesMouseInput {
 		}
 		return false;
 	}
+
+	@Override
+	public Rectangle getBoundingBox() {
+		return hitbox;
+	}
 }

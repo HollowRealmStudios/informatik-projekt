@@ -26,7 +26,7 @@ public class DwellerSpawner {
 			Dweller dweller = NameList.nextDweller(Random.ranGender());
 			GameStorage.INSTANCE.getRoomAt(0, 14).addDweller(dweller);
 			GameStorage.INSTANCE.addDweller(dweller);
-			LayerSupervisor.NOTIFICATION_STACK.push(new NotificationRequest("New dweller arrived: " + dweller.toString(), 2f));
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("New dweller arrived: " + dweller.toString(), 2f));
 		}
 	}
 }

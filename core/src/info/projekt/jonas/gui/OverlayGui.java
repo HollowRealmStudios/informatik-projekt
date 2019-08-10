@@ -33,10 +33,10 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 	};
 	private boolean open = false;
 	private final Widget[] opened = new Widget[]{
-			new ImageButton(() -> NOTIFICATION_STACK.push(new NotificationRequest(RandomStringUtils.randomAlphabetic(ThreadLocalRandom.current().nextInt(5, 50)), 2)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
+			new ImageButton(() -> NOTIFICATION_QUEUE.add(new NotificationRequest(RandomStringUtils.randomAlphabetic(ThreadLocalRandom.current().nextInt(5, 50)), 2)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
 			new ImageButton(() -> open = false, 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> StorageHandler.saveGame(GameStorage.INSTANCE), 50, 350, 100, 100, TextureLoader.getTexture("Save.png")),
-			new ImageButton(() -> LayerSupervisor.LAYER_STACK.push(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
+			new ImageButton(() -> LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
 			new ImageButton(() -> Gdx.app.exit(), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
 	};
 
@@ -65,7 +65,7 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 		((Label) permanents[1]).setText(String.valueOf(GameStorage.INSTANCE.water));
 		((Label) permanents[2]).setText(String.valueOf(GameStorage.INSTANCE.energy));
 		((Label) permanents[3]).setText(String.valueOf(GameStorage.INSTANCE.food));
-		((Notification) permanents[4]).onActiveUpdate();
+		((Notification) permanents[4]).update();
 	}
 
 }

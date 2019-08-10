@@ -10,6 +10,7 @@ import info.projekt.jonas.gui.toolkit.util.RenderUtils;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.storage.StorageHandler;
+import info.projekt.jonas.util.Configuration;
 import info.projekt.jonas.util.TextureLoader;
 
 import java.awt.*;
@@ -60,7 +61,7 @@ public class InfoProjekt extends Game {
 		supervisor.update();
 		supervisor.draw();
 		stopwatch.stop();
-		logger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
+		if(Configuration.FPS_COUNTER) logger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
 		stopwatch.reset();
 	}
 

@@ -7,6 +7,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 import java.util.logging.Logger;
 
+import static info.projekt.jonas.util.Color.*;
+
 /**
  * @author Jonas
  */
@@ -18,24 +20,24 @@ public class StorageHandler {
 	@NotNull
 	public static GameStorage loadGame() {
 		try {
-			logger.info("Loading game...");
+			logger.info(toColor("Loading game...", YELLOW));
 			GameStorage storage = (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
-			logger.info("Done loading game...");
+			logger.info(toColor("Done loading game...", GREEN));
 			return storage;
 		} catch (IOException | ClassNotFoundException e) {
-			logger.info("Generating world...");
+			logger.info(RED + "Error loading world. Generating new one..." + RESET);
 			GameStorage storage = new GameStorage();
 			storage.rooms = newMap();
-			logger.info("Done generating world...");
+			logger.info(toColor("Done generating world...", GREEN));
 			return storage;
 		}
 	}
 
 	public static void saveGame(GameStorage storage) {
 		try {
-			logger.info("Saving game...");
+			logger.info(toColor("Saving game...", YELLOW));
 			new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
-			logger.info("Done saving game...");
+			logger.info(toColor("Done saving game...", GREEN));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

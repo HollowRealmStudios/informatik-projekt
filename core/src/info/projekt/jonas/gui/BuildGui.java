@@ -34,8 +34,8 @@ public class BuildGui extends Layer {
 				int cost = ((Buildable) room.getClass().getAnnotations()[0]).cost();
 				ImageButton button = new ImageButton(() -> {
 					selected = room.getClass();
-					LayerSupervisor.LAYER_STACK.push(new LayerRequest(null, LayerSupervisor.GUI_LAYER, true));
-					LayerSupervisor.NOTIFICATION_STACK.push(new NotificationRequest("Selected " + room.getClass().getSimpleName(), 1.5f));
+					LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, LayerSupervisor.GUI_LAYER, true));
+					LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Selected " + room.getClass().getSimpleName(), 1.5f));
 				}, 0, 0, 200, 100, room.getTexture());
 				Label label = new Label(0, 0, String.valueOf(cost), FONT);
 				if (dir) {
