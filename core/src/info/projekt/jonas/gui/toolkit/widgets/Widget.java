@@ -11,5 +11,4 @@ public abstract class Widget {
 	public abstract void draw(SpriteBatch batch);
 
 	public abstract void debug(ShapeRenderer renderer);
-
 }

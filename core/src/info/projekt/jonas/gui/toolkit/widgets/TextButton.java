@@ -1,5 +1,6 @@
 package info.projekt.jonas.gui.toolkit.widgets;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -14,12 +15,18 @@ public class TextButton extends Button {
 	private final int x;
 	private final int y;
 
-	public TextButton(Runnable action, int x, int y, String text, BitmapFont font) {
-		super(action, x, y, WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text));
+	public TextButton(Runnable action, int x, int y, String text, BitmapFont font, Object... storage) {
+		super(action, x, y, WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text), storage);
 		this.text = text;
 		this.font = font;
 		this.x = x;
 		this.y = y + WidgetUtil.getTextHeight(font, text);
+	}
+
+	public TextButton centerX() {
+		TextButton button = this;
+		button.hitbox.x = Gdx.graphics.getWidth() / 2 - button.hitbox.width / 2;
+		return button;
 	}
 
 	@Override

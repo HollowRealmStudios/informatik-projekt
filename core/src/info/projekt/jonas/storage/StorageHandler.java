@@ -39,7 +39,7 @@ public class StorageHandler {
 			new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
 			logger.info(toColor("Done saving game...", GREEN));
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.info(toColor("Error saving game...", RED));
 		}
 	}
 

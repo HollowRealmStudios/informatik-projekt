@@ -38,11 +38,23 @@ public class GameScreen extends Layer {
 	public boolean handleMouse() {
 		Vector2 pos = unproject();
 		if (BuildGui.getRoom() != null) placeRoom(pos);
+		else if (RoomGui.dweller != null) moveDweller(pos);
 		else openRoom(pos);
 		return true;
 	}
 
-	private void openRoom(Vector2 pos) {
+	private void moveDweller(@NotNull Vector2 pos) {
+		try {
+			if (GameStorage.INSTANCE.getRoomAt((int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT)) != null) {
+				GameStorage.INSTANCE.getRoomAt((int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT)).addDweller(RoomGui.dweller);
+				RoomGui.acceptMove();
+			} else RoomGui.declineMove();
+		} catch (ArrayIndexOutOfBoundsException e) {
+			RoomGui.declineMove();
+		}
+	}
+
+	private void openRoom(@NotNull Vector2 pos) {
 		try {
 			Room room = GameStorage.INSTANCE.getRoomAt((int) Math.floor(pos.x / CELL_WIDTH), (int) Math.floor(pos.y / CELL_HEIGHT));
 			if (room != null) {

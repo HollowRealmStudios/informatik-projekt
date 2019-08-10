@@ -1,16 +1,19 @@
 package info.projekt.jonas.util;
 
+import com.badlogic.gdx.utils.Array;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class StreamArray<T> implements Serializable {
 
-	private final T[] t;
+	private T[] t;
 	private int carriage;
 
 	@Contract(pure = true)
@@ -19,7 +22,7 @@ public class StreamArray<T> implements Serializable {
 	}
 
 	public Stream<T> stream() {
-		return Arrays.stream(t);
+		return Arrays.stream(t).filter(Objects::nonNull);
 	}
 
 	public T get(int index) {

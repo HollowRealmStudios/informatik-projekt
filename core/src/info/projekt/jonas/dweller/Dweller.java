@@ -18,6 +18,10 @@ import java.util.Arrays;
  */
 public class Dweller implements Serializable {
 
+	public String getName() {
+		return completeName;
+	}
+
 	public enum GENDER {MALE, FEMALE}
 
 	private final String completeName;
@@ -30,7 +34,7 @@ public class Dweller implements Serializable {
 	private transient Texture texture;
 
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
-		this.completeName = surname + ", " + name;
+		this.completeName = name + ", " + surname;
 		this.gender = gender;
 		this.strength = MathUtils.clamp(strength, 0, 10);
 		this.intelligence = MathUtils.clamp(intelligence, 0, 10);

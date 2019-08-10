@@ -3,6 +3,8 @@ package info.projekt.jonas.gui.toolkit;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import info.projekt.jonas.gui.BuildGui;
+import info.projekt.jonas.gui.toolkit.capabilities.IHandlesOnOpen;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesPassiveUpdates;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
@@ -98,8 +100,11 @@ public class LayerSupervisor {
 		});
 		if (!LAYER_QUEUE.isEmpty()) {
 			LayerRequest request = LAYER_QUEUE.remove();
-			if (layers.get(request.layerNumber) == null || request.force)
+			if (layers.get(request.layerNumber) == null || request.force) {
+				int layer = request.layerNumber;
 				layers.set(request.layerNumber, LAYERS.get(request.layer));
+				if(layers.get(layer) instanceof IHandlesOnOpen) ((IHandlesOnOpen) layers.get(layer)).onOpen();
+			}
 		}
 	}
 }

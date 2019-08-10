@@ -9,10 +9,11 @@ import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.room.capabilities.IConsume;
 import info.projekt.jonas.room.capabilities.IProduce;
 import info.projekt.jonas.storage.GameStorage;
-import info.projekt.jonas.util.StreamArray;
+import info.projekt.jonas.util.LimitedArrayList;
 import info.projekt.jonas.util.TextureLoader;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 import java.util.Arrays;
@@ -26,7 +27,7 @@ import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_WIDTH;
 public abstract class Room implements Serializable {
 
 	private int x, y;
-	private StreamArray<Dweller> dwellers = new StreamArray<>(new Dweller[4]);
+	private LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
 
 	private transient Texture[] textures = new Texture[]{
 			TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/1.png"),
@@ -35,7 +36,8 @@ public abstract class Room implements Serializable {
 	};
 	private int level = 0;
 
-	public static Room clone(Class<? extends Room> room) {
+	@Nullable
+	public static Room clone(@NotNull Class<? extends Room> room) {
 		try {
 			return room.newInstance();
 		} catch (InstantiationException | IllegalAccessException e) {
@@ -49,7 +51,7 @@ public abstract class Room implements Serializable {
 	}
 
 	public boolean isSpaceRemaining() {
-		return dwellers.getCarriage() - 1 != dwellers.size();
+		return dwellers.isSpace();
 	}
 
 	private void repopulate() {
@@ -109,7 +111,7 @@ public abstract class Room implements Serializable {
 		GameStorage.INSTANCE.currency -= ((Buildable) this.getClass().getAnnotations()[0]).cost();
 	}
 
-	protected StreamArray<Dweller> getDwellers() {
+	public LimitedArrayList<Dweller> getDwellers() {
 		return dwellers;
 	}
 

@@ -11,13 +11,8 @@ public class ImageButton extends Button {
 
 	private final Texture texture;
 
-	public ImageButton(Runnable action, int x, int y, @NotNull Texture texture) {
-		super(action, x, y, texture.getWidth(), texture.getHeight());
-		this.texture = texture;
-	}
-
-	public ImageButton(Runnable action, int x, int y, int width, int height, Texture texture) {
-		super(action, x, y, width, height);
+	public ImageButton(Runnable action, int x, int y, int width, int height, Texture texture, Object... storage) {
+		super(action, x, y, width, height, storage);
 		this.texture = texture;
 	}
 

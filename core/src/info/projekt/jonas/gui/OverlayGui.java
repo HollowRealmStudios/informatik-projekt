@@ -5,21 +5,20 @@ import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesActiveUpdates;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
-import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
+import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
 import info.projekt.jonas.gui.toolkit.widgets.Notification;
 import info.projekt.jonas.gui.toolkit.widgets.Widget;
-import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.StorageHandler;
 import info.projekt.jonas.util.TextureLoader;
-import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Arrays;
-import java.util.concurrent.ThreadLocalRandom;
 
 import static info.projekt.jonas.gui.toolkit.LayerSupervisor.*;
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.LAYER_QUEUE;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 
 public class OverlayGui extends Layer implements IHandlesActiveUpdates {
@@ -33,10 +32,10 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 	};
 	private boolean open = false;
 	private final Widget[] opened = new Widget[]{
-			new ImageButton(() -> NOTIFICATION_QUEUE.add(new NotificationRequest(RandomStringUtils.randomAlphabetic(ThreadLocalRandom.current().nextInt(5, 50)), 2)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
+			new ImageButton(() -> LAYER_QUEUE.add(new LayerRequest(DwellerListGui.class, GUI_LAYER, true)), 50, 200, 100, 100, TextureLoader.getTexture("Dwellers.png")),
 			new ImageButton(() -> open = false, 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> StorageHandler.saveGame(GameStorage.INSTANCE), 50, 350, 100, 100, TextureLoader.getTexture("Save.png")),
-			new ImageButton(() -> LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
+			new ImageButton(() -> LAYER_QUEUE.add(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),
 			new ImageButton(() -> Gdx.app.exit(), 50, 650, 100, 100, TextureLoader.getTexture("Close.png")),
 	};
 

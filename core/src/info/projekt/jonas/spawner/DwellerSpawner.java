@@ -29,5 +29,8 @@ public class DwellerSpawner {
 			GameStorage.INSTANCE.addDweller(dweller);
 			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("New dweller arrived: " + dweller.toString(), 2f));
 		}
+		else {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("No more space", 2f));
+		}
 	}
 }
