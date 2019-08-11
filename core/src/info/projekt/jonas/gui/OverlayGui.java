@@ -23,15 +23,15 @@ import static info.projekt.jonas.gui.toolkit.util.RenderUtils.FONT;
 public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 
 	private final Widget[] permanents = new Widget[]{
-			new Label(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), String.valueOf(GameStorage.INSTANCE.currency), FONT),
-			new Label((Gdx.graphics.getWidth() / 5) * 2, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.water)), String.valueOf(GameStorage.INSTANCE.water), FONT),
-			new Label((Gdx.graphics.getWidth() / 5) * 3, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.energy)), String.valueOf(GameStorage.INSTANCE.energy), FONT),
-			new Label((Gdx.graphics.getWidth() / 5) * 4, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.food)), String.valueOf(GameStorage.INSTANCE.food), FONT),
+			new Label(Gdx.graphics.getWidth() / 5, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT), String.valueOf(GameStorage.INSTANCE.currency), FONT),
+			new Label((Gdx.graphics.getWidth() / 5) * 2, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT), String.valueOf(GameStorage.INSTANCE.water), FONT),
+			new Label((Gdx.graphics.getWidth() / 5) * 3, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT), String.valueOf(GameStorage.INSTANCE.energy), FONT),
+			new Label((Gdx.graphics.getWidth() / 5) * 4, Gdx.graphics.getHeight() - WidgetUtil.getTextHeight(FONT), String.valueOf(GameStorage.INSTANCE.food), FONT),
 			new Notification(),
-			new Image(Gdx.graphics.getWidth() / 5 - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)),WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), TextureLoader.getTexture("Money.png")),
-			new Image(Gdx.graphics.getWidth() / 5 * 2 - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)),WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), TextureLoader.getTexture("Water.png")),
-			new Image(Gdx.graphics.getWidth() / 5 * 3 - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)),WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), TextureLoader.getTexture("Lightning.png")),
-			new Image(Gdx.graphics.getWidth() / 5 * 4 - WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)),WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), WidgetUtil.getTextHeight(FONT, String.valueOf(GameStorage.INSTANCE.currency)), TextureLoader.getTexture("Hamburger.png"))
+			new Image(Gdx.graphics.getWidth() / 5 - WidgetUtil.getTextHeight(FONT), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT),WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextHeight(FONT), TextureLoader.getTexture("Money.png")),
+			new Image(Gdx.graphics.getWidth() / 5 * 2 - WidgetUtil.getTextHeight(FONT), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT),WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextHeight(FONT), TextureLoader.getTexture("Water.png")),
+			new Image(Gdx.graphics.getWidth() / 5 * 3 - WidgetUtil.getTextHeight(FONT), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT),WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextHeight(FONT), TextureLoader.getTexture("Lightning.png")),
+			new Image(Gdx.graphics.getWidth() / 5 * 4 - WidgetUtil.getTextHeight(FONT), Gdx.graphics.getHeight() - 2 * WidgetUtil.getTextHeight(FONT),WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextHeight(FONT), TextureLoader.getTexture("Hamburger.png"))
 
 	};
 	private boolean open = false;
@@ -63,7 +63,6 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 			removeWidgets(Arrays.asList(closed));
 			addWidgets(Arrays.asList(closed));
 		}
-		GameStorage.INSTANCE.currency++;
 		((Label) permanents[0]).setText(String.valueOf(GameStorage.INSTANCE.currency));
 		((Label) permanents[1]).setText(String.valueOf(GameStorage.INSTANCE.water));
 		((Label) permanents[2]).setText(String.valueOf(GameStorage.INSTANCE.energy));

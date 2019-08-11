@@ -21,7 +21,7 @@ public class ChildSpawner {
 			public void run() {
 				spawnChild();
 			}
-		}, Configuration.MINUTES_PER_CHILDREN * 60f, Configuration.MINUTES_PER_CHILDREN * 60f);
+		}, Configuration.Resources.MINUTES_PER_CHILDREN * 60f, Configuration.Resources.MINUTES_PER_CHILDREN * 60f);
 	}
 
 	private void spawnChild() {

@@ -11,6 +11,6 @@ public class KitchenRoom extends Room implements IProduce {
 
 	@Override
 	public void produce() {
-		getDwellers().stream().forEach(dweller -> GameStorage.INSTANCE.food += dweller.getCreativity());
+		getDwellers().forEach(dweller -> GameStorage.INSTANCE.food += dweller.getCreativity() * (getLevel() + 1));
 	}
 }

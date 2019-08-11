@@ -67,7 +67,7 @@ public class Layer {
 	public void draw(SpriteBatch batch, ShapeRenderer renderer) {
 		for (Widget widget : widgets) {
 			widget.draw(batch);
-			if (Configuration.GUI_DEBUG) widget.debug(renderer);
+			if (Configuration.Debug.GUI_DEBUG) widget.debug(renderer);
 		}
 	}
 

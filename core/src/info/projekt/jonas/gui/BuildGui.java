@@ -31,6 +31,7 @@ public class BuildGui extends Layer {
 	public BuildGui() {
 		boolean dir = false;
 		int i = 300;
+		System.out.println(Registry.getRooms().size());
 		for (Room room : Registry.getRooms().values()) {
 			if (Arrays.stream(room.getClass().getAnnotations()).anyMatch(annotation -> annotation instanceof Buildable)) {
 				int cost = ((Buildable) room.getClass().getAnnotations()[0]).cost();

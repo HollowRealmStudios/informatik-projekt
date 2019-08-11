@@ -5,6 +5,8 @@ import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.util.Configuration;
 import org.jetbrains.annotations.Contract;
 
+import java.util.Objects;
+
 public class ResourceSpawner {
 
 	@Contract(pure = true)
@@ -14,13 +16,14 @@ public class ResourceSpawner {
 			public void run() {
 				spawnResources();
 			}
-		}, 0, 1 / Configuration.RESOURCE_MULTIPLIER);
+		}, 0, 1f / Configuration.Resources.RESOURCE_MULTIPLIER);
 	}
 
 	private void spawnResources() {
-		for (int x = 0; x < 5; x++) {
-			for (int y = 0; y < 15; y++) {
-				if (GameStorage.INSTANCE.getRoomAt(x, y) != null) GameStorage.INSTANCE.getRoomAt(x, y).generate();
+		for (int x = 0; x < Configuration.ROOMS_HOR; x++) {
+			for (int y = 0; y < Configuration.ROOMS_VER; y++) {
+				if (GameStorage.INSTANCE.getRoomAt(x, y) != null)
+					Objects.requireNonNull(GameStorage.INSTANCE.getRoomAt(x, y)).generate();
 			}
 		}
 	}

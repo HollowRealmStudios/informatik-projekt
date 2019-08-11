@@ -11,9 +11,9 @@ public class WidgetUtil {
 		return (int) layout.width;
 	}
 
-	public static int getTextHeight(BitmapFont font, String text) {
+	public static int getTextHeight(BitmapFont font) {
 		GlyphLayout layout = new GlyphLayout();
-		layout.setText(font, text);
+		layout.setText(font, "lorem ipsum dolor sit amet");
 		return (int) layout.height;
 	}
 }

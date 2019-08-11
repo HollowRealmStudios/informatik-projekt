@@ -6,11 +6,11 @@ import info.projekt.jonas.storage.GameStorage;
 /**
  * @author Jonas
  */
-@Buildable
+@Buildable(cost = 400)
 public class SewageTreatmentPlant extends Room implements IProduce {
 
 	@Override
 	public void produce() {
-		getDwellers().stream().forEach(dweller -> GameStorage.INSTANCE.water += dweller.getIntelligence());
+		getDwellers().forEach(dweller -> GameStorage.INSTANCE.water += dweller.getIntelligence() * (getLevel() + 1));
 	}
 }

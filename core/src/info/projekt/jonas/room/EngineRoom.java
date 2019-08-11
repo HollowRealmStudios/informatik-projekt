@@ -6,11 +6,11 @@ import info.projekt.jonas.storage.GameStorage;
 /**
  * @author Jonas
  */
-@Buildable()
+@Buildable(cost = 400)
 public class EngineRoom extends Room implements IProduce {
 
 	@Override
 	public void produce() {
-		getDwellers().stream().forEach(dweller -> GameStorage.INSTANCE.energy += dweller.getStrength());
+		getDwellers().forEach(dweller -> GameStorage.INSTANCE.energy += dweller.getStrength() * (getLevel() + 1));
 	}
 }

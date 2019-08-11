@@ -2,14 +2,13 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
-import info.projekt.jonas.gui.LoadingGui;
-import info.projekt.jonas.gui.toolkit.util.LayerRequest;
-import info.projekt.jonas.spawner.ChildSpawner;
-import info.projekt.jonas.spawner.DwellerSpawner;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGui;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.RenderUtils;
+import info.projekt.jonas.spawner.ChildSpawner;
+import info.projekt.jonas.spawner.DwellerSpawner;
+import info.projekt.jonas.spawner.MoneySpawner;
 import info.projekt.jonas.spawner.ResourceSpawner;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.Registry;
@@ -35,20 +34,21 @@ public class InfoProjekt extends Game {
 
 	private void init() {
 		TextureLoader.loadTextures();
-		supervisor = new LayerSupervisor();
 		Registry.registerRooms();
+		supervisor = new LayerSupervisor();
 		try {
 			Registry.registerArmors();
 			Registry.registerWeapons();
 			Registry.registerComponents();
 			Registry.registerRecipes();
-			if(Configuration.REGISTRY_DEBUG) Registry.debug();
+			if (Configuration.Debug.REGISTRY_DEBUG) Registry.debug();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		new DwellerSpawner();
 		new ResourceSpawner();
 		new ChildSpawner();
+		new MoneySpawner();
 	}
 
 	@Override
@@ -65,7 +65,8 @@ public class InfoProjekt extends Game {
 		supervisor.update();
 		supervisor.draw();
 		stopwatch.stop();
-		if(Configuration.FPS_COUNTER) logger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
+		if (Configuration.Debug.FPS_COUNTER)
+			logger.info("Render of frame took " + stopwatch.elapsed(TimeUnit.NANOSECONDS) + "ns, max. fps: " + 1000000 / stopwatch.elapsed(TimeUnit.MICROSECONDS));
 		stopwatch.reset();
 	}
 

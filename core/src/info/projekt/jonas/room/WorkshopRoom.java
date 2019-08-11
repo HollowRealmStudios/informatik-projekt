@@ -1,6 +1,6 @@
 package info.projekt.jonas.room;
 
-@Buildable
+@Buildable(cost = 1200)
 public class WorkshopRoom extends Room {
 
 }

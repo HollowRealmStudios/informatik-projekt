@@ -62,12 +62,12 @@ public class Notification extends Widget {
 	public void debug(ShapeRenderer renderer) {
 		renderer.begin(ShapeRenderer.ShapeType.Line);
 		renderer.setColor(Color.PURPLE);
-		renderer.rect(label.x, label.y - WidgetUtil.getTextHeight(FONT, label.getText()), WidgetUtil.getTextWidth(FONT, label.getText()), WidgetUtil.getTextHeight(FONT, label.getText()));
+		renderer.rect(label.x, label.y - WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextWidth(FONT, label.getText()), WidgetUtil.getTextHeight(FONT));
 		renderer.end();
 	}
 
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(label.x, label.y - WidgetUtil.getTextHeight(FONT, label.getText()), WidgetUtil.getTextWidth(FONT, label.getText()), WidgetUtil.getTextHeight(FONT, label.getText()));
+		return new Rectangle(label.x, label.y - WidgetUtil.getTextHeight(FONT), WidgetUtil.getTextWidth(FONT, label.getText()), WidgetUtil.getTextHeight(FONT));
 	}
 }

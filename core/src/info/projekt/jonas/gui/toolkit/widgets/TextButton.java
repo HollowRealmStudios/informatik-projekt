@@ -12,15 +12,11 @@ public class TextButton extends Button {
 
 	private final String text;
 	private final BitmapFont font;
-	private final int x;
-	private final int y;
 
 	public TextButton(Runnable action, int x, int y, String text, BitmapFont font, Object... storage) {
-		super(action, x, y, WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text), storage);
+		super(action, x, y - WidgetUtil.getTextHeight(font), WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font), storage);
 		this.text = text;
 		this.font = font;
-		this.x = x;
-		this.y = y + WidgetUtil.getTextHeight(font, text);
 	}
 
 	public TextButton centerX() {
@@ -32,7 +28,7 @@ public class TextButton extends Button {
 	@Override
 	public void draw(@NotNull SpriteBatch batch) {
 		batch.begin();
-		font.draw(batch, text, x, y);
+		font.draw(batch, text, hitbox.x, hitbox.y + WidgetUtil.getTextHeight(font));
 		batch.end();
 	}
 

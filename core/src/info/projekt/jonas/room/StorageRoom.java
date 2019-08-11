@@ -3,7 +3,7 @@ package info.projekt.jonas.room;
 /**
  * @author Jonas
  */
-@Buildable
+@Buildable(cost = 1000)
 public class StorageRoom extends Room {
 
 }

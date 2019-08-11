@@ -27,7 +27,7 @@ public class Label extends Widget {
 
 	public Label centerY() {
 		Label l = this;
-		l.y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font, text) / 2;
+		l.y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font) / 2;
 		centerY = true;
 		return l;
 	}
@@ -40,7 +40,7 @@ public class Label extends Widget {
 	}
 
 	protected void centerYManually() {
-		y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font, text) / 2;
+		y = Gdx.graphics.getHeight() / 2 - WidgetUtil.getTextHeight(font) / 2;
 	}
 
 	protected void  centerXManually() {
@@ -68,12 +68,12 @@ public class Label extends Widget {
 	public void debug(@NotNull ShapeRenderer renderer) {
 		renderer.setColor(Color.RED);
 		renderer.begin(ShapeRenderer.ShapeType.Line);
-		renderer.rect(x, y - WidgetUtil.getTextHeight(font, text), WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font, text));
+		renderer.rect(x, y - WidgetUtil.getTextHeight(font), WidgetUtil.getTextWidth(font, text), WidgetUtil.getTextHeight(font));
 		renderer.end();
 	}
 
 	@Override
 	public Rectangle getBoundingBox() {
-		return new Rectangle(x, y, WidgetUtil.getTextWidth(FONT, text), WidgetUtil.getTextHeight(FONT, text));
+		return new Rectangle(x, y, WidgetUtil.getTextWidth(FONT, text), WidgetUtil.getTextHeight(FONT));
 	}
 }

@@ -10,9 +10,15 @@ import info.projekt.jonas.storage.Registry;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+
 public class MineshaftRoom extends Room implements IProduce, IConsume {
 
 	int s, i, c, k;
+
+	@Override
+	public boolean enoughResources() {
+		return GameStorage.INSTANCE.water > getDwellers().size() && GameStorage.INSTANCE.energy > getDwellers().size() && GameStorage.INSTANCE.food > getDwellers().size();
+	}
 
 	@Override
 	public void consume() {
