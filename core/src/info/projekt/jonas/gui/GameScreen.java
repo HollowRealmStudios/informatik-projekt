@@ -15,6 +15,7 @@ import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.room.Buildable;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.storage.GameStorage;
+import info.projekt.jonas.util.TextureLoader;
 import org.jetbrains.annotations.NotNull;
 
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.CELL_HEIGHT;
@@ -101,6 +102,8 @@ public class GameScreen extends Layer {
 			for (int y = 0; y < 15; y++) {
 				if (GameStorage.INSTANCE.getRoomAt(x, y) != null)
 					GameStorage.INSTANCE.getRoomAt(x, y).draw(cameraBatch, x, y);
+				else
+					cameraBatch.draw(TextureLoader.getTexture("room_empty.png"), x * CELL_WIDTH, y * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 			}
 		}
 		cameraBatch.end();

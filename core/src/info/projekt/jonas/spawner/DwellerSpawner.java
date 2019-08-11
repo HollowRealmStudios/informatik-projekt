@@ -19,7 +19,7 @@ public class DwellerSpawner {
 			public void run() {
 				spawnDweller();
 			}
-		}, 60, Configuration.MINUTES_PER_DWELLER * 60);
+		}, Configuration.MINUTES_PER_DWELLER * 60f, Configuration.MINUTES_PER_DWELLER * 60f);
 	}
 
 	private void spawnDweller() {

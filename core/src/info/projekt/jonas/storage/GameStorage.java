@@ -19,9 +19,9 @@ public class GameStorage implements Serializable {
 
 	public Room[][] rooms = new Room[5][15];
 
-	public final LimitedArrayList<CraftingComponent> components = new LimitedArrayList<>(0);
+	public final LimitedArrayList<CraftingComponent> components = new LimitedArrayList<>(1000);
 
-	public final LimitedArrayList<Item> items = new LimitedArrayList<>(0);
+	public final LimitedArrayList<Item> items = new LimitedArrayList<>(1000);
 
 	private final ArrayList<Dweller> dwellers = new ArrayList<>();
 

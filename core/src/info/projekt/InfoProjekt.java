@@ -2,6 +2,9 @@ package info.projekt;
 
 import com.badlogic.gdx.Game;
 import com.google.common.base.Stopwatch;
+import info.projekt.jonas.gui.LoadingGui;
+import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.spawner.ChildSpawner;
 import info.projekt.jonas.spawner.DwellerSpawner;
 import info.projekt.jonas.gui.GameScreen;
 import info.projekt.jonas.gui.OverlayGui;
@@ -19,6 +22,8 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.BACKGROUND_LAYER;
+
 /**
  * @author Jonas
  */
@@ -30,6 +35,7 @@ public class InfoProjekt extends Game {
 
 	private void init() {
 		TextureLoader.loadTextures();
+		supervisor = new LayerSupervisor();
 		Registry.registerRooms();
 		try {
 			Registry.registerArmors();
@@ -40,16 +46,16 @@ public class InfoProjekt extends Game {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		supervisor = new LayerSupervisor();
 		new DwellerSpawner();
 		new ResourceSpawner();
+		new ChildSpawner();
 	}
 
 	@Override
 	public void create() {
 		init();
 		supervisor.setLayer(new OverlayGui(), LayerSupervisor.OVERLAY_LAYER);
-		supervisor.setLayer(new GameScreen(), LayerSupervisor.BACKGROUND_LAYER);
+		supervisor.setLayer(new GameScreen(), BACKGROUND_LAYER);
 	}
 
 	@Override

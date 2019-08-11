@@ -15,13 +15,12 @@ import static info.projekt.jonas.util.Color.*;
 public class StorageHandler {
 
 	private static final Logger logger = Logger.getLogger("Storage logger");
-	private static final String FILE = "Storage.dat";
 
 	@NotNull
 	public static GameStorage loadGame() {
 		try {
 			logger.info(toColor("Loading game...", YELLOW));
-			GameStorage storage = (GameStorage) new ObjectInputStream(new FileInputStream(FILE)).readObject();
+			GameStorage storage = (GameStorage) new ObjectInputStream(new FileInputStream(Configuration.FILE_NAME)).readObject();
 			logger.info(toColor("Done loading game...", GREEN));
 			return storage;
 		} catch (IOException | ClassNotFoundException e) {
@@ -36,7 +35,7 @@ public class StorageHandler {
 	public static void saveGame(GameStorage storage) {
 		try {
 			logger.info(toColor("Saving game...", YELLOW));
-			new ObjectOutputStream(new FileOutputStream(FILE)).writeObject(storage);
+			new ObjectOutputStream(new FileOutputStream(Configuration.FILE_NAME)).writeObject(storage);
 			logger.info(toColor("Done saving game...", GREEN));
 		} catch (IOException e) {
 			logger.info(toColor("Error saving game...", RED));

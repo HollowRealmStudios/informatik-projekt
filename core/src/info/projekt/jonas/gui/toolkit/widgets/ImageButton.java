@@ -31,7 +31,7 @@ public class ImageButton extends Button {
 
 	@Override
 	public void debug(@NotNull ShapeRenderer renderer) {
-		renderer.setColor(Color.RED);
+		renderer.setColor(Color.YELLOW);
 		renderer.begin(ShapeRenderer.ShapeType.Line);
 		renderer.rect(hitbox.x, hitbox.y, hitbox.width, hitbox.height);
 		renderer.setColor(Color.GREEN);

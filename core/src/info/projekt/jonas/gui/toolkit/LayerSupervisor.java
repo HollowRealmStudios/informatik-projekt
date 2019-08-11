@@ -1,9 +1,11 @@
 package info.projekt.jonas.gui.toolkit;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import info.projekt.jonas.gui.BuildGui;
+import info.projekt.jonas.gui.LoadingGui;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesOnOpen;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesPassiveUpdates;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
@@ -33,7 +35,7 @@ public class LayerSupervisor {
 	public LayerSupervisor() {
 		batch = new SpriteBatch();
 		renderer = new ShapeRenderer();
-		new Reflections("info.projekt").getSubTypesOf(Layer.class).forEach(c -> {
+		new Reflections("info.projekt").getSubTypesOf(Layer.class).stream().filter(aClass -> !aClass.equals(LoadingGui.class)).forEach(c -> {
 			try {
 				LAYERS.put(c, c.newInstance());
 			} catch (InstantiationException | IllegalAccessException e) {
@@ -55,6 +57,9 @@ public class LayerSupervisor {
 	}
 
 	public void draw() {
+		batch.begin();
+		batch.draw(TextureLoader.getTexture("Wallpaper.png"), 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		batch.end();
 		for (int i = 0; i <= 2; i++) {
 			if(i == 2 && layers.get(i) != null) {
 				batch.begin();

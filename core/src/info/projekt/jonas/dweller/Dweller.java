@@ -2,27 +2,19 @@ package info.projekt.jonas.dweller;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
-import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.WeaponItem;
+import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.util.TextureLoader;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.Contract;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author Jonas
  */
 public class Dweller implements Serializable {
-
-	public String getName() {
-		return completeName;
-	}
-
-	public enum GENDER {MALE, FEMALE}
 
 	private final String completeName;
 	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
@@ -32,6 +24,7 @@ public class Dweller implements Serializable {
 	private final int charisma;
 	private final int creativity;
 	private transient Texture texture;
+	private int health;
 
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
 		this.completeName = name + ", " + surname;
@@ -42,8 +35,16 @@ public class Dweller implements Serializable {
 		this.creativity = MathUtils.clamp(creativity, 0, 10);
 	}
 
+	public String getName() {
+		return completeName;
+	}
+
+	public GENDER getGender() {
+		return gender;
+	}
+
 	private void repopulate() {
-				texture = TextureLoader.getTextureUnsafe("textures/" + gender.name() + ".png");
+		texture = TextureLoader.getTextureUnsafe("textures/" + gender.name() + ".png");
 	}
 
 	@Contract(pure = true)
@@ -68,7 +69,7 @@ public class Dweller implements Serializable {
 	}
 
 	public Texture getTexture() {
-		if(isTextureNull()) repopulate();
+		if (isTextureNull()) repopulate();
 		return texture;
 	}
 
@@ -92,4 +93,14 @@ public class Dweller implements Serializable {
 	public String toString() {
 		return completeName + ", " + strength + ", " + intelligence + ", " + charisma + ", " + creativity;
 	}
+
+	public void heal() {
+		health = 100;
+	}
+
+	public void damage(int amount) {
+		health -= amount;
+	}
+
+	public enum GENDER {MALE, FEMALE}
 }

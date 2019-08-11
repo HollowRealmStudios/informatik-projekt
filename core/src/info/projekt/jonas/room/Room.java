@@ -83,7 +83,7 @@ public abstract class Room implements Serializable {
 		batch.draw(textures[level], x * CELL_WIDTH, y * CELL_HEIGHT, CELL_WIDTH, CELL_HEIGHT);
 		for (int i = 0; i < dwellers.size(); i++)
 			if (dwellers.get(i) != null)
-				batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100 + 10, y * CELL_HEIGHT + 10);
+				batch.draw(dwellers.get(i).getTexture(), x * CELL_WIDTH + i * 100 + 10, y * CELL_HEIGHT);
 	}
 
 	public int getLevel() {

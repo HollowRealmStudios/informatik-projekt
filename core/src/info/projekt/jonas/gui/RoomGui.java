@@ -11,11 +11,13 @@ import info.projekt.jonas.gui.toolkit.util.WidgetUtil;
 import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
 import info.projekt.jonas.gui.toolkit.widgets.TextButton;
+import info.projekt.jonas.gui.toolkit.widgets.Widget;
 import info.projekt.jonas.room.Buildable;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.util.TextureLoader;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -45,25 +47,6 @@ public class RoomGui extends Layer implements IHandlesActiveUpdates, IHandlesOnO
 		addWidget(destroy);
 	}
 
-	@Override
-	public void onActiveUpdate() {
-		info.setText(room.getClass().getSimpleName() + ": " + (room.getLevel() + 1));
-	}
-
-	@Override
-	public void onOpen() {
-		AtomicInteger i = new AtomicInteger();
-		room.getDwellers().stream().forEach(dweller -> {
-			TextButton button = new TextButton(() -> {
-				RoomGui.dweller = dweller;
-				LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));
-				LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Selected " + dweller.getName(), 2));
-			}, HALF_WIDTH - WidgetUtil.getTextWidth(FONT, dweller.toString()) / 2, HEIGHT - 600 - i.get() * 75, dweller.toString(), FONT, dweller);
-			addWidget(button);
-			i.getAndIncrement();
-		});
-	}
-
 	public static void acceptMove() {
 		room.getDwellers().remove(dweller);
 		dweller = null;
@@ -71,5 +54,27 @@ public class RoomGui extends Layer implements IHandlesActiveUpdates, IHandlesOnO
 
 	public static void declineMove() {
 		dweller = null;
+	}
+
+	@Override
+	public void onActiveUpdate() {
+		info.setText(room.getClass().getSimpleName() + ": " + (room.getLevel() + 1));
+	}
+
+	@Override
+	public void onOpen() {
+		ArrayList<Widget> toRemove = new ArrayList<>();
+		getWidgets().stream().filter(widget -> !widget.equals(destroy) && !widget.equals(upgrade) && !widget.equals(info)).forEach(toRemove::add);
+		removeWidgets(toRemove);
+		AtomicInteger i = new AtomicInteger();
+		room.getDwellers().forEach(dweller -> {
+			TextButton button = new TextButton(() -> {
+				RoomGui.dweller = dweller;
+				LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));
+				LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Selected " + dweller.getName(), 2));
+			}, HALF_WIDTH - WidgetUtil.getTextWidth(FONT, dweller.toString()) / 2, HEIGHT - 600 - i.get() * 75, dweller.toString(), FONT);
+			addWidget(button);
+			i.getAndIncrement();
+		});
 	}
 }

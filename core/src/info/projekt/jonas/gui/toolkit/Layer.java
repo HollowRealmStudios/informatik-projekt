@@ -71,6 +71,10 @@ public class Layer {
 		}
 	}
 
+	public ArrayList<Widget> getWidgets() {
+		return widgets;
+	}
+
 	public Rectangle getBackgroundSize() {
 		final Rectangle rectangle = new Rectangle(1000000, 1000000, 0, 0);
 		widgets.forEach(widget -> {

@@ -3,18 +3,20 @@ package info.projekt.jonas.gui.toolkit.widgets;
 import com.badlogic.gdx.Gdx;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesMouseInput;
 import info.projekt.jonas.gui.toolkit.util.Rectangle;
-import info.projekt.jonas.util.StreamArray;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Button extends Widget implements IHandlesMouseInput {
 
 	public final Rectangle hitbox;
 	private final Runnable action;
-	private StreamArray<Object> storage;
+	private ArrayList<Object> storage = new ArrayList<>();
 
 	protected Button(Runnable action, int x, int y, int width, int height, Object... storage) {
 		hitbox = new Rectangle(x, y, width, height);
 		this.action = action;
-		this.storage = new StreamArray<>(storage);
+		this.storage.addAll(Arrays.asList(storage));
 	}
 
 	@Override
@@ -29,5 +31,9 @@ public abstract class Button extends Widget implements IHandlesMouseInput {
 	@Override
 	public Rectangle getBoundingBox() {
 		return hitbox;
+	}
+
+	public ArrayList<Object> getStorage() {
+		return storage;
 	}
 }

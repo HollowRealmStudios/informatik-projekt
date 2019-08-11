@@ -1,36 +1,6 @@
 {
   "Issues": [
     {
-      "Issue": "buttons bleiben sichtbar wenn ein gui offen ist",
-      "Importance": 60,
-      "Cause": "werden nicht unsichtbar gemacht?!?",
-      "Fix": "unsichtbar machen wenn gui geöffnet wird"
-    },
-    {
-      "Issue": "zu schnell zu viele bewohner",
-      "Importance": 70,
-      "Cause": "no delay",
-      "Fix": "add random delays"
-    },
-    {
-      "Issue": "no background is displayed when gui is open",
-      "Importance": 30,
-      "Cause": "no background is drawn",
-      "Fix": "add background to all guis"
-    },
-    {
-      "Issue": "no background picture in game",
-      "Importance": 10,
-      "Cause": "only brown color is drawn and andre didn't make a background",
-      "Fix": "andre has to make a background and we set it as background of the game"
-    },
-    {
-      "Issue": "black frame is missing from picture",
-      "Importance": 50,
-      "Cause": "andre is too stupid to make similar graphics",
-      "Fix": "andre"
-    },
-    {
       "Issue": "no use for meds",
       "Importance": 30,
       "Cause": "dwellers don't take damage",
@@ -41,42 +11,6 @@
       "Importance": 30,
       "Cause": "no use until now",
       "Fix": "add warnings low health, add health bar to dweller gui and button to heal"
-    },
-    {
-      "Issue": "too much resources are produced",
-      "Importance": 90,
-      "Cause": "wrong resource production/consumption",
-      "Fix": "remake resource production/consumption"
-    },
-    {
-      "Issue": "ctrl-panel",
-      "Importance": 1,
-      "Cause": "used during tests",
-      "Fix": "remove after finishing"
-    },
-    {
-      "Issue": "missing textures for women",
-      "Importance": 50,
-      "Cause": "andre",
-      "Fix": "andre"
-    },
-    {
-      "Issue": "dweller list no character for skill points",
-      "Importance": 20,
-      "Cause": "no character is printed",
-      "Fix": "print character in front of the skill point"
-    },
-    {
-      "Issue": "too much resources are produced",
-      "Importance": 90,
-      "Cause": "wrong resource production/consumption",
-      "Fix": "remake resource production/consumption"
-    },
-    {
-      "Issue": "Add descriptions to labels, i.e. currency, water,...",
-      "Importance": 50,
-      "Cause": "Not added",
-      "Fix": "Find fitting symbols / descriptions and add them in the update function in GameScreen"
     },
     {
       "Issue": "Add more crafting recipes and materials with textures",
@@ -91,48 +25,6 @@
       "Fix": "Add the actual ability to craft items by removing the materials, if available and adding the item to the player's storage"
     },
     {
-      "Issue": "Unify look of the button",
-      "Importance": 50,
-      "Cause": "Not yet implemented / wrong background",
-      "Fix": "Fix the already available textures, add the ones that are still missing"
-    },
-    {
-      "Issue": "Notification is not centered",
-      "Importance": 50,
-      "Cause": "Scene2d is hard to use",
-      "Fix": "Center it in WorkThread"
-    },
-    {
-      "Issue": "Upgrading is not working properly",
-      "Importance": 80,
-      "Cause": "Maybe problem in RoomGui / GameScreen?",
-      "Fix": "Don't know have to look further into it"
-    },
-    {
-      "Issue": "Fix pretty printing",
-      "Importance": 20,
-      "Cause": "Maybe problem in RoomGui / GameScreen?",
-      "Fix": "Don't know have to look further into it"
-    },
-    {
-      "Issue": "Add notification when the player doesn't have enough money",
-      "Importance": 50,
-      "Cause": "Not implemented",
-      "Fix": "Add to GameScreen handle mouse"
-    },
-    {
-      "Issue": "room gui",
-      "Importance": 30,
-      "Cause": "ask Jonas",
-      "Fix": "already wip by Jonas"
-    },
-    {
-      "Issue": "Long time for going to mines and back",
-      "Importance": 30,
-      "Cause": "idk",
-      "Fix": "Button for jumping to top and bottom of the map"
-    },
-    {
       "Issue": "no check if you have enough resources in crafting",
       "Importance": 30,
       "Cause": "is not there",
@@ -143,30 +35,6 @@
       "Importance": 30,
       "Cause": "dumb players",
       "Fix": "andre writes a text and someone implements it"
-    },
-    {
-      "Issue": "buttons to big",
-      "Importance": 30,
-      "Cause": "are not relative",
-      "Fix": "make it relative ( christoph )"
-    },
-    {
-      "Issue": "no title on title screen",
-      "Importance": 90,
-      "Cause": "",
-      "Fix": "add title to title screen picture"
-    },
-    {
-      "Issue": "no loading screen",
-      "Importance": 60,
-      "Cause": "is not there",
-      "Fix": "add loading screen"
-    },
-    {
-      "Issue": "can't delete rooms",
-      "Importance": -1,
-      "Cause": "not planed because the rooms don't know their positions",
-      "Fix": "someone adds a delete function"
     }
   ]
 }
