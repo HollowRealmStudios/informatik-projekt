@@ -2,14 +2,20 @@ package info.projekt.jonas.dweller;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.MathUtils;
+import info.projekt.jonas.gui.toolkit.LayerSupervisor;
+import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
 import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.WeaponItem;
+import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.util.TextureLoader;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.Contract;
 
 import java.io.Serializable;
+
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 
 /**
  * @author Jonas
@@ -24,7 +30,7 @@ public class Dweller implements Serializable {
 	private final int charisma;
 	private final int creativity;
 	private transient Texture texture;
-	private int health;
+	private int health = 100;
 
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
 		this.completeName = name + ", " + surname;
@@ -91,11 +97,18 @@ public class Dweller implements Serializable {
 
 	@Override
 	public String toString() {
-		return completeName + ", " + strength + ", " + intelligence + ", " + charisma + ", " + creativity;
+		return completeName + ", " + strength + ", " + intelligence + ", " + charisma + ", " + creativity + ", " + health + "%";
 	}
 
 	public void heal() {
-		health = 100;
+		if(GameStorage.INSTANCE.meds > 0) {
+			health = 100;
+			GameStorage.INSTANCE.meds--;
+		}
+		else {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("No more meds available", 2));
+		}
+		LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));
 	}
 
 	public void damage(int amount) {

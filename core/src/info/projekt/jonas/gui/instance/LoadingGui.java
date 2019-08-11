@@ -1,4 +1,4 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.gui.instance;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

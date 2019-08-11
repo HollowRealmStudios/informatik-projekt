@@ -1,13 +1,17 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.gui.instance;
 
-import info.projekt.jonas.gui.toolkit.widgets.Image;
 import info.projekt.jonas.gui.toolkit.Layer;
+import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.capabilities.IHandlesOnOpen;
+import info.projekt.jonas.gui.toolkit.util.LayerRequest;
+import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
+import info.projekt.jonas.gui.toolkit.widgets.Image;
 import info.projekt.jonas.storage.GameStorage;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicIntegerArray;
 
+import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HALF_HEIGHT;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.HALF_WIDTH;
 
@@ -17,6 +21,10 @@ public class StorageGui extends Layer implements IHandlesOnOpen {
 	public void onOpen() {
 		removeAll();
 		int amount = GameStorage.INSTANCE.items.size();
+		if (amount == 0) {
+			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("No items available", 2));
+			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));
+		}
 		final AtomicInteger[] i = {new AtomicInteger(HALF_HEIGHT - (amount * 114) / 8)};
 		final AtomicIntegerArray columns = new AtomicIntegerArray(new int[]{1});
 		GameStorage.INSTANCE.items.forEach(item -> {
@@ -34,7 +42,6 @@ public class StorageGui extends Layer implements IHandlesOnOpen {
 					addWidget(new Image(HALF_WIDTH + 139, i[0].get(), 64, 64, item.getTexture()));
 					break;
 			}
-			System.out.println(columns.get(0));
 			if (columns.get(0) == 4) columns.set(0, 0);
 			columns.getAndIncrement(0);
 			if (columns.get(0) == 1) i[0].addAndGet(115);

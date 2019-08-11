@@ -7,6 +7,7 @@ import info.projekt.jonas.room.capabilities.IConsume;
 import info.projekt.jonas.room.capabilities.IProduce;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.Registry;
+import info.projekt.jonas.util.Random;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -36,6 +37,10 @@ public class MineshaftRoom extends Room implements IProduce, IConsume {
 			i += dweller.getIntelligence();
 			c += dweller.getCharisma();
 			k += dweller.getCreativity();
+			if (Random.ranBool() && Random.ranBool() && Random.ranBool() && Random.ranBool() && Random.ranBool() && Random.ranBool()) {
+				dweller.damage(ThreadLocalRandom.current().nextInt(2, 10));
+				LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("A dweller took damage", 2));
+			}
 		});
 		if (s >= 100 && i >= 100 && c >= 100 && k >= 100) {
 			s = 0;

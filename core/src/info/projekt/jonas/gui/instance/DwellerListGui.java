@@ -1,9 +1,8 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.gui.instance;
 
 import info.projekt.jonas.gui.toolkit.Layer;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
-import info.projekt.jonas.gui.toolkit.widgets.Label;
 import info.projekt.jonas.gui.toolkit.widgets.TextButton;
 import info.projekt.jonas.storage.GameStorage;
 

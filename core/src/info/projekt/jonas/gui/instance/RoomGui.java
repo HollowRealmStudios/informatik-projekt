@@ -1,4 +1,4 @@
-package info.projekt.jonas.gui;
+package info.projekt.jonas.gui.instance;
 
 import info.projekt.jonas.dweller.Dweller;
 import info.projekt.jonas.gui.toolkit.Layer;

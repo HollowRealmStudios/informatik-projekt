@@ -116,7 +116,6 @@ public abstract class Room implements Serializable {
 	}
 
 	public void generate() {
-		System.out.println("Generating");
 		if(this instanceof IProduce) {((IProduce) this).produce();}
 		if(this instanceof IConsume) {if(((IConsume)this).enoughResources()) ((IConsume)this).consume();}
 	}

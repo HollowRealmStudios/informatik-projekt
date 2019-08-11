@@ -33,6 +33,8 @@ public class GameStorage implements Serializable {
 
 	public int water = 0;
 
+	public int meds = 0;
+
 	public void addDweller(Dweller dweller) {
 		dwellers.add(dweller);
 	}
