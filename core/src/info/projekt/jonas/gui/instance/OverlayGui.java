@@ -37,7 +37,7 @@ public class OverlayGui extends Layer implements IHandlesActiveUpdates {
 	};
 	private boolean open = false;
 	private final Widget[] opened = new Widget[]{
-			new ImageButton(() -> LAYER_QUEUE.add(new LayerRequest(StorageGui.class, GUI_LAYER, true)), 50, 200, 100, 100, TextureLoader.getTexture("Inventory.png")),
+			new ImageButton(() -> StorageHandler.saveGame(GameStorage.INSTANCE), 50, 200, 100, 100, TextureLoader.getTexture("Save.png")),
 			new ImageButton(() -> open = false, 50, 50, 100, 100, TextureLoader.getTexture("Down.png")),
 			new ImageButton(() -> LAYER_QUEUE.add(new LayerRequest(DwellerListGui.class, GUI_LAYER, true)), 50, 350, 100, 100, TextureLoader.getTexture("Dwellers.png")),
 			new ImageButton(() -> LAYER_QUEUE.add(new LayerRequest(BuildGui.class, GUI_LAYER, true)), 50, 500, 100, 100, TextureLoader.getTexture("Build.png")),

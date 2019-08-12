@@ -1,8 +1,10 @@
 package info.projekt.jonas.storage;
 
 import info.projekt.jonas.dweller.Dweller;
+import info.projekt.jonas.items.ArmorItem;
 import info.projekt.jonas.items.CraftingComponent;
 import info.projekt.jonas.items.Item;
+import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.util.LimitedArrayList;
 import org.jetbrains.annotations.Nullable;
@@ -21,7 +23,8 @@ public class GameStorage implements Serializable {
 
 	public final LimitedArrayList<CraftingComponent> components = new LimitedArrayList<>(1000);
 
-	public final LimitedArrayList<Item> items = new LimitedArrayList<>(1000);
+	public final LimitedArrayList<WeaponItem> weapons = new LimitedArrayList<>(1000);
+	public final LimitedArrayList<ArmorItem> armors = new LimitedArrayList<>(1000);
 
 	private final ArrayList<Dweller> dwellers = new ArrayList<>();
 

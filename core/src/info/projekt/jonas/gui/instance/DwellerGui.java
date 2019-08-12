@@ -27,17 +27,15 @@ public class DwellerGui extends Layer implements IHandlesOnOpen {
 	public void onOpen() {
 		removeAll();
 		info = new Label(0, HEIGHT - 300, dweller.toString(), FONT).centerX();
-		heal = new ImageButton(() -> dweller.heal(), HALF_WIDTH - 89, HEIGHT - 400, 64, 64, TextureLoader.getTexture("Heal.png"));
+		heal = new ImageButton(() -> dweller.heal(), HALF_WIDTH - 89, HEIGHT - 450, 64, 64, TextureLoader.getTexture("Heal.png"));
 		armor = new ImageButton(() -> {
-			ItemSelectorGui.dweller = dweller;
-			ItemSelectorGui.type = ArmorItem.class;
-			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(ItemSelectorGui.class, GUI_LAYER, true));
-		}, HALF_WIDTH + 25, HEIGHT - 400, 64, 64, dweller.getArmor().getTexture());
+			ItemSelectorArmorGui.dweller = dweller;
+			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(ItemSelectorArmorGui.class, GUI_LAYER, true));
+		}, HALF_WIDTH + 25, HEIGHT - 450, 64, 64, dweller.getArmor().getTexture());
 		weapon = new ImageButton(() -> {
-			ItemSelectorGui.dweller = dweller;
-			ItemSelectorGui.type = WeaponItem.class;
-			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(ItemSelectorGui.class, GUI_LAYER, true));
-		}, HALF_WIDTH + 25, HEIGHT - 514, 64, 64, dweller.getWeapon().getTexture());
+			ItemSelectorWeaponGui.dweller = dweller;
+			LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(ItemSelectorWeaponGui.class, GUI_LAYER, true));
+		}, HALF_WIDTH + 25, HEIGHT - 564, 64, 64, dweller.getWeapon().getTexture());
 		addWidget(info);
 		addWidget(heal);
 		addWidget(armor);

@@ -9,7 +9,7 @@ public class Configuration {
 	}
 
 	public static final class Resources {
-		public static final float MINUTES_PER_DWELLER = 2f;
+		public static final float MINUTES_PER_DWELLER = 0.2f;
 		public static final float RESOURCE_MULTIPLIER = 1f;
 		public static final float MINUTES_PER_CHILDREN = 1f;
 		public static final float MONEY_MULTIPLIER = 2f;

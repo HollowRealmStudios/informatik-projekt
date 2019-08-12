@@ -91,15 +91,14 @@ public abstract class Room implements Serializable {
 	}
 
 	public boolean isUpgradeable() {
-		if(level == 2) {
+		if (level == 2) {
 			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Already at max level", 2));
 			return false;
 		}
-		if(Arrays.stream(this.getClass().getAnnotations()).noneMatch(annotation -> annotation instanceof Buildable)) {
+		if (Arrays.stream(this.getClass().getAnnotations()).noneMatch(annotation -> annotation instanceof Buildable)) {
 			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("That room can't be upgraded", 2));
 			return false;
-		}
-		else if(GameStorage.INSTANCE.currency < ((Buildable) this.getClass().getAnnotations()[0]).cost()) {
+		} else if (GameStorage.INSTANCE.currency < ((Buildable) this.getClass().getAnnotations()[0]).cost()) {
 			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("Not enough money", 2));
 			return false;
 		}
@@ -116,7 +115,15 @@ public abstract class Room implements Serializable {
 	}
 
 	public void generate() {
-		if(this instanceof IProduce) {((IProduce) this).produce();}
-		if(this instanceof IConsume) {if(((IConsume)this).enoughResources()) ((IConsume)this).consume();}
+		if (this instanceof IProduce) {
+			((IProduce) this).produce();
+		}
+		if (this instanceof IConsume) {
+			if (((IConsume) this).enoughResources()) ((IConsume) this).consume();
+		}
+	}
+
+	public void removeDead() {
+		dwellers.removeIf(dweller -> dweller.getHealth() <= 0);
 	}
 }

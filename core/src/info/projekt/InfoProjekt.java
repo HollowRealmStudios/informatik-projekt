@@ -6,10 +6,7 @@ import info.projekt.jonas.gui.instance.GameScreen;
 import info.projekt.jonas.gui.instance.OverlayGui;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.RenderUtils;
-import info.projekt.jonas.spawner.ChildSpawner;
-import info.projekt.jonas.spawner.DwellerSpawner;
-import info.projekt.jonas.spawner.MoneySpawner;
-import info.projekt.jonas.spawner.ResourceSpawner;
+import info.projekt.jonas.spawner.*;
 import info.projekt.jonas.storage.GameStorage;
 import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.storage.StorageHandler;
@@ -49,6 +46,7 @@ public class InfoProjekt extends Game {
 		new ResourceSpawner();
 		new ChildSpawner();
 		new MoneySpawner();
+		new DeathSpawner();
 	}
 
 	@Override

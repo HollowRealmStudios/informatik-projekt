@@ -13,7 +13,6 @@ public class KitchenRoom extends Room implements IProduce {
 	public void produce() {
 		getDwellers().forEach(dweller -> {
 			GameStorage.INSTANCE.food += dweller.getCreativity() * (getLevel() + 1);
-			System.out.println("New food: " + dweller.getCreativity() * (getLevel() + 1) + " Currently: " + GameStorage.INSTANCE.food);
 		});
 	}
 }

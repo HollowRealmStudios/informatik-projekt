@@ -115,5 +115,9 @@ public class Dweller implements Serializable {
 		health -= amount;
 	}
 
+	public int getHealth() {
+		return health;
+	}
+
 	public enum GENDER {MALE, FEMALE}
 }
