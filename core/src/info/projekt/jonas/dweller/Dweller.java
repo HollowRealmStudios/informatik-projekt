@@ -12,6 +12,7 @@ import info.projekt.jonas.storage.Registry;
 import info.projekt.jonas.util.TextureLoader;
 import info.projekt.jonas.util.Tuple;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.Serializable;
 
@@ -23,7 +24,7 @@ import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 public class Dweller implements Serializable {
 
 	private final String completeName;
-	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("Hazmat Suit"), (WeaponItem) Registry.getItem("Ballistic-rifle"));
+	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>();
 	private final GENDER gender;
 	private final int strength;
 	private final int intelligence;
@@ -35,10 +36,10 @@ public class Dweller implements Serializable {
 	public Dweller(String name, String surname, GENDER gender, int strength, int intelligence, int charisma, int creativity) {
 		this.completeName = name + ", " + surname;
 		this.gender = gender;
-		this.strength = MathUtils.clamp(strength, 0, 10);
-		this.intelligence = MathUtils.clamp(intelligence, 0, 10);
-		this.charisma = MathUtils.clamp(charisma, 0, 10);
-		this.creativity = MathUtils.clamp(creativity, 0, 10);
+		this.strength = strength;
+		this.intelligence = intelligence;
+		this.charisma = charisma;
+		this.creativity = creativity;
 	}
 
 	public String getName() {
@@ -58,20 +59,26 @@ public class Dweller implements Serializable {
 		return texture == null;
 	}
 
+	@Nullable
 	public ArmorItem getArmor() {
 		return items.getOne();
 	}
 
 	public void setArmor(ArmorItem armor) {
+		if(items.getOne() != null) GameStorage.INSTANCE.armors.add(items.getOne());
 		items.setOne(armor);
+		GameStorage.INSTANCE.armors.remove(armor);
 	}
 
+	@Nullable
 	public WeaponItem getWeapon() {
 		return items.getTwo();
 	}
 
 	public void setWeapon(WeaponItem weapon) {
+		if(items.getTwo() != null) GameStorage.INSTANCE.weapons.add(items.getTwo());
 		items.setTwo(weapon);
+		GameStorage.INSTANCE.weapons.remove(weapon);
 	}
 
 	public Texture getTexture() {

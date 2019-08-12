@@ -26,9 +26,9 @@ public class MineshaftRoom extends Room implements IProduce, IConsume {
 	@Override
 	public void consume() {
 		getDwellers().forEach(dweller -> {
-			GameStorage.INSTANCE.water--;
-			GameStorage.INSTANCE.food--;
-			GameStorage.INSTANCE.energy--;
+			GameStorage.INSTANCE.water -= 10;
+			GameStorage.INSTANCE.food -= 10;
+			GameStorage.INSTANCE.energy -= 10;
 		});
 	}
 
