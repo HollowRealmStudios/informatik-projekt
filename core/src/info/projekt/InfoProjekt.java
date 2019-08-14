@@ -32,7 +32,6 @@ public class InfoProjekt extends Game {
 	private void init() {
 		TextureLoader.loadTextures();
 		Registry.registerRooms();
-		supervisor = new LayerSupervisor();
 		try {
 			Registry.registerArmors();
 			Registry.registerWeapons();
@@ -42,6 +41,8 @@ public class InfoProjekt extends Game {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		GameStorage.INSTANCE = StorageHandler.loadGame();
+		supervisor = new LayerSupervisor();
 		new DwellerSpawner();
 		new ResourceSpawner();
 		new ChildSpawner();

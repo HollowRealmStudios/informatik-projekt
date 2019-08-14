@@ -30,7 +30,6 @@ public class Registry {
 	private static final ArrayList<CraftingRecipe> RECIPES = new ArrayList<>();
 
 	public static void registerWeapons() throws IOException {
-
 		JsonArray in = JsonObject.readFrom(new FileReader("Weapons.json")).get("weapons").asArray();
 		for (JsonValue object : in.asArray()) {
 			JsonObject obj = object.asObject();

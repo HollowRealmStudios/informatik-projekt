@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class GameStorage implements Serializable {
 
-	public static final transient GameStorage INSTANCE = StorageHandler.loadGame();
+	public static transient GameStorage INSTANCE;
 
 	public Room[][] rooms = new Room[5][15];
 

@@ -30,9 +30,9 @@ public abstract class Room implements Serializable {
 	private LimitedArrayList<Dweller> dwellers = new LimitedArrayList<>(4);
 
 	private transient Texture[] textures = new Texture[]{
-			TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/1.png"),
-			TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/2.png"),
-			TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/3.png")
+			TextureLoader.getTexture(this.getClass().getSimpleName() + "/1.png"),
+			TextureLoader.getTexture(this.getClass().getSimpleName() + "/2.png"),
+			TextureLoader.getTexture(this.getClass().getSimpleName() + "/3.png")
 	};
 	private int level = 0;
 
@@ -56,9 +56,9 @@ public abstract class Room implements Serializable {
 
 	private void repopulate() {
 		textures = new Texture[]{
-				TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/1.png"),
-				TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/1.png"),
-				TextureLoader.getTextureUnsafe("textures/" + this.getClass().getSimpleName() + "/1.png")
+				TextureLoader.getTexture(this.getClass().getSimpleName() + "/1.png"),
+				TextureLoader.getTexture(this.getClass().getSimpleName() + "/2.png"),
+				TextureLoader.getTexture(this.getClass().getSimpleName() + "/3.png")
 		};
 	}
 

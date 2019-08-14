@@ -1,7 +1,6 @@
 package info.projekt.jonas.dweller;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.MathUtils;
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
@@ -24,7 +23,7 @@ import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 public class Dweller implements Serializable {
 
 	private final String completeName;
-	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>();
+	private final Tuple<ArmorItem, WeaponItem> items = new Tuple<>((ArmorItem) Registry.getItem("T-Shirt"), (WeaponItem) Registry.getItem("Knife"));
 	private final GENDER gender;
 	private final int strength;
 	private final int intelligence;
@@ -51,7 +50,7 @@ public class Dweller implements Serializable {
 	}
 
 	private void repopulate() {
-		texture = TextureLoader.getTextureUnsafe("textures/" + gender.name() + ".png");
+		texture = TextureLoader.getTexture(gender.name().toLowerCase() + ".png");
 	}
 
 	@Contract(pure = true)
@@ -65,7 +64,7 @@ public class Dweller implements Serializable {
 	}
 
 	public void setArmor(ArmorItem armor) {
-		if(items.getOne() != null) GameStorage.INSTANCE.armors.add(items.getOne());
+		if (items.getOne() != null) GameStorage.INSTANCE.armors.add(items.getOne());
 		items.setOne(armor);
 		GameStorage.INSTANCE.armors.remove(armor);
 	}
@@ -76,7 +75,7 @@ public class Dweller implements Serializable {
 	}
 
 	public void setWeapon(WeaponItem weapon) {
-		if(items.getTwo() != null) GameStorage.INSTANCE.weapons.add(items.getTwo());
+		if (items.getTwo() != null) GameStorage.INSTANCE.weapons.add(items.getTwo());
 		items.setTwo(weapon);
 		GameStorage.INSTANCE.weapons.remove(weapon);
 	}
@@ -108,11 +107,10 @@ public class Dweller implements Serializable {
 	}
 
 	public void heal() {
-		if(GameStorage.INSTANCE.meds > 0) {
+		if (GameStorage.INSTANCE.meds > 0) {
 			health = 100;
 			GameStorage.INSTANCE.meds--;
-		}
-		else {
+		} else {
 			LayerSupervisor.NOTIFICATION_QUEUE.add(new NotificationRequest("No more meds available", 2));
 		}
 		LayerSupervisor.LAYER_QUEUE.add(new LayerRequest(null, GUI_LAYER, true));

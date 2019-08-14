@@ -18,15 +18,21 @@ public class TextureLoader {
 
 	public static void loadTextures() {
 		try {
-			Files.walk(Paths.get(Gdx.files.internal("textures").path())).filter(path -> path.toString().endsWith(".png")).forEach(path -> TEXTURES.put(path.toString().replace("\\", "/"), new Texture(Gdx.files.internal(path.toString()))));
+			Files.walk(Paths.get(Gdx.files.internal("textures").path())).filter(path -> path.toString().endsWith(".png")).forEach(path -> {
+				String[] split = path.toString().replace("\\", "/").split("/");
+				int size = split.length;
+				if(split[size - 1].replace(".png", "").length() == 1) TEXTURES.put(split[size - 2].concat("/").concat(split[size - 1]), new Texture(Gdx.files.internal(path.toString().replace("\\", "/"))));
+				else TEXTURES.put(split[size - 1], new Texture(Gdx.files.internal(path.toString().replace("\\", "/"))));
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		TEXTURES.entrySet().forEach(set -> System.out.println(set.toString()));
 	}
 
 	@Nullable
 	public static Texture getTexture(String path) {
-		if (TEXTURES.get(path) == null && TEXTURES.get("textures/" + path) == null) {
+		if (TEXTURES.get(path) == null) {
 			Tuple<String, Integer> closest = new Tuple<>("??????", 0);
 			TEXTURES.forEach((key, value) -> {
 				if (FuzzySearch.ratio(path, key) > closest.getTwo()) {
@@ -36,9 +42,7 @@ public class TextureLoader {
 			});
 			throw new NullPointerException(path + " was not found. Did you mean " + closest.getOne());
 		}
-		if (TEXTURES.get(path) == null) return TEXTURES.get("textures/" + path);
-		else TEXTURES.get(path);
-		return null;
+		else return TEXTURES.get(path);
 	}
 
 	@NotNull

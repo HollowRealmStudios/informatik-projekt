@@ -1,88 +1,10 @@
 {
   "weapons": [
     {
-      "texture": "gun.png",
-      "name": "Ballistic-rifle",
+      "texture": "93r.png",
+      "name": "Beretta r93",
       "damage": 3,
       "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Ballistic-shotgun",
-      "damage": 3,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Ballistic-sniper",
-      "damage": 4,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Ballistic-pistol",
-      "damage": 1,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Laser-rifle",
-      "damage": 4,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Laser-shotgun",
-      "damage": 4,
-      "deviation": 2
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Laser-sniper",
-      "damage": 5,
-      "deviation": 0
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Laser-pistol",
-      "damage": 2,
-      "deviation": 0
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Plasma-rifle",
-      "damage": 4,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Plasma-shotgun",
-      "damage": 6,
-      "deviation": 3
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Plasma-sniper",
-      "damage": 7,
-      "deviation": 0
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Plasma-pistol",
-      "damage": 4,
-      "deviation": 0
-    },
-    {
-      "texture": "Katana.png",
-      "name": "Neon-Katana",
-      "damage": 8,
-      "deviation": 5
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "pan",
-      "damage": 4,
-      "deviation": 2
     },
     {
       "texture": "1000Voices.png",
@@ -91,52 +13,76 @@
       "deviation": 2
     },
     {
-      "texture": "TurtleShell.png",
-      "name": "Turtleshell",
-      "damage": 2,
+      "texture": "Deagle.png",
+      "name": "Desert Eagle",
+      "damage": 4,
       "deviation": 1
     },
     {
-      "texture": "shotgun.png",
-      "name": "Future Imperfect",
-      "damage": 12,
+      "texture": "AK47.png",
+      "name": "AK-47",
+      "damage": 3,
+      "deviation": 1
+    },
+    {
+      "texture": "Famas.png",
+      "name": "Famas",
+      "damage": 1,
+      "deviation": 1
+    },
+    {
+      "texture": "Glock.png",
+      "name": "Glock",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "GrenadeLauncher.png",
+      "name": "Grenade Launcher",
+      "damage": 4,
+      "deviation": 2
+    },
+    {
+      "texture": "M2A4.png",
+      "name": "M2A4",
+      "damage": 5,
+      "deviation": 0
+    },
+    {
+      "texture": "PlasmaRifle.png",
+      "name": "Plasma Rifle",
+      "damage": 2,
+      "deviation": 0
+    },
+    {
+      "texture": "Katana.png",
+      "name": "Katana",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "Null.png",
+      "name": "Gexe's Skill",
+      "damage": 6,
+      "deviation": 3
+    },
+    {
+      "texture": "Shotgun.png",
+      "name": "Shotgun",
+      "damage": 7,
       "deviation": 0
     },
     {
       "texture": "Grenade.png",
       "name": "Grenade",
-      "damage": 8,
-      "deviation": 1
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Victorinox",
-      "damage": 3,
-      "deviation": 2
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "(Baseball-)Bat",
-      "damage": 3,
+      "damage": 4,
       "deviation": 0
     },
     {
-      "texture": "shotgun.png",
-      "name": "AdminTool",
-      "damage": 10000,
-      "deviation": 0
-    },
-    {
-      "texture": "shotgun.png",
-      "name": "Ion_Sniper",
-      "damage": 15,
-      "deviation": 5
-    },
-    {
-      "texture": "Null.png",
-      "name": "Gexe's Skills",
-      "damage": 13,
-      "deviation": 2
+      "texture": "Knife.png",
+      "name": "Knife",
+      "damage": 2,
+      "deviation": 3
     }
   ]
 }
