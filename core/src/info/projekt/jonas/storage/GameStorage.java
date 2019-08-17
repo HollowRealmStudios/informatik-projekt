@@ -1,10 +1,9 @@
 package info.projekt.jonas.storage;
 
 import info.projekt.jonas.dweller.Dweller;
-import info.projekt.jonas.items.ArmorItem;
-import info.projekt.jonas.items.CraftingComponent;
-import info.projekt.jonas.items.Item;
-import info.projekt.jonas.items.WeaponItem;
+import info.projekt.jonas.item.ArmorItem;
+import info.projekt.jonas.item.CraftingComponent;
+import info.projekt.jonas.item.WeaponItem;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.util.LimitedArrayList;
 import org.jetbrains.annotations.Nullable;

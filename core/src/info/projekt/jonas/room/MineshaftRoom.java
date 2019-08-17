@@ -2,9 +2,9 @@ package info.projekt.jonas.room;
 
 import info.projekt.jonas.gui.toolkit.LayerSupervisor;
 import info.projekt.jonas.gui.toolkit.util.NotificationRequest;
-import info.projekt.jonas.items.ArmorItem;
-import info.projekt.jonas.items.Item;
-import info.projekt.jonas.items.WeaponItem;
+import info.projekt.jonas.item.ArmorItem;
+import info.projekt.jonas.item.Item;
+import info.projekt.jonas.item.WeaponItem;
 import info.projekt.jonas.room.capabilities.IConsume;
 import info.projekt.jonas.room.capabilities.IProduce;
 import info.projekt.jonas.storage.GameStorage;

@@ -1,4 +1,4 @@
-package info.projekt.jonas.items;
+package info.projekt.jonas.item;
 
 import com.badlogic.gdx.graphics.Texture;
 import info.projekt.jonas.util.TextureLoader;

@@ -1,4 +1,4 @@
-package info.projekt.jonas.items;
+package info.projekt.jonas.item;
 
 import java.util.concurrent.ThreadLocalRandom;
 

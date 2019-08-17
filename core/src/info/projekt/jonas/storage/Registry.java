@@ -3,7 +3,7 @@ package info.projekt.jonas.storage;
 import com.eclipsesource.json.JsonArray;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonValue;
-import info.projekt.jonas.items.*;
+import info.projekt.jonas.item.*;
 import info.projekt.jonas.room.Room;
 import info.projekt.jonas.util.Color;
 import info.projekt.jonas.util.Tuple;

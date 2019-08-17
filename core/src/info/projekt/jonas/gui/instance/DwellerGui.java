@@ -7,11 +7,7 @@ import info.projekt.jonas.gui.toolkit.capabilities.IHandlesOnOpen;
 import info.projekt.jonas.gui.toolkit.util.LayerRequest;
 import info.projekt.jonas.gui.toolkit.widgets.ImageButton;
 import info.projekt.jonas.gui.toolkit.widgets.Label;
-import info.projekt.jonas.items.ArmorItem;
-import info.projekt.jonas.items.WeaponItem;
 import info.projekt.jonas.util.TextureLoader;
-
-import java.util.Objects;
 
 import static info.projekt.jonas.gui.toolkit.LayerSupervisor.GUI_LAYER;
 import static info.projekt.jonas.gui.toolkit.util.RenderUtils.*;

@@ -1,4 +1,4 @@
-package info.projekt.jonas.items;
+package info.projekt.jonas.item;
 
 public class CraftingComponent extends Item {
 
