@@ -8,15 +8,15 @@ import java.awt.*;
 
 public class DesktopLauncher {
 
-	public static void main(String[] arg) {
-		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
-		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
-		config.fullscreen = true;
-		config.vSyncEnabled = false;
-		config.foregroundFPS = 60;
-		config.backgroundFPS = 60;
-		config.forceExit = true;
-		new LwjglApplication(new InfoProjekt(), config);
-	}
+    public static void main(String[] arg) {
+        new LwjglApplication(new InfoProjekt(), new LwjglApplicationConfiguration() {{
+            width = Toolkit.getDefaultToolkit().getScreenSize().width;
+            height = Toolkit.getDefaultToolkit().getScreenSize().height;
+            fullscreen = true;
+            vSyncEnabled = true;
+            foregroundFPS = 60;
+            backgroundFPS = 60;
+            forceExit = true;
+        }});
+    }
 }

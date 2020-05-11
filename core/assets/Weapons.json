@@ -1,52 +1,10 @@
 {
   "weapons": [
     {
-      "texture": "93r.png",
-      "name": "Beretta r93",
-      "damage": 3,
-      "deviation": 1
-    },
-    {
       "texture": "1000Voices.png",
       "name": "1000 Voices",
       "damage": 9,
       "deviation": 2
-    },
-    {
-      "texture": "Deagle.png",
-      "name": "Desert Eagle",
-      "damage": 4,
-      "deviation": 1
-    },
-    {
-      "texture": "AK47.png",
-      "name": "AK-47",
-      "damage": 3,
-      "deviation": 1
-    },
-    {
-      "texture": "Famas.png",
-      "name": "Famas",
-      "damage": 1,
-      "deviation": 1
-    },
-    {
-      "texture": "Glock.png",
-      "name": "Glock",
-      "damage": 4,
-      "deviation": 1
-    },
-    {
-      "texture": "GrenadeLauncher.png",
-      "name": "Grenade Launcher",
-      "damage": 4,
-      "deviation": 2
-    },
-    {
-      "texture": "M2A4.png",
-      "name": "M2A4",
-      "damage": 5,
-      "deviation": 0
     },
     {
       "texture": "PlasmaRifle.png",
@@ -77,12 +35,6 @@
       "name": "Grenade",
       "damage": 4,
       "deviation": 0
-    },
-    {
-      "texture": "Knife.png",
-      "name": "Knife",
-      "damage": 2,
-      "deviation": 3
     }
   ]
 }
