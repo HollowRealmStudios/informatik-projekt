@@ -1,0 +1,40 @@
+{
+  "weapons": [
+    {
+      "texture": "1000Voices.png",
+      "name": "1000 Voices",
+      "damage": 9,
+      "deviation": 2
+    },
+    {
+      "texture": "PlasmaRifle.png",
+      "name": "Plasma Rifle",
+      "damage": 2,
+      "deviation": 0
+    },
+    {
+      "texture": "Katana.png",
+      "name": "Katana",
+      "damage": 4,
+      "deviation": 1
+    },
+    {
+      "texture": "Null.png",
+      "name": "Gexe's Skill",
+      "damage": 6,
+      "deviation": 3
+    },
+    {
+      "texture": "Shotgun.png",
+      "name": "Shotgun",
+      "damage": 7,
+      "deviation": 0
+    },
+    {
+      "texture": "Grenade.png",
+      "name": "Grenade",
+      "damage": 4,
+      "deviation": 0
+    }
+  ]
+}

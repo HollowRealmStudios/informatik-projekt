@@ -1,0 +1,34 @@
+{
+  "armors": [
+    {
+      "texture": "HazmatSuit.png",
+      "name": "Hazmat Suit",
+      "protection": 3,
+      "deviation": 0
+    },
+    {
+      "texture": "PewdiepieShirt.png",
+      "name": "Sub to Pewdiepie Shirt",
+      "protection": 0,
+      "deviation": 1
+    },
+    {
+      "texture": "PowerArmor.png",
+      "name": "Power Armor",
+      "protection": 5,
+      "deviation": 2
+    },
+    {
+      "texture": "TurtleShell.png",
+      "name": "Turtle Shell",
+      "protection": 2,
+      "deviation": 3
+    },
+    {
+      "texture": "Shirt.png",
+      "name": "T-Shirt",
+      "protection": 0,
+      "deviation": 1
+    }
+  ]
+}
